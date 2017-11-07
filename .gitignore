@@ -21,6 +21,11 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+[Ll]ibrary/
+[Bb]uilds/
+[Bb]uild/
+[Tt]emp/
+UnityPackageManager/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -44,11 +49,13 @@ dlldata.c
 project.lock.json
 artifacts/
 
+*.proj
+*.vsproj
+*.sln
 *_i.c
 *_p.c
 *_i.h
 *.ilk
-*.meta
 *.obj
 *.pch
 *.pdb
