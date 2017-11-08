@@ -50,6 +50,7 @@ project.lock.json
 artifacts/
 
 *.proj
+*.csproj
 *.vsproj
 *.sln
 *_i.c
