@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class PlayerTouchControls : InputManager {
 
-    protected override void MouseOver(Vector2 mouseWorldPos)
-    {
-
-    }
+    public PlayerController pc;
 
     protected override void MouseDown(Vector2 mouseWorldPos)
     {
-
+        pc.MouseDown(mouseWorldPos);
     }
     
 }
