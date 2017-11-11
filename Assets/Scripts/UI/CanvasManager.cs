@@ -12,8 +12,11 @@ public class CanvasManager : MonoBehaviour {
     public float airFactor = 0;
     public float waterFactor = 0;
     public float growth = 0;
+    public float growthDamp = 0;
     public float height = 0;
     public float time = 0;
+    public float dampTime = 0.5f;
+    private float velocity = 0;
     public Transform growthMeter;
 
     void Update()
@@ -21,7 +24,7 @@ public class CanvasManager : MonoBehaviour {
         time += Time.deltaTime;
         UpdateGrowth();
         height += growth * Time.deltaTime / 10;
-        water -= Time.deltaTime * (growth / 10 + sun) / 50;
+        water -= Time.deltaTime * (growth / 10 + sun) / 60;
         if (water < 0)
             water = 0;
         waterFactor = GV.WaterFactor(water);
@@ -32,7 +35,9 @@ public class CanvasManager : MonoBehaviour {
         airFactor = GV.AirFactor(air);
         waterFactor = GV.WaterFactor(water);
         growth = sunFactor * airFactor * waterFactor * 10;
-        growthMeter.position = new Vector3(growthMeter.position.x, growth/2f-4f, growthMeter.position.z);
+        growthDamp = Mathf.SmoothDamp(growthDamp, growth, ref velocity, dampTime);
+        float meterAngle = 90 - 180 * (growthDamp / 10);
+        growthMeter.eulerAngles = new Vector3(growthMeter.eulerAngles.x, growthMeter.eulerAngles.y, meterAngle);
 
     }
 }

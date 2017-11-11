@@ -21,4 +21,18 @@ public class GV {
             return -0.5f * Mathf.Cos(water * 3 * Mathf.PI - 3) + 0.5f;
         else return 1;
     }
+
+    public static float GetMinimalRotation(float source, float target)
+    {
+        float delta = target - source;
+        while (delta > 180)
+        {
+            delta -= 360;
+        }
+        while (delta < -180)
+        {
+            delta += 360;
+        }
+        return delta;
+    }
 }
