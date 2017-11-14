@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GV {
 
+    public static WS ws;
+
     public static float SunFactor(float sun)   // arg range: [0, 1];  return range: [0, 1]
     {
         if (sun <= (11f / 60f))

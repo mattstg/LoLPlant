@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public InputManager im;
+    InputManager mouseIM;
+    InputManager keyIM;
     public float YClickJumpThreshold = 1.5f; //Clicking this much units higher will cause the jump
 
     bool isJumping;
     bool isGrounded;
 
-    public void UpdatePlayer(float dt)
+    public void Initialize()
     {
+        //Create both input managers & link here
 
     }
 
+    public void Refresh(float dt)
+    {
+
+    }
     public void MouseDown(Vector2 mouseWorldPos)
     {
         //This will recieve input of mouse
