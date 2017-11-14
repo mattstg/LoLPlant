@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    InputManager mouseIM;
-    InputManager keyIM;
+    InputManager im;
     public float YClickJumpThreshold = 1.5f; //Clicking this much units higher will cause the jump
 
     bool isJumping;
@@ -13,18 +12,26 @@ public class PlayerController : MonoBehaviour {
 
     public void Initialize()
     {
+        im = gameObject.AddComponent<InputManager>();
+        im.Initialize(this);
         //Create both input managers & link here
-
     }
 
     public void Refresh(float dt)
     {
-
+        im.UpdateInput(); //update input
     }
+
+
     public void MouseDown(Vector2 mouseWorldPos)
     {
         //This will recieve input of mouse
+        Debug.Log("Mouse pressed/held: " + mouseWorldPos);
+    }
 
+    public void KeysPressed(Vector2 dir)
+    {
+        Debug.Log("Key pressed: " + dir);
     }
 
     public void OnCollisionEnter2D(Collision2D coli)

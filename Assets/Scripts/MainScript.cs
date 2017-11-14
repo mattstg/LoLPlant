@@ -11,6 +11,13 @@ public class MainScript : MonoBehaviour
     Flow labFlow;
     Flow curFlow;
 	// Update is called once per frame
+    void Start()
+    {
+        currentState = CurrentState.Game;
+        curFlow = gameFlow = InitializeFlowScript(currentState, 0);
+    }
+
+
 	void Update ()
     {
         float dt = Time.deltaTime;
@@ -24,7 +31,7 @@ public class MainScript : MonoBehaviour
         //}
 	}
 
-    private void InitializeFlowScript(CurrentState flowType, int progressPoint)
+    private Flow InitializeFlowScript(CurrentState flowType, int progressPoint)
     {
         Flow newFlow;
         switch (flowType)
@@ -36,8 +43,9 @@ public class MainScript : MonoBehaviour
                 newFlow = new LabFlow();
                 break;
             default:
-                return;
+                return null;
         }
         newFlow.Initialize(progressPoint);
+        return newFlow;
     }
 }

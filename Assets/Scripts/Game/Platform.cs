@@ -12,22 +12,17 @@ public class Platform : MonoBehaviour {
 
     public void Initialize()
     {
-        numOfWP = transform.childCount;
-        if (numOfWP > 0)
-        {
-            //current point is always waypoint zero
-            wp = new Vector2[numOfWP];
-            wp[0] = transform.position;
-            for (int i = 1; i < numOfWP; i++)
-                wp[i] = transform.GetChild(i).position;
-            foreach (Transform child in transform)
-                Destroy(child);
-            moves = true;
-        }
-        else
-        {
-            moves = false;
-        }
+        string mahName = transform.name;
+        numOfWP = transform.childCount + 1; //Includes its starting position as a waypoint
+        //current point is always waypoint zero
+        wp = new Vector2[numOfWP];
+        wp[0] = transform.position;
+        for (int i = 1; i < numOfWP; i++)
+            wp[i] = transform.GetChild(i - 1).position;
+        foreach (Transform child in transform)
+            Destroy(child.gameObject);
+        moves = (numOfWP > 1);
+       
     }
 
 	public void Refresh(float dt)
