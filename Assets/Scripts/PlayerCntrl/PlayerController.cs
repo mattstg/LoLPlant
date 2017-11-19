@@ -22,6 +22,17 @@ public class PlayerController : MonoBehaviour {
         im.UpdateInput(); //update input
     }
 
+    public float RaycastToSun() //Efficency of raycast to the sun
+    {
+        //Need layer mask
+        int layerMask = LayerMask.NameToLayer("Platform");
+        float d = Vector2.Distance(transform.position, GV.ws.sun.transform.position);
+        //need distance
+        RaycastHit2D[] rayhits = Physics2D.RaycastAll(transform.position, transform.position - GV.ws.sun.transform.position, d, layerMask);
+        if (rayhits == null)
+            return 1;
+        return 1 - rayhits.Length;
+    }
 
     public void MouseDown(Vector2 mouseWorldPos)
     {
