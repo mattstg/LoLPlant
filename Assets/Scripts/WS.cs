@@ -13,9 +13,8 @@ public class WS : MonoBehaviour
     public Transform cloudParent;
     public Transform sun;
 
-    public void Awake()
+    public void LinkToGV()
     {
         GV.ws = this;
     }
-
 }
