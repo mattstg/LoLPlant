@@ -5,6 +5,9 @@ using UnityEngine;
 public class GV {
 
     public static WS ws;
+    public static MainScript ms;
+
+    public static readonly float PlatformBlockPercentage = .3f;
 
     public static float SunFactor(float sun)   // arg range: [0, 1];  return range: [0, 1]
     {

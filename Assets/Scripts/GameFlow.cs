@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class GameFlow : Flow {
 
-    
+
+    DayNightCycle dnc;
+
+
     // Update is called once per frame
     public override void Initialize(int progressNumber)
     {
+        GameObject.FindObjectOfType<WS>().LinkToGV(); //Force the link of WS into GV so can set the links below
         GV.ws.dnc.Initialize();                 //Initialize day night cycle
         GV.ws.pc.Initialize();                  //Initialize player controller
         GV.ws.mui.Initialize();                 //Initialize meter manager

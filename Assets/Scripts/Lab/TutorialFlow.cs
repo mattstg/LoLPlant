@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LabFlow : Flow {
+public class TutorialFlow : Flow {
 
     // Update is called once per frame
     public override void Initialize(int progressNumber)
