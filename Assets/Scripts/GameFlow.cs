@@ -13,16 +13,19 @@ public class GameFlow : Flow {
     {
         GameObject.FindObjectOfType<WS>().LinkToGV(); //Force the link of WS into GV so can set the links below
         GV.ws.dnc.Initialize();                 //Initialize day night cycle
+        GV.ws.plant.Initialize();                  //Initialize plant
         GV.ws.pc.Initialize();                  //Initialize player controller
-        GV.ws.mui.Initialize();                 //Initialize meter manager
         GV.ws.platformManager.Initialize();     //Initialize platform manager
+        GV.ws.dm.Initialize();                 //Initialize dashboard manager
+
     }
 
     public override void Update(float dt)
     { //refresh, ew
         GV.ws.dnc.Refresh(dt);                 //Refresh day night cycle
+        GV.ws.plant.Refresh(dt);                //Refresh plant
         GV.ws.pc.Refresh(dt);                  //Refresh player controller
-        GV.ws.mui.Refresh(dt);                 //Refresh meter manager
         GV.ws.platformManager.Refresh(dt);     //Refresh platform manager
+        GV.ws.dm.Refresh(dt);                 //Refresh dashboard manager
     }
 }

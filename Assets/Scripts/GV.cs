@@ -7,7 +7,12 @@ public class GV {
     public static WS ws;
     public static MainScript ms;
 
-    public static readonly float PlatformBlockPercentage = .3f;
+    public static readonly float PlatformSunblock = .3f;
+
+    public static readonly float WaterDepletionRate = 0.01f;
+    public static readonly float SpinnerSpeed = 2f;
+    public static readonly float FoodMaximum = 60f;
+    public static readonly float FoodHeightRatio = 1f;
 
     public static float SunFactor(float sun)   // arg range: [0, 1];  return range: [0, 1]
     {
@@ -35,7 +40,7 @@ public class GV {
         return delta;
     }
 
-    public static float NormalizeAngle(float angle)
+    public static float NormalizeAngle(float angle) // [-180 - +180]
     {
         while (angle > 180)
             angle -= 360;
