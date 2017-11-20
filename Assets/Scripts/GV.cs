@@ -15,11 +15,6 @@ public class GV {
         //return Mathf.Clamp((27f / 25f) * Mathf.Pow(Mathf.Clamp(sun, 0, 1), 2) - 0.08f, 0, 1);
     }
 
-    public static float AirFactor(float air)
-    {
-        return Mathf.Clamp(-(Mathf.Pow((Mathf.Clamp(air, 0, 1) - 1), 2)) + 1, 0, 1);
-    }
-
     public static float WaterFactor(float water)
     {
         water = Mathf.Clamp(water, 0, 1);
@@ -35,5 +30,14 @@ public class GV {
         while (delta < -180)
             delta += 360;
         return delta;
+    }
+
+    public static float NormalizeAngle(float angle)
+    {
+        while (angle > 180)
+            angle -= 360;
+        while (angle < -180)
+            angle += 360;
+        return angle;
     }
 }

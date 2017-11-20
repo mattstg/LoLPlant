@@ -32,9 +32,8 @@ public class GameManager {
     public float UpdateGrowth()
     {
         float sunFactor = GV.SunFactor(sun);
-        float airFactor = GV.AirFactor(air);
         float waterFactor = GV.WaterFactor(water);
-        growth = sunFactor * airFactor * waterFactor * 10;
+        growth = sunFactor * waterFactor * 10;
         return growth;
     }
 }
