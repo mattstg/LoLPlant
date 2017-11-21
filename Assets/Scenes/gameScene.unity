@@ -2103,6 +2103,7 @@ MonoBehaviour:
   spinner: {fileID: 0}
   spinnerBall: {fileID: 0}
   spinnerTracer: {fileID: 0}
+  ballFade: {fileID: 0}
   foodMeter: {fileID: 0}
   foodLoss: {fileID: 0}
 --- !u!4 &1425836985
@@ -2164,6 +2165,7 @@ GameObject:
   - component: {fileID: 1601196265}
   - component: {fileID: 1601196267}
   - component: {fileID: 1601196266}
+  - component: {fileID: 1601196268}
   m_Layer: 5
   m_Name: Ball
   m_TagString: Untagged
@@ -2222,6 +2224,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1601196264}
+--- !u!114 &1601196268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1601196264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd491a29b6ca1e4297d12281841d125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1610205355
 GameObject:
   m_ObjectHideFlags: 0
@@ -2713,6 +2726,7 @@ MonoBehaviour:
   spinner: {fileID: 79935929}
   spinnerBall: {fileID: 1601196265}
   spinnerTracer: {fileID: 1045242840}
+  ballFade: {fileID: 1601196268}
   foodMeter: {fileID: 1283982467}
   foodLoss: {fileID: 1734624347}
 --- !u!1 &2013283694

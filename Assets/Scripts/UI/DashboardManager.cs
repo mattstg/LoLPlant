@@ -19,6 +19,7 @@ public class DashboardManager : MonoBehaviour {
     public RectTransform spinner;
     public RectTransform spinnerBall;
     public Image spinnerTracer;
+    public ImageFade ballFade;
 
     public Image foodMeter;
     public Image foodLoss;
@@ -28,13 +29,14 @@ public class DashboardManager : MonoBehaviour {
     public void Initialize()
     {
         plant = GV.ws.plant;
+        ballFade.Initialize();
     }
 
     public void Refresh(float dt)
     {
         UpdateInputs();
         UpdatePhotosynthesis();
-        UpdateSpinner();
+        UpdateSpinner(dt);
         UpdateFood();
     }
 
@@ -89,7 +91,7 @@ public class DashboardManager : MonoBehaviour {
         psMeter.eulerAngles = new Vector3(psMeter.eulerAngles.x, psMeter.eulerAngles.y, -180 * plant.psDamp + 90);
     }
 
-    public void UpdateSpinner()
+    public void UpdateSpinner(float dt)
     {
         spinner.eulerAngles = new Vector3(spinner.eulerAngles.x, spinner.eulerAngles.y, plant.psProgressDamp * -360 * GV.SpinnerSpeed);
 
@@ -104,8 +106,16 @@ public class DashboardManager : MonoBehaviour {
             spinnerTracer.rectTransform.localEulerAngles = new Vector3(spinnerTracer.rectTransform.localEulerAngles.x, spinnerTracer.rectTransform.localEulerAngles.y, (1f - tracerFill) * -360f);
         }
 
-        float ballScale = Mathf.Max(tracerFill / 0.4f, 0.15f);
+        float ballScale = Mathf.Clamp(tracerFill / 0.4f, 0.15f, 1f);
         spinnerBall.localScale = new Vector3(ballScale, ballScale, spinnerBall.localScale.z);
+
+        if (plant.psDamp < 0.08f && ballFade.GetTargetOpacity() == 1f)
+            ballFade.SetTargetOpacity(0f, 1.0f);
+        else if (plant.psDamp >= 0.08f && ballFade.GetTargetOpacity() < 1f)
+            ballFade.SetTargetOpacity(1f, 0.5f);
+        ballFade.Refresh(dt);
+        if (ballFade.IsStateChanged())
+            spinnerTracer.color = ballFade.GetImage().color;
     }
 
     public void UpdateFood()
