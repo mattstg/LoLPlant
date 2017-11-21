@@ -28,6 +28,9 @@ public class DashboardManager : MonoBehaviour {
 
     private Plant plant;
 
+    //private float fpsDamp = 0f;
+    //private float fpsVelocity = 0f;
+
     public void Initialize()
     {
         plant = GV.ws.plant;
@@ -40,6 +43,9 @@ public class DashboardManager : MonoBehaviour {
         UpdatePhotosynthesis();
         UpdateSpinner(dt);
         UpdateFood();
+
+        //fpsDamp = Mathf.SmoothDamp(fpsDamp, (1f / Time.deltaTime) / 100f, ref fpsVelocity, 0.1f);
+        //psMeter.eulerAngles = new Vector3(psMeter.eulerAngles.x, psMeter.eulerAngles.y, -180 * fpsDamp + 90);
     }
 
     public void UpdateInputs()
@@ -139,7 +145,7 @@ public class DashboardManager : MonoBehaviour {
         }
         else
             iconFillAmount = foodMeter.fillAmount;
-        iconFillAmount = Mathf.Max(iconFillAmount, 0.11f);
+        iconFillAmount = Mathf.Max(iconFillAmount, 0.095f);
         foodIcon.anchorMin = new Vector2(0.8f - iconFillAmount * 0.8f, 0f);
         foodIcon.anchorMax = new Vector2(0.8f, iconFillAmount);
     }
