@@ -23,6 +23,8 @@ public class DashboardManager : MonoBehaviour {
 
     public Image foodMeter;
     public Image foodLoss;
+    private FoodLossState foodLossState = FoodLossState.Normal;
+    public RectTransform foodIcon;
 
     private Plant plant;
 
@@ -121,5 +123,24 @@ public class DashboardManager : MonoBehaviour {
     public void UpdateFood()
     {
         foodMeter.fillAmount = Mathf.Clamp(plant.foodDamp / GV.FoodMaximum, 0, 1);
+        if (plant.foodLossState != foodLossState)
+        {
+            foodLossState = plant.foodLossState;
+            if (foodLossState == FoodLossState.Normal)
+                foodLoss.gameObject.SetActive(false);
+            else
+                foodLoss.gameObject.SetActive(true);
+        }
+        float iconFillAmount;
+        if (foodLossState != FoodLossState.Normal)
+        {
+            foodLoss.fillAmount = Mathf.Clamp(plant.foodLossDamp / GV.FoodMaximum, 0, 1);
+            iconFillAmount = foodLoss.fillAmount;
+        }
+        else
+            iconFillAmount = foodMeter.fillAmount;
+        iconFillAmount = Mathf.Max(iconFillAmount, 0.11f);
+        foodIcon.anchorMin = new Vector2(0.8f - iconFillAmount * 0.8f, 0f);
+        foodIcon.anchorMax = new Vector2(0.8f, iconFillAmount);
     }
 }

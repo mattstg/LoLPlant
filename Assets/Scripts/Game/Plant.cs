@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum FoodLossState {Normal, Frozen, Dropping};
+
 public class Plant : MonoBehaviour {
 
     public float sun = 0;
@@ -25,6 +27,13 @@ public class Plant : MonoBehaviour {
     public float food = 0;
     public float foodDamp = 0;
     private float foodVelocity = 0;
+
+    public FoodLossState foodLossState = FoodLossState.Normal;
+    public float foodLossDelay = 2f;
+    private float foodLossCounter = 0f;
+    public float foodLossTarget = -1f;
+    public float foodLossDamp = 0;
+    private float foodLossVelocity = 0;
 
     public float height = 0;
     public float heightDamp = 0;
@@ -77,7 +86,42 @@ public class Plant : MonoBehaviour {
     public void UpdateFood(float dt)
     {
         food += photosynthesis * dt;
+        float oldFoodDamp = foodDamp;
         foodDamp = Mathf.SmoothDamp(foodDamp, food, ref foodVelocity, dampTime * 2f);
+
+        switch (foodLossState)
+        {
+            case FoodLossState.Normal:
+                break;
+            case FoodLossState.Frozen:
+                foodLossCounter += dt;
+                if (foodLossCounter >= foodLossDelay)
+                {
+                    foodLossCounter = foodLossDelay;
+                    foodLossState = FoodLossState.Dropping;
+                }
+                break;
+            case FoodLossState.Dropping:
+                if (foodLossTarget < 0f)
+                {
+                    foodLossDamp = Mathf.SmoothDamp(foodLossDamp, foodDamp, ref foodLossVelocity, dampTime * 2f);
+                    if (foodLossDamp < foodDamp + 0.05f)
+                        foodLossState = FoodLossState.Normal;
+                }
+                else
+                {
+                    foodLossCounter += dt;
+                    foodLossDamp = Mathf.SmoothDamp(foodLossDamp, foodLossTarget, ref foodLossVelocity, dampTime * 2f);
+                    if (foodLossDamp < foodLossTarget + 0.1f)
+                    {
+                        foodLossTarget = -1;
+                        foodLossState = FoodLossState.Frozen;;
+                    }
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     public void UpdateHeight()
@@ -85,4 +129,30 @@ public class Plant : MonoBehaviour {
 
     }
 
+    public void LoseFood(float foodLost)
+    {
+        if (food > 0f)
+        {
+            food = Mathf.Max(food - foodLost, 0f);
+            switch (foodLossState)
+            {
+                case FoodLossState.Normal:
+                    foodLossState = FoodLossState.Frozen;
+                    foodLossCounter = 0f;
+                    foodLossTarget = -1f;
+                    foodLossDamp = foodDamp;
+                    break;
+                case FoodLossState.Frozen:
+                    foodLossCounter = 0f;
+                    foodLossTarget = -1f;
+                    break;
+                case FoodLossState.Dropping:
+                    foodLossCounter = 0f;
+                    foodLossTarget = foodDamp;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }
