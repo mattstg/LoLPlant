@@ -9,6 +9,12 @@ public class GV {
 
     public static readonly float PlatformSunblock = .3f;
 
+    public static readonly float NormalTimeOffset = 4f;
+    public static readonly float SecondsPerHour = 2f;
+    public static readonly int HoursPerDay = 24;
+    public static readonly int SunriseHour = 4;
+    public static readonly int SundownHour = 20;
+
     public static readonly float WaterDepletionRate = 0.01f;
     public static readonly float SpinnerSpeed = 2f;
     public static readonly float FoodMaximum = 60f;
@@ -40,11 +46,20 @@ public class GV {
         return delta;
     }
 
-    public static float NormalizeAngle(float angle) // [-180 - +180]
+    public static float NormalizeAngle180(float angle) // [-180 - +180]
     {
         while (angle > 180)
             angle -= 360;
         while (angle < -180)
+            angle += 360;
+        return angle;
+    }
+
+    public static float NormalizeAngle360(float angle) // [0 - +360[
+    {
+        while (angle >= 360)
+            angle -= 360;
+        while (angle < 0)
             angle += 360;
         return angle;
     }

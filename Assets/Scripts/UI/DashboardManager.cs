@@ -53,7 +53,7 @@ public class DashboardManager : MonoBehaviour {
         sunMeter.eulerAngles = new Vector3(sunMeter.eulerAngles.x, sunMeter.eulerAngles.y, -180 * plant.sunDamp + 90);
         waterMeter.eulerAngles = new Vector3(waterMeter.eulerAngles.x, waterMeter.eulerAngles.y, -180 * plant.waterDamp + 90);
 
-        float normalAngle = GV.NormalizeAngle(sunMeter.eulerAngles.z);
+        float normalAngle = GV.NormalizeAngle180(sunMeter.eulerAngles.z);
         if (normalAngle > 32)
         {
             sunDiscGreen.gameObject.SetActive(false);
@@ -73,7 +73,7 @@ public class DashboardManager : MonoBehaviour {
             sunDiscRed.gameObject.SetActive(false);
         }
 
-        normalAngle = GV.NormalizeAngle(waterMeter.eulerAngles.z);
+        normalAngle = GV.NormalizeAngle180(waterMeter.eulerAngles.z);
         if (normalAngle > 69 || normalAngle < -69)
         {
             waterDiscGreen.gameObject.SetActive(false);
