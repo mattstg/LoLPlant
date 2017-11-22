@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeterUI : MonoBehaviour {
+public class Spinner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

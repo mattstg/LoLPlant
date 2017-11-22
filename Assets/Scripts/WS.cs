@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class WS : MonoBehaviour
 {
-    public PlantGame plant;
+    public Plant plant;
     public DayNightCycle dnc;
     public PlayerController pc;
-    public MeterUIManager mui;
-    public ScoreUI scoreui;
+    public DashboardManager dm;
     public PlatformManager platformManager;
     public Transform cloudParent;
     public Transform sun;

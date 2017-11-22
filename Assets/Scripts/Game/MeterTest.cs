@@ -105,7 +105,7 @@ public class MeterTest : MonoBehaviour
         waterDamp = Mathf.SmoothDamp(waterDamp, water, ref waterVelocity, dampTime);
         waterMeter.eulerAngles = new Vector3(waterMeter.eulerAngles.x, waterMeter.eulerAngles.y, -180 * waterDamp + 90);
 
-        float normalAngle = GV.NormalizeAngle(sunMeter.eulerAngles.z);
+        float normalAngle = GV.NormalizeAngle180(sunMeter.eulerAngles.z);
         if (normalAngle > 32)
         {
             sunDiscGreen.gameObject.SetActive(false);
@@ -125,7 +125,7 @@ public class MeterTest : MonoBehaviour
             sunDiscRed.gameObject.SetActive(false);
         }
 
-        normalAngle = GV.NormalizeAngle(waterMeter.eulerAngles.z);
+        normalAngle = GV.NormalizeAngle180(waterMeter.eulerAngles.z);
         if (normalAngle > 69 || normalAngle < -69)
         {
             waterDiscGreen.gameObject.SetActive(false);

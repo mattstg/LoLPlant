@@ -7,7 +7,18 @@ public class GV {
     public static WS ws;
     public static MainScript ms;
 
-    public static readonly float PlatformBlockPercentage = .3f;
+    public static readonly float PlatformSunblock = .3f;
+
+    public static readonly float NormalTimeOffset = 4f;
+    public static readonly float SecondsPerHour = 5f;
+    public static readonly int HoursPerDay = 24;
+    public static readonly int SunriseHour = 4;
+    public static readonly int SundownHour = 20;
+
+    public static readonly float WaterDepletionRate = 0.005f;
+    public static readonly float SpinnerSpeed = 2f;
+    public static readonly float FoodMaximum = 60f;
+    public static readonly float FoodHeightRatio = 1f;
 
     public static float SunFactor(float sun)   // arg range: [0, 1];  return range: [0, 1]
     {
@@ -35,12 +46,82 @@ public class GV {
         return delta;
     }
 
-    public static float NormalizeAngle(float angle)
+    public static float NormalizeAngle180(float angle) // [-180 - +180]
     {
         while (angle > 180)
             angle -= 360;
         while (angle < -180)
             angle += 360;
         return angle;
+    }
+
+    public static float NormalizeAngle360(float angle) // [0 - +360[
+    {
+        while (angle >= 360)
+            angle -= 360;
+        while (angle < 0)
+            angle += 360;
+        return angle;
+    }
+
+    public static float GetSunRotation(float normalTime)
+    {
+        return normalTime * (-360f / (float)GV.HoursPerDay) - 90f;
+    }
+
+    public static Vector2 GetRadialCoordinates(float angle, float radius, float verticalOffset)
+    {
+        angle = angle * 2f * Mathf.PI / 360f;
+        float x = Mathf.Cos(angle) * radius;
+        float y = (Mathf.Sin(angle) - verticalOffset) * radius;
+        return new Vector2(x, y);
+    }
+
+    public static float GetAngle(Vector2 point)
+    {
+        float hypotenuse = GetDistance(point);
+        float mult = 1f;
+        if (point.y < 0f)
+            mult = -1f;
+        return Mathf.Acos(point.x / hypotenuse) * 360f / (2f * Mathf.PI) * mult;
+    }
+
+    public static float GetDistance(Vector2 point)
+    {
+        return Mathf.Sqrt(Mathf.Pow(point.x, 2) + Mathf.Pow(point.y, 2));
+    }
+
+    public static string GetWeekdaySting(int day)
+    {
+        day = day % 7;
+        string weekdayString;
+        switch (day)
+        {
+            case 0:
+                weekdayString = "MONDAY";
+                break;
+            case 1:
+                weekdayString = "TUESDAY";
+                break;
+            case 2:
+                weekdayString = "WEDNESDAY";
+                break;
+            case 3:
+                weekdayString = "THURSDAY";
+                break;
+            case 4:
+                weekdayString = "FRIDAY";
+                break;
+            case 5:
+                weekdayString = "SATURDAY";
+                break;
+            case 6:
+                weekdayString = "SUNDAY";
+                break;
+            default:
+                weekdayString = "";
+                break;
+        }
+        return weekdayString;
     }
 }
