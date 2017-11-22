@@ -32,6 +32,9 @@ public class DashboardManager : MonoBehaviour {
     private float groundToSunAngle = 0f;
     private float groundToSunMagnitude = 0f;
 
+    public Slider sunControl;
+    public Slider waterControl;
+
     public Text hourText;
     public Text amPmText;
     public Text dayText;
@@ -46,10 +49,13 @@ public class DashboardManager : MonoBehaviour {
     {
         plant = GV.ws.plant;
         ballFade.Initialize();
+        sunControl.onValueChanged.AddListener(delegate { SunControlValueChanged(); });
+        waterControl.onValueChanged.AddListener(delegate { WaterControlValueChanged(); });
     }
 
     public void Refresh(float dt)
     {
+        UpdateControls();
         UpdateInputs();
         UpdatePhotosynthesis();
         UpdateSpinner(dt);
@@ -61,6 +67,23 @@ public class DashboardManager : MonoBehaviour {
 
         //fpsDamp = Mathf.SmoothDamp(fpsDamp, (1f / Time.deltaTime) / 100f, ref fpsVelocity, 0.1f);
         //psMeter.eulerAngles = new Vector3(psMeter.eulerAngles.x, psMeter.eulerAngles.y, -180 * fpsDamp + 90);
+    }
+
+    public void UpdateControls()
+    {
+        sunControl.value = GV.ws.plant.sun;
+        waterControl.value = GV.ws.plant.water;
+    }
+
+    public void SunControlValueChanged()
+    {
+        GV.ws.plant.shadowFactor = Mathf.Min(sunControl.value / GV.ws.dnc.ambientSunLevel, 1f);
+        GV.ws.plant.sun = GV.ws.dnc.ambientSunLevel * GV.ws.plant.shadowFactor;
+    }
+
+    public void WaterControlValueChanged()
+    {
+        GV.ws.plant.water = waterControl.value;
     }
 
     public void UpdateInputs()

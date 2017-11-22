@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum FoodLossState {Normal, Frozen, Dropping};
 
 public class Plant : MonoBehaviour {
 
     public float sun = 0;
+    public float shadowFactor = 1f;
     public float sunFactor = 0;
     public float sunDamp = 0;
     private float sunVelocity = 0;
@@ -58,8 +60,10 @@ public class Plant : MonoBehaviour {
 
     public void UpdateSun()
     {
-        //sun = Mathf.Clamp(sun, 0, GV.ws.dnc.ambientSunLevel * (2f/3f);
-        sun = GV.ws.dnc.ambientSunLevel * (2f/3f);
+        //sun = Mathf.Clamp(sun, 0, 1);
+        sun = Mathf.Clamp(GV.ws.dnc.ambientSunLevel * shadowFactor, 0, 1);
+        //sun = GV.ws.dnc.ambientSunLevel * (2f/3f);
+
         sunFactor = GV.SunFactor(sun);
         sunDamp = Mathf.SmoothDamp(sunDamp, sun, ref sunVelocity, dampTime);
     }
