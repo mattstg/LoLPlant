@@ -26,6 +26,17 @@ public class DashboardManager : MonoBehaviour {
     private FoodLossState foodLossState = FoodLossState.Normal;
     public RectTransform foodIcon;
 
+    public RectTransform sundialSun;
+    public RectTransform sundialLine;
+    private Vector2 sunPosition;
+    private float groundToSunAngle = 0f;
+    private float groundToSunMagnitude = 0f;
+
+    public Text hourText;
+    public Text amPmText;
+    public Text dayText;
+    public Text heightText;
+
     private Plant plant;
 
     //private float fpsDamp = 0f;
@@ -43,6 +54,10 @@ public class DashboardManager : MonoBehaviour {
         UpdatePhotosynthesis();
         UpdateSpinner(dt);
         UpdateFood();
+        UpdateSundial();
+        UpdateDayText();
+        UpdateHourText();
+        UpdateHeightText();
 
         //fpsDamp = Mathf.SmoothDamp(fpsDamp, (1f / Time.deltaTime) / 100f, ref fpsVelocity, 0.1f);
         //psMeter.eulerAngles = new Vector3(psMeter.eulerAngles.x, psMeter.eulerAngles.y, -180 * fpsDamp + 90);
@@ -148,5 +163,35 @@ public class DashboardManager : MonoBehaviour {
         iconFillAmount = Mathf.Max(iconFillAmount, 0.095f);
         foodIcon.anchorMin = new Vector2(0.8f - iconFillAmount * 0.8f, 0f);
         foodIcon.anchorMax = new Vector2(0.8f, iconFillAmount);
+    }
+
+    public void UpdateSundial()
+    {
+        float normalTime = GV.ws.dnc.normalTime;
+
+        sunPosition = GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 45.5f, -0.5f);
+        groundToSunAngle = GV.GetAngle(sunPosition);
+        groundToSunMagnitude = GV.GetDistance(sunPosition);
+        float lineScale = groundToSunMagnitude * (2f / 3f) / 45.5f;
+
+        sundialSun.localPosition = sunPosition;
+        sundialLine.eulerAngles = new Vector3(sundialLine.eulerAngles.x, sundialLine.eulerAngles.y, groundToSunAngle - 90f);
+        sundialLine.localScale = new Vector3(sundialLine.localScale.x, lineScale, sundialLine.localScale.z);
+    }
+
+    public void UpdateDayText()
+    {
+        dayText.text = GV.GetWeekdaySting(GV.ws.dnc.day);
+    }
+
+    public void UpdateHourText()
+    {
+        hourText.text = GV.ws.dnc.hour12.ToString();
+        amPmText.text = (GV.ws.dnc.isMorning) ? "am" : "pm";
+    }
+
+    public void UpdateHeightText()
+    {
+
     }
 }

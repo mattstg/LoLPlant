@@ -58,7 +58,8 @@ public class Plant : MonoBehaviour {
 
     public void UpdateSun()
     {
-        sun = Mathf.Clamp(sun, 0, 1);
+        //sun = Mathf.Clamp(sun, 0, GV.ws.dnc.ambientSunLevel * (2f/3f);
+        sun = GV.ws.dnc.ambientSunLevel * (2f/3f);
         sunFactor = GV.SunFactor(sun);
         sunDamp = Mathf.SmoothDamp(sunDamp, sun, ref sunVelocity, dampTime);
     }
