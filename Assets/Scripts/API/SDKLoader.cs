@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using LoLSDK;
 using SimpleJSON;
+
 using System.IO;
 
 public class SDKLoader {
@@ -12,6 +13,8 @@ public class SDKLoader {
 	private static readonly string languageJSONFilePath = "language.json";
 	private static readonly string questionsJSONFilePath = "questions.json";
 	private static readonly string startGameJSONFilePath = "startGame.json";
+    private static readonly Dictionary<string, string> textDict = new Dictionary<string, string>();
+    public static JSONNode startGameData;
 
 	public static void StartLoader()
     {
@@ -21,7 +24,8 @@ public class SDKLoader {
 		#elif UNITY_WEBGL
 			ILOLSDK webGL = new LoLSDK.WebGL();
 		#endif
-
+        
+        
 		// Initialize the object, passing in the WebGL
 		LOLSDK.Init (webGL, "com.Pansimula.LPlant");
 
@@ -38,15 +42,15 @@ public class SDKLoader {
 
 		// Then, tell the platform the game is ready.
 		LOLSDK.Instance.GameIsReady();
-
-        
 	}
 
 	// Start the game here
 	static void HandleStartGame (string json) {
-		//SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
-		SharedState.StartGameData = JSON.Parse(json);
-	}
+        //Given start game info, load the language and text files
+        startGameData = JSON.Parse(json);
+        LangDict.Instance.SetLanguage(startGameData["languageCode"].Value);
+        LangDict.Instance.SetNode(JSON.Parse(languageJSONFilePath));
+    }
 
     // Handle pause / resume
     static void HandleGameStateChange (GameState gameState) {
@@ -64,12 +68,7 @@ public class SDKLoader {
     static void HandleLanguageDefs (string json)
     {
 		JSONNode langDefs = JSON.Parse(json);
-
-		// Example of accessing language strings
-		// Debug.Log(langDefs);
-		// Debug.Log(langDefs["welcome"]);
-
-		SharedState.LanguageDefs = langDefs;
+        LangDict.Instance.SetLanguage(langDefs);
 	}
     static private void LoadMockData () {
 		#if UNITY_EDITOR
