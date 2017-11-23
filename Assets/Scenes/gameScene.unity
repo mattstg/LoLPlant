@@ -5473,6 +5473,7 @@ GameObject:
   - component: {fileID: 2087831455}
   - component: {fileID: 2087831454}
   - component: {fileID: 2087831457}
+  - component: {fileID: 2087831458}
   m_Layer: 0
   m_Name: Mainscripts
   m_TagString: Untagged
@@ -5498,6 +5499,7 @@ MonoBehaviour:
   platformManager: {fileID: 2013283695}
   cloudParent: {fileID: 1347987724}
   sun: {fileID: 961284406}
+  shadowManager: {fileID: 2087831458}
 --- !u!4 &2087831453
 Transform:
   m_ObjectHideFlags: 0
@@ -5589,6 +5591,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelType: 2
+--- !u!114 &2087831458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2087831451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd6f2804ad6493448366a10a904f551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2122311111
 GameObject:
   m_ObjectHideFlags: 0

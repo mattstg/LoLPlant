@@ -11,6 +11,7 @@ public class WS : MonoBehaviour
     public PlatformManager platformManager;
     public Transform cloudParent;
     public Transform sun;
+    public ShadowManager shadowManager;
 
     public void LinkToGV()
     {

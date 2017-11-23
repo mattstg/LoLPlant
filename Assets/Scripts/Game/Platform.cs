@@ -8,6 +8,7 @@ public class Platform : MonoBehaviour {
     int curWP = 0;
     int numOfWP = 0;
     Vector2[] wp;
+    public bool isStaticPlatform { get { return !moves; } }
     bool moves;
 
     public void Initialize()
@@ -22,14 +23,13 @@ public class Platform : MonoBehaviour {
         foreach (Transform child in transform)
             Destroy(child.gameObject);
         moves = (numOfWP > 1);
-       
     }
 
 	public void Refresh(float dt)
     {
         if (!moves)
             return;
-        transform.position = Vector2.MoveTowards(transform.position, wp[curWP], speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, wp[curWP], speed * dt);
         if(ReachedDest(transform.position,wp[curWP]))
         {
             curWP++;
