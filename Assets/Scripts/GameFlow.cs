@@ -17,18 +17,19 @@ public class GameFlow : Flow {
         GV.ws.pc.Initialize();                  //Initialize player controller
         GV.ws.platformManager.Initialize();     //Initialize platform manager
         GV.ws.dm.Initialize();                 //Initialize dashboard manager
-
+        GV.ws.shadowManager.Initialize();      //Shadow Manager
     }
 
     public override void Update(float dt)
     { //refresh, ew
         if (!GV.Paused)
         {
-            GV.ws.dnc.Refresh(dt);                 //Refresh day night cycle
-            GV.ws.plant.Refresh(dt);                //Refresh plant
-            GV.ws.pc.Refresh(dt);                  //Refresh player controller
-            GV.ws.platformManager.Refresh(dt);     //Refresh platform manager
+            GV.ws.dnc.Refresh(dt);                //Refresh day night cycle
+            GV.ws.plant.Refresh(dt);              //Refresh plant
+            GV.ws.pc.Refresh(dt);                 //Refresh player controller
+            GV.ws.platformManager.Refresh(dt);    //Refresh platform manager
             GV.ws.dm.Refresh(dt);                 //Refresh dashboard manager
+            GV.ws.shadowManager.Refresh();        //Shadow Manager       
         }
     }
 }
