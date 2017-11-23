@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DashboardManager : MonoBehaviour {
-
+public class DashboardManager : MonoBehaviour
+{
     public RectTransform sunMeter;
     public RectTransform sunDiscGreen;
     public RectTransform sunDiscOrange;
@@ -40,6 +40,11 @@ public class DashboardManager : MonoBehaviour {
     public Text dayText;
     public Text heightText;
 
+    public Bouncer bouncer1;
+    public Bouncer bouncer2;
+    public Bouncer bouncer3;
+    public Bouncer bouncer4;
+
     private Plant plant;
 
     //private float fpsDamp = 0f;
@@ -51,6 +56,11 @@ public class DashboardManager : MonoBehaviour {
         ballFade.Initialize();
         sunControl.onValueChanged.AddListener(delegate { SunControlValueChanged(); });
         waterControl.onValueChanged.AddListener(delegate { WaterControlValueChanged(); });
+
+        bouncer1.Initialize();
+        bouncer2.Initialize();
+        bouncer3.Initialize();
+        bouncer4.Initialize();
     }
 
     public void Refresh(float dt)
@@ -64,6 +74,11 @@ public class DashboardManager : MonoBehaviour {
         UpdateDayText();
         UpdateHourText();
         UpdateHeightText();
+        
+        bouncer1.UpdateBouncer(dt);
+        bouncer2.UpdateBouncer(dt);
+        bouncer3.UpdateBouncer(dt);
+        bouncer4.UpdateBouncer(dt);
 
         //fpsDamp = Mathf.SmoothDamp(fpsDamp, (1f / Time.deltaTime) / 100f, ref fpsVelocity, 0.1f);
         //psMeter.eulerAngles = new Vector3(psMeter.eulerAngles.x, psMeter.eulerAngles.y, -180 * fpsDamp + 90);
@@ -146,7 +161,7 @@ public class DashboardManager : MonoBehaviour {
             spinnerTracer.gameObject.SetActive(false);
         else if (plant.psProgressVelocity > 0)
         {
-            tracerFill = Mathf.Clamp(plant.psProgressVelocity * 0.6f, 0, 0.4f);
+            tracerFill = Mathf.Clamp(plant.psProgressVelocity * 0.5f, 0, 0.4f);
             spinnerTracer.gameObject.SetActive(true);
             spinnerTracer.fillAmount = tracerFill;
             spinnerTracer.rectTransform.localEulerAngles = new Vector3(spinnerTracer.rectTransform.localEulerAngles.x, spinnerTracer.rectTransform.localEulerAngles.y, (1f - tracerFill) * -360f);
@@ -155,9 +170,9 @@ public class DashboardManager : MonoBehaviour {
         float ballScale = Mathf.Clamp(tracerFill / 0.4f, 0.15f, 1f);
         spinnerBall.localScale = new Vector3(ballScale, ballScale, spinnerBall.localScale.z);
 
-        if (plant.psDamp < 0.08f && ballFade.GetTargetOpacity() == 1f)
+        if (plant.psDamp < 0.02f && ballFade.GetTargetOpacity() == 1f)
             ballFade.SetTargetOpacity(0f, 1.0f);
-        else if (plant.psDamp >= 0.08f && ballFade.GetTargetOpacity() < 1f)
+        else if (plant.psDamp >= 0.02f && ballFade.GetTargetOpacity() < 1f)
             ballFade.SetTargetOpacity(1f, 0.5f);
         ballFade.Refresh(dt);
         if (ballFade.IsStateChanged())

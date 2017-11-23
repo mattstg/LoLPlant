@@ -21,10 +21,16 @@ public class GV {
     public static readonly float FoodHeightRatio = 1f;
 
     public static bool Paused = false;
+    public static bool ClockStopped = false;
 
     public static void SetPause(bool _paused)
     {
         Paused = _paused;
+    }
+
+    public static void SetClockStopped(bool _clockStopped)
+    {
+        ClockStopped = _clockStopped;
     }
 
     public static float SunFactor(float sun)   // arg range: [0, 1];  return range: [0, 1]
@@ -98,6 +104,12 @@ public class GV {
     public static float GetDistance(Vector2 point)
     {
         return Mathf.Sqrt(Mathf.Pow(point.x, 2) + Mathf.Pow(point.y, 2));
+    }
+
+    public static float BounceFactor(float progress)
+    {
+        return WaterFactor(progress);
+        //return Mathf.Abs(Mathf.Sin(progress * Mathf.PI));
     }
 
     public static string GetWeekdaySting(int day)

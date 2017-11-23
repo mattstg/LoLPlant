@@ -26,7 +26,8 @@ public class DayNightCycle : MonoBehaviour
 
     public void Refresh(float dt)
     {
-        time += dt;
+        if (!GV.ClockStopped)
+            time += dt;
         normalTime = (time / GV.SecondsPerHour) + GV.NormalTimeOffset;
         day = (int)(normalTime / GV.HoursPerDay);
         hour = (int)(normalTime % GV.HoursPerDay);
@@ -58,5 +59,10 @@ public class DayNightCycle : MonoBehaviour
             GV.ws.dm.sunControl.interactable = true;
             GV.ws.dm.waterControl.interactable = true;
         }
+    }
+
+    public void ToggleClockStopped()
+    {
+        GV.SetClockStopped(!GV.ClockStopped);
     }
 }
