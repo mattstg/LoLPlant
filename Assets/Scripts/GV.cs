@@ -20,12 +20,21 @@ public class GV {
     public static readonly float FoodMaximum = 60f;
     public static readonly float FoodHeightRatio = 1f;
 
+    public static bool Paused = false;
+
+    public static void SetPause(bool _paused)
+    {
+        Paused = _paused;
+    }
+
     public static float SunFactor(float sun)   // arg range: [0, 1];  return range: [0, 1]
     {
-        if (sun <= (11f / 60f))
-            return 0;
-        else
-            return Mathf.Clamp(0.5f * Mathf.Sin(1.2f * Mathf.PI * (Mathf.Clamp(sun, 0, 1) - 0.6f)) + 0.5f, 0, 1);
+        return Mathf.Clamp(-1.1f * Mathf.Pow((sun - 1f), 2f) + 1f, 0, 1);
+
+        //if (sun <= (11f / 60f))
+        //    return 0;
+        //else
+        //    return Mathf.Clamp(0.5f * Mathf.Sin(1.2f * Mathf.PI * (Mathf.Clamp(sun, 0, 1) - 0.6f)) + 0.5f, 0, 1);
         //return Mathf.Clamp((27f / 25f) * Mathf.Pow(Mathf.Clamp(sun, 0, 1), 2) - 0.08f, 0, 1);
     }
 

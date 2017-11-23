@@ -70,7 +70,7 @@ public class Plant : MonoBehaviour {
 
     public void UpdateWater(float dt)
     {
-        water -= (photosynthesis + sun) * GV.WaterDepletionRate * dt;
+        water -= (photosynthesis + (sun / 2f)) * GV.WaterDepletionRate * dt;
         water = Mathf.Clamp(water, 0, 1);
         waterFactor = GV.WaterFactor(water);
         waterDamp = Mathf.SmoothDamp(waterDamp, water, ref waterVelocity, dampTime);
@@ -120,7 +120,7 @@ public class Plant : MonoBehaviour {
                     if (foodLossDamp < foodLossTarget + 0.1f)
                     {
                         foodLossTarget = -1;
-                        foodLossState = FoodLossState.Frozen;;
+                        foodLossState = FoodLossState.Frozen;
                     }
                 }
                 break;

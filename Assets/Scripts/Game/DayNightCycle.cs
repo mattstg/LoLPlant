@@ -42,6 +42,11 @@ public class DayNightCycle : MonoBehaviour
         groundToSunAngle = GV.GetAngle(sunPosition);
         groundToSunMagnitude = GV.GetDistance(sunPosition);
 
-        ambientSunLevel = Mathf.Max(sunPosition.y, 0) * (2f/3f);
+        ambientSunLevel = Mathf.Min(Mathf.Max(sunPosition.y, 0) * (2f/3f) * 1.2f, 1f);
+    }
+
+    public void TogglePause()
+    {
+        GV.SetPause(!GV.Paused);
     }
 }
