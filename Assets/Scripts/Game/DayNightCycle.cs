@@ -48,5 +48,15 @@ public class DayNightCycle : MonoBehaviour
     public void TogglePause()
     {
         GV.SetPause(!GV.Paused);
+        if (GV.Paused)
+        {
+            GV.ws.dm.sunControl.interactable = false;
+            GV.ws.dm.waterControl.interactable = false;
+        }
+        else
+        {
+            GV.ws.dm.sunControl.interactable = true;
+            GV.ws.dm.waterControl.interactable = true;
+        }
     }
 }
