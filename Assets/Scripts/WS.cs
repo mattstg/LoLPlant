@@ -12,6 +12,9 @@ public class WS : MonoBehaviour
     public Transform cloudParent;
     public Transform sun;
     public ShadowManager shadowManager;
+    public List<Parallax> parallaxes;
+    public Transform cameraTransform;
+    public CloudManager cloudManager;
 
     public void LinkToGV()
     {

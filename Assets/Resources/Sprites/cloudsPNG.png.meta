@@ -1,0 +1,412 @@
+fileFormatVersion: 2
+guid: 638ea825f63ff2c4eb8bf92ec431bd27
+timeCreated: 1511471427
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: cloudsPNG_0
+    21300002: cloudsPNG_1
+    21300004: cloudsPNG_2
+    21300006: cloudsPNG_3
+    21300008: cloudsPNG_4
+    21300010: cloudsPNG_5
+    21300012: cloudsPNG_6
+    21300014: cloudsPNG_7
+    21300016: cloudsPNG_8
+    21300018: cloudsPNG_9
+    21300020: cloudsPNG_10
+    21300022: cloudsPNG_11
+    21300024: cloudsPNG_12
+    21300026: cloudsPNG_13
+    21300028: cloudsPNG_14
+    21300030: cloudsPNG_15
+    21300032: cloudsPNG_16
+    21300034: cloudsPNG_17
+    21300036: cloudsPNG_18
+    21300038: cloudsPNG_19
+    21300040: cloudsPNG_20
+    21300042: cloudsPNG_21
+    21300044: cloudsPNG_22
+    21300046: cloudsPNG_23
+    21300048: cloudsPNG_24
+    21300050: cloudsPNG_25
+    21300052: cloudsPNG_26
+    21300054: cloudsPNG_27
+    21300056: cloudsPNG_28
+    21300058: cloudsPNG_29
+    21300060: cloudsPNG_30
+    21300062: cloudsPNG_31
+    21300064: cloudsPNG_32
+    21300066: cloudsPNG_33
+    21300068: cloudsPNG_34
+    21300070: cloudsPNG_35
+    21300072: cloudsPNG_36
+    21300074: cloudsPNG_37
+    21300076: cloudsPNG_38
+    21300078: cloudsPNG_39
+    21300080: cloudsPNG_40
+    21300082: cloudsPNG_41
+    21300084: cloudsPNG_42
+    21300086: cloudsPNG_43
+    21300088: cloudsPNG_44
+    21300090: cloudsPNG_45
+    21300092: cloudsPNG_46
+    21300094: cloudsPNG_47
+    21300096: cloudsPNG_48
+    21300098: cloudsPNG_49
+    21300100: cloudsPNG_50
+    21300102: cloudsPNG_51
+    21300104: cloudsPNG_52
+    21300106: cloudsPNG_53
+    21300108: cloudsPNG_54
+    21300110: cloudsPNG_55
+    21300112: cloudsPNG_56
+    21300114: cloudsPNG_57
+    21300116: cloudsPNG_58
+    21300118: cloudsPNG_59
+    21300120: cloudsPNG_60
+    21300122: cloudsPNG_61
+    21300124: cloudsPNG_62
+    21300126: cloudsPNG_63
+    21300128: cloudsPNG_64
+    21300130: cloudsPNG_65
+    21300132: cloudsPNG_66
+    21300134: cloudsPNG_67
+    21300136: cloudsPNG_68
+    21300138: cloudsPNG_69
+    21300140: cloudsPNG_70
+    21300142: cloudsPNG_71
+    21300144: cloudsPNG_72
+    21300146: cloudsPNG_73
+    21300148: cloudsPNG_74
+    21300150: cloudsPNG_75
+    21300152: cloudsPNG_76
+    21300154: cloudsPNG_77
+    21300156: cloudsPNG_78
+    21300158: cloudsPNG_79
+    21300160: cloudsPNG_80
+    21300162: cloudsPNG_81
+    21300164: cloudsPNG_82
+    21300166: cloudsPNG_83
+    21300168: cloudsPNG_84
+    21300170: cloudsPNG_85
+    21300172: cloudsPNG_86
+    21300174: cloudsPNG_87
+    21300176: cloudsPNG_88
+    21300178: cloudsPNG_89
+    21300180: cloudsPNG_90
+    21300182: cloudsPNG_91
+    21300184: cloudsPNG_92
+    21300186: cloudsPNG_93
+    21300188: cloudsPNG_94
+    21300190: cloudsPNG_95
+    21300192: cloudsPNG_96
+    21300194: cloudsPNG_97
+    21300196: cloudsPNG_98
+    21300198: cloudsPNG_99
+    21300200: cloudsPNG_100
+    21300202: cloudsPNG_101
+    21300204: cloudsPNG_102
+    21300206: cloudsPNG_103
+    21300208: cloudsPNG_104
+    21300210: cloudsPNG_105
+    21300212: cloudsPNG_106
+    21300214: cloudsPNG_107
+    21300216: cloudsPNG_108
+    21300218: cloudsPNG_109
+    21300220: cloudsPNG_110
+    21300222: cloudsPNG_111
+    21300224: cloudsPNG_112
+    21300226: cloudsPNG_113
+    21300228: cloudsPNG_114
+    21300230: cloudsPNG_115
+    21300232: cloudsPNG_116
+    21300234: cloudsPNG_117
+    21300236: cloudsPNG_118
+    21300238: cloudsPNG_119
+    21300240: cloudsPNG_120
+    21300242: cloudsPNG_121
+    21300244: cloudsPNG_122
+    21300246: cloudsPNG_123
+    21300248: cloudsPNG_124
+    21300250: cloudsPNG_125
+    21300252: cloudsPNG_126
+    21300254: cloudsPNG_127
+    21300256: cloudsPNG_128
+    21300258: cloudsPNG_129
+    21300260: cloudsPNG_130
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: cloudsPNG_0
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 1967
+        width: 318
+        height: 295
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cloudsPNG_4
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 1937
+        width: 582
+        height: 330
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cloudsPNG_5
+      rect:
+        serializedVersion: 2
+        x: 2206
+        y: 1742
+        width: 602
+        height: 478
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cloudsPNG_7
+      rect:
+        serializedVersion: 2
+        x: 3280
+        y: 1692
+        width: 517
+        height: 432
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cloudsPNG_24
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 1451
+        width: 510
+        height: 432
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cloudsPNG_26
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 1435
+        width: 561
+        height: 437
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cloudsPNG_38
+      rect:
+        serializedVersion: 2
+        x: 2115
+        y: 910
+        width: 986
+        height: 614
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cloudsPNG_41
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 874
+        width: 666
+        height: 502
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cloudsPNG_47
+      rect:
+        serializedVersion: 2
+        x: 3327
+        y: 889
+        width: 614
+        height: 463
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cloudsPNG_50
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 728
+        width: 997
+        height: 586
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cloudsPNG_84
+      rect:
+        serializedVersion: 2
+        x: 1357
+        y: 147
+        width: 599
+        height: 695
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cloudsPNG_90
+      rect:
+        serializedVersion: 2
+        x: 2371
+        y: 104
+        width: 542
+        height: 682
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cloudsPNG_91
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 201
+        width: 461
+        height: 367
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cloudsPNG_95
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 109
+        width: 1086
+        height: 398
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
