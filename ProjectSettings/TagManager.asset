@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: sky
+    uniqueID: 1057883769
+    locked: 0
+  - name: clouds behind mtns
+    uniqueID: 1772528535
+    locked: 0
+  - name: mountains
+    uniqueID: 3250609809
+    locked: 0
+  - name: clouds in front of mtns
+    uniqueID: 2932715619
+    locked: 0
