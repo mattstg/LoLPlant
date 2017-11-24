@@ -14,6 +14,7 @@ public class WS : MonoBehaviour
     public ShadowManager shadowManager;
     public List<Parallax> parallaxes;
     public Transform cameraTransform;
+    public CameraManager cameraManager;
     public CloudManager cloudManager;
 
     public void LinkToGV()
