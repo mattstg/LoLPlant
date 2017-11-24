@@ -44,6 +44,7 @@ public class DashboardManager : MonoBehaviour
     public Bouncer bouncer2;
     public Bouncer bouncer3;
     public Bouncer bouncer4;
+    public Bouncer bouncer5;
 
     private Plant plant;
 
@@ -61,6 +62,7 @@ public class DashboardManager : MonoBehaviour
         bouncer2.Initialize();
         bouncer3.Initialize();
         bouncer4.Initialize();
+        bouncer5.Initialize();
     }
 
     public void Refresh(float dt)
@@ -79,6 +81,7 @@ public class DashboardManager : MonoBehaviour
         bouncer2.UpdateBouncer(dt);
         bouncer3.UpdateBouncer(dt);
         bouncer4.UpdateBouncer(dt);
+        bouncer5.UpdateBouncer(dt);
 
         //fpsDamp = Mathf.SmoothDamp(fpsDamp, (1f / Time.deltaTime) / 100f, ref fpsVelocity, 0.1f);
         //psMeter.eulerAngles = new Vector3(psMeter.eulerAngles.x, psMeter.eulerAngles.y, -180 * fpsDamp + 90);

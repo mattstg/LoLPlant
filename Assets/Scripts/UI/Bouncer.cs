@@ -18,6 +18,8 @@ public class Bouncer : MonoBehaviour
     public bool isPausing = false;
     public float progress = 0f;
 
+    public bool useWaveMotion = false;
+
     public void Initialize()
     {
         if (!rectTransform)
@@ -48,6 +50,6 @@ public class Bouncer : MonoBehaviour
             progress = (isPausing) ? (timer + timerOffset) / pauseTime : (timer + timerOffset) / bounceTime;
         }
 
-        rectTransform.anchoredPosition = new Vector2(origin.x + offset.x, origin.y + offset.y + ((isPausing) ? 0f : GV.BounceFactor(progress) * bounceHeight));
+        rectTransform.anchoredPosition = new Vector2(origin.x + offset.x, origin.y + offset.y + ((isPausing) ? 0f : ((useWaveMotion) ? GV.WaveFactor(progress) : GV.BounceFactor(progress)) * bounceHeight));
     }
 }

@@ -118,6 +118,11 @@ public class GV {
         //return Mathf.Abs(Mathf.Sin(progress * Mathf.PI));
     }
 
+    public static float WaveFactor(float progress)
+    {
+        return -0.5f * Mathf.Cos(2f * Mathf.PI * progress) + 0.5f;
+    }
+
     public static string GetWeekdaySting(int day)
     {
         day = day % 7;
