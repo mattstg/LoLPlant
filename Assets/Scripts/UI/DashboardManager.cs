@@ -11,6 +11,8 @@ public class DashboardManager : MonoBehaviour
         // Height to All = revealing sundial + time + day
     public DashboardElementSet visibleElementSet = DashboardElementSet.All;
 
+    public Image lowerDashboard;
+
     public RectTransform sunParent;
     public RectTransform sunMeter;
     public RectTransform sunDiscGreen;
@@ -231,10 +233,105 @@ public class DashboardManager : MonoBehaviour
 
     }
 
+    public void ShowNextElementSet()
+    {
+        ShowElementSet((visibleElementSet == DashboardElementSet.All) ? 0 : visibleElementSet + 1);
+    }
+
     public void ShowElementSet(DashboardElementSet elementSet)
     {
         if (elementSet == visibleElementSet)
             return;
-        //to be completed
+        switch (elementSet)
+        {
+            case DashboardElementSet.None:
+                sunParent.gameObject.SetActive(false);
+                waterParent.gameObject.SetActive(false);
+                psParent.gameObject.SetActive(false);
+                foodParent.gameObject.SetActive(false);
+                heightParent.gameObject.SetActive(false);
+                sundialParent.gameObject.SetActive(false);
+
+                lowerDashboard.sprite = Resources.Load("UI/Graphics/lowerDashboard0", typeof(Sprite)) as Sprite;
+
+                visibleElementSet = DashboardElementSet.None;
+                break;
+            case DashboardElementSet.Sun:
+                sunParent.gameObject.SetActive(true);
+                waterParent.gameObject.SetActive(false);
+                psParent.gameObject.SetActive(false);
+                foodParent.gameObject.SetActive(false);
+                heightParent.gameObject.SetActive(false);
+                sundialParent.gameObject.SetActive(false);
+
+                lowerDashboard.sprite = Resources.Load("UI/Graphics/lowerDashboard1", typeof(Sprite)) as Sprite;
+
+                visibleElementSet = DashboardElementSet.Sun;
+                break;
+            case DashboardElementSet.Water:
+                sunParent.gameObject.SetActive(true);
+                waterParent.gameObject.SetActive(true);
+                psParent.gameObject.SetActive(false);
+                foodParent.gameObject.SetActive(false);
+                heightParent.gameObject.SetActive(false);
+                sundialParent.gameObject.SetActive(false);
+
+                lowerDashboard.sprite = Resources.Load("UI/Graphics/lowerDashboard2", typeof(Sprite)) as Sprite;
+
+                visibleElementSet = DashboardElementSet.Water;
+                break;
+            case DashboardElementSet.Photosynthesis:
+                sunParent.gameObject.SetActive(true);
+                waterParent.gameObject.SetActive(true);
+                psParent.gameObject.SetActive(true);
+                foodParent.gameObject.SetActive(false);
+                heightParent.gameObject.SetActive(false);
+                sundialParent.gameObject.SetActive(false);
+
+                if (visibleElementSet < DashboardElementSet.Photosynthesis)
+                    lowerDashboard.sprite = Resources.Load("UI/Graphics/lowerDashboard3", typeof(Sprite)) as Sprite;
+
+                visibleElementSet = DashboardElementSet.Photosynthesis;
+                break;
+            case DashboardElementSet.Food:
+                sunParent.gameObject.SetActive(true);
+                waterParent.gameObject.SetActive(true);
+                psParent.gameObject.SetActive(true);
+                foodParent.gameObject.SetActive(true);
+                heightParent.gameObject.SetActive(false);
+                sundialParent.gameObject.SetActive(false);
+
+                if (visibleElementSet < DashboardElementSet.Photosynthesis)
+                    lowerDashboard.sprite = Resources.Load("UI/Graphics/lowerDashboard3", typeof(Sprite)) as Sprite;
+
+                visibleElementSet = DashboardElementSet.Food;
+                break;
+            case DashboardElementSet.Height:
+                sunParent.gameObject.SetActive(true);
+                waterParent.gameObject.SetActive(true);
+                psParent.gameObject.SetActive(true);
+                foodParent.gameObject.SetActive(true);
+                heightParent.gameObject.SetActive(true);
+                sundialParent.gameObject.SetActive(false);
+
+                if (visibleElementSet < DashboardElementSet.Photosynthesis)
+                    lowerDashboard.sprite = Resources.Load("UI/Graphics/lowerDashboard3", typeof(Sprite)) as Sprite;
+
+                visibleElementSet = DashboardElementSet.Height;
+                break;
+            case DashboardElementSet.All:
+                sunParent.gameObject.SetActive(true);
+                waterParent.gameObject.SetActive(true);
+                psParent.gameObject.SetActive(true);
+                foodParent.gameObject.SetActive(true);
+                heightParent.gameObject.SetActive(true);
+                sundialParent.gameObject.SetActive(true);
+
+                if (visibleElementSet < DashboardElementSet.Photosynthesis)
+                    lowerDashboard.sprite = Resources.Load("UI/Graphics/lowerDashboard3", typeof(Sprite)) as Sprite;
+
+                visibleElementSet = DashboardElementSet.All;
+                break;
+        }
     }
 }
