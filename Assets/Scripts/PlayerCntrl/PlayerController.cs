@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
         //Create both input managers & link here
     }
 
-    public void Refresh(float dt)
+    public virtual void Refresh(float dt)
     {
         im.UpdateInput(); //update input
     }

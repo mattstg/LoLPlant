@@ -16,9 +16,15 @@ public class WS : MonoBehaviour
     public Transform cameraTransform;
     public CameraManager cameraManager;
     public CloudManager cloudManager;
+    public Flow currentFlow;
+    public DayEndManager dayEndManager;
+    public BasicPopup basicPopup;
+    public AphidManager aphidManager;
 
-    public void LinkToGV()
+
+    public void LinkToGV(Flow _flow)
     {
+        currentFlow = _flow;
         GV.ws = this;
     }
 }

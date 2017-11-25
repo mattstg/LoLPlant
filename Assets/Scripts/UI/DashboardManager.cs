@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class DashboardManager : MonoBehaviour
 {
+    public enum MeterType { Water, Sun, Growth, Sugar}
+
     public RectTransform sunMeter;
     public RectTransform sunDiscGreen;
     public RectTransform sunDiscOrange;
@@ -231,5 +233,10 @@ public class DashboardManager : MonoBehaviour
     public void UpdateHeightText()
     {
 
+    }
+
+    public void SetMeterActive(MeterType _meterType, bool _setActive)
+    {
+        //Set active the correct meter type
     }
 }

@@ -53,3 +53,9 @@ TagManager:
   - name: clouds in front of mtns
     uniqueID: 2932715619
     locked: 0
+  - name: Platform
+    uniqueID: 943831127
+    locked: 0
+  - name: Popup
+    uniqueID: 2843504725
+    locked: 0

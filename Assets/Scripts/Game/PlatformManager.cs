@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlatformManager : MonoBehaviour {
 
     Platform[] platforms;
+    bool platformsActive;
 
 	public void Initialize()
     {
@@ -16,11 +17,19 @@ public class PlatformManager : MonoBehaviour {
             platforms[i] = transform.GetChild(i).GetComponent<Platform>();
             platforms[i].Initialize();
         }
+        platformsActive = transform.gameObject.activeInHierarchy;
     }
 
     public void Refresh(float dt)
     {
-        foreach (Platform p in platforms)
-            p.Refresh(dt);
+        if(platformsActive)
+            foreach (Platform p in platforms)
+                p.Refresh(dt);
+    }
+
+    public void SetPlatformsActive(bool _setActive)
+    {
+        transform.gameObject.SetActive(true);
+        platformsActive = true;
     }
 }

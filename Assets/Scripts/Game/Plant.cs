@@ -7,42 +7,42 @@ public enum FoodLossState {Normal, Frozen, Dropping};
 
 public class Plant : MonoBehaviour {
 
-    public float sun = 0;
-    public float shadowFactor = 1f;
-    public float sunFactor = 0;
-    public float sunDamp = 0;
-    private float sunVelocity = 0;
-
-    public float water = 0;
-    public float waterFactor = 0;
-    public float waterDamp = 0;
-    private float waterVelocity = 0;
-
-    public float photosynthesis = 0;
-    public float psDamp = 0;
-    private float psVelocity = 0;
-
-    public float psProgress = 0;
-    public float psProgressDamp = 0;
-    public float psProgressVelocity = 0;
-
-    public float food = 0;
-    public float foodDamp = 0;
-    private float foodVelocity = 0;
-
-    public FoodLossState foodLossState = FoodLossState.Normal;
-    public float foodLossDelay = 2f;
-    private float foodLossCounter = 0f;
-    public float foodLossTarget = -1f;
-    public float foodLossDamp = 0;
-    private float foodLossVelocity = 0;
-
-    public float height = 0;
-    public float heightDamp = 0;
-    private float heightVelocity = 0;
-
-    public float dampTime = 0.25f;
-
+    [HideInInspector] public float sun = 0;
+    [HideInInspector] public float shadowFactor = 1f;
+    [HideInInspector] public float sunFactor = 0;
+    [HideInInspector] public float sunDamp = 0;
+    [HideInInspector] private float sunVelocity = 0;
+    
+    [HideInInspector] public float water = 0;
+    [HideInInspector] public float waterFactor = 0;
+    [HideInInspector] public float waterDamp = 0;
+    [HideInInspector] private float waterVelocity = 0;
+    
+    [HideInInspector] public float photosynthesis = 0;
+    [HideInInspector] public float psDamp = 0;
+    [HideInInspector] private float psVelocity = 0;
+    
+    [HideInInspector] public float psProgress = 0;
+    [HideInInspector] public float psProgressDamp = 0;
+    [HideInInspector] public float psProgressVelocity = 0;
+    
+    [HideInInspector] public float food = 0;
+    [HideInInspector] public float foodDamp = 0;
+    [HideInInspector] private float foodVelocity = 0;
+    
+    [HideInInspector] public FoodLossState foodLossState = FoodLossState.Normal;
+    [HideInInspector] public float foodLossDelay = 2f;
+    [HideInInspector] private float foodLossCounter = 0f;
+    [HideInInspector] public float foodLossTarget = -1f;
+    [HideInInspector] public float foodLossDamp = 0;
+    [HideInInspector] private float foodLossVelocity = 0;
+    
+    [HideInInspector] public float height = 0;
+    [HideInInspector] public float heightDamp = 0;
+    [HideInInspector] private float heightVelocity = 0;
+    
+    [HideInInspector] public float dampTime = 0.25f;
+    
     public void Initialize()
     {
 
