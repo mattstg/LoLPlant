@@ -9,8 +9,8 @@ public class TAClosePopup : TAEvent
         
     }
 
-    public override void PreformEvent()
+    public override void PerformEvent()
     {
-        GV.ws.basicPopup.ClosePopup();
+        GV.ws.popupManager.ClosePopup();
     }
 }

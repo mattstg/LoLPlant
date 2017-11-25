@@ -15,7 +15,7 @@ public class TAEvent
         eventType = _eventType;
     }
 
-    public virtual void PreformEvent()
+    public virtual void PerformEvent()
     {
 
     }

@@ -4,23 +4,26 @@ using UnityEngine;
 
 public class WS : MonoBehaviour
 {
+    public Flow currentFlow;
+    public DayEndManager dayEndManager;
+
     public Plant plant;
     public DayNightCycle dnc;
     public PlayerController pc;
+
     public DashboardManager dm;
-    public PlatformManager platformManager;
-    public Transform cloudParent;
-    public Transform sun;
-    public ShadowManager shadowManager;
+    public PopupManager popupManager;
+
     public List<Parallax> parallaxes;
     public Transform cameraTransform;
     public CameraManager cameraManager;
-    public CloudManager cloudManager;
-    public Flow currentFlow;
-    public DayEndManager dayEndManager;
-    public BasicPopup basicPopup;
-    public AphidManager aphidManager;
 
+    public PlatformManager platformManager;
+    public AphidManager aphidManager;
+    public Transform cloudParent;
+    public CloudManager cloudManager;
+    public ShadowManager shadowManager;
+    public Transform sun;
 
     public void LinkToGV(Flow _flow)
     {

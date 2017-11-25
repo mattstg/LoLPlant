@@ -10,9 +10,9 @@ public class TACreatePopup : TAEvent
         popupName = _popupName;
     }
 
-    public override void PreformEvent()
+    public override void PerformEvent()
     {
         string text = LangDict.Instance.GetText(popupName); //Text from language file using the popupname as the key
-        GV.ws.basicPopup.InitializePopup(text);
+        GV.ws.popupManager.InitializePopup(text);
     }
 }

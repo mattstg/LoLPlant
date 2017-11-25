@@ -13,6 +13,7 @@ public class TutorialFlow : Flow {
         // GV.ws.cameraManager.Initialize();  Cam is locked for tut, dont update
         GV.ws.platformManager.Initialize();     //Initialize platform manager
         GV.ws.dm.Initialize();                  //Initialize dashboard manager
+        GV.ws.popupManager.Initialize();        //Initialize popup manager
         GV.ws.cloudManager.Initialize();        //Initialize cloud manager
         GV.ws.shadowManager.Initialize();      //Shadow Manager
     }
@@ -27,8 +28,9 @@ public class TutorialFlow : Flow {
             // GV.ws.cameraManager.Refresh(dt);  Cam is locked for tut, dont update
             GV.ws.platformManager.Refresh(dt);    //Refresh platform manager
             GV.ws.dm.Refresh(dt);                 //Refresh dashboard manager
-            foreach (Parallax p in GV.ws.parallaxes)
-                p.Refresh(dt);
+            GV.ws.popupManager.Refresh(dt);
+            //foreach (Parallax p in GV.ws.parallaxes)  //No parallax in tutorial
+            //    p.Refresh(dt);
             GV.ws.cloudManager.Refresh(dt);
             GV.ws.shadowManager.Refresh();        //Shadow Manager       
 

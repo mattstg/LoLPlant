@@ -10,7 +10,7 @@ public class TAFreezeChar : TAEvent
         setFrozen = _setFrozen;
     }
 
-    public override void PreformEvent()
+    public override void PerformEvent()
     {
         (GV.ws.pc as TutorialPC).SetCharActive(setFrozen);
     }

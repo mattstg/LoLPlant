@@ -10,7 +10,7 @@ public class TADayEndPanel : TAEvent
 
     }
 
-    public override void PreformEvent()
+    public override void PerformEvent()
     {
         GV.ws.dayEndManager.DayEnd();
     }

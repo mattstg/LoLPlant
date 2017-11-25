@@ -123,7 +123,7 @@ public class GV {
         return -0.5f * Mathf.Cos(2f * Mathf.PI * progress) + 0.5f;
     }
 
-    public static string GetWeekdaySting(int day)
+    public static string GetWeekdayString(int day)
     {
         day = day % 7;
         string weekdayString;

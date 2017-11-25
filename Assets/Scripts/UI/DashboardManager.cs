@@ -5,47 +5,53 @@ using UnityEngine.UI;
 
 public class DashboardManager : MonoBehaviour
 {
-    public enum MeterType { Water, Sun, Growth, Sugar}
+    public enum DashboardElementSet { None, Sun, Water, Photosynthesis, Food, Height, All }
+        // None = nothing except: upper + lower dashboards + menu button
+        // n to n+1 = revealing another element
+        // Height to All = revealing sundial + time + day
+    public DashboardElementSet visibleElementSet = DashboardElementSet.All;
 
+    public RectTransform sunParent;
     public RectTransform sunMeter;
     public RectTransform sunDiscGreen;
     public RectTransform sunDiscOrange;
     public RectTransform sunDiscRed;
 
+    public RectTransform waterParent;
     public RectTransform waterMeter;
     public RectTransform waterDiscGreen;
     public RectTransform waterDiscOrange;
     public RectTransform waterDiscRed;
 
+    public RectTransform psParent;
     public RectTransform psMeter;
     public RectTransform spinner;
     public RectTransform spinnerBall;
     public Image spinnerTracer;
     public ImageFade ballFade;
 
+    public RectTransform foodParent;
     public Image foodMeter;
     public Image foodLoss;
     private FoodLossState foodLossState = FoodLossState.Normal;
     public RectTransform foodIcon;
 
+    public Transform heightParent;
+    public Text heightText;
+
+    public RectTransform sundialParent;
     public RectTransform sundialSun;
     public RectTransform sundialLine;
     private Vector2 sunPosition;
     private float groundToSunAngle = 0f;
     private float groundToSunMagnitude = 0f;
 
-    public Slider sunControl;
-    public Slider waterControl;
-
     public Text hourText;
     public Text amPmText;
     public Text dayText;
-    public Text heightText;
 
-    public Bouncer bouncer1;
-    public Bouncer bouncer2;
-    public Bouncer bouncer3;
-    public Bouncer bouncer4;
+    public Slider sunControl;
+    public Slider waterControl;
 
     private Plant plant;
 
@@ -58,11 +64,6 @@ public class DashboardManager : MonoBehaviour
         ballFade.Initialize();
         sunControl.onValueChanged.AddListener(delegate { SunControlValueChanged(); });
         waterControl.onValueChanged.AddListener(delegate { WaterControlValueChanged(); });
-
-        bouncer1.Initialize();
-        bouncer2.Initialize();
-        bouncer3.Initialize();
-        bouncer4.Initialize();
     }
 
     public void Refresh(float dt)
@@ -76,11 +77,6 @@ public class DashboardManager : MonoBehaviour
         UpdateDayText();
         UpdateHourText();
         UpdateHeightText();
-        
-        bouncer1.UpdateBouncer(dt);
-        bouncer2.UpdateBouncer(dt);
-        bouncer3.UpdateBouncer(dt);
-        bouncer4.UpdateBouncer(dt);
 
         //fpsDamp = Mathf.SmoothDamp(fpsDamp, (1f / Time.deltaTime) / 100f, ref fpsVelocity, 0.1f);
         //psMeter.eulerAngles = new Vector3(psMeter.eulerAngles.x, psMeter.eulerAngles.y, -180 * fpsDamp + 90);
@@ -221,7 +217,7 @@ public class DashboardManager : MonoBehaviour
 
     public void UpdateDayText()
     {
-        dayText.text = GV.GetWeekdaySting(GV.ws.dnc.day);
+        dayText.text = GV.GetWeekdayString(GV.ws.dnc.day);
     }
 
     public void UpdateHourText()
@@ -235,8 +231,10 @@ public class DashboardManager : MonoBehaviour
 
     }
 
-    public void SetMeterActive(MeterType _meterType, bool _setActive)
+    public void ShowElementSet(DashboardElementSet elementSet)
     {
-        //Set active the correct meter type
+        if (elementSet == visibleElementSet)
+            return;
+        //to be completed
     }
 }

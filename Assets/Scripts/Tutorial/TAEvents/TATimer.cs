@@ -11,7 +11,7 @@ public class TATimer : TAEvent
 
     }
 
-    public override void PreformEvent()
+    public override void PerformEvent()
     {
         (GameObject.Instantiate(Resources.Load("Prefabs/TATimer")) as GameObject).GetComponent<TAEventTimer>().Initialize(timer,eventName);
     }

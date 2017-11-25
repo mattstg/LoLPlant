@@ -14,6 +14,7 @@ public class GameFlow : Flow {
         GV.ws.cameraManager.Initialize();
         GV.ws.platformManager.Initialize();     //Initialize platform manager
         GV.ws.dm.Initialize();                  //Initialize dashboard manager
+        GV.ws.popupManager.Initialize();        //Initialize popup manager
         GV.ws.cloudManager.Initialize();        //Initialize cloud manager
         GV.ws.shadowManager.Initialize();      //Shadow Manager
     }
@@ -28,6 +29,7 @@ public class GameFlow : Flow {
             GV.ws.cameraManager.Refresh(dt);
             GV.ws.platformManager.Refresh(dt);    //Refresh platform manager
             GV.ws.dm.Refresh(dt);                 //Refresh dashboard manager
+            GV.ws.popupManager.Refresh(dt);      //Refresh popup manager
             foreach (Parallax p in GV.ws.parallaxes)
                 p.Refresh(dt);
             GV.ws.cloudManager.Refresh(dt);

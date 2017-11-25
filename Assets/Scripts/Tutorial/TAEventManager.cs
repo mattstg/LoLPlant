@@ -55,7 +55,7 @@ public class TAEventManager
         }
         else
         {
-            taStack.Pop().PreformEvent();
+            taStack.Pop().PerformEvent();
             ProcessStack(); //If is an action, can do multiple actions in a row, continues till finds a trigger
         }
     }
