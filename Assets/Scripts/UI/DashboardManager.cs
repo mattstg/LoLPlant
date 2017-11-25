@@ -31,6 +31,9 @@ public class DashboardManager : MonoBehaviour
     public RectTransform spinnerBall;
     public Image spinnerTracer;
     public ImageFade ballFade;
+    public bool fpsOverride = false;
+    private float fpsDamp = 0f;
+    private float fpsVelocity = 0f;
 
     public RectTransform foodParent;
     public Image foodMeter;
@@ -57,9 +60,6 @@ public class DashboardManager : MonoBehaviour
 
     private Plant plant;
 
-    //private float fpsDamp = 0f;
-    //private float fpsVelocity = 0f;
-
     public void Initialize()
     {
         plant = GV.ws.plant;
@@ -80,8 +80,11 @@ public class DashboardManager : MonoBehaviour
         UpdateHourText();
         UpdateHeightText();
 
-        //fpsDamp = Mathf.SmoothDamp(fpsDamp, (1f / Time.deltaTime) / 100f, ref fpsVelocity, 0.1f);
-        //psMeter.eulerAngles = new Vector3(psMeter.eulerAngles.x, psMeter.eulerAngles.y, -180 * fpsDamp + 90);
+        if (fpsOverride)    //dev feature: psMeter shows fps instead
+        {
+            fpsDamp = Mathf.SmoothDamp(fpsDamp, (1f / Time.deltaTime) / 100f, ref fpsVelocity, 0.1f);
+            psMeter.eulerAngles = new Vector3(psMeter.eulerAngles.x, psMeter.eulerAngles.y, -180 * fpsDamp + 90);
+        }
     }
 
     public void UpdateControls()
@@ -333,5 +336,10 @@ public class DashboardManager : MonoBehaviour
                 visibleElementSet = DashboardElementSet.All;
                 break;
         }
+    }
+
+    public void ToggleFpsOverride()
+    {
+        fpsOverride = !fpsOverride;
     }
 }
