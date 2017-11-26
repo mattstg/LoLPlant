@@ -201,7 +201,9 @@ public class DashboardManager : MonoBehaviour
         }
         else
             iconFillAmount = foodMeter.fillAmount;
-        foodIcon.anchoredPosition = new Vector2(-5.5f + iconFillAmount * (-17.5f + 5.5f), 24.5f + iconFillAmount * (416.5f - 24.5f));
+        float x = -5.5f + iconFillAmount * (-18.5f + 5.5f);
+        float y = 24.5f + iconFillAmount * (416.5f - 24.5f);
+        foodIcon.anchoredPosition = new Vector2(x, y);
             // bottom: A(x, y); top: B(x, y); iconFillAmount: K; position = (Ax + K(Bx - Ax), Ay + K(By- Ay))
 
         //iconFillAmount = Mathf.Max(iconFillAmount, 0.095f);

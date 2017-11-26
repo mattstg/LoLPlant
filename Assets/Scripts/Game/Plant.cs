@@ -7,18 +7,18 @@ public enum FoodLossState {Normal, Frozen, Dropping};
 
 public class Plant : MonoBehaviour {
 
-    [HideInInspector] public float sun = 0;
+    public float sun = 0;
     [HideInInspector] public float shadowFactor = 1f;
     [HideInInspector] public float sunFactor = 0;
     [HideInInspector] public float sunDamp = 0;
     [HideInInspector] private float sunVelocity = 0;
     
-    [HideInInspector] public float water = 0;
+    public float water = 0;
     [HideInInspector] public float waterFactor = 0;
     [HideInInspector] public float waterDamp = 0;
     [HideInInspector] private float waterVelocity = 0;
     
-    [HideInInspector] public float photosynthesis = 0;
+    public float photosynthesis = 0;
     [HideInInspector] public float psDamp = 0;
     [HideInInspector] private float psVelocity = 0;
     
@@ -26,7 +26,7 @@ public class Plant : MonoBehaviour {
     [HideInInspector] public float psProgressDamp = 0;
     [HideInInspector] public float psProgressVelocity = 0;
     
-    [HideInInspector] public float food = 0;
+    public float food = 0;
     [HideInInspector] public float foodDamp = 0;
     [HideInInspector] private float foodVelocity = 0;
     
@@ -37,11 +37,11 @@ public class Plant : MonoBehaviour {
     [HideInInspector] public float foodLossDamp = 0;
     [HideInInspector] private float foodLossVelocity = 0;
     
-    [HideInInspector] public float height = 0;
+    public float height = 0;
     [HideInInspector] public float heightDamp = 0;
     [HideInInspector] private float heightVelocity = 0;
     
-    [HideInInspector] public float dampTime = 0.25f;
+    public float dampTime = 0.25f;
     
     public void Initialize()
     {
