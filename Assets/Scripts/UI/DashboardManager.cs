@@ -64,8 +64,10 @@ public class DashboardManager : MonoBehaviour
     {
         plant = GV.ws.plant;
         ballFade.Initialize();
-        sunControl.onValueChanged.AddListener(delegate { SunControlValueChanged(); });
-        waterControl.onValueChanged.AddListener(delegate { WaterControlValueChanged(); });
+        if (sunControl)
+            sunControl.onValueChanged.AddListener(delegate { SunControlValueChanged(); });
+        if (waterControl)
+            waterControl.onValueChanged.AddListener(delegate { WaterControlValueChanged(); });
     }
 
     public void Refresh(float dt)
@@ -89,8 +91,10 @@ public class DashboardManager : MonoBehaviour
 
     public void UpdateControls()
     {
-        sunControl.value = GV.ws.plant.sun;
-        waterControl.value = GV.ws.plant.water;
+        if (sunControl)
+            sunControl.value = GV.ws.plant.sun;
+        if (waterControl)
+            waterControl.value = GV.ws.plant.water;
     }
 
     public void SunControlValueChanged()
