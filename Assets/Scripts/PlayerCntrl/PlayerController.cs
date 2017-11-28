@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    public void OnCollisionExit2D(Collision2D coli)
+    public virtual void OnCollisionExit2D(Collision2D coli)
     {
         switch (coli.gameObject.tag)
         {

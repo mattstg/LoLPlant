@@ -5,10 +5,11 @@ using UnityEngine;
 public class TATimer : TAEvent
 {
     float timer;
+    string eventName;
 
-    public TATimer(TAEventType _eventType, string _eventName, float _timer) : base(_eventType, _eventName)
+    public TATimer(string _eventName, float _timer) : base(TAEventType.Action)
     {
-
+        eventName = _eventName;
     }
 
     public override void PerformEvent()

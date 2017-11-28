@@ -15,7 +15,7 @@ public class TutorialFlow : Flow {
         GV.ws.dm.Initialize();                  //Initialize dashboard manager
         GV.ws.popupManager.Initialize();        //Initialize popup manager
         GV.ws.cloudManager.Initialize();        //Initialize cloud manager
-        GV.ws.shadowManager.Initialize();      //Shadow Manager
+        GV.ws.shadowManager.Initialize();       //Shadow Manager
     }
 
     public override void Update(float dt)

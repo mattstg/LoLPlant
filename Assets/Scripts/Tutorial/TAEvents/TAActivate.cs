@@ -7,7 +7,7 @@ public class TAActivate : TAEvent
     string toActivate;
     bool setActive;
     //activate meters, platforms, aphid
-    public TAActivate(TAEventType _eventType, string _eventName, string _toActivate, bool _setActive) : base(_eventType, _eventName)
+    public TAActivate(string _toActivate, bool _setActive) : base(TAEventType.Action)
     {
         toActivate = _toActivate;
         setActive = _setActive;
@@ -17,6 +17,9 @@ public class TAActivate : TAEvent
     {
         switch(toActivate)
         {
+            case "Dashboard":
+                GV.ws.dm.ShowNextElementSet();
+                break;
             case "DashboardNone":
                 GV.ws.dm.ShowElementSet(DashboardManager.DashboardElementSet.None);
                 break;

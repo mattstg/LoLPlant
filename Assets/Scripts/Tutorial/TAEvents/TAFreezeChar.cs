@@ -5,7 +5,7 @@ using UnityEngine;
 public class TAFreezeChar : TAEvent
 {
     bool setFrozen;
-    public TAFreezeChar(TAEventType _eventType, string _eventName, bool _setFrozen) : base(_eventType, _eventName)
+    public TAFreezeChar(bool _setFrozen) : base(TAEventType.Action)
     {
         setFrozen = _setFrozen;
     }

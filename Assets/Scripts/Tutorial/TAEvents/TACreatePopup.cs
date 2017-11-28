@@ -5,7 +5,7 @@ using UnityEngine;
 public class TACreatePopup : TAEvent
 {
     string popupName;
-    public TACreatePopup(TAEventType _eventType, string _eventName, string _popupName) : base(_eventType, _eventName)
+    public TACreatePopup(string _popupName) : base(TAEventType.Action)
     {
         popupName = _popupName;
     }

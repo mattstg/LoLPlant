@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlantLab : MonoBehaviour {
+public class PlantLab : Plant
+{
+    float waterTriggerThreshold;
+    float sunTriggerThreshold;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public override void Refresh(float dt)
+    {
+        if (water >= waterTriggerThreshold)
+            TAEventManager.Instance.RecieveActionTrigger("Water");
+        if (sun >= sunTriggerThreshold)
+            TAEventManager.Instance.RecieveActionTrigger("Sun");
+
+        base.Refresh(dt);
+    }
+
 }

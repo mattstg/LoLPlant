@@ -16,7 +16,20 @@
     "Day4": "Friday",
 	"Day5": "Saturday",
 	"Day6": "Sunday"
-  },
+	"SunReq": "Plants require sun, because the science bible says so"
+	"GatherSun": "Go gather sunlight, it is a non-rewenable resource so grab it while you can"
+	"ControlsKey" : "Move using WASD or arrow keys if you are using a keyboard"
+	"ControlsTouch" : "Move towards where you click or touch if using mouse or touchpad"
+	"SunMeter": "Go gather sunlight, it is a non-rewenable resource so grab it while you can, notice how bar increases or w/e"
+	"H20Req": "Plant needs more than just sun, water too, go collect water"
+	"Evaporation" : "You got enough water, look how it evaps tho"
+	"ReqBothForSugar" : "Requires both to produce sugars, and some soil, cant have one of the other, both at same time (minus storage)"
+	"Sugar" : "store sugars for growth later through photo"
+	"Aphids" : "Aphids are etc, they steal ur sugar"
+	"SugarGrowthRate" : "I dont remember"
+	"Escape" : "Use the platforms to escape!"
+	"SugarsToGrowth" : "How stored sugars become growth in the evening and night"
+	 },
   "es": {
     "welcome": "",
     "readyToPlay": "¿Estás listo para jugar?",

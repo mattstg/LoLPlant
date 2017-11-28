@@ -48,7 +48,7 @@ public class Plant : MonoBehaviour {
 
     }
 
-    public void Refresh(float dt)
+    public virtual void Refresh(float dt)
     {
         UpdateSun();
         UpdateWater(dt);

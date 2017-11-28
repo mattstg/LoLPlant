@@ -21,11 +21,12 @@ public class PopupManager : MonoBehaviour
 
     public void InitializePopup(string msgText)
     {
-
+        Debug.Log("Popup: " + msgText);
+        ClosePopup();
     }
 
     public void ClosePopup()
     {
-
+        TAEventManager.Instance.RecieveActionTrigger("ClosePopup");
     }
 }

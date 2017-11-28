@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TAClosePopup : TAEvent
 {
-    public TAClosePopup(TAEventType _eventType, string _eventName) : base(_eventType, _eventName)
+    public TAClosePopup() : base(TAEventType.Action)
     {
         
     }
