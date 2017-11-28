@@ -9,14 +9,16 @@ public class PopupManager : MonoBehaviour
 
     public void Initialize()
     {
-        foreach (Bouncer b in bouncers)
-            b.Initialize();
+        if (bouncers.Count != 0)
+            for (int i = 0; i < bouncers.Count; i++)
+                bouncers[i].Initialize();
     }
 
     public void Refresh(float dt)
     {
-        foreach (Bouncer b in bouncers)
-            b.UpdateBouncer(dt);
+        if (bouncers.Count != 0)
+            for (int i = 0; i < bouncers.Count; i++)
+                bouncers[i].UpdateBouncer(dt);
     }
 
     public void InitializePopup(string msgText)
