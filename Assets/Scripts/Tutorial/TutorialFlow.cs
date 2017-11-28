@@ -16,6 +16,7 @@ public class TutorialFlow : Flow {
         GV.ws.popupManager.Initialize();        //Initialize popup manager
         GV.ws.cloudManager.Initialize();        //Initialize cloud manager
         GV.ws.shadowManager.Initialize();       //Shadow Manager
+        TAEventManager.Instance.Initialize(progressNumber);
     }
 
     public override void Update(float dt)
@@ -33,7 +34,6 @@ public class TutorialFlow : Flow {
             //    p.Refresh(dt);
             GV.ws.cloudManager.Refresh(dt);
             GV.ws.shadowManager.Refresh();        //Shadow Manager       
-
         }
     }
 }

@@ -22,7 +22,7 @@ public class PopupManager : MonoBehaviour
     public void InitializePopup(string msgText)
     {
         Debug.Log("Popup: " + msgText);
-        ClosePopup();
+        //ClosePopup();
     }
 
     public void ClosePopup()

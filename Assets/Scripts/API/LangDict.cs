@@ -32,6 +32,7 @@ public class LangDict {
         languageSelected = lang;
     }
 
+    //Already sent with language selected?
     public void SetNode(JSONNode js)
     {
         langNode = js;
@@ -41,7 +42,8 @@ public class LangDict {
     {
         try
         {
-            return langNode[languageSelected][keyName].Value;
+            //Not spouse to use language?
+            return langNode[keyName].Value;
         }
         catch
         {

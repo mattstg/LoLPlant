@@ -85,6 +85,7 @@ public class TAEventManager
                 //ENDS LEVEL WHEN CLOSES
                 break;
         }
+        ProcessStack();
     }
 
     public void RecieveLock(string newLock)

@@ -8,7 +8,7 @@ public class CastsShadow : MonoBehaviour {
     public float width;
     public bool isStatic;
 
-	public void Awake()
+	public void Start()
     {
         if (autoWidthCalculate)
             width = transform.localScale.x; //The shadow sprite is 100x10, so the scale is directly porptional to the width

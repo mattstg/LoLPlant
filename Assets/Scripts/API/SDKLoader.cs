@@ -48,8 +48,6 @@ public class SDKLoader {
 	static void HandleStartGame (string json) {
         //Given start game info, load the language and text files
         startGameData = JSON.Parse(json);
-        LangDict.Instance.SetLanguage(startGameData["languageCode"].Value);
-        LangDict.Instance.SetNode(JSON.Parse(languageJSONFilePath));
     }
 
     // Handle pause / resume
@@ -68,7 +66,7 @@ public class SDKLoader {
     static void HandleLanguageDefs (string json)
     {
 		JSONNode langDefs = JSON.Parse(json);
-        LangDict.Instance.SetLanguage(langDefs);
+        LangDict.Instance.SetNode(langDefs);
 	}
     static private void LoadMockData () {
 		#if UNITY_EDITOR
