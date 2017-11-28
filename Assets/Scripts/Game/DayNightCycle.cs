@@ -51,13 +51,17 @@ public class DayNightCycle : MonoBehaviour
         GV.SetPause(!GV.Paused);
         if (GV.Paused)
         {
-            GV.ws.dm.sunControl.interactable = false;
-            GV.ws.dm.waterControl.interactable = false;
+            if (GV.ws.dm.sunControl)
+                GV.ws.dm.sunControl.interactable = false;
+            if (GV.ws.dm.waterControl)
+                GV.ws.dm.waterControl.interactable = false;
         }
         else
         {
-            GV.ws.dm.sunControl.interactable = true;
-            GV.ws.dm.waterControl.interactable = true;
+            if (GV.ws.dm.sunControl)
+                GV.ws.dm.sunControl.interactable = true;
+            if (GV.ws.dm.waterControl)
+                GV.ws.dm.waterControl.interactable = true;
         }
     }
 
