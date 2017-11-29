@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class TintObject : MonoBehaviour
 {
-    SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
+    public bool isPlayer = false;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer)
-            SpriteTinter.Instance.AddSprite(spriteRenderer);
+            SpriteTinter.Instance.AddSprite(this);
     }
 
     void OnDestroy()
     {
         if (spriteRenderer)
-            SpriteTinter.Instance.RemoveSprite(spriteRenderer);
+            SpriteTinter.Instance.RemoveSprite(this);
     }
 }

@@ -22,47 +22,57 @@ public class SpriteTinter
     }
     #endregion
 
-    public List<SpriteRenderer> srlist;
-    float lastLightLevel = 1;
+    public List<TintObject> tintObjectList;
+    float lastLightLevel = 1f;
+    float lastPlayerOverride = -1f;
 
     private SpriteTinter()
     {
-        srlist = new List<SpriteRenderer>();
-
+        tintObjectList = new List<TintObject>();
     }
 
 
-    public void AddSprite(SpriteRenderer sr)
+    public void AddSprite(TintObject to)
     {
-        if (!srlist.Contains(sr))
-            srlist.Add(sr);
+        if (!tintObjectList.Contains(to))
+            tintObjectList.Add(to);
     }
 
-    public void RemoveSprite(SpriteRenderer sr)
+    public void RemoveSprite(TintObject to)
     {
-        srlist.Remove(sr);
+        tintObjectList.Remove(to);
     }
 
-    public void UpdateSpriteTints(float lightLevel)
+    public void UpdateSpriteTints(float lightLevel, float playerOverride)
     {
-        if (lastLightLevel == lightLevel)
-            return;
-
-        for(int i = srlist.Count - 1; i >= 0; i--)
+        for(int i = tintObjectList.Count - 1; i >= 0; i--)
         {
-            if(srlist[i] == null) //Object was deleted and not removed properly
+            if(tintObjectList[i] == null) //Object was deleted and not removed properly
             {
                 Debug.Log("Sprite was not removed from sprite tint properly before removed (is null now)");
-                srlist.RemoveAt(i);
+                tintObjectList.RemoveAt(i);
             }
             else
             {
-                Color c = srlist[i].color;
-                c.r = c.g = c.b = lightLevel;
-                srlist[i].color = c; 
+                if (tintObjectList[i].isPlayer && playerOverride > -0.001f)
+                {
+                    if (playerOverride != lastPlayerOverride)
+                    {
+                        Color c = tintObjectList[i].spriteRenderer.color;
+                        c.r = c.g = c.b = Mathf.Clamp(playerOverride, 0f, 1f);
+                        tintObjectList[i].spriteRenderer.color = c;
+                    }
+                }
+                else if (lightLevel != lastLightLevel)
+                {
+                    Color c = tintObjectList[i].spriteRenderer.color;
+                    c.r = c.g = c.b = Mathf.Clamp(lightLevel, 0f, 1f);
+                    tintObjectList[i].spriteRenderer.color = c;
+                } 
             }
         }
         lastLightLevel = lightLevel;
+        lastPlayerOverride = playerOverride;
     }
 
 }
