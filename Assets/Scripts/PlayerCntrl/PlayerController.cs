@@ -49,7 +49,10 @@ public class PlayerController : MonoBehaviour {
 
 	public void KeysPressed(Vector2 dir, float _dt)
     {
-        Debug.Log("Key pressed: " + dir);
+		if (dir.x != 0)
+			Move (dir.x, _dt);
+		if (dir.y != 0)
+			Jump (dir.y, _dt);
     }
 
 	public void Jump(float direction, float _dt){
@@ -57,7 +60,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void Move(float direction, float _dt){
-		body.AddForce (new Vector2(direction / Mathf.Abs(direction) * _dt * 1000, 0), ForceMode2D.Force);
+		body.AddForce (new Vector2(direction / Mathf.Abs(direction) * _dt * 20, 0), ForceMode2D.Impulse);
 	}
 
     public void OnCollisionEnter2D(Collision2D coli)

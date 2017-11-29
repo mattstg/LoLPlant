@@ -11,7 +11,7 @@ public class AnimationController : MonoBehaviour {
 	private static float _moveAnimSpeedModifier = 4;
 	private static float _moveAnimSpeedDampener = 2;
 	private static float _moveDampener = 5;
-	private static bool facingLeft = true;
+	private static bool facingRight = true;
 
 
 	private Animator anim;
@@ -45,14 +45,14 @@ public class AnimationController : MonoBehaviour {
 		Velo (player.velocity.x, player.velocity.y);
 		MoveSpeed (Mathf.Clamp(player.velocity.x / _moveAnimSpeedDampener, _moveAnimSpeedMin, _moveAnimSpeedModifier));
 		Move (Mathf.Abs(player.velocity.x) / _moveDampener);
-		if ((facingLeft && player.velocity.x < 0) || (!facingLeft && player.velocity.x > 0))
+		if ((facingRight && player.velocity.x < -0.05f) || (!facingRight && player.velocity.x > 0.05f))
 			Flip ();
 	}
 		
 	public void Flip(){
 		Vector3 newScale = gameObject.transform.localScale;
 		gameObject.transform.localScale = new Vector3 (newScale.x * -1, newScale.y, newScale.z);
-		facingLeft = !facingLeft;
+		facingRight = !facingRight;
 	}
 
 	public void Grounded(bool input){
