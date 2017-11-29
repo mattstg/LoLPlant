@@ -23,8 +23,8 @@ public class SpriteTinter
     #endregion
 
     public List<TintObject> tintObjectList;
-    float lastLightLevel = 1f;
-    float lastPlayerOffset = 1f;
+    float lastLightLevel = -10f;
+    float lastPlayerOffset = -10f;
 
     private SpriteTinter()
     {
@@ -56,7 +56,7 @@ public class SpriteTinter
             {
                 if (tintObjectList[i].isPlayer)
                 {
-                    if (playerOffset != lastPlayerOffset)
+                    if (playerOffset != lastPlayerOffset || lightLevel != lastLightLevel)
                     {
                         Color c = tintObjectList[i].spriteRenderer.color;
                         c.r = c.g = c.b = Mathf.Clamp(lightLevel + playerOffset, 0f, 1f);
