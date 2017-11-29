@@ -84,7 +84,7 @@ public class DashboardManager : MonoBehaviour
 
         if (fpsOverride)    //dev feature: psMeter shows fps instead
         {
-            fpsDamp = Mathf.SmoothDamp(fpsDamp, (1f / Time.deltaTime) / 100f, ref fpsVelocity, 0.1f);
+            fpsDamp = Mathf.SmoothDamp(fpsDamp, (1f / Time.deltaTime) / 120f, ref fpsVelocity, 0.1f);
             psMeter.eulerAngles = new Vector3(psMeter.eulerAngles.x, psMeter.eulerAngles.y, -180 * fpsDamp + 90);
         }
     }
