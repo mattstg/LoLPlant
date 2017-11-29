@@ -24,7 +24,7 @@ public class SpriteTinter
 
     public List<TintObject> tintObjectList;
     float lastLightLevel = 1f;
-    float lastPlayerOverride = -1f;
+    float lastPlayerOffset = 1f;
 
     private SpriteTinter()
     {
@@ -43,7 +43,7 @@ public class SpriteTinter
         tintObjectList.Remove(to);
     }
 
-    public void UpdateSpriteTints(float lightLevel, float playerOverride)
+    public void UpdateSpriteTints(float lightLevel, float playerOffset)
     {
         for(int i = tintObjectList.Count - 1; i >= 0; i--)
         {
@@ -54,25 +54,25 @@ public class SpriteTinter
             }
             else
             {
-                if (tintObjectList[i].isPlayer && playerOverride > -0.001f)
+                if (tintObjectList[i].isPlayer)
                 {
-                    if (playerOverride != lastPlayerOverride)
+                    if (playerOffset != lastPlayerOffset)
                     {
                         Color c = tintObjectList[i].spriteRenderer.color;
-                        c.r = c.g = c.b = Mathf.Clamp(playerOverride, 0f, 1f);
+                        c.r = c.g = c.b = Mathf.Clamp(lightLevel + playerOffset, 0f, 1f);
                         tintObjectList[i].spriteRenderer.color = c;
                     }
                 }
                 else if (lightLevel != lastLightLevel)
                 {
                     Color c = tintObjectList[i].spriteRenderer.color;
-                    c.r = c.g = c.b = Mathf.Clamp(lightLevel, 0f, 1f);
+                    c.r = c.g = c.b = lightLevel;
                     tintObjectList[i].spriteRenderer.color = c;
                 } 
             }
         }
         lastLightLevel = lightLevel;
-        lastPlayerOverride = playerOverride;
+        lastPlayerOffset = playerOffset;
     }
 
 }
