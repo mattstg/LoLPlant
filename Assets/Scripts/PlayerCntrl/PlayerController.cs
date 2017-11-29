@@ -5,15 +5,24 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     InputManager im;
+	AnimationController anim;
+	Rigidbody2D body;
     public float YClickJumpThreshold = 1.5f; //Clicking this much units higher will cause the jump
 
     bool isJumping;
     bool isGrounded;
 
+	public void Start(){
+		//temp just so i can initialize in scene
+		Initialize();
+	}
+
     public void Initialize()
     {
         im = gameObject.AddComponent<InputManager>();
         im.Initialize(this);
+		anim = GetComponent<AnimationController> ();
+		body = GetComponent<Rigidbody2D> ();
         //Create both input managers & link here
     }
 
@@ -38,6 +47,7 @@ public class PlayerController : MonoBehaviour {
     {
         //This will recieve input of mouse
         Debug.Log("Mouse pressed/held: " + mouseWorldPos);
+
     }
 
     public void KeysPressed(Vector2 dir)
@@ -51,6 +61,7 @@ public class PlayerController : MonoBehaviour {
         {
             case "Platform":
                 isGrounded = true;
+				anim.Grounded(true);
                 break;
             case "Water":
                 break;
@@ -62,8 +73,9 @@ public class PlayerController : MonoBehaviour {
     {
         switch (coli.gameObject.tag)
         {
-            case "Platform":
-                isGrounded = false;
+		case "Platform":
+				isGrounded = false;
+				anim.Grounded (false);
                 break;
 
         }
