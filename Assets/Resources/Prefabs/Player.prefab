@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4635065088486440}
   - component: {fileID: 212816553349939402}
+  - component: {fileID: 114111445300688808}
   m_Layer: 0
   m_Name: frontLeg
   m_TagString: Untagged
@@ -36,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4134401817272200}
   - component: {fileID: 212602233756632300}
+  - component: {fileID: 114814414034257394}
   m_Layer: 0
   m_Name: backLeg
   m_TagString: Untagged
@@ -52,6 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4697653786878990}
   - component: {fileID: 212774726017709602}
+  - component: {fileID: 114672063418994992}
   m_Layer: 0
   m_Name: frontHand
   m_TagString: Untagged
@@ -104,6 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4760920106265460}
   - component: {fileID: 212303318003108696}
+  - component: {fileID: 114134788620539202}
   m_Layer: 0
   m_Name: backHand
   m_TagString: Untagged
@@ -120,6 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4663572522584470}
   - component: {fileID: 212747463141439250}
+  - component: {fileID: 114891537076804050}
   m_Layer: 0
   m_Name: flowerPot
   m_TagString: Untagged
@@ -311,6 +316,28 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114111445300688808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1063975008003026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87abe9406eade9741849e8e335d1c44e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114134788620539202
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1959631593974296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87abe9406eade9741849e8e335d1c44e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114604061198577124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -323,6 +350,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   YClickJumpThreshold: 1.5
+--- !u!114 &114672063418994992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1476950858271302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87abe9406eade9741849e8e335d1c44e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114773361111196504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -332,6 +370,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcb649c1e7f80134eaa2ec16560fd96e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114814414034257394
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1167946004009298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87abe9406eade9741849e8e335d1c44e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114891537076804050
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1964124180467286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87abe9406eade9741849e8e335d1c44e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212303318003108696
