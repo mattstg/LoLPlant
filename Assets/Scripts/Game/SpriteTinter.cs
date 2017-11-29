@@ -58,7 +58,7 @@ public class SpriteTinter
             else
             {
                 Color c = srlist[i].color;
-                c.a = lightLevel;
+                c.r = c.g = c.b = lightLevel;
                 srlist[i].color = c; 
             }
         }
