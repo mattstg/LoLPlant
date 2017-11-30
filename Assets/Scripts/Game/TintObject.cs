@@ -7,8 +7,20 @@ public class TintObject : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public bool isPlayer = false;
 
-    void Start()
+    void Awake()
     {
+        Initialize();
+    }
+
+    public void ForceAwake()
+    {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        if (spriteRenderer)
+            return;
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer)
             SpriteTinter.Instance.AddSprite(this);
