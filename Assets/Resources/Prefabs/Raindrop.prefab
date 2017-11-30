@@ -35,11 +35,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4135816653937856}
-  - component: {fileID: 111847601370767554}
   - component: {fileID: 114105101152878788}
   - component: {fileID: 61834991641233878}
   - component: {fileID: 70597503328793998}
   - component: {fileID: 50415786503858782}
+  - component: {fileID: 111488671480592048}
   m_Layer: 0
   m_Name: Raindrop
   m_TagString: Raindrop
@@ -266,9 +266,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.5
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.25
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -314,7 +314,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.02}
   m_Size: {x: 0.15, y: 0.2}
   m_Direction: 0
---- !u!111 &111847601370767554
+--- !u!111 &111488671480592048
 Animation:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -324,7 +324,6 @@ Animation:
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 8df7b9a91c1a55c4c9f59dab93c54984, type: 2}
   m_Animations:
-  - {fileID: 0}
   - {fileID: 7400000, guid: 8df7b9a91c1a55c4c9f59dab93c54984, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
