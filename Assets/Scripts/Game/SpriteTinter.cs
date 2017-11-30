@@ -24,7 +24,7 @@ public class SpriteTinter
 
     public List<TintObject> tintObjectList;
     float lastLightLevel = -10f;
-    float lastPlayerOffset = -10f;
+    float lastPlayerLightLevel = -10f;
 
     private SpriteTinter()
     {
@@ -45,7 +45,8 @@ public class SpriteTinter
 
     public void UpdateSpriteTints(float lightLevel, float playerOffset)
     {
-        for(int i = tintObjectList.Count - 1; i >= 0; i--)
+        float playerLightLevel = Mathf.Clamp(lightLevel + playerOffset, 0f, 1f);
+        for (int i = tintObjectList.Count - 1; i >= 0; i--)
         {
             if(tintObjectList[i] == null) //Object was deleted and not removed properly
             {
@@ -56,10 +57,10 @@ public class SpriteTinter
             {
                 if (tintObjectList[i].isPlayer)
                 {
-                    if (playerOffset != lastPlayerOffset || lightLevel != lastLightLevel)
+                    if (playerLightLevel != lastPlayerLightLevel)
                     {
                         Color c = tintObjectList[i].spriteRenderer.color;
-                        c.r = c.g = c.b = Mathf.Clamp(lightLevel + playerOffset, 0f, 1f);
+                        c.r = c.g = c.b = playerLightLevel;
                         tintObjectList[i].spriteRenderer.color = c;
                     }
                 }
@@ -72,7 +73,6 @@ public class SpriteTinter
             }
         }
         lastLightLevel = lightLevel;
-        lastPlayerOffset = playerOffset;
+        lastPlayerLightLevel = playerLightLevel;
     }
-
 }
