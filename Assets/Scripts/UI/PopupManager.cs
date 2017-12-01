@@ -17,7 +17,7 @@ public class PopupManager : MonoBehaviour
     private State state;
     private Icon icon;
     private List<Message> messages;
-    private int currentMessage = 0;
+    private int currentIndex;
 
     private Vector2 messageSpaceDimensions = new Vector2(120f, 30f);
     private Vector2 msdVelocity = Vector2.zero;
@@ -25,6 +25,10 @@ public class PopupManager : MonoBehaviour
 
     public void Initialize()
     {
+        messages = new List<Message>();
+        currentIndex = 0;
+        //state = State.Closed;
+        //popupParent.gameObject.SetActive(false);
         if (bouncers.Count != 0)
             for (int i = 0; i < bouncers.Count; i++)
                 bouncers[i].Initialize();
@@ -57,18 +61,29 @@ public class PopupManager : MonoBehaviour
 
     public void LoadPopup(List<Message> _messages)
     {
-        messages = _messages;
+        if (messages.Count > 0)
+            messages.AddRange(_messages);
+        else
+            messages = _messages;
         foreach (Message m in messages)
             Debug.Log("Popup: " + m.message);
     }
 
     public void Next()
     {
-        ClosePopup();
+        currentIndex++;
+
+        if (currentIndex >= messages.Count || messages.Count == 0)
+            ClosePopup();
+        else
+            messageText.text = messages[currentIndex].message;
     }
 
     public void ClosePopup()
     {
+        messages.Clear();
+        messageText.text = "";
+        currentIndex = 0;
         popupParent.gameObject.SetActive(false);
         //if(prompt)
             //do some graphic stuff
