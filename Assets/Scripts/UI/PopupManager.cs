@@ -21,14 +21,22 @@ public class PopupManager : MonoBehaviour
                 bouncers[i].UpdateBouncer(dt);
     }
 
-    public void InitializePopup(string msgText)
+    public void InitializePopup(List<string> msgText)
     {
+        //Clear Text
+        //Turn popup on
+        shutOnClose = _shutOnClose;
         Debug.Log("Popup: " + msgText);
         //ClosePopup();
     }
 
     public void ClosePopup()
     {
+        //if(prompt)
+            //do some graphic stuff
+            //then after a few Refresh cycles, send trigger "ClosePopup"
+        //if(shutOnClose)
+                //Then object turns off
         TAEventManager.Instance.RecieveActionTrigger("ClosePopup");
     }
 }

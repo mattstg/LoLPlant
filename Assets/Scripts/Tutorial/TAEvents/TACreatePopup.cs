@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class TACreatePopup : TAEvent
 {
-    string popupName;
+    List<string> popupName;
+
     public TACreatePopup(string _popupName) : base(TAEventType.Action)
     {
-        popupName = _popupName;
+        popupName = new List<string>() { _popupName };
+    }
+
+    public TACreatePopup(List<string> _popupNames) : base(TAEventType.Action)
+    {
+        popupName = _popupNames;
     }
 
     public override void PerformEvent()
     {
-        string text = LangDict.Instance.GetText(popupName); //Text from language file using the popupname as the key
-        GV.ws.popupManager.InitializePopup(text);
+        //string text = LangDict.Instance.GetText(popupName); //Text from language file using the popupname as the key
+        GV.ws.popupManager.InitializePopup(popupName);
     }
 }

@@ -32,6 +32,7 @@ public class TAEventManager
         switch (progressPoint)
         {
             case 0:
+                taQueue.Enqueue(new TAActivate("DashboardNone", true));
                 taQueue.Enqueue(new TAFreezeChar(true));
                 taQueue.Enqueue(new TATimer("Timer", 2));
                 taQueue.Enqueue(new TATrigger("Timer"));
@@ -104,7 +105,10 @@ public class TAEventManager
     public void RecieveActionTrigger(string triggerName)
     {
         if (triggerName == currentLock)
+        {
+            currentLock = "";
             ProcessStack();
+        }
     }
 	
 }

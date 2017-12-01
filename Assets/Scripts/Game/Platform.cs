@@ -4,25 +4,36 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour {
 
+    public bool hasAphid;
+    public bool castsShadow;
+
     public float speed = 1;
     int curWP = 0;
     int numOfWP = 0;
     Vector2[] wp;
     public bool isStaticPlatform { get { return !moves; } }
     bool moves;
+    Vector2[] edges;
 
     public void Initialize()
     {
-        string mahName = transform.name;
-        numOfWP = transform.childCount + 1; //Includes its starting position as a waypoint
+        //Calculate Waypoints
+        Transform wpTransform = transform.Find("wp");
+        int numOfWPinWPTransform = (wpTransform != null) ?wpTransform.childCount:0;
+        numOfWP = numOfWPinWPTransform + 1; //Includes its starting position as a waypoint
         //current point is always waypoint zero
         wp = new Vector2[numOfWP];
         wp[0] = transform.position;
         for (int i = 1; i < numOfWP; i++)
-            wp[i] = transform.GetChild(i - 1).position;
-        foreach (Transform child in transform)
-            Destroy(child.gameObject);
+            wp[i] = wpTransform.GetChild(i - 1).position;
+        if (wpTransform != null)
+            Destroy(wpTransform.gameObject);
         moves = (numOfWP > 1);
+
+        //Calculate edges
+        edges = new Vector2[2];
+        Transform edgesParent = transform.Find("edges");
+
     }
 
 	public void Refresh(float dt)
