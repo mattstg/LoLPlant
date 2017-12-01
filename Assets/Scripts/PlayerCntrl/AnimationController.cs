@@ -11,6 +11,7 @@ public class AnimationController : MonoBehaviour {
 	private static float _moveAnimSpeedModifier = 4;
 	private static float _moveAnimSpeedDampener = 2;
 	private static float _moveDampener = 5;
+	private static bool facingRight = true;
 
 
 	private Animator anim;
@@ -23,28 +24,37 @@ public class AnimationController : MonoBehaviour {
 	private bool canFall = true;
 
 	// Use this for initialization
-	void Start () {
-		anim = GetComponentInParent<Animator> ();
+
+	public void Initialize()
+	{
+		anim = GetComponent<Animator> ();
 		player = GetComponentInParent<Rigidbody2D> ();
 		jumpTimer = _timeBetweenJumpAnims;
 	}
-	
+
+	public virtual void Refresh(float dt){
 	// Update is called once per frame
-	void Update () {
-		float dTime = Time.deltaTime;
 		if (!isGrounded) {
-			fallTimer += dTime;
+			fallTimer += dt;
 			if (fallTimer > _airTimeUntilFall)
 				Fall ();
 		}
 		else
 			fallTimer = 0;
-		jumpTimer += dTime;
+		jumpTimer += dt;
 		Velo (player.velocity.x, player.velocity.y);
 		MoveSpeed (Mathf.Clamp(player.velocity.x / _moveAnimSpeedDampener, _moveAnimSpeedMin, _moveAnimSpeedModifier));
-		Move (player.velocity.x / _moveDampener);
+		Move (Mathf.Abs(player.velocity.x) / _moveDampener);
+		if ((facingRight && player.velocity.x < -0.05f) || (!facingRight && player.velocity.x > 0.05f))
+			Flip ();
 	}
 		
+	public void Flip(){
+		Vector3 newScale = gameObject.transform.localScale;
+		gameObject.transform.localScale = new Vector3 (newScale.x * -1, newScale.y, newScale.z);
+		facingRight = !facingRight;
+	}
+
 	public void Grounded(bool input){
 		anim.SetBool ("isGrounded", input);
 		if (input) {

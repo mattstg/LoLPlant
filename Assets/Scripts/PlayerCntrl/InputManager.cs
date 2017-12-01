@@ -12,16 +12,16 @@ public class InputManager : MonoBehaviour {
         pc = _pc;
     }
 
-    public void UpdateInput()
+	public void UpdateInput(float dt)
     {
         //Mouse/touch click
         if(Input.GetMouseButton(0))  //Continous press
         {
-            _MouseClicked(Input.mousePosition);
+            _MouseClicked(Input.mousePosition,dt);
         }
         else if(Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved))
         {
-            _MouseClicked(Input.GetTouch(0).position);
+			_MouseClicked(Input.GetTouch(0).position,dt);
         }
 
         //Keyboard input
@@ -33,7 +33,7 @@ public class InputManager : MonoBehaviour {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space))
             keysPressed.y = -1;
         if (keysPressed.x != 0 || keysPressed.y != 0)
-            pc.KeysPressed(keysPressed);
+			pc.KeysPressed(keysPressed,dt);
     }
 
 	public void OnMouseOver()
@@ -41,10 +41,10 @@ public class InputManager : MonoBehaviour {
 		MouseOver (Camera.main.ScreenToWorldPoint(Input.mousePosition));
 	}
 
-	private void _MouseClicked(Vector2 clickPos)
+	private void _MouseClicked(Vector2 clickPos,float _dt)
 	{
 		Vector2 clickedPos = Camera.main.ScreenToWorldPoint (clickPos);
-		MouseDown (clickedPos);
+		MouseDown (clickedPos,_dt);
 	}
 
 	protected virtual void MouseOver(Vector2 mouseWorldPos)
@@ -52,9 +52,9 @@ public class InputManager : MonoBehaviour {
 
 	}
 
-	protected virtual void MouseDown(Vector2 mouseWorldPos)
+	protected virtual void MouseDown(Vector2 mouseWorldPos, float _dt)
 	{
-        pc.MouseDown(mouseWorldPos);
+		pc.MouseDown(mouseWorldPos,_dt);
 	}
     
         
