@@ -33,7 +33,6 @@ public class PopupManager : MonoBehaviour
     {
         //Clear Text
         //Turn popup on
-        shutOnClose = _shutOnClose;
         Debug.Log("Popup: " + msgText);
         //ClosePopup();
     }
