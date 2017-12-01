@@ -5,6 +5,14 @@ using UnityEngine.UI;
 
 public class PopupManager : MonoBehaviour
 {
+    public enum Type { Info, Prompt }
+    public enum State { Open, Closed, Opening, Closing, Proceeding }
+    public enum Icon { None, Arrow, Square, Dots, Checkmark, Exclamation }
+
+    private Type type;
+    private State state;
+    private Icon icon;
+
     public List<Bouncer> bouncers = new List<Bouncer>();
 
     public void Initialize()
