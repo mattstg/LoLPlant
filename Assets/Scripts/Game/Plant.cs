@@ -50,22 +50,22 @@ public class Plant : MonoBehaviour {
 
     public virtual void Refresh(float dt)
     {
-        UpdateSun();
+        UpdateSun(dt);
         UpdateWater(dt);
-        UpdatePhotosynthesis();
+        UpdatePhotosynthesis(dt);
         UpdatePsProgress(dt);
         UpdateFood(dt);
-        UpdateHeight();
+        UpdateHeight(dt);
     }
 
-    public void UpdateSun()
+    public void UpdateSun(float dt)
     {
         //sun = Mathf.Clamp(sun, 0, 1);
         sun = Mathf.Clamp(GV.ws.dnc.ambientSunLevel * shadowFactor, 0, 1);
         //sun = GV.ws.dnc.ambientSunLevel * (2f/3f);
 
         sunFactor = GV.SunFactor(sun);
-        sunDamp = Mathf.SmoothDamp(sunDamp, sun, ref sunVelocity, dampTime);
+        sunDamp = Mathf.SmoothDamp(sunDamp, sun, ref sunVelocity, dampTime, Mathf.Infinity, dt);
     }
 
     public void UpdateWater(float dt)
@@ -73,26 +73,26 @@ public class Plant : MonoBehaviour {
         water -= (photosynthesis + (sun / 2f)) * GV.WaterDepletionRate * dt;
         water = Mathf.Clamp(water, 0, 1);
         waterFactor = GV.WaterFactor(water);
-        waterDamp = Mathf.SmoothDamp(waterDamp, water, ref waterVelocity, dampTime);
+        waterDamp = Mathf.SmoothDamp(waterDamp, water, ref waterVelocity, dampTime, Mathf.Infinity, dt);
     }
 
-    public void UpdatePhotosynthesis()
+    public void UpdatePhotosynthesis(float dt)
     {
         photosynthesis = sunFactor * waterFactor;
-        psDamp = Mathf.SmoothDamp(psDamp, photosynthesis, ref psVelocity, dampTime);
+        psDamp = Mathf.SmoothDamp(psDamp, photosynthesis, ref psVelocity, dampTime, Mathf.Infinity, dt);
     }
 
     public void UpdatePsProgress(float dt)
     {
         psProgress += photosynthesis * dt;
-        psProgressDamp = Mathf.SmoothDamp(psProgressDamp, psProgress, ref psProgressVelocity, dampTime * 2f);
+        psProgressDamp = Mathf.SmoothDamp(psProgressDamp, psProgress, ref psProgressVelocity, dampTime * 2f, Mathf.Infinity, dt);
     }
 
     public void UpdateFood(float dt)
     {
         food += photosynthesis * dt;
         float oldFoodDamp = foodDamp;
-        foodDamp = Mathf.SmoothDamp(foodDamp, food, ref foodVelocity, dampTime * 2f);
+        foodDamp = Mathf.SmoothDamp(foodDamp, food, ref foodVelocity, dampTime * 2f, Mathf.Infinity, dt);
 
         switch (foodLossState)
         {
@@ -109,14 +109,14 @@ public class Plant : MonoBehaviour {
             case FoodLossState.Dropping:
                 if (foodLossTarget < 0f)
                 {
-                    foodLossDamp = Mathf.SmoothDamp(foodLossDamp, foodDamp, ref foodLossVelocity, dampTime * 2f);
+                    foodLossDamp = Mathf.SmoothDamp(foodLossDamp, foodDamp, ref foodLossVelocity, dampTime * 2f, Mathf.Infinity, dt);
                     if (foodLossDamp < foodDamp + 0.05f)
                         foodLossState = FoodLossState.Normal;
                 }
                 else
                 {
                     foodLossCounter += dt;
-                    foodLossDamp = Mathf.SmoothDamp(foodLossDamp, foodLossTarget, ref foodLossVelocity, dampTime * 2f);
+                    foodLossDamp = Mathf.SmoothDamp(foodLossDamp, foodLossTarget, ref foodLossVelocity, dampTime * 2f, Mathf.Infinity, dt);
                     if (foodLossDamp < foodLossTarget + 0.1f)
                     {
                         foodLossTarget = -1;
@@ -129,7 +129,7 @@ public class Plant : MonoBehaviour {
         }
     }
 
-    public void UpdateHeight()
+    public void UpdateHeight(float dt)
     {
 
     }
