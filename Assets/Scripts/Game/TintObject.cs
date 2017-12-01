@@ -28,7 +28,6 @@ public class TintObject : MonoBehaviour
 
     void OnDestroy()
     {
-        if (spriteRenderer)
-            SpriteTinter.Instance.RemoveSprite(this);
+        SpriteTinter.Instance.RemoveSprite(this);
     }
 }
