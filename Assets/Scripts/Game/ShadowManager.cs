@@ -30,7 +30,7 @@ public class ShadowManager : MonoBehaviour {
         int index = 0;
         Vector2[][] fullShadowsArr = new Vector2[dynamicShadows.Count + staticShadows.Length][];
         foreach(CastsShadow cs in dynamicShadows)
-            fullShadowsArr[index++] = GetEdgeVectors(cs);
+            fullShadowsArr[index++] = cs.RetrieveShadowEdges();
         foreach (Vector2[] v2 in staticShadows)
             fullShadowsArr[index++] = v2;
         CastShadows(fullShadowsArr);
@@ -48,10 +48,9 @@ public class ShadowManager : MonoBehaviour {
         }
     }
 
-    public void RegisterStaticShadow(CastsShadow cs)
+    public void RegisterStaticShadow(Vector2[] edges)
     {
-        staticShadowsTemp.Add(GetEdgeVectors(cs));
-        Destroy(cs); //Is static, doesnt need script
+        staticShadowsTemp.Add(edges);
     }
 
     public void RegisterDynamicShadow(CastsShadow cs)
@@ -64,10 +63,4 @@ public class ShadowManager : MonoBehaviour {
     {
         dynamicShadows.Remove(cs);
     }
-
-    private Vector2[] GetEdgeVectors(CastsShadow cs)
-    {
-        return new Vector2[] { cs.transform.position - new Vector3(cs.width / 2, 0, 0), cs.transform.position + new Vector3(cs.width / 2, 0, 0) };
-    }
-
 }

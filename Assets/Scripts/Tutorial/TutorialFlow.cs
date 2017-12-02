@@ -16,6 +16,7 @@ public class TutorialFlow : Flow {
         GV.ws.popupManager.Initialize();        //Initialize popup manager
         GV.ws.cloudManager.Initialize();        //Initialize cloud manager
         GV.ws.shadowManager.Initialize();       //Shadow Manager
+        GV.ws.aphidManager.Initialize();        //Create all aphids, must be called after platform manager
         TAEventManager.Instance.Initialize(progressNumber);
     }
 
@@ -29,11 +30,12 @@ public class TutorialFlow : Flow {
             // GV.ws.cameraManager.Refresh(dt);  Cam is locked for tut, dont update
             GV.ws.platformManager.Refresh(dt);    //Refresh platform manager
             GV.ws.dm.Refresh(dt);                 //Refresh dashboard manager
-            GV.ws.popupManager.Refresh(dt);
+            //GV.ws.popupManager.Refresh(dt);                                              Since i fucked up the tutscene, link is missing throwing errors, disabled for now
             //foreach (Parallax p in GV.ws.parallaxes)  //No parallax in tutorial
             //    p.Refresh(dt);
             GV.ws.cloudManager.Refresh(dt);
             GV.ws.shadowManager.Refresh();        //Shadow Manager       
+            GV.ws.aphidManager.Refresh(dt);
         }
     }
 }

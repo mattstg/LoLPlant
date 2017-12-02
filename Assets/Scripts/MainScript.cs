@@ -16,9 +16,11 @@ public class MainScript : MonoBehaviour
     {
         //THIS IS THE FIRST POINT EVER ENTERED BY THIS PROGRAM. (Except for MainScriptInitializer.cs, who creates this script and runs this function for the game to start)
         GV.ms = this; //set link so rest can access this script easily
+        SDKLoader.StartLoader(); //Will link SDK calls from LoL to us (to recieve)
+        //ANYTHING BELOW THIS NEEDS TO ONLY CALL ONCE EVERYTHING IS LOADED
         currentState = cs; //Initial scene to load
         curFlow = InitializeFlowScript(currentState, progressPoint);  //initial flow initialize
-        SDKLoader.StartLoader(); //Will link SDK calls from LoL to us (to recieve)
+        
     }
 
 
