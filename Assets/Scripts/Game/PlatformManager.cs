@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlatformManager : MonoBehaviour {
 
@@ -32,4 +33,10 @@ public class PlatformManager : MonoBehaviour {
         transform.gameObject.SetActive(true);
         platformsActive = true;
     }
+
+    public List<Platform> GetAllPlatformsWithAphids()
+    {
+        return platforms.Where(x => x.hasAphid).ToList();
+    }
+
 }

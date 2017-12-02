@@ -1,10 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform : MonoBehaviour {
+public class Platform : MonoBehaviour, CastsShadow {
 
-    public enum Side { Left = 0, Right = 1 }
     public bool hasAphid;
     public bool castsShadow;
 
@@ -16,43 +16,46 @@ public class Platform : MonoBehaviour {
     bool moves;
     Vector2[] edgeOffsets;
    
-    public Vector2 GetSide(Side side)
+    public Vector2[] GetEdges()
     {
-        return edgeOffsets[(int)side] + new Vector2(transform.position.x, transform.position.y);
+        return new Vector2[] { edgeOffsets[0] + (Vector2)transform.position, edgeOffsets[1] + (Vector2)transform.position };
+    }
+
+    public Vector2 GetSidePoint(bool left, bool offset = false)
+    {
+        int side = (left) ?0:1;
+        if (!offset)
+            return edgeOffsets[side] + new Vector2(transform.position.x, transform.position.y);
+        else
+            return edgeOffsets[side];
     }
 
     public void Initialize()
     {
         //Calculate edges
         edgeOffsets = new Vector2[2];
-        Transform edgesParent = transform.Find("Edges");
-        if (!edgesParent || !edgesParent.GetChild(0) || !edgesParent.GetChild(1))
-        {
-            Debug.Log("Error! Platform: " + transform.name + " \"Edges\" transform missing, or missing two children objects for edges");
-            edgeOffsets[0] = edgeOffsets[1] = new Vector2();
-            return;
-        }
-        Transform child0, child1;
-        child0 = edgesParent.GetChild(0).transform;
-        child1 = edgesParent.GetChild(1).transform;
-        edgeOffsets[0] = (child0.position.x > child1.position.x) ? child0.position : child0.position;  //Left edge is stored in first offset array slot
-        edgeOffsets[1] = (child0.position.x <= child1.position.x) ? child0.position : child0.position;
-        edgeOffsets[0] = edgeOffsets[0] - new Vector2(transform.position.x, transform.position.y);   //Edges are turned into offset instead of hard values
-        edgeOffsets[1] = edgeOffsets[1] - new Vector2(transform.position.x, transform.position.y);
-        Destroy(edgesParent.gameObject);
+        EdgeCollider2D ec = GetComponent<EdgeCollider2D>();
+        edgeOffsets[0] = ec.points[0] * transform.localScale.x;  //Edge points dont take scale into account in unity editor
+        edgeOffsets[1] = ec.points[1] * transform.localScale.x;
+        edgeOffsets[0].y += ec.offset.y;
+        edgeOffsets[1].y += ec.offset.y;
 
         //Calculate Waypoints
-        Transform wpTransform = transform.Find("WP");
-        int numOfWPinWPTransform = (wpTransform != null) ?wpTransform.childCount:0;
-        numOfWP = numOfWPinWPTransform + 1; //Includes its starting position as a waypoint
+        numOfWP = transform.childCount + 1; //Includes its starting position as a waypoint
         //current point is always waypoint zero
         wp = new Vector2[numOfWP];
         wp[0] = transform.position;
         for (int i = 1; i < numOfWP; i++)
-            wp[i] = wpTransform.GetChild(i - 1).position;
-        if (wpTransform != null)
-            Destroy(wpTransform.gameObject);
+            wp[i] = transform.GetChild(i - 1).position;
+        foreach (Transform t in transform)
+            Destroy(t.gameObject); //delete children wp
         moves = (numOfWP > 1);
+
+        if (castsShadow)
+            if (moves)
+                RegisterDynamicShadow();
+            else
+                RegisterStaticShadow();
     }
 
 	public void Refresh(float dt)
@@ -71,5 +74,20 @@ public class Platform : MonoBehaviour {
     private bool ReachedDest(Vector2 pos1, Vector2 pos2)
     {
         return (pos1 - pos2).sqrMagnitude < .1f;
+    }
+
+    public void RegisterStaticShadow()
+    {
+        GV.ws.shadowManager.RegisterStaticShadow(GetEdges());
+    }
+
+    public void RegisterDynamicShadow()
+    {
+        GV.ws.shadowManager.RegisterDynamicShadow(this);
+    }
+
+    public Vector2[] RetrieveShadowEdges()
+    {
+        return GetEdges();
     }
 }
