@@ -57,6 +57,15 @@ TagManager:
   - name: clouds in front of mtns
     uniqueID: 2932715619
     locked: 0
+  - name: midground trees far
+    uniqueID: 2924455317
+    locked: 0
+  - name: midground trees medium
+    uniqueID: 515916223
+    locked: 0
+  - name: midground trees close
+    uniqueID: 1084535421
+    locked: 0
   - name: foreground trees
     uniqueID: 3667843209
     locked: 0
