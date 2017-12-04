@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4319740875423814}
   - component: {fileID: 212211585320770292}
+  - component: {fileID: 114060258233355460}
   m_Layer: 0
   m_Name: Aphid
   m_TagString: Untagged
@@ -70,6 +71,19 @@ Transform:
   m_Father: {fileID: 4263031327496434}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114060258233355460
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1706314728660970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87abe9406eade9741849e8e335d1c44e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  isPlayer: 0
 --- !u!114 &114238885484492152
 MonoBehaviour:
   m_ObjectHideFlags: 1
