@@ -123,6 +123,11 @@ public class GV {
         return -0.5f * Mathf.Cos(2f * Mathf.PI * progress) + 0.5f;
     }
 
+    public static void SetAlpha(Color color, float alpha)
+    {
+        color = new Color(color.r, color.g, color.b, alpha);
+    }
+
     public static string GetWeekdayString(int day)
     {
         day = day % 7;

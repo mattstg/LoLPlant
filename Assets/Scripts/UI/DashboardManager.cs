@@ -30,7 +30,7 @@ public class DashboardManager : MonoBehaviour
     public RectTransform spinner;
     public RectTransform spinnerBall;
     public Image spinnerTracer;
-    public ImageFade ballFade;
+    public Fader ballFader;
     public bool fpsOverride = false;
     private float fpsDamp = 0f;
     private float fpsVelocity = 0f;
@@ -63,7 +63,7 @@ public class DashboardManager : MonoBehaviour
     public void Initialize()
     {
         plant = GV.ws.plant;
-        ballFade.Initialize();
+        ballFader.InitializeFader();
         if (sunControl)
             sunControl.onValueChanged.AddListener(delegate { SunControlValueChanged(); });
         if (waterControl)
@@ -177,13 +177,13 @@ public class DashboardManager : MonoBehaviour
         float ballScale = Mathf.Clamp(tracerFill / 0.4f, 0.15f, 1f);
         spinnerBall.localScale = new Vector3(ballScale, ballScale, spinnerBall.localScale.z);
 
-        if (plant.psDamp < 0.02f && ballFade.GetTargetOpacity() == 1f)
-            ballFade.SetTargetOpacity(0f, 1.0f);
-        else if (plant.psDamp >= 0.02f && ballFade.GetTargetOpacity() < 1f)
-            ballFade.SetTargetOpacity(1f, 0.5f);
-        ballFade.Refresh(dt);
-        if (ballFade.IsStateChanged())
-            spinnerTracer.color = ballFade.GetImage().color;
+        if (plant.psDamp < 0.02f && ballFader.GetTargetAlpha() == 1f)
+            ballFader.SetTargetAlpha(0f, 1.0f);
+        else if (plant.psDamp >= 0.02f && ballFader.GetTargetAlpha() < 1f)
+            ballFader.SetTargetAlpha(1f, 0.5f);
+        ballFader.UpdateFader(dt);
+        if (ballFader.IsStateChanged())
+            spinnerTracer.color = ballFader.GetImage().color;
     }
 
     public void UpdateFood()

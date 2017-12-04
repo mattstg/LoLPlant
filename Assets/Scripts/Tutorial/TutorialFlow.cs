@@ -30,7 +30,7 @@ public class TutorialFlow : Flow {
             // GV.ws.cameraManager.Refresh(dt);  Cam is locked for tut, dont update
             GV.ws.platformManager.Refresh(dt);    //Refresh platform manager
             GV.ws.dm.Refresh(dt);                 //Refresh dashboard manager
-            //GV.ws.popupManager.Refresh(dt);                                              Since i fucked up the tutscene, link is missing throwing errors, disabled for now
+            GV.ws.popupManager.Refresh(dt);        // Since i fucked up the tutscene, link is missing throwing errors, disabled for now
             //foreach (Parallax p in GV.ws.parallaxes)  //No parallax in tutorial
             //    p.Refresh(dt);
             GV.ws.cloudManager.Refresh(dt);

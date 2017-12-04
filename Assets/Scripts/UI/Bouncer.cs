@@ -20,7 +20,7 @@ public class Bouncer : MonoBehaviour
 
     public bool useWaveMotion = false;
 
-    public void Initialize()
+    public void InitializeBouncer()
     {
         if (!rectTransform)
             rectTransform = GetComponent<RectTransform>();
