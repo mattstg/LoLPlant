@@ -8,6 +8,8 @@ public enum CurrentState { MainMenu, Tutorial, Game, PostGame}
 public class MainScript : MonoBehaviour
 {
     public static int progressPoint = 0;
+    bool lolsdkFinishedLoading = false;
+    bool flowInitialized = false;
 
     CurrentState currentState;
     Flow curFlow;
@@ -17,19 +19,27 @@ public class MainScript : MonoBehaviour
         //THIS IS THE FIRST POINT EVER ENTERED BY THIS PROGRAM. (Except for MainScriptInitializer.cs, who creates this script and runs this function for the game to start)
         GV.ms = this; //set link so rest can access this script easily
         SDKLoader.StartLoader(); //Will link SDK calls from LoL to us (to recieve)
-        //ANYTHING BELOW THIS NEEDS TO ONLY CALL ONCE EVERYTHING IS LOADED
-        currentState = cs; //Initial scene to load
-        curFlow = InitializeFlowScript(currentState, progressPoint);  //initial flow initialize
-        
+        currentState = cs;
     }
-
 
 	void Update ()
     {
-        if (curFlow == null)
-            return; //This means Initialize hasnt been called yet, can happen in weird Awake/Update way (should though, but be safe)
-        float dt = Time.deltaTime;
-        curFlow.Update(dt);
+        if (!lolsdkFinishedLoading)
+            lolsdkFinishedLoading = SDKLoader.CheckIfEverythingLoaded();  //If have not recieved lols jsons yet
+
+        if (lolsdkFinishedLoading && !flowInitialized)  //Once recieved jsons, initialize the flow
+        {             
+            curFlow = InitializeFlowScript(currentState, progressPoint);  //initial flow initialize
+            flowInitialized = true;
+        }
+
+        if (flowInitialized)
+        {
+            if (curFlow == null)
+                return; //This means Initialize hasnt been called yet, can happen in weird Awake/Update way (should though, but be safe)
+            float dt = Time.deltaTime;
+            curFlow.Update(dt);
+        }
 	}
 
     private Flow InitializeFlowScript(CurrentState flowType, int progressPoint)

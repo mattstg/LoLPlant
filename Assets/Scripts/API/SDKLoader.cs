@@ -16,7 +16,10 @@ public class SDKLoader {
     private static readonly Dictionary<string, string> textDict = new Dictionary<string, string>();
     public static JSONNode startGameData;
 
-	public static void StartLoader()
+    private static bool languageLoaded = false;
+    private static bool startgameLoaded = false;
+
+    public static void StartLoader()
     {
         // Create the WebGL (or mock) object
 #if UNITY_EDITOR
@@ -31,7 +34,7 @@ public class SDKLoader {
 
 		// Register event handlers
 		LOLSDK.Instance.StartGameReceived += new StartGameReceivedHandler (HandleStartGame);
-		LOLSDK.Instance.GameStateChanged += new GameStateChangedHandler (HandleGameStateChange);
+		LOLSDK.Instance.GameStateChanged += new GameStateChangedHandler (HandleGameStateChange);      //for pausing?
 	    LOLSDK.Instance.QuestionsReceived += new QuestionListReceivedHandler (HandleQuestions);
 	    LOLSDK.Instance.LanguageDefsReceived += new LanguageDefsReceivedHandler (HandleLanguageDefs);
 
@@ -45,9 +48,16 @@ public class SDKLoader {
 	}
 
 	// Start the game here
-	static void HandleStartGame (string json) {
+	static void HandleStartGame (string json)
+    {
         //Given start game info, load the language and text files
         startGameData = JSON.Parse(json);
+        startgameLoaded = true;
+    }
+
+    public static bool CheckIfEverythingLoaded()
+    {
+        return languageLoaded && startgameLoaded;
     }
 
     // Handle pause / resume
@@ -67,6 +77,7 @@ public class SDKLoader {
     {
 		JSONNode langDefs = JSON.Parse(json);
         LangDict.Instance.SetNode(langDefs);
+        languageLoaded = true;
 	}
     static private void LoadMockData () {
 		#if UNITY_EDITOR
@@ -82,7 +93,7 @@ public class SDKLoader {
 				JSONNode startGamePayload = JSON.Parse(startDataAsJSON);
 				// Capture the language code from the start payload. Use this to switch fontss
 				langCode = startGamePayload["languageCode"];
-				HandleStartGame(startDataAsJSON);
+				HandleStartGame(startDataAsJSON);                
 			}
 
 			// Load Dev Language File from StreamingAssets
@@ -95,6 +106,7 @@ public class SDKLoader {
 				JSONNode langDefs = JSON.Parse(langDataAsJson);
 				// use the languageCode from startGame.json captured above
 				HandleLanguageDefs(langDefs[langCode].ToString());
+                languageLoaded = true;
 			}
 
 			// Load Dev Questions from StreamingAssets
@@ -103,7 +115,6 @@ public class SDKLoader {
 				string questionsDataAsJson = File.ReadAllText (questionsFilePath);
 				MultipleChoiceQuestionList qs =
 					MultipleChoiceQuestionList.CreateFromJSON(questionsDataAsJson);
-				HandleQuestions(qs);
 			}
 		#endif
 	}
