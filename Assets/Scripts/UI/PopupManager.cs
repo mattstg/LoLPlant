@@ -31,6 +31,8 @@ public class PopupManager : MonoBehaviour
     public ZoomBouncer boxZoomBouncer;
     public ZoomBouncer checkZoomBouncer;
 
+    public List<Button> nextButtons = new List<Button>();
+
     private State state;
     private State targetState;
     private Vector2 currentPosition = Vector2.zero;
@@ -39,6 +41,8 @@ public class PopupManager : MonoBehaviour
     private Icon icon;
     private List<Message> messages;
     private int currentIndex;
+    private float transitionProgress = 2f;
+    private readonly float transitionDuration = 2f;
 
     private bool updatePosition = false;
     private bool updatePanel = true;        //these 4 bools should be false, once flow is built
@@ -46,6 +50,7 @@ public class PopupManager : MonoBehaviour
     private bool updateMessageSpace = true; //
     private bool updateIcon = true;         //
 
+    private bool inputAccepted = true;       //should be false, once flow is built
     private bool iconSelected = false;
 
     private Vector2 messageSpaceDimensions = new Vector2(120f, 30f);
@@ -92,26 +97,24 @@ public class PopupManager : MonoBehaviour
     private void Clear()
     {
         state = State.Closed;
-        currentPosition = GetPosition(Message.Position.Bottom);
-        popupParent.anchoredPosition = currentPosition;
-        icon = Icon.None;
+
         if (messages.Count > 0)
             messages.Clear();
+
         currentIndex = 0;
         messageText.text = "";
+        currentPosition = GetPosition(Message.Position.Bottom);
+        popupParent.anchoredPosition = currentPosition;
+
+        icon = Icon.None;
+        ApplyIcon(0f);
+        ApplyInputState(false, true);
+        iconSelected = false;
+
         panelFader.SetPresentAlpha(0f);
         messageFader.SetPresentAlpha(0f);
-        arrowFader.SetPresentAlpha(0f);
-        boxFader.SetPresentAlpha(0f);
-        foreach (Fader f in dotsFaders)
-            f.SetPresentAlpha(0f);
-        checkFader.SetPresentAlpha(0f);
         popupParent.gameObject.SetActive(false);
-        arrowFader.gameObject.SetActive(false);
-        boxFader.gameObject.SetActive(false);
-        foreach (Fader f in dotsFaders)
-            f.gameObject.SetActive(false);
-        checkFader.gameObject.SetActive(false);
+
         updatePosition = false;
         updatePanel = false;
         updateMessage = false;
@@ -121,7 +124,27 @@ public class PopupManager : MonoBehaviour
 
     public void LoadPopup(List<Message> _messages)
     {
-        if (messages.Count > 0)
+        if (state == State.Closed)
+        {
+            messages = _messages;
+            targetState = State.Opening;
+            currentIndex = 0;
+        }
+        else if (state == State.Closing) // should not happen
+        {
+            Clear();
+            messages = _messages;
+            targetState = State.Opening;
+            currentIndex = 0;
+        }
+        else
+        {
+            messages.AddRange(_messages);
+        }
+        Flow();
+
+        /*
+        if (messages.Count > 0 &&)
             messages.AddRange(_messages);
         else
         {
@@ -147,6 +170,7 @@ public class PopupManager : MonoBehaviour
 
         foreach (Message m in _messages)
             Debug.Log("Popup: " + m.message);
+        */
     }
 
     public void Refresh(float dt)
@@ -161,6 +185,20 @@ public class PopupManager : MonoBehaviour
             UpdateMessageSpace(dt);
         if (updateIcon)
             UpdateIcon(dt);
+
+        if (state == State.Opening || state == State.Proceeding || state == State.Closing)
+        {
+            transitionProgress += dt;
+            if (transitionProgress >= transitionDuration)
+            {
+                transitionProgress = transitionDuration;
+                if (state == State.Opening || state == State.Proceeding)
+                    targetState = State.Open;
+                else if (state == State.Closing)
+                    targetState = State.Closed;
+                Flow();
+            }
+        }
     }
 
     private void UpdatePosition(float dt)
@@ -250,6 +288,97 @@ public class PopupManager : MonoBehaviour
         messageText.text = messages[currentIndex].message;
     }
 
+    private void ApplyIcon(float alpha = 0f)
+    {
+        switch (icon)
+        {
+            case Icon.Arrow:
+                arrowFader.gameObject.SetActive(true);
+                boxFader.gameObject.SetActive(false);
+                foreach (Fader f in dotsFaders)
+                    f.gameObject.SetActive(false);
+                checkFader.gameObject.SetActive(false);
+
+                arrowFader.SetPresentAlpha(alpha);
+                break;
+            case Icon.Box:
+                arrowFader.gameObject.SetActive(false);
+                boxFader.gameObject.SetActive(true);
+                foreach (Fader f in dotsFaders)
+                    f.gameObject.SetActive(false);
+                checkFader.gameObject.SetActive(false);
+
+                boxFader.SetPresentAlpha(alpha);
+                break;
+            case Icon.Dots:
+                arrowFader.gameObject.SetActive(false);
+                boxFader.gameObject.SetActive(false);
+                foreach (Fader f in dotsFaders)
+                    f.gameObject.SetActive(true);
+                checkFader.gameObject.SetActive(false);
+
+                foreach (Fader f in dotsFaders)
+                    f.SetPresentAlpha(alpha);
+                break;
+            case Icon.Check:
+                arrowFader.gameObject.SetActive(false);
+                boxFader.gameObject.SetActive(false);
+                foreach (Fader f in dotsFaders)
+                    f.gameObject.SetActive(true);
+                checkFader.gameObject.SetActive(true);
+
+                checkFader.SetPresentAlpha(alpha);
+                break;
+            default:
+                arrowFader.gameObject.SetActive(false);
+                boxFader.gameObject.SetActive(false);
+                foreach (Fader f in dotsFaders)
+                    f.gameObject.SetActive(false);
+                checkFader.gameObject.SetActive(false);
+                break;
+        }
+    }
+
+    private void FadeInIcon(float duration)
+    {
+        switch (icon)
+        {
+            case Icon.Arrow:
+                arrowFader.FadeIn(duration);
+                break;
+            case Icon.Box:
+                boxFader.FadeIn(duration);
+                break;
+            case Icon.Dots:
+                foreach (Fader f in dotsFaders)
+                    f.FadeIn(duration);
+                break;
+            case Icon.Check:
+                checkFader.FadeIn(duration);
+                break;
+        }
+    }
+
+    private void FadeOutIcon(float duration)
+    {
+        switch (icon)
+        {
+            case Icon.Arrow:
+                arrowFader.FadeOut(duration);
+                break;
+            case Icon.Box:
+                boxFader.FadeOut(duration);
+                break;
+            case Icon.Dots:
+                foreach (Fader f in dotsFaders)
+                    f.FadeOut(duration);
+                break;
+            case Icon.Check:
+                checkFader.FadeOut(duration);
+                break;
+        }
+    }
+
     private void Flow()
     {
         if (state != targetState)
@@ -260,6 +389,7 @@ public class PopupManager : MonoBehaviour
                 case State.Closed:
                     if (targetState == State.Opening)
                     {
+                        state = targetState;
                         BeginOpening();
                         validTarget = true;
                     }
@@ -268,17 +398,20 @@ public class PopupManager : MonoBehaviour
                     if (targetState == State.Open)
                     {
                         state = targetState;
+                        HasOpened();
                         validTarget = true;
                     }
                     break;
                 case State.Open:
-                    if (targetState == State.Proceeding)
+                    if (targetState == State.Proceeding && currentIndex < messages.Count - 1)
                     {
+                        state = targetState;
                         BeginProceeding();
                         validTarget = true;
                     }
                     else if (targetState == State.Closing)
                     {
+                        state = targetState;
                         BeginClosing();
                         validTarget = true;
                     }
@@ -287,6 +420,7 @@ public class PopupManager : MonoBehaviour
                     if (targetState == State.Open)
                     {
                         state = targetState;
+                        HasOpened();
                         validTarget = true;
                     }
                     break;
@@ -294,6 +428,7 @@ public class PopupManager : MonoBehaviour
                     if (targetState == State.Closed)
                     {
                         state = targetState;
+                        HasClosed();
                         validTarget = true;
                     }
                     break;
@@ -305,25 +440,80 @@ public class PopupManager : MonoBehaviour
             }
         }
 
-
+        if (icon == Icon.Box && currentIndex < messages.Count - 1 )
+        {
+            icon = Icon.Arrow;
+            ApplyIcon(boxFader.GetPresentAlpha());
+            FadeInIcon(1f);
+            updateIcon = true;
+        }
     }
 
     private void BeginOpening()
     {
-        
+        transitionProgress = 0f;
 
-        updateMessageSpace = true;
+        currentIndex = 0;
+        messageText.text = messages[currentIndex].message;
+        targetPosition = GetPosition(messages[currentIndex].position);
+        ApplyInputState(false);
+
+        updatePosition = true;
         updatePanel = true;
+        updateMessage = true;
+        updateMessageSpace = true;
         updateIcon = false;
+
+        popupParent.gameObject.SetActive(true);
+        panelFader.FadeIn(1f);
+        messageFader.FadeIn(2f);
+
     }
 
     private void BeginProceeding()
     {
+        transitionProgress = 0f;
+        ApplyInputState(false);
 
     }
 
     private void BeginClosing()
     {
+        transitionProgress = 0f;
+        ApplyInputState(false);
+
+    }
+
+    private void HasOpened()
+    {
+        //activate icon
+        //icon fader: fade in
+        ApplyInputState(messages[currentIndex].type == Message.Type.Info);
+        bool callFlow = false;
+        if (messages[currentIndex].type == Message.Type.Info)
+            icon = (IsCurrentIndexLast()) ? Icon.Box : Icon.Arrow;
+        else
+        {
+            if (messages[currentIndex].promptSuccess)
+            {
+                icon = Icon.Check;
+                targetState = (IsCurrentIndexLast()) ? State.Closing : State.Proceeding;
+                callFlow = true; 
+            }
+            
+        }
+
+        ApplyIcon(0f);
+        FadeInIcon(1f);
+        updateIcon = true;
+
+        if (callFlow)
+            Flow();
+    }
+
+    private void HasClosed()
+    {
+        ApplyInputState(false);
 
     }
 
@@ -342,26 +532,59 @@ public class PopupManager : MonoBehaviour
     {
         if (state == State.Open)
         {
-            if (currentIndex >= messages.Count - 1 || messages.Count == 0)
+            if (IsCurrentIndexLast() || messages.Count == 0)
             {
-                ClosePopup();
-                // targetState = State.Closing;
-                // Flow();
+                targetState = State.Closing;
+                Flow();
             }
             else
             {
-                currentIndex++;
-                messageText.text = messages[currentIndex].message;
-                updateMessageSpace = true;
-                // targetState = State.Proceeding;
-                // Flow();
+                targetState = State.Proceeding;
+                Flow();
             }
         }
     }
 
-    public void PromptSuccess() //called by TAEventManager
+    public void PromptSuccess(string messageName) //called by TAEventManager
     {
+        if (messages[currentIndex].name == messageName && messages[currentIndex].type == Message.Type.Prompt)
+        {
+            messages[currentIndex].promptSuccess = true;
+            if (state == State.Open && icon == Icon.Dots)
+            {
+                FadeOutIcon(1f);
+                icon = Icon.Check;
+                FadeInIcon(1f);
+                //ZoomBounceInIcon();
+                targetState = (IsCurrentIndexLast()) ? State.Closing : State.Proceeding;
+                Flow();
+            }
+        }
+        else
+        {
+            bool messageFound = false;
+            for (int i = 0; i < messages.Count; i++)
+            {
+                if ( messages[i].name == messageName && messages[i].type == Message.Type.Prompt && i != currentIndex )
+                {
+                    messages[i].promptSuccess = true;
+                    messageFound = true;
+                    break;
+                }
+            }
+            if (!messageFound)
+                Debug.Log("Error: PopupManager: PromptSuccess() called by TAEventManager without corresponding prompt-message loaded");
+        }
+    }
 
+    private void ApplyInputState(bool _inputAccepted, bool forceApply = false)
+    {
+        if (inputAccepted != _inputAccepted || forceApply)
+        {
+            inputAccepted = _inputAccepted;
+            foreach (Button b in nextButtons)
+                b.interactable = inputAccepted;
+        }
     }
 
     private bool IsCurrentIndexLast()
