@@ -9,8 +9,18 @@ public class PlayerController : MonoBehaviour {
     public float YClickJumpThreshold = 1.5f; //Clicking this much units higher will cause the jump
 	AnimationController anim;
 	Rigidbody2D body;
-    bool isJumping;
+    
     bool isGrounded;
+    float moveForce = 10.5f;  //
+    float maxSpeed = 6f;
+    //All jump related
+    float jumpForceInitial = 4f;
+    float jumpForcePerSec = 7f;
+    float jumpMaxHoldTime = 1.5f;
+    float jumpHeldTime = 0; //Counter that increases while held
+    bool isJumping = false;
+    float mouseJumpTolerance = 1; //higher than that amt to jump
+
 
     public void Initialize()
     {
@@ -42,9 +52,9 @@ public class PlayerController : MonoBehaviour {
 
 	public void MouseDown(Vector2 mouseWorldPos, float _dt)
     {
-        //This will recieve input of mouse
-        Debug.Log("Mouse pressed/held: " + mouseWorldPos);
-		Move (mouseWorldPos.x, _dt);
+        Vector2 relativePress = new Vector2(Mathf.Clamp(mouseWorldPos.x - transform.position.x,-1,1), Mathf.Clamp(mouseWorldPos.y - transform.position.y,-1,1));
+        relativePress.y = (Mathf.Abs(relativePress.y) >= mouseJumpTolerance) ?-1:0;            
+        KeysPressed(relativePress, _dt);
     }
 
 	public void KeysPressed(Vector2 dir, float _dt)
@@ -52,15 +62,32 @@ public class PlayerController : MonoBehaviour {
 		if (dir.x != 0)
 			Move (dir.x, _dt);
 		if (dir.y != 0)
-			Jump (dir.y, _dt);
+            if(jumpHeldTime < jumpMaxHoldTime)
+                Jump(dir.y, _dt);
     }
 
 	public void Jump(float direction, float _dt){
-		body.AddForce (new Vector2(0, direction / Mathf.Abs(direction) * _dt), ForceMode2D.Impulse);
-	}
+        float jumpForce;
+        
+        if (isJumping)
+        {
+            jumpForce = jumpForcePerSec * _dt;
+            jumpHeldTime += _dt;
+        }
+        else
+        {
+            jumpForce = jumpForceInitial;
+            isJumping = true;
+        }
+        body.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+    }
 
-	public void Move(float direction, float _dt){
-		body.AddForce (new Vector2(direction / Mathf.Abs(direction) * _dt * 20, 0), ForceMode2D.Impulse);
+	public void Move(float direction, float _dt)
+    {
+        float moveForce = _dt * this.moveForce * direction;
+        body.AddForce (new Vector2(moveForce, 0), ForceMode2D.Impulse);
+        if (Mathf.Abs(body.velocity.x) > maxSpeed)
+            body.velocity = new Vector2(maxSpeed * Mathf.Sign(body.velocity.x),body.velocity.y);
 	}
 
     public void OnCollisionEnter2D(Collision2D coli)
@@ -69,6 +96,8 @@ public class PlayerController : MonoBehaviour {
         {
             case "Platform":
                 isGrounded = true;
+                isJumping = false;
+                jumpHeldTime = 0;
 				anim.Grounded(true);
                 break;
             case "Water":
