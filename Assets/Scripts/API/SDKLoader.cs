@@ -34,7 +34,7 @@ public class SDKLoader {
 
 		// Register event handlers
 		LOLSDK.Instance.StartGameReceived += new StartGameReceivedHandler (HandleStartGame);
-		LOLSDK.Instance.GameStateChanged += new GameStateChangedHandler (HandleGameStateChange);      //for pausing?
+		LOLSDK.Instance.GameStateChanged += new GameStateChangedHandler (HandleGameStateChange);   
 	    LOLSDK.Instance.QuestionsReceived += new QuestionListReceivedHandler (HandleQuestions);
 	    LOLSDK.Instance.LanguageDefsReceived += new LanguageDefsReceivedHandler (HandleLanguageDefs);
 

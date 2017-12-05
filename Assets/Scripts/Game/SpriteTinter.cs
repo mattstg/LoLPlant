@@ -50,7 +50,7 @@ public class SpriteTinter
         {
             if(tintObjectList[i] == null) //Object was deleted and not removed properly
             {
-                Debug.Log("Sprite was not removed from sprite tint properly before removed (is null now)");
+                //Debug.Log("Sprite was not removed from sprite tint properly before removed (is null now)");
                 tintObjectList.RemoveAt(i);
             }
             else
