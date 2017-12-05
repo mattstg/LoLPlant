@@ -4753,7 +4753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfa33bcba7b22344a1fedabf0628e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxMultiplier: 0.76
+  parallaxMultiplier: 0.7
   yOffset: -3.7
 --- !u!212 &696486067
 SpriteRenderer:
@@ -4789,7 +4789,7 @@ SpriteRenderer:
   m_SortingLayerID: 1084535421
   m_SortingLayer: 7
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 09b71681a3248bf49b585b04fd8e0bf4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1783d38b0bbb8914a9fdf17519f11908, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5662,7 +5662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfa33bcba7b22344a1fedabf0628e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxMultiplier: 0.79
+  parallaxMultiplier: 0.76
   yOffset: -3.7
 --- !u!114 &794215959
 MonoBehaviour:
@@ -12071,7 +12071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfa33bcba7b22344a1fedabf0628e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxMultiplier: 0.78
+  parallaxMultiplier: 0.73
   yOffset: -3.7
 --- !u!114 &1698130532
 MonoBehaviour:
