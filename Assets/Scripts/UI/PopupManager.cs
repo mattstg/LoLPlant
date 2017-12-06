@@ -493,7 +493,7 @@ public class PopupManager : MonoBehaviour
         popupParent.gameObject.SetActive(true);
         panelFader.FadeIn(1f);
         messageFader.FadeIn(1f, 0.5f);
-        //messageZoomBouncer.ZoomBounceIn(1f, 0.5f);
+        messageZoomBouncer.ZoomBounceIn(1.5f, 0f, 1.03f);
     }
 
     private void BeginProceeding()
@@ -622,8 +622,8 @@ public class PopupManager : MonoBehaviour
             messageText.text = messages[currentIndex].message;
             // if icon = arrow/box, set default sprite
             icon = Icon.None;
-            messageFader.FadeIn(1f);
-            //messageZoomBouncer.ZoomBounceIn(1f);
+            messageFader.FadeIn(1f, 0.5f);
+            messageZoomBouncer.ZoomBounceIn(1.5f, 0f, 1.03f);
             Debug.Log("Fader: PopupManager.MessageFadedForProceed()");
         }
     }
@@ -671,7 +671,7 @@ public class PopupManager : MonoBehaviour
                 icon = Icon.Check;
                 ApplyIcon();
                 FadeInIcon(1f);
-                //ZoomBounceInIcon();
+                ZoomBounceInIcon(0.5f);
                 targetState = (IsCurrentIndexLast()) ? State.Closing : State.Proceeding;
                 Flow();
             }

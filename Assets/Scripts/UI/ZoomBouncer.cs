@@ -14,6 +14,7 @@ public class ZoomBouncer : MonoBehaviour
     private bool delaying = false;
     private float zbProgress = 0f;
     private float zbDuration = 0f;
+    private float zbPeakScale = 1.2f;
     private Type type;
     private Bouncer bouncer;
 
@@ -47,17 +48,16 @@ public class ZoomBouncer : MonoBehaviour
                 float bounceScale;
                 if (type == Type.Out)
                 {
-                    bounceScale = GV.ZoomBounceOut(zbProgress / zbDuration);
+                    bounceScale = GV.ZoomBounceOut(zbProgress / zbDuration, zbPeakScale);
                     rectTransform.localScale = new Vector3(bounceScale, bounceScale, rectTransform.localScale.z);
                 }
                 else
                 {
-                    bounceScale = GV.ZoomBounceIn(zbProgress / zbDuration);
+                    bounceScale = GV.ZoomBounceIn(zbProgress / zbDuration, zbPeakScale);
                     rectTransform.localScale = new Vector3(bounceScale, bounceScale, rectTransform.localScale.z);
                 }
                 if (bouncer)
                     bouncer.locked = true;
-                Debug.Log(zbProgress + ", " + bounceScale);
             }
             else
             {
@@ -69,12 +69,13 @@ public class ZoomBouncer : MonoBehaviour
         }
     }
 
-    public void ZoomBounceIn(float duration = 1f, float delay = 0f)
+    public void ZoomBounceIn(float duration = 1f, float delay = 0f, float peakScale = 1.2f)
     {
         type = Type.In;
         delayDuration = delay;
         zbDuration = duration;
         delayProgress = zbProgress = 0f;
+        zbPeakScale = peakScale;
         if (delayDuration > 0f)
             delaying = true;
         else
@@ -84,12 +85,13 @@ public class ZoomBouncer : MonoBehaviour
         }
     }
 
-    public void ZoomBounceOut(float duration = 1f, float delay = 0f)
+    public void ZoomBounceOut(float duration = 1f, float delay = 0f, float peakScale = 1.2f)
     {
         type = Type.Out;
         delayDuration = delay;
         zbDuration = duration;
         delayProgress = zbProgress = 0f;
+        zbPeakScale = peakScale;
         if (delayDuration > 0f)
             delaying = true;
         else
