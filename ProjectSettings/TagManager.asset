@@ -66,6 +66,9 @@ TagManager:
   - name: midground trees close
     uniqueID: 1084535421
     locked: 0
+  - name: grass back
+    uniqueID: 2400796985
+    locked: 0
   - name: foreground trees
     uniqueID: 3667843209
     locked: 0
@@ -75,7 +78,7 @@ TagManager:
   - name: Player & Bugs
     uniqueID: 2400002349
     locked: 0
-  - name: grass
+  - name: grass front
     uniqueID: 234517999
     locked: 0
   - name: Popup
