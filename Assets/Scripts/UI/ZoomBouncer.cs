@@ -52,4 +52,14 @@ public class ZoomBouncer : MonoBehaviour
         //
         //rectTransform.anchoredPosition = new Vector2(origin.x + offset.x, origin.y + offset.y + ((isPausing) ? 0f : ((useWaveMotion) ? GV.WaveFactor(progress) : GV.BounceFactor(progress)) * bounceHeight));
     }
+
+    public void ZoomBounceIn(float delay = 0f, float peakScale = 1.2f, float peakTime = 0.25f)
+    {
+
+    }
+
+    public void ZoomBounceOut(float delay = 0f, float peakScale = 1.2f, float peakTime = 0.25f)
+    {
+
+    }
 }

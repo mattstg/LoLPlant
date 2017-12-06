@@ -8,6 +8,9 @@ public class Fader : MonoBehaviour
     public enum Type { Image, Text, None }
 
     private Type type;
+    private float delayDuration = 0;
+    private float delayProgress = 0;
+    private bool delaying = false;
     private float fadeDuration = 1;
     private float fadeProgress = 1;
     private float sourceAlpha = 1;
@@ -16,9 +19,14 @@ public class Fader : MonoBehaviour
     private Text text;
     private bool stateChange = false;
 
+    public delegate void FadeComplete();
+    private FadeComplete onFadeComplete;
+
+
     public void InitializeFader()
     {
         type = Type.None;
+        onFadeComplete = null;
         if (fadeDuration <= 0)
             fadeDuration = 1;
         fadeProgress = fadeDuration;
@@ -36,6 +44,7 @@ public class Fader : MonoBehaviour
 
     public void InitializeFader(Image _image)
     {
+        onFadeComplete = null;
         if (fadeDuration <= 0)
             fadeDuration = 1;
         fadeProgress = fadeDuration;
@@ -45,6 +54,7 @@ public class Fader : MonoBehaviour
 
     public void InitializeFader(Text _text)
     {
+        onFadeComplete = null;
         if (fadeDuration <= 0)
             fadeDuration = 1;
         fadeProgress = fadeDuration;
@@ -57,18 +67,37 @@ public class Fader : MonoBehaviour
         stateChange = false;
         if (type == Type.None)
             return;
-        if (fadeProgress != fadeDuration)
+        if (delaying)
+        {
+            if (delayProgress < delayDuration)
+            {
+                delayProgress += dt;
+            }
+            else
+            {
+                delayProgress = delayDuration = 0f;
+                delaying = false;
+            }
+        }
+        else if (fadeProgress != fadeDuration)
         {
             if (fadeDuration <= 0)
                 fadeDuration = 1;
 
             float integral = GetIntegral(fadeProgress / fadeDuration);
             float newAlpha = targetAlpha * integral + sourceAlpha * (1 - integral);
-            fadeProgress += dt;
-            if (fadeProgress > fadeDuration)
-                fadeProgress = fadeDuration;
             ApplyAlpha(newAlpha);
             stateChange = true;
+
+            fadeProgress += dt;
+            if (fadeProgress >= fadeDuration)
+            {
+                fadeProgress = fadeDuration;
+                if (onFadeComplete != null)
+                    onFadeComplete();
+                onFadeComplete = null;
+            }
+
         }
     }
 
@@ -92,14 +121,26 @@ public class Fader : MonoBehaviour
             return 0.5f + ((progress - 0.5f) * (GetVelocity(progress) + 2) / 2);
     }
 
-    public void FadeIn(float duration)
+    public void FadeIn(float duration, float delay = 0, FadeComplete _onFadeComplete = null)
     {
+        delayProgress = 0f;
+        delayDuration = (delay > 0f) ? delay : 0f;
+        delaying = (delayDuration > 0f);
+
         SetTargetAlpha(1f, duration);
+
+        onFadeComplete = _onFadeComplete;
     }
 
-    public void FadeOut(float duration)
+    public void FadeOut(float duration, float delay = 0, FadeComplete _onFadeComplete = null)
     {
+        delayProgress = 0f;
+        delayDuration = (delay > 0f) ? delay : 0f;
+        delaying = (delayDuration > 0f);
+
         SetTargetAlpha(0f, duration);
+
+        onFadeComplete = _onFadeComplete;
     }
 
     public void SetTargetAlpha(float target, float duration)
