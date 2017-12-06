@@ -30,8 +30,10 @@ public class PlatformManager : MonoBehaviour {
 
     public void SetPlatformsActive(bool _setActive)
     {
-        transform.gameObject.SetActive(true);
-        platformsActive = true;
+        transform.gameObject.SetActive(_setActive);
+        platformsActive = _setActive;
+        if (!_setActive)
+            GV.ws.aphidManager.SetAphidsActive(false); //cant have floating aphids now can we
     }
 
     public List<Platform> GetAllPlatformsWithAphids()

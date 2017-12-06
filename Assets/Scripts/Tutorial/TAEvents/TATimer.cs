@@ -10,6 +10,7 @@ public class TATimer : TAEvent
     public TATimer(string _eventName, float _timer) : base(TAEventType.Action)
     {
         eventName = _eventName;
+        timer = _timer;
     }
 
     public override void PerformEvent()
