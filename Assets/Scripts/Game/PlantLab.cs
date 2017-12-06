@@ -10,9 +10,9 @@ public class PlantLab : Plant
     public override void Refresh(float dt)
     {
         if (water >= waterTriggerThreshold)
-            TAEventManager.Instance.RecieveActionTrigger("Water");
+            TAEventManager.Instance.ReceiveActionTrigger("Water");
         if (sun >= sunTriggerThreshold)
-            TAEventManager.Instance.RecieveActionTrigger("Sun");
+            TAEventManager.Instance.ReceiveActionTrigger("Sun");
 
         base.Refresh(dt);
     }

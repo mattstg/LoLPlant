@@ -43,6 +43,7 @@ public class PopupManager : MonoBehaviour
     private int currentIndex;
     private float transitionProgress = 2f;
     private readonly float transitionDuration = 3f;
+    private readonly float promptProceedDelay = 2f;
 
     private bool updatePosition = false;
     private bool updatePanel = true;        //these 4 bools should be false, once flow is built
@@ -187,16 +188,13 @@ public class PopupManager : MonoBehaviour
         if (updateIcon)
             UpdateIcon(dt);
 
-        if (state == State.Opening || state == State.Proceeding || state == State.Closing)
+        if ((state == State.Opening || state == State.Proceeding) && transitionProgress >= 0f)
         {
             transitionProgress += dt;
-            if (transitionProgress >= transitionDuration)
+            if (transitionProgress >= transitionDuration + ((state == State.Proceeding && messages[currentIndex - 1].type == Message.Type.Prompt) ? promptProceedDelay : 0f))
             {
-                transitionProgress = transitionDuration;
-                if (state == State.Opening || state == State.Proceeding)
-                    targetState = State.Open;
-                else if (state == State.Closing)
-                    targetState = State.Closed;
+                transitionProgress = -1f;
+                targetState = State.Open;
                 Flow();
             }
         }
@@ -282,11 +280,6 @@ public class PopupManager : MonoBehaviour
             default:
                 break;
         }
-    }
-
-    private void ApplyMessage()
-    {
-        messageText.text = messages[currentIndex].message;
     }
 
     private void ApplyIcon(float alpha = 0f)
@@ -478,11 +471,13 @@ public class PopupManager : MonoBehaviour
         updateMessageSpace = true;
         updateIcon = true;
 
-        int nextIndex = currentIndex + 1;
-        if (messages[nextIndex].type == Message.Type.Info)
+        currentIndex += 1;
+
+        transitionProgress = 0f;
+        ApplyInputState(false);
+
+        if (messages[currentIndex - 1].type == Message.Type.Info)
         {
-            transitionProgress = 0f;
-            ApplyInputState(false);
             messageFader.FadeOut(1f, 0.5f, MessageFadedForProceed);
             //ZoomBounceOutIcon()
             FadeOutIcon(0.5f, 0.5f);
@@ -491,9 +486,7 @@ public class PopupManager : MonoBehaviour
         }
         else
         {
-            transitionProgress = 0f;
-            ApplyInputState(false);
-            messageFader.FadeOut(1f, 2f, MessageFadedForProceed);
+            messageFader.FadeOut(1f, 2.5f, MessageFadedForProceed);
             FadeOutIcon(0.5f); //icon = dots
             icon = Icon.Check;
             FadeInIcon(0.5f, 0f, CheckFadedIn);
@@ -503,9 +496,31 @@ public class PopupManager : MonoBehaviour
 
     private void BeginClosing()
     {
+        updatePanel = true;
+        updateMessage = true;
+        updateIcon = true;
+
         transitionProgress = 0f;
         ApplyInputState(false);
 
+        if (messages[currentIndex].type == Message.Type.Info)
+        {
+            panelFader.FadeOut(1f, 1.5f, PanelFadedForClose);
+            messageFader.FadeOut(1f, 0.5f);
+            //zoom bounce out icon
+            FadeOutIcon(0.5f, 0.5f);
+            iconSelected = true;
+            //set sprite selected
+        }
+        else
+        {
+            panelFader.FadeOut(1f, 3.5f, PanelFadedForClose);
+            messageFader.FadeOut(1f, 2.5f);
+            FadeOutIcon(0.5f);
+            icon = Icon.Check;
+            FadeInIcon(0.5f, 0f, CheckFadedIn);
+            //zoom bounce in icon
+        }
     }
 
     private void HasOpened()
@@ -543,7 +558,8 @@ public class PopupManager : MonoBehaviour
     private void HasClosed()
     {
         Clear();
-        TAEventManager.Instance.RecieveActionTrigger("ClosePopup");
+        TAEventManager.Instance.ReceiveActionTrigger("ClosePopup");
+        Debug.Log("HasClosed(), TAEventManager.ReceiveActionTrigger('ClosePopup')");
     }
 
     public void ClosePopup()
@@ -554,7 +570,6 @@ public class PopupManager : MonoBehaviour
     {
         if (state == State.Proceeding)
         {
-            currentIndex += 1;
             if (messages[currentIndex].position != messages[currentIndex - 1].position)
             {
                 targetPosition = GetPosition(messages[currentIndex].position);
@@ -573,7 +588,8 @@ public class PopupManager : MonoBehaviour
     {
         if (state == State.Closing)
         {
-
+            targetState = State.Closed;
+            Flow();
         }
     }
 

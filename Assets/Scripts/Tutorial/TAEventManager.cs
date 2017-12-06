@@ -101,7 +101,7 @@ public class TAEventManager
             ProcessStack();
     }
 
-    public void RecieveActionTrigger(string triggerName)
+    public void ReceiveActionTrigger(string triggerName)
     {
         if (triggerName == currentLock)
         {
