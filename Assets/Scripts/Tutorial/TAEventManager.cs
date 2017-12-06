@@ -38,9 +38,12 @@ public class TAEventManager
                 taQueue.Enqueue(new TATimer("Timer", 2));
                 taQueue.Enqueue(new TATrigger("Timer"));
                 taQueue.Enqueue(new TACreatePopup(new Message("SunReq")));
-                taQueue.Enqueue(new TACreatePopup(new Message("GatherSun")));
+                taQueue.Enqueue(new TACreatePopup(new Message("GatherSun", Message.Type.Prompt, Message.Position.Top)));
                 taQueue.Enqueue(new TACreatePopup(new Message("ControlsKey")));
                 taQueue.Enqueue(new TACreatePopup(new Message("ControlsTouch")));
+                taQueue.Enqueue(new TATimer("Timer", 10f));
+                taQueue.Enqueue(new TATrigger("Timer"));
+                taQueue.Enqueue(new TAPromptSuccess("GatherSun"));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TAFreezeChar(false));
                 taQueue.Enqueue(new TATrigger("PlatformTouch"));

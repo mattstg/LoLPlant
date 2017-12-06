@@ -5,61 +5,97 @@ using UnityEngine.UI;
 
 public class ZoomBouncer : MonoBehaviour
 {
+    public enum Type { In, Out }
+
     public RectTransform rectTransform;
-    private Vector2 origin = new Vector2(0f, 0f);
 
-    public Vector2 offset = new Vector2(0f, 0f);
-    public float bounceHeight = 10f;
-    public float bounceTime = 1f;
-    public float pauseTime = 0f;
-
-    public float timer = 0f;
-    public float timerOffset = 0f;
-    public bool isPausing = false;
-    public float progress = 0f;
-
-    public bool useWaveMotion = false;
+    private float delayProgress = 0f;
+    private float delayDuration = 0f;
+    private bool delaying = false;
+    private float zbProgress = 0f;
+    private float zbDuration = 0f;
+    private Type type;
+    private Bouncer bouncer;
 
     public void InitializeZoomBouncer()
     {
-        //if (!rectTransform)
-        //    rectTransform = GetComponent<RectTransform>();
-        //origin = rectTransform.anchoredPosition;
-        //timer = 0f;
+        if (!rectTransform)
+            rectTransform = GetComponent<RectTransform>();
+        if (GetComponent<Bouncer>())
+            bouncer = GetComponent<Bouncer>();
     }
 
     public void UpdateZoomBouncer(float dt)
     {
-        //timer += dt;
-        //
-        //if (isPausing && pauseTime <= 0f)
-        //{
-        //    pauseTime = 0f;
-        //    isPausing = false;
-        //    timer = 0f;
-        //}
-        //if (bounceTime <= 0f)
-        //    bounceTime = 1f;
-        //
-        //progress = (isPausing) ? (timer + timerOffset) / pauseTime : (timer + timerOffset) / bounceTime;
-        //
-        //if (progress >= 1f)
-        //{
-        //    timer -= (isPausing) ? pauseTime : bounceTime;
-        //    isPausing = (!isPausing && pauseTime > 0f);
-        //    progress = (isPausing) ? (timer + timerOffset) / pauseTime : (timer + timerOffset) / bounceTime;
-        //}
-        //
-        //rectTransform.anchoredPosition = new Vector2(origin.x + offset.x, origin.y + offset.y + ((isPausing) ? 0f : ((useWaveMotion) ? GV.WaveFactor(progress) : GV.BounceFactor(progress)) * bounceHeight));
+        if (delaying)
+        {
+            if (delayProgress < delayDuration)
+            {
+                delayProgress += dt;
+            }
+            else
+            {
+                delayProgress = delayDuration = 0f;
+                delaying = false;
+            }
+        }
+        else
+        {
+            if (zbProgress < zbDuration)
+            {
+                zbProgress += dt;
+                float bounceScale;
+                if (type == Type.Out)
+                {
+                    bounceScale = GV.ZoomBounceOut(zbProgress / zbDuration);
+                    rectTransform.localScale = new Vector3(bounceScale, bounceScale, rectTransform.localScale.z);
+                }
+                else
+                {
+                    bounceScale = GV.ZoomBounceIn(zbProgress / zbDuration);
+                    rectTransform.localScale = new Vector3(bounceScale, bounceScale, rectTransform.localScale.z);
+                }
+                if (bouncer)
+                    bouncer.locked = true;
+                Debug.Log(zbProgress + ", " + bounceScale);
+            }
+            else
+            {
+                rectTransform.localScale = new Vector3(1f, 1f, rectTransform.localScale.z);
+                zbProgress = zbDuration = 0f;
+                if (bouncer)
+                    bouncer.locked = false;
+            }
+        }
     }
 
-    public void ZoomBounceIn(float delay = 0f, float peakScale = 1.2f, float peakTime = 0.25f)
+    public void ZoomBounceIn(float duration = 1f, float delay = 0f)
     {
-
+        type = Type.In;
+        delayDuration = delay;
+        zbDuration = duration;
+        delayProgress = zbProgress = 0f;
+        if (delayDuration > 0f)
+            delaying = true;
+        else
+        {
+            delaying = false;
+            delayDuration = 0f;
+        }
     }
 
-    public void ZoomBounceOut(float delay = 0f, float peakScale = 1.2f, float peakTime = 0.25f)
+    public void ZoomBounceOut(float duration = 1f, float delay = 0f)
     {
-
+        type = Type.Out;
+        delayDuration = delay;
+        zbDuration = duration;
+        delayProgress = zbProgress = 0f;
+        if (delayDuration > 0f)
+            delaying = true;
+        else
+        {
+            delaying = false;
+            delayDuration = 0f;
+        }
     }
 }

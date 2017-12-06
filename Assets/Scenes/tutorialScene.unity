@@ -1333,7 +1333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &236813844
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1818,15 +1818,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 0}
-  offset: {x: 0, y: 0}
-  bounceHeight: 10
-  bounceTime: 1
-  pauseTime: 0
-  timer: 0
-  timerOffset: 0
-  isPausing: 0
-  progress: 0
-  useWaveMotion: 0
 --- !u!114 &390434939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1859,6 +1850,7 @@ MonoBehaviour:
   isPausing: 0
   progress: 0
   useWaveMotion: 0
+  locked: 0
 --- !u!114 &390434941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1890,7 +1882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.29906183, g: 0.875, b: 0.11580883, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2013,6 +2005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxMultiplier: 0.6667
+  yOffset: 0
 --- !u!4 &437183415
 Transform:
   m_ObjectHideFlags: 0
@@ -3295,6 +3288,7 @@ MonoBehaviour:
   isPausing: 0
   progress: 0
   useWaveMotion: 0
+  locked: 0
 --- !u!114 &785626088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3359,15 +3353,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 0}
-  offset: {x: 0, y: 0}
-  bounceHeight: 10
-  bounceTime: 1
-  pauseTime: 0
-  timer: 0
-  timerOffset: 0
-  isPausing: 0
-  progress: 0
-  useWaveMotion: 0
 --- !u!114 &785626092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3781,7 +3766,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 943831127
-  m_SortingLayer: 6
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0.6764706, g: 0.3859175, b: 0.07461072, a: 1}
@@ -4961,6 +4946,8 @@ MonoBehaviour:
   arrowZoomBouncer: {fileID: 785626091}
   boxZoomBouncer: {fileID: 2103908766}
   checkZoomBouncer: {fileID: 390434938}
+  nextButtons:
+  - {fileID: 1882158593}
 --- !u!1 &1155897444
 GameObject:
   m_ObjectHideFlags: 0
@@ -5781,7 +5768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1354631688
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5821,6 +5808,7 @@ MonoBehaviour:
   isPausing: 0
   progress: 0
   useWaveMotion: 0
+  locked: 0
 --- !u!114 &1354631690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8031,7 +8019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1918661711
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8082,6 +8070,7 @@ MonoBehaviour:
   isPausing: 0
   progress: 0
   useWaveMotion: 0
+  locked: 0
 --- !u!114 &1918661714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8208,15 +8197,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 0}
-  offset: {x: 0, y: 0}
-  bounceHeight: 10
-  bounceTime: 1
-  pauseTime: 0
-  timer: 0
-  timerOffset: 0
-  isPausing: 0
-  progress: 0
-  useWaveMotion: 0
 --- !u!114 &1935356717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8277,7 +8257,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 943831127
-  m_SortingLayer: 6
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d3217ebd3c6b7244797816c8400a3f2f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -8506,7 +8486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2060886348
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8546,6 +8526,7 @@ MonoBehaviour:
   isPausing: 0
   progress: 0
   useWaveMotion: 0
+  locked: 0
 --- !u!114 &2060886350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8785,15 +8766,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 0}
-  offset: {x: 0, y: 0}
-  bounceHeight: 10
-  bounceTime: 1
-  pauseTime: 0
-  timer: 0
-  timerOffset: 0
-  isPausing: 0
-  progress: 0
-  useWaveMotion: 0
 --- !u!114 &2103908767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8826,6 +8798,7 @@ MonoBehaviour:
   isPausing: 0
   progress: 0
   useWaveMotion: 0
+  locked: 0
 --- !u!114 &2103908769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8857,7 +8830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.32352942, g: 0.5241383, b: 1, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -9026,7 +8999,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 943831127
-  m_SortingLayer: 6
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7bde6c86d6cbfa244ab3ee534290af97, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

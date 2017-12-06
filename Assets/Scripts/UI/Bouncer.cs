@@ -19,6 +19,7 @@ public class Bouncer : MonoBehaviour
     public float progress = 0f;
 
     public bool useWaveMotion = false;
+    public bool locked = false;
 
     public void InitializeBouncer()
     {
@@ -30,26 +31,29 @@ public class Bouncer : MonoBehaviour
 
     public void UpdateBouncer(float dt)
     {
-        timer += dt;
-
-        if (isPausing && pauseTime <= 0f)
+        if (!locked)
         {
-            pauseTime = 0f;
-            isPausing = false;
-            timer = 0f;
-        }
-        if (bounceTime <= 0f)
-            bounceTime = 1f;
+            timer += dt;
 
-        progress = (isPausing) ? (timer + timerOffset) / pauseTime : (timer + timerOffset) / bounceTime;
+            if (isPausing && pauseTime <= 0f)
+            {
+                pauseTime = 0f;
+                isPausing = false;
+                timer = 0f;
+            }
+            if (bounceTime <= 0f)
+                bounceTime = 1f;
 
-        if (progress >= 1f)
-        {
-            timer -= (isPausing) ? pauseTime : bounceTime;
-            isPausing = (!isPausing && pauseTime > 0f);
             progress = (isPausing) ? (timer + timerOffset) / pauseTime : (timer + timerOffset) / bounceTime;
-        }
 
-        rectTransform.anchoredPosition = new Vector2(origin.x + offset.x, origin.y + offset.y + ((isPausing) ? 0f : ((useWaveMotion) ? GV.WaveFactor(progress) : GV.BounceFactor(progress)) * bounceHeight));
+            if (progress >= 1f)
+            {
+                timer -= (isPausing) ? pauseTime : bounceTime;
+                isPausing = (!isPausing && pauseTime > 0f);
+                progress = (isPausing) ? (timer + timerOffset) / pauseTime : (timer + timerOffset) / bounceTime;
+            }
+
+            rectTransform.anchoredPosition = new Vector2(origin.x + offset.x, origin.y + offset.y + ((isPausing) ? 0f : ((useWaveMotion) ? GV.WaveFactor(progress) : GV.BounceFactor(progress)) * bounceHeight));
+        }
     }
 }
