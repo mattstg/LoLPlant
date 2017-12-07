@@ -33,7 +33,7 @@ public class TAEventManager
         {
             case 0:
                 taQueue.Enqueue(new TAActivate("DashboardNone", true));
-                taQueue.Enqueue(new TAActivate("Platforms", false));
+                //taQueue.Enqueue(new TAActivate("Platforms", false));
                 taQueue.Enqueue(new TAFreezeChar(true));
                 taQueue.Enqueue(new TATimer("Timer", 2));
                 taQueue.Enqueue(new TATrigger("Timer"));

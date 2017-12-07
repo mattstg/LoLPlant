@@ -11,7 +11,10 @@ public class AphidManager : MonoBehaviour {
     {
         List<Platform> platWithAphids = GV.ws.platformManager.GetAllPlatformsWithAphids();
         foreach (Platform p in platWithAphids)
+        {
+            Debug.Log("Creating aphid on platform: " + p.name + " where is true: " + p.hasAphid);
             CreateAphidOnPlatform(p);
+        }
     }
 
     public void CreateAphidOnPlatform(Platform p)

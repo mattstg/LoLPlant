@@ -8,6 +8,7 @@ TagManager:
   - PlatformTrigger
   - Raindrop
   - RainCollector
+  - Aphid
   layers:
   - Default
   - TransparentFX

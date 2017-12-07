@@ -92,18 +92,43 @@ public class PlayerController : MonoBehaviour {
 
     public void OnCollisionEnter2D(Collision2D coli)
     {
+        Debug.Log("Colliding with: " + coli.gameObject.name + " whose tag is " + coli.gameObject.tag);
         switch(coli.gameObject.tag)
         {
             case "Platform":
-                isGrounded = true;
-                isJumping = false;
-                jumpHeldTime = 0;
-				anim.Grounded(true);
+                TouchedGround();
                 break;
             case "Water":
                 break;
+            case "Aphid":
+                TouchedGround();
+                if (!coli.gameObject.GetComponent<Aphid>().isOutCold)
+                    GetHitByAphid(coli.gameObject.transform);
+                break;
         }
+    }
 
+    private void TouchedGround()
+    {
+        isGrounded = true;
+        isJumping = false;
+        jumpHeldTime = 0;
+        anim.Grounded(true);
+    }
+
+    public void GetHitByAphid(Transform aphidTransform)
+    {
+        Debug.Log("Get hit by aphid");
+    }
+
+    public void OnTriggerEnter2D(Collider2D coli)
+    {
+        switch (coli.gameObject.tag)
+        {
+            case "Aphid":
+                coli.gameObject.GetComponent<Aphid>().HoppedOn();
+                break;
+        }
     }
 
     public virtual void OnCollisionExit2D(Collision2D coli)
