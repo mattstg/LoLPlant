@@ -124,6 +124,32 @@ public class GV {
         return -0.5f * Mathf.Cos(2f * Mathf.PI * progress) + 0.5f;
     }
 
+    public static float ZoomBounceIn(float progress, float peakScale = 1.2f)
+    {
+        float k = Mathf.Max(peakScale, 1.01f);
+        float h = 1f - ((k - 1f) * (Mathf.Sqrt((1f / (k - 1f)) + 1f) - 1f));
+        float a = (1f - k) / Mathf.Pow((1f - h), 2f);
+        if (progress <= 0f)
+            return 0f;
+        else if (progress >= 1f)
+            return 1f;
+        else
+            return Mathf.Clamp(a * Mathf.Pow(progress - h, 2f) + k, 0f, 1.2f);
+    }
+
+    public static float ZoomBounceOut(float progress, float peakScale = 1.2f)
+    {
+        float k = Mathf.Max(peakScale, 1.01f);
+        float h = (k - 1f) * (Mathf.Sqrt((1f / (k - 1f)) + 1f) - 1f);
+        float a = (1f - k) / Mathf.Pow(h, 2f);
+        if (progress <= 0f)
+            return 1f;
+        else if (progress >= 1f)
+            return 0f;
+        else
+            return Mathf.Clamp(a * Mathf.Pow(progress - h, 2f) + k, 0f, 1.2f);
+    }
+
     public static void SetAlpha(Color color, float alpha)
     {
         color = new Color(color.r, color.g, color.b, alpha);

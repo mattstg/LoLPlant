@@ -375,6 +375,38 @@ public class PopupManager : MonoBehaviour
         }
     }
 
+    private void ZoomBounceInIcon(float duration, float delay = 0f)
+    {
+        switch (icon)
+        {
+            case Icon.Arrow:
+                arrowZoomBouncer.ZoomBounceIn(duration, delay);
+                break;
+            case Icon.Box:
+                boxZoomBouncer.ZoomBounceIn(duration, delay);
+                break;
+            case Icon.Check:
+                checkZoomBouncer.ZoomBounceIn(duration, delay);
+                break;
+        }
+    }
+
+    private void ZoomBounceOutIcon(float duration, float delay = 0f)
+    {
+        switch (icon)
+        {
+            case Icon.Arrow:
+                arrowZoomBouncer.ZoomBounceOut(duration, delay);
+                break;
+            case Icon.Box:
+                boxZoomBouncer.ZoomBounceOut(duration, delay);
+                break;
+            case Icon.Check:
+                checkZoomBouncer.ZoomBounceOut(duration, delay);
+                break;
+        }
+    }
+
     private void Flow()
     {
         if (state != targetState)
@@ -460,8 +492,8 @@ public class PopupManager : MonoBehaviour
 
         popupParent.gameObject.SetActive(true);
         panelFader.FadeIn(1f);
-        messageFader.FadeIn(1f, 1f);
-        messageZoomBouncer.ZoomBounceIn(1f);
+        messageFader.FadeIn(1f, 0.5f);
+        messageZoomBouncer.ZoomBounceIn(1.5f, 0f, 1.03f);
     }
 
     private void BeginProceeding()
@@ -479,8 +511,8 @@ public class PopupManager : MonoBehaviour
         if (messages[currentIndex - 1].type == Message.Type.Info)
         {
             messageFader.FadeOut(1f, 0.5f, MessageFadedForProceed);
-            //ZoomBounceOutIcon()
-            FadeOutIcon(0.5f, 0.5f);
+            ZoomBounceOutIcon(0.5f);
+            FadeOutIcon(0.5f);
             iconSelected = true;
             //set sprite to selected arrow/box
         }
@@ -489,8 +521,9 @@ public class PopupManager : MonoBehaviour
             messageFader.FadeOut(1f, 2.5f, MessageFadedForProceed);
             FadeOutIcon(0.5f); //icon = dots
             icon = Icon.Check;
+            ApplyIcon();
             FadeInIcon(0.5f, 0f, CheckFadedIn);
-            //ZoomBounceInIcon()
+            ZoomBounceInIcon(0.5f);
         }
     }
 
@@ -505,21 +538,21 @@ public class PopupManager : MonoBehaviour
 
         if (messages[currentIndex].type == Message.Type.Info)
         {
-            panelFader.FadeOut(1f, 1.5f, PanelFadedForClose);
+            panelFader.FadeOut(1f, 1f, PanelFadedForClose);
             messageFader.FadeOut(1f, 0.5f);
-            //zoom bounce out icon
-            FadeOutIcon(0.5f, 0.5f);
+            ZoomBounceOutIcon(0.5f);
+            FadeOutIcon(0.5f);
             iconSelected = true;
             //set sprite selected
         }
         else
         {
-            panelFader.FadeOut(1f, 3.5f, PanelFadedForClose);
+            panelFader.FadeOut(1f, 3f, PanelFadedForClose);
             messageFader.FadeOut(1f, 2.5f);
             FadeOutIcon(0.5f);
             icon = Icon.Check;
             FadeInIcon(0.5f, 0f, CheckFadedIn);
-            //zoom bounce in icon
+            ZoomBounceInIcon(0.5f);
         }
     }
 
@@ -548,6 +581,14 @@ public class PopupManager : MonoBehaviour
 
         ApplyIcon(0f);
         FadeInIcon(0.5f);
+        if (icon == Icon.Check)
+        {
+            foreach (Fader f in dotsFaders)
+            {
+                f.SetPresentAlpha(0f);
+                f.gameObject.SetActive(false);
+            }
+        }
         ApplyInputState(messages[currentIndex].type == Message.Type.Info);
 
 
@@ -570,16 +611,19 @@ public class PopupManager : MonoBehaviour
     {
         if (state == State.Proceeding)
         {
+            updateIcon = false;
+            iconSelected = false;
+
             if (messages[currentIndex].position != messages[currentIndex - 1].position)
             {
                 targetPosition = GetPosition(messages[currentIndex].position);
                 updatePosition = true;
             }
             messageText.text = messages[currentIndex].message;
-            iconSelected = false;
             // if icon = arrow/box, set default sprite
-            messageFader.FadeIn(1f);
-            messageZoomBouncer.ZoomBounceIn();
+            icon = Icon.None;
+            messageFader.FadeIn(1f, 0.5f);
+            messageZoomBouncer.ZoomBounceIn(1.5f, 0f, 1.03f);
             Debug.Log("Fader: PopupManager.MessageFadedForProceed()");
         }
     }
@@ -618,15 +662,16 @@ public class PopupManager : MonoBehaviour
 
     public void PromptSuccess(string messageName) //called by TAEventManager
     {
-        if (messages[currentIndex].name == messageName && messages[currentIndex].type == Message.Type.Prompt)
+        if (messages[currentIndex].name == messageName && messages[currentIndex].type == Message.Type.Prompt && state == State.Open)
         {
-            messages[currentIndex].promptSuccess = true;
-            if (state == State.Open && icon == Icon.Dots)
+            if (!messages[currentIndex].promptSuccess)
             {
+                messages[currentIndex].promptSuccess = true;
                 FadeOutIcon(1f);
                 icon = Icon.Check;
+                ApplyIcon();
                 FadeInIcon(1f);
-                //ZoomBounceInIcon();
+                ZoomBounceInIcon(0.5f);
                 targetState = (IsCurrentIndexLast()) ? State.Closing : State.Proceeding;
                 Flow();
             }
@@ -636,7 +681,7 @@ public class PopupManager : MonoBehaviour
             bool messageFound = false;
             for (int i = 0; i < messages.Count; i++)
             {
-                if ( messages[i].name == messageName && messages[i].type == Message.Type.Prompt && i != currentIndex )
+                if ( messages[i].name == messageName && messages[i].type == Message.Type.Prompt )
                 {
                     messages[i].promptSuccess = true;
                     messageFound = true;
@@ -669,6 +714,8 @@ public class PopupManager : MonoBehaviour
         {
             case Message.Position.Bottom:
                 return new Vector2(0f, 60f);
+            case Message.Position.Top:
+                return new Vector2(0f, 296f);
             default:
                 return new Vector2(0f, 0f);
         }
