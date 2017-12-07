@@ -133,8 +133,10 @@ public class GV {
             return 0f;
         else if (progress >= 1f)
             return 1f;
+        else if (progress >= h)
+            return Mathf.Clamp(((1f - k) / 2f) * Mathf.Cos((Mathf.PI * (progress - 1f)) / (1f - h)) + ((1f + k) / 2f), 0f, k);
         else
-            return Mathf.Clamp(a * Mathf.Pow(progress - h, 2f) + k, 0f, 1.2f);
+            return Mathf.Clamp(a * Mathf.Pow(progress - h, 2f) + k, 0f, k);
     }
 
     public static float ZoomBounceOut(float progress, float peakScale = 1.2f)
@@ -146,8 +148,10 @@ public class GV {
             return 1f;
         else if (progress >= 1f)
             return 0f;
+        else if (progress <= h)
+            return Mathf.Clamp(((1f - k) / 2f) * Mathf.Cos((Mathf.PI * progress) / h) + ((1f + k) / 2f), 0f, k);
         else
-            return Mathf.Clamp(a * Mathf.Pow(progress - h, 2f) + k, 0f, 1.2f);
+            return Mathf.Clamp(a * Mathf.Pow(progress - h, 2f) + k, 0f, k);
     }
 
     public static void SetAlpha(Color color, float alpha)

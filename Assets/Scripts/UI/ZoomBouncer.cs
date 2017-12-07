@@ -14,7 +14,7 @@ public class ZoomBouncer : MonoBehaviour
     private bool delaying = false;
     private float zbProgress = 0f;
     private float zbDuration = 0f;
-    private float zbPeakScale = 1.2f;
+    private float zbPeakScale = 1.25f;
     private Type type;
     private Bouncer bouncer;
 
@@ -69,7 +69,7 @@ public class ZoomBouncer : MonoBehaviour
         }
     }
 
-    public void ZoomBounceIn(float duration = 1f, float delay = 0f, float peakScale = 1.2f)
+    public void ZoomBounceIn(float duration = 1f, float delay = 0f, float peakScale = 1.25f)
     {
         type = Type.In;
         delayDuration = delay;
@@ -85,7 +85,7 @@ public class ZoomBouncer : MonoBehaviour
         }
     }
 
-    public void ZoomBounceOut(float duration = 1f, float delay = 0f, float peakScale = 1.2f)
+    public void ZoomBounceOut(float duration = 1f, float delay = 0f, float peakScale = 1.25f)
     {
         type = Type.Out;
         delayDuration = delay;
