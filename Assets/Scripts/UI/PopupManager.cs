@@ -519,7 +519,7 @@ public class PopupManager : MonoBehaviour
         else
         {
             messageFader.FadeOut(1f, 2.5f, MessageFadedForProceed);
-            FadeOutIcon(0.5f); //icon = dots
+            FadeOutIcon(0.1f); //icon = dots
             icon = Icon.Check;
             ApplyIcon();
             FadeInIcon(0.5f, 0f, CheckFadedIn);
@@ -549,7 +549,7 @@ public class PopupManager : MonoBehaviour
         {
             panelFader.FadeOut(1f, 3f, PanelFadedForClose);
             messageFader.FadeOut(1f, 2.5f);
-            FadeOutIcon(0.5f);
+            FadeOutIcon(0.1f);
             icon = Icon.Check;
             FadeInIcon(0.5f, 0f, CheckFadedIn);
             ZoomBounceInIcon(0.5f);
@@ -716,6 +716,8 @@ public class PopupManager : MonoBehaviour
                 return new Vector2(0f, 60f);
             case Message.Position.Top:
                 return new Vector2(0f, 296f);
+            case Message.Position.Right:
+                return new Vector2(240f, 158f);
             default:
                 return new Vector2(0f, 0f);
         }

@@ -1292,6 +1292,7 @@ MonoBehaviour:
   isPausing: 0
   progress: 0
   useWaveMotion: 0
+  locked: 0
 --- !u!114 &130663301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2554,6 +2555,7 @@ MonoBehaviour:
   isPausing: 0
   progress: 0
   useWaveMotion: 0
+  locked: 0
 --- !u!114 &377025693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3121,15 +3123,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 0}
-  offset: {x: 0, y: 0}
-  bounceHeight: 10
-  bounceTime: 1
-  pauseTime: 0
-  timer: 0
-  timerOffset: 0
-  isPausing: 0
-  progress: 0
-  useWaveMotion: 0
 --- !u!114 &473139809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3162,6 +3155,7 @@ MonoBehaviour:
   isPausing: 0
   progress: 0
   useWaveMotion: 0
+  locked: 0
 --- !u!114 &473139811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3710,15 +3704,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 0}
-  offset: {x: 0, y: 0}
-  bounceHeight: 10
-  bounceTime: 1
-  pauseTime: 0
-  timer: 0
-  timerOffset: 0
-  isPausing: 0
-  progress: 0
-  useWaveMotion: 0
 --- !u!114 &568917792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3751,6 +3736,7 @@ MonoBehaviour:
   isPausing: 0
   progress: 0
   useWaveMotion: 0
+  locked: 0
 --- !u!114 &568917794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3872,6 +3858,7 @@ MonoBehaviour:
   isPausing: 0
   progress: 0
   useWaveMotion: 0
+  locked: 0
 --- !u!114 &570486919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6021,6 +6008,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 819095119}
+--- !u!114 &820285272 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114625120400799954, guid: f4f78d0a94fe9ac4a90cd91e11ffe648,
+    type: 2}
+  m_PrefabInternal: {fileID: 505277176}
+  m_Script: {fileID: 11500000, guid: f5ecdc2298875c84889ea51f892d19b8, type: 3}
 --- !u!1 &821294926
 GameObject:
   m_ObjectHideFlags: 0
@@ -6300,12 +6293,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4135816653937856, guid: 86e7a37cbd027f44fa7d0c54d6db36d8,
     type: 2}
   m_PrefabInternal: {fileID: 273366030}
---- !u!114 &888315166 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114604061198577124, guid: f4f78d0a94fe9ac4a90cd91e11ffe648,
-    type: 2}
-  m_PrefabInternal: {fileID: 505277176}
-  m_Script: {fileID: 11500000, guid: f5ecdc2298875c84889ea51f892d19b8, type: 3}
 --- !u!4 &888315167 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4733128547810800, guid: f4f78d0a94fe9ac4a90cd91e11ffe648,
@@ -6698,15 +6685,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 0}
-  offset: {x: 0, y: 0}
-  bounceHeight: 10
-  bounceTime: 1
-  pauseTime: 0
-  timer: 0
-  timerOffset: 0
-  isPausing: 0
-  progress: 0
-  useWaveMotion: 0
 --- !u!114 &957538586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6739,6 +6717,7 @@ MonoBehaviour:
   isPausing: 0
   progress: 0
   useWaveMotion: 0
+  locked: 0
 --- !u!114 &957538588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11417,15 +11396,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 0}
-  offset: {x: 0, y: 0}
-  bounceHeight: 10
-  bounceTime: 1
-  pauseTime: 0
-  timer: 0
-  timerOffset: 0
-  isPausing: 0
-  progress: 0
-  useWaveMotion: 0
 --- !u!114 &1560235809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14178,7 +14148,7 @@ MonoBehaviour:
   dayEndManager: {fileID: 0}
   plant: {fileID: 2087831454}
   dnc: {fileID: 2087831456}
-  pc: {fileID: 888315166}
+  pc: {fileID: 820285272}
   dm: {fileID: 2014563818}
   popupManager: {fileID: 1520685148}
   parallaxes:
