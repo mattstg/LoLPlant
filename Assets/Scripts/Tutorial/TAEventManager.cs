@@ -38,12 +38,12 @@ public class TAEventManager
                 taQueue.Enqueue(new TATimer("Timer", 2));
                 taQueue.Enqueue(new TATrigger("Timer"));
                 taQueue.Enqueue(new TACreatePopup(new Message("SunReq")));
-                taQueue.Enqueue(new TACreatePopup(new Message("GatherSun", Message.Type.Prompt, Message.Position.Top)));
-                taQueue.Enqueue(new TACreatePopup(new Message("ControlsKey", Message.Type.Info, Message.Position.Right)));
+                taQueue.Enqueue(new TACreatePopup(new Message("GatherSun", Message.Type.Info, Message.Position.Top)));
+                taQueue.Enqueue(new TACreatePopup(new Message("ControlsKey", Message.Type.Prompt, Message.Position.Right)));
                 taQueue.Enqueue(new TACreatePopup(new Message("ControlsTouch")));
-                taQueue.Enqueue(new TATimer("Timer", 15f));
+                taQueue.Enqueue(new TATimer("Timer", 12f));
                 taQueue.Enqueue(new TATrigger("Timer"));
-                taQueue.Enqueue(new TAPromptSuccess("GatherSun"));
+                taQueue.Enqueue(new TAPromptSuccess("ControlsKey"));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TAFreezeChar(false));
                 taQueue.Enqueue(new TATrigger("PlatformTouch"));
@@ -55,7 +55,6 @@ public class TAEventManager
                 taQueue.Enqueue(new TACreatePopup(new Message("H20Req", Message.Type.Prompt)));
                 taQueue.Enqueue(new TAActivate("DashboardWater", true));
                 taQueue.Enqueue(new TATrigger("Water"));
-                // enqueue new action TAPromptSuccess, notifying PopupManager
                 taQueue.Enqueue(new TACreatePopup(new Message("Evaporation")));
                 taQueue.Enqueue(new TACreatePopup(new Message("ReqBothForSugar")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));

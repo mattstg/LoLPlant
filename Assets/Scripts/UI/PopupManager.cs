@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PopupManager : MonoBehaviour
 {
     public enum State { Closed, Open, Opening, Proceeding, Closing }
-    public enum Icon { None, Arrow, Box, Dots, Check }
+    public enum Icon { None, Arrow, Dots, Check }
 
     public RectTransform popupParent;
     public RectTransform messageRect;
@@ -17,28 +17,22 @@ public class PopupManager : MonoBehaviour
     public Fader panelFader;
     public Fader messageFader;
     public Fader arrowFader;
-    public Fader boxFader;
     public List<Fader> dotsFaders = new List<Fader>();
     public Fader checkFader;
 
     public Bouncer arrowBouncer;
-    public Bouncer boxBouncer;
     public List<Bouncer> dotsBouncers = new List<Bouncer>();
     public Bouncer checkBouncer;
 
     public ZoomBouncer messageZoomBouncer;
     public ZoomBouncer arrowZoomBouncer;
-    public ZoomBouncer boxZoomBouncer;
     public ZoomBouncer checkZoomBouncer;
 
     public List<Button> nextButtons = new List<Button>();
 
     public Image arrowImage;
-    public Image boxImage;
     private Sprite arrowDefaultSprite;
     public Sprite arrowSelectedSprite;
-    private Sprite boxDefaultSprite;
-    public Sprite boxSelectedSprite;
 
     private State state;
     private State targetState;
@@ -53,14 +47,13 @@ public class PopupManager : MonoBehaviour
     private readonly float promptProceedDelay = 2f;
 
     private bool updatePosition = false;
-    private bool updatePanel = true;        //these 4 bools should be false, once flow is built
-    private bool updateMessage = true;      //
-    private bool updateMessageSpace = true; //
-    private bool updateIcon = true;         //
+    private bool updatePanel = false;
+    private bool updateMessage = false;
+    private bool updateMessageSpace = false;
+    private bool updateIcon = false;     
 
-    private bool inputAccepted = true;       //should be false, once flow is built
+    private bool inputAccepted = false;
     private bool arrowSelected = false;
-    private bool boxSelected = false;
 
     private Vector2 messageSpaceDimensions = new Vector2(120f, 30f);
     private Vector2 msdVelocity = Vector2.zero;
@@ -69,19 +62,17 @@ public class PopupManager : MonoBehaviour
     public void Initialize()
     {
         messages = new List<Message>();
-        InitializeSelectableIcons();
+        InitializeArrow();
         InitializeFaders();
         InitializeBouncers();
         InitializeZoomBouncers();
         Clear();
     }
 
-    private void InitializeSelectableIcons()
+    private void InitializeArrow()
     {
         arrowDefaultSprite = arrowImage.sprite;
-        boxDefaultSprite = boxImage.sprite;
-        SetIconSelected(false, Icon.Arrow, true);
-        SetIconSelected(false, Icon.Box, true);
+        SetArrowSelected(false, true);
     }
 
     private void InitializeFaders()
@@ -89,7 +80,6 @@ public class PopupManager : MonoBehaviour
         panelFader.InitializeFader();
         messageFader.InitializeFader();
         arrowFader.InitializeFader();
-        boxFader.InitializeFader();
         foreach (Fader f in dotsFaders)
             f.InitializeFader();
         checkFader.InitializeFader();
@@ -98,7 +88,6 @@ public class PopupManager : MonoBehaviour
     private void InitializeBouncers()
     {
         arrowBouncer.InitializeBouncer();
-        boxBouncer.InitializeBouncer();
         foreach (Bouncer b in dotsBouncers)
             b.InitializeBouncer();
         checkBouncer.InitializeBouncer();
@@ -108,7 +97,6 @@ public class PopupManager : MonoBehaviour
     {
         messageZoomBouncer.InitializeZoomBouncer();
         arrowZoomBouncer.InitializeZoomBouncer();
-        boxZoomBouncer.InitializeZoomBouncer();
         checkZoomBouncer.InitializeZoomBouncer();
     }
 
@@ -127,8 +115,7 @@ public class PopupManager : MonoBehaviour
         icon = Icon.None;
         ApplyIcon(0f);
         ApplyInputState(false, true);
-        SetIconSelected(false, Icon.Arrow);
-        SetIconSelected(false, Icon.Box);
+        SetArrowSelected(false);
 
         panelFader.SetPresentAlpha(0f);
         messageFader.SetPresentAlpha(0f);
@@ -274,11 +261,6 @@ public class PopupManager : MonoBehaviour
                 arrowBouncer.UpdateBouncer(dt);
                 arrowZoomBouncer.UpdateZoomBouncer(dt);
                 break;
-            case Icon.Box:
-                boxFader.UpdateFader(dt);
-                boxBouncer.UpdateBouncer(dt);
-                boxZoomBouncer.UpdateZoomBouncer(dt);
-                break;
             case Icon.Dots:
                 foreach (Fader f in dotsFaders)
                     f.UpdateFader(dt);
@@ -305,27 +287,14 @@ public class PopupManager : MonoBehaviour
         {
             case Icon.Arrow:
                 arrowFader.gameObject.SetActive(true);
-                //if arrow sprite = selected, sprite = unselected
-                boxFader.gameObject.SetActive(false);
                 foreach (Fader f in dotsFaders)
                     f.gameObject.SetActive(false);
                 checkFader.gameObject.SetActive(false);
 
                 arrowFader.SetPresentAlpha(alpha);
                 break;
-            case Icon.Box:
-                arrowFader.gameObject.SetActive(false);
-                boxFader.gameObject.SetActive(true);
-                //if box sprite = selected, sprite = unselected
-                foreach (Fader f in dotsFaders)
-                    f.gameObject.SetActive(false);
-                checkFader.gameObject.SetActive(false);
-
-                boxFader.SetPresentAlpha(alpha);
-                break;
             case Icon.Dots:
                 arrowFader.gameObject.SetActive(false);
-                boxFader.gameObject.SetActive(false);
                 foreach (Fader f in dotsFaders)
                     f.gameObject.SetActive(true);
                 checkFader.gameObject.SetActive(false);
@@ -335,7 +304,6 @@ public class PopupManager : MonoBehaviour
                 break;
             case Icon.Check:
                 arrowFader.gameObject.SetActive(false);
-                boxFader.gameObject.SetActive(false);
                 foreach (Fader f in dotsFaders)
                     f.gameObject.SetActive(true);
                 checkFader.gameObject.SetActive(true);
@@ -344,7 +312,6 @@ public class PopupManager : MonoBehaviour
                 break;
             default:
                 arrowFader.gameObject.SetActive(false);
-                boxFader.gameObject.SetActive(false);
                 foreach (Fader f in dotsFaders)
                     f.gameObject.SetActive(false);
                 checkFader.gameObject.SetActive(false);
@@ -358,9 +325,6 @@ public class PopupManager : MonoBehaviour
         {
             case Icon.Arrow:
                 arrowFader.FadeIn(duration, delay, onComplete);
-                break;
-            case Icon.Box:
-                boxFader.FadeIn(duration, delay, onComplete);
                 break;
             case Icon.Dots:
                 foreach (Fader f in dotsFaders)
@@ -379,9 +343,6 @@ public class PopupManager : MonoBehaviour
             case Icon.Arrow:
                 arrowFader.FadeOut(duration, delay, onComplete);
                 break;
-            case Icon.Box:
-                boxFader.FadeOut(duration, delay, onComplete);
-                break;
             case Icon.Dots:
                 foreach (Fader f in dotsFaders)
                     f.FadeOut(duration, delay, onComplete);
@@ -399,9 +360,6 @@ public class PopupManager : MonoBehaviour
             case Icon.Arrow:
                 arrowZoomBouncer.ZoomBounceIn(duration, delay);
                 break;
-            case Icon.Box:
-                boxZoomBouncer.ZoomBounceIn(duration, delay);
-                break;
             case Icon.Check:
                 checkZoomBouncer.ZoomBounceIn(duration, delay);
                 break;
@@ -415,32 +373,18 @@ public class PopupManager : MonoBehaviour
             case Icon.Arrow:
                 arrowZoomBouncer.ZoomBounceOut(duration, delay);
                 break;
-            case Icon.Box:
-                boxZoomBouncer.ZoomBounceOut(duration, delay);
-                break;
             case Icon.Check:
                 checkZoomBouncer.ZoomBounceOut(duration, delay);
                 break;
         }
     }
 
-    private void SetIconSelected(bool selected, Icon _icon, bool forceSetIcon = false)
+    private void SetArrowSelected(bool selected, bool forceSetArrow = false)
     {
-        if (_icon == Icon.Arrow)
+        if (selected != arrowSelected || forceSetArrow)
         {
-            if (selected != arrowSelected || forceSetIcon)
-            {
-                arrowSelected = selected;
-                arrowImage.sprite = (arrowSelected) ? arrowSelectedSprite : arrowDefaultSprite;
-            }
-        }
-        else if (_icon == Icon.Box)
-        {
-            if (selected != boxSelected || forceSetIcon)
-            {
-                boxSelected = selected;
-                boxImage.sprite = (boxSelected ? boxSelectedSprite : boxDefaultSprite);
-            }
+            arrowSelected = selected;
+            arrowImage.sprite = (arrowSelected) ? arrowSelectedSprite : arrowDefaultSprite;
         }
     }
 
@@ -504,14 +448,6 @@ public class PopupManager : MonoBehaviour
                 Debug.Log("Error: PopupManager: Flow(): targetState is invalid");
             }
         }
-
-        if (icon == Icon.Box && currentIndex < messages.Count - 1 )
-        {
-            icon = Icon.Arrow;
-            ApplyIcon(boxFader.GetPresentAlpha());
-            FadeInIcon(1f);
-            updateIcon = true;
-        }
     }
 
     private void BeginOpening()
@@ -550,7 +486,7 @@ public class PopupManager : MonoBehaviour
             messageFader.FadeOut(1f, 0.5f, MessageFadedForProceed);
             ZoomBounceOutIcon(0.7f);
             FadeOutIcon(0.7f);
-            SetIconSelected(true, icon);
+            SetArrowSelected(true);
         }
         else
         {
@@ -578,7 +514,7 @@ public class PopupManager : MonoBehaviour
             messageFader.FadeOut(1f, 0.5f);
             ZoomBounceOutIcon(0.7f);
             FadeOutIcon(0.7f);
-            SetIconSelected(true, icon);
+            SetArrowSelected(true);
         }
         else
         {
@@ -601,7 +537,7 @@ public class PopupManager : MonoBehaviour
 
         bool callFlow = false;
         if (messages[currentIndex].type == Message.Type.Info)
-            icon = (IsCurrentIndexLast()) ? Icon.Box : Icon.Arrow;
+            icon = Icon.Arrow;
         else
         {
             if (messages[currentIndex].promptSuccess)
@@ -614,7 +550,7 @@ public class PopupManager : MonoBehaviour
                 icon = Icon.Dots;
         }
 
-        SetIconSelected(false, icon);
+        SetArrowSelected(false);
         ApplyIcon(0f);
         FadeInIcon(0.5f);
         if (icon == Icon.Check)
