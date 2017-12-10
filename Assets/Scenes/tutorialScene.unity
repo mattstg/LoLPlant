@@ -2048,7 +2048,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 0d802c5da3a9f3041aa60925845cc3df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0df40edb030026e47b87ba431b33ae4c, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3497,7 +3497,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 0d802c5da3a9f3041aa60925845cc3df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0df40edb030026e47b87ba431b33ae4c, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -5030,6 +5030,11 @@ MonoBehaviour:
   boxZoomBouncer: {fileID: 2103908766}
   checkZoomBouncer: {fileID: 390434938}
   nextButtons: []
+  arrowImage: {fileID: 785626089}
+  boxImage: {fileID: 2103908770}
+  arrowSelectedSprite: {fileID: 21300000, guid: e68db6101721a6744afbded8928958a0,
+    type: 3}
+  boxSelectedSprite: {fileID: 21300000, guid: e68db6101721a6744afbded8928958a0, type: 3}
 --- !u!1 &1155897444
 GameObject:
   m_ObjectHideFlags: 0
@@ -9026,7 +9031,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 0d802c5da3a9f3041aa60925845cc3df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0df40edb030026e47b87ba431b33ae4c, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

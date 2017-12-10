@@ -85,7 +85,7 @@ public class ZoomBouncer : MonoBehaviour
         }
     }
 
-    public void ZoomBounceOut(float duration = 1f, float delay = 0f, float peakScale = 1.25f)
+    public void ZoomBounceOut(float duration = 1f, float delay = 0f, float peakScale = 1.4f)
     {
         type = Type.Out;
         delayDuration = delay;
