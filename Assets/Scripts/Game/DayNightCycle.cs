@@ -54,6 +54,11 @@ public class DayNightCycle : MonoBehaviour
         SpriteTinter.Instance.UpdateSpriteTints(1f - Mathf.Pow(illumination - 1f, 2f), playerIlluminationOffset);
     }
 
+    public void SetTime(float _time)
+    {
+        time = _time;
+    }
+
     public void TogglePause()
     {
         GV.SetPause(!GV.Paused);

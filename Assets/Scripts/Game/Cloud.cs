@@ -35,7 +35,7 @@ public class Cloud : MonoBehaviour {
         this.transform.Translate(0, altitude - this.transform.localPosition.y, 0);
     }
 
-    public void Refresh(float dt)
+    public virtual void Refresh(float dt)
     {
         if (this.transform.localPosition.x >= travelRange.x) //if still in bounds, keep moving left
             this.transform.Translate(-speed * dt, 0, 0);

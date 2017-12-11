@@ -20,7 +20,8 @@ public class PlayerController : MonoBehaviour {
     float jumpHeldTime = 0; //Counter that increases while held
     bool isJumping = false;
     float mouseJumpTolerance = 1; //higher than that amt to jump
-
+    bool inputActive = true;
+    bool inputHardLock = false; //Use if you dont want popupmanager interfering
 
     public void Initialize()
     {
@@ -32,9 +33,22 @@ public class PlayerController : MonoBehaviour {
         //Create both input managers & link here
     }
 
+    public void SetInputActive(bool _setActive, bool hardLock = false)
+    {
+        if (hardLock)
+        {
+            inputHardLock = hardLock;
+            inputActive = _setActive;
+        }
+        else if(!inputHardLock) //&& !hardlock
+            inputActive = _setActive;
+        
+    }
+
     public virtual void Refresh(float dt)
     {
-        im.UpdateInput(dt); //update input
+        if(inputActive)
+            im.UpdateInput(dt); //update input
 		anim.Refresh(dt);
     }
 

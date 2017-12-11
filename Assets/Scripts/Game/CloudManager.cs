@@ -5,6 +5,7 @@ using UnityEngine;
 public class CloudManager : MonoBehaviour {
 
 	public List<Cloud> clouds;
+    bool cloudsVisible;
 
     public void Initialize()
     {
@@ -12,9 +13,16 @@ public class CloudManager : MonoBehaviour {
             c.Initialize();
     }
 
-    public void Refresh(float dt)
+    public void SetCloudsVisible(bool _setVisible)
     {
         foreach (Cloud c in clouds)
-            c.Refresh(dt);
+            c.gameObject.SetActive(_setVisible);
+    }
+
+    public void Refresh(float dt)
+    {
+        if(cloudsVisible)
+            foreach (Cloud c in clouds)
+                c.Refresh(dt);
     }
 }

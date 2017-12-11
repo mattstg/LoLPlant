@@ -12,6 +12,6 @@ public class TAFreezeChar : TAEvent
 
     public override void PerformEvent()
     {
-        (GV.ws.pc as TutorialPC).SetCharActive(setFrozen);
+        (GV.ws.pc as TutorialPC).SetInputActive(!setFrozen, true);
     }
 }

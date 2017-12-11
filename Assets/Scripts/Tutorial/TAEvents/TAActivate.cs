@@ -44,6 +44,9 @@ public class TAActivate : TAEvent
             case "Platforms":
                 GV.ws.platformManager.SetPlatformsActive(setActive);
                 break;
+            case "Clouds":
+                GV.ws.cloudManager.SetCloudsVisible(setActive);
+                break;
             case "Aphids":
                 GV.ws.aphidManager.SetAphidsActive(setActive);
                 break;
