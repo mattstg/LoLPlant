@@ -78,12 +78,12 @@ public class Platform : MonoBehaviour, CastsShadow {
 
     public void RegisterStaticShadow()
     {
-        GV.ws.shadowManager.RegisterStaticShadow(GetEdges());
+        GV.ws.shadowManager.RegisterShadow(this,false);
     }
 
     public void RegisterDynamicShadow()
     {
-        GV.ws.shadowManager.RegisterDynamicShadow(this);
+        GV.ws.shadowManager.RegisterShadow(this, true);
     }
 
     public Vector2[] RetrieveShadowEdges()

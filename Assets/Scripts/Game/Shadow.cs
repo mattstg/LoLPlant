@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Shadow : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public CastsShadow parentObj;
+
+    public void Initialize(CastsShadow _parent)
+    {
+        parentObj = _parent;
+    }
+
+	public void Refresh()
+    {
+
+    }
 }

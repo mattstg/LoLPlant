@@ -7,5 +7,4 @@ public interface CastsShadow
     void RegisterStaticShadow();
     void RegisterDynamicShadow();
     Vector2[] RetrieveShadowEdges();
-
 }
