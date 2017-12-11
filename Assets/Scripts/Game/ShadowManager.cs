@@ -22,7 +22,7 @@ public class ShadowManager : MonoBehaviour {
         
     }
 
-    public void RegisterShadow(CastsShadow cs, bool isStatic)
+    public void RegisterShadow(CastsShadow cs, bool isStatic, Transform parentTransform)
     {
         //step one, create shadow object for it
         GameObject go = Instantiate(Resources.Load("Prefabs/Shadow")) as GameObject;
@@ -32,6 +32,7 @@ public class ShadowManager : MonoBehaviour {
         else
             shadow.InitializeAsStatic(cs, cs.RetrieveShadowEdges());
         shadows.Add(shadow);
+        go.transform.SetParent(parentTransform);
     }
 
     //Dynamic shadows need to be removed 
