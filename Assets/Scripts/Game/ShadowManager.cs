@@ -5,11 +5,10 @@ using UnityEngine;
 public class ShadowManager : MonoBehaviour {
 
     //Tracks all CastsShadows and creates shadows
-    List<Shadow> shadows;
+    List<Shadow> shadows = new List<Shadow>();
 
     public void Initialize()
     {
-        shadows = new List<Shadow>();
         //At this point, shadows have not called Awake yet, so no shadows
     }
 

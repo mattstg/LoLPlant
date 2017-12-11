@@ -7,28 +7,47 @@ public class Shadow : MonoBehaviour {
     float leftWall = -1 * ((GV.worldWidth / 2) + GV.shadowBuffer); //left shadow cutoff
     float rightWall = (GV.worldWidth / 2) + GV.shadowBuffer; //right shadow cutoff
     float floor = -1 * ((GV.worldHeight / 2) + GV.shadowBuffer); //bottom shadow cutoff
-    float theta = GV.ws.dnc.groundToSunAngle;
+    
     float angleBuffer = GV.sunAngleBuffer;
-    Vector2[] vertices = new Vector2[4];
+    Vector3[] vertices = new Vector3[4];
+    Mesh mesh;
+    float theta;
 
     public CastsShadow parentObj;
     Vector2[] staticEdges;
     bool isStatic;
 
+    
+
     public void InitializeAsStatic(CastsShadow _parent,Vector2[] _staticEdges)
     {
+        theta = GV.ws.dnc.groundToSunAngle;
         staticEdges = _staticEdges;
         parentObj = _parent;
         isStatic = true;
         vertices[0] = staticEdges[0];
         vertices[1] = staticEdges[1];
-
+        SetupMesh();
     }
 
     public void Initialize(CastsShadow _parent)
     {
+        theta = GV.ws.dnc.groundToSunAngle;
         parentObj = _parent;
         isStatic = false;
+        SetupMesh();
+    }
+
+    private void SetupMesh()
+    {
+        Renderer rend = this.GetComponent<MeshRenderer>();
+        rend.sortingLayerName = "Shadows";
+
+        mesh = this.GetComponent<MeshFilter>().mesh;
+        int[] triangles = new int[6] { 2, 0, 3, 0, 1, 3 };
+        Vector3[] zeroVertices = new Vector3[4];
+        mesh.triangles = triangles;
+        mesh.vertices = zeroVertices;
     }
 
 	public void Refresh()
@@ -56,6 +75,7 @@ public class Shadow : MonoBehaviour {
                 vertices[3] = GetVertex(vertices[1], m);
             }
         }
+        mesh.vertices = vertices;
         
     }
 
