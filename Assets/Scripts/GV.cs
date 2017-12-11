@@ -27,6 +27,12 @@ public class GV {
     public static readonly Vector2 cloudTravelRange = new Vector2(-20f, 20f); //x value is background x value past which a cloud will respawn on right; y value is background x value where cloud will respawn
     public static readonly float sortingLayerCriticalValue = 1.3f; //clouds moving faster than this speed will pass in front of mountains; slower ones will pass behind
 
+    public static readonly float worldWidth = 40.96f; //these dimension values do not actually control the world size; they just reflect it in order to inform other stuff like shadows
+    public static readonly float worldHeight = 23.04f;
+    public static readonly float shadowBuffer = 5f;
+    public static readonly float sunAngleBuffer = 2; 
+
+
     public static bool Paused = false;
     public static bool ClockStopped = false;
 
