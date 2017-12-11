@@ -75,7 +75,7 @@ public class Platform : MonoBehaviour, CastsShadow {
 
     public void RegisterShadow(bool isStatic)
     {
-        GV.ws.shadowManager.RegisterShadow(this, isStatic);
+        GV.ws.shadowManager.RegisterShadow(this, isStatic, transform);
     }
     
     public Vector2[] RetrieveShadowEdges()

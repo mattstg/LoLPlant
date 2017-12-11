@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour
 {
+    public bool clockActive = true;
 
     public float time = 0f;
     public float normalTime = 0f;
@@ -21,32 +22,41 @@ public class DayNightCycle : MonoBehaviour
 
     public Transform sky;
 
+    public static readonly float normalTimeOffset = 4f;
+    public static readonly float secondsPerHour = 7.5f;
+    public static readonly int hoursPerDay = 24;
+    public static readonly int sunriseHour = 4;
+    public static readonly int sundownHour = 20;
 
-    public void Initialize()
+    public void Initialize(bool _clockActive = true)
     {
-
+        clockActive = _clockActive;
     }
 
     public void Refresh(float dt)
     {
-        if (!GV.ClockStopped)
+        if (clockActive)
+        {
             time += dt;
-        normalTime = (time / GV.SecondsPerHour) + GV.NormalTimeOffset;
-        day = (int)(normalTime / GV.HoursPerDay);
-        hour = (int)(normalTime % GV.HoursPerDay);
-        hour12 = (int)(normalTime % (GV.HoursPerDay * 0.5f));
+            UpdateDNC();
+        }
+    }
+
+    public void UpdateDNC()
+    {
+        normalTime = (time / secondsPerHour) + normalTimeOffset;
+        day = (int)(normalTime / hoursPerDay);
+        hour = (int)(normalTime % hoursPerDay);
+        hour12 = (int)(normalTime % (hoursPerDay * 0.5f));
         if (hour12 == 0)
-            hour12 = (int)(GV.HoursPerDay * 0.5f);
-        if (hour < GV.HoursPerDay * 0.5f)
-            isMorning = true;
-        else
-            isMorning = false;
+            hour12 = (int)(hoursPerDay * 0.5f);
+        isMorning = (hour < hoursPerDay * 0.5f);
 
         sunPosition = GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 1f, -0.5f);
         groundToSunAngle = GV.GetAngle(sunPosition);
         groundToSunMagnitude = GV.GetDistance(sunPosition);
 
-        ambientSunLevel = Mathf.Min(Mathf.Max(sunPosition.y, 0) * (2f/3f) * 1.2f, 1f);
+        ambientSunLevel = Mathf.Min(Mathf.Max(sunPosition.y, 0) * (2f / 3f) * 1.2f, 1f);
 
         sky.localPosition = new Vector3(sky.localPosition.x, GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 12.4f, 0f).y, sky.localPosition.z);
 
@@ -78,8 +88,13 @@ public class DayNightCycle : MonoBehaviour
         }
     }
 
-    public void ToggleClockStopped()
+    public void ToggleClockActive()
     {
-        GV.SetClockStopped(!GV.ClockStopped);
+        SetClockActive(!clockActive);
+    }
+
+    public void SetClockActive(bool _clockActive)
+    {
+        clockActive = _clockActive;
     }
 }

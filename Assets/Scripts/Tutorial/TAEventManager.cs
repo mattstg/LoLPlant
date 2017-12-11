@@ -37,7 +37,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TAActivate("DashboardNone", true));
                 taQueue.Enqueue(new TAActivate("Aphids", false));
                 //taQueue.Enqueue(new TAActivate("Platforms", false));
-                taQueue.Enqueue(new TAFreezeChar(true));
+                taQueue.Enqueue(new TAFreezeChar(true,false));
                 taQueue.Enqueue(new TATimer("Timer", 2));
                 taQueue.Enqueue(new TATrigger("Timer"));
                 taQueue.Enqueue(new TACreatePopup(new Message("SunReq")));
@@ -45,7 +45,6 @@ public class TAEventManager
                 taQueue.Enqueue(new TACreatePopup(new Message("ControlsKey")));
                 taQueue.Enqueue(new TACreatePopup(new Message("ControlsTouch")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
-                taQueue.Enqueue(new TAFreezeChar(false));
                 taQueue.Enqueue(new TAActivate("DashboardSun", true));
                 taQueue.Enqueue(new TATrigger("Sun"));
                 taQueue.Enqueue(new TACreatePopup(new Message("SunMeter")));
