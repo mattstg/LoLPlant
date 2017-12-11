@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class CloudManager : MonoBehaviour {
 
-	public List<Cloud> clouds;
-    bool cloudsVisible;
+	List<Cloud> clouds;
+    bool cloudsVisible = true;
 
     public void Initialize()
     {
-        foreach (Cloud c in clouds)
+
+        foreach (Transform child in transform)
+        {
+            Cloud c = child.GetComponent<Cloud>();
+            clouds.Add(c);
             c.Initialize();
+        }
     }
 
     public void SetCloudsVisible(bool _setVisible)
