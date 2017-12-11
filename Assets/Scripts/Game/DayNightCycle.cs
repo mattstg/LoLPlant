@@ -64,9 +64,11 @@ public class DayNightCycle : MonoBehaviour
         SpriteTinter.Instance.UpdateSpriteTints(1f - Mathf.Pow(illumination - 1f, 2f), playerIlluminationOffset);
     }
 
-    public void SetTime(float _time)
+    public void SetTime(int _day, int _hour)
     {
-        time = _time;
+        float nTime = _day * hoursPerDay + _hour;
+        time = (nTime - normalTimeOffset) * secondsPerHour;
+        UpdateDNC();
     }
 
     public void TogglePause()

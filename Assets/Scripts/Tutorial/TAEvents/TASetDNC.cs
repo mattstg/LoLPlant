@@ -7,11 +7,15 @@ public class TASetDNC : TAEvent
     float timer;
     string eventName;
 
-    public TASetDNC(bool freeze, float setTime = -1) : base(TAEventType.Action)
+    public TASetDNC(bool clockActive, int hour = -1, int day = -1) : base(TAEventType.Action)
     {
-        if (setTime >= 0)
-            GV.ws.dnc.SetTime(setTime);
-        GV.ws.dnc.SetClockActive(!freeze);
+        if (hour >= 0)
+        {
+            if (day < 0)
+                day = GV.ws.dnc.day;
+            GV.ws.dnc.SetTime(day, hour);
+        }
+        GV.ws.dnc.SetClockActive(clockActive);
     }
 
     public override void PerformEvent()

@@ -33,7 +33,7 @@ public class TAEventManager
         {
             case 0:
                 //
-                taQueue.Enqueue(new TASetDNC(true));
+                taQueue.Enqueue(new TASetDNC(false, 12, 0));
                 taQueue.Enqueue(new TAActivate("DashboardNone", true));
                 taQueue.Enqueue(new TAActivate("Aphids", false));
                 //taQueue.Enqueue(new TAActivate("Platforms", false));
