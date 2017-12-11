@@ -11,7 +11,7 @@ public class TASetDNC : TAEvent
     {
         if (setTime >= 0)
             GV.ws.dnc.SetTime(setTime);
-        GV.SetClockStopped(freeze);
+        GV.ws.dnc.SetClockActive(!freeze);
     }
 
     public override void PerformEvent()

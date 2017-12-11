@@ -10,12 +10,6 @@ public class GV {
     public static bool Sound_Active = true;
     public static readonly float PlatformSunblock = .3f;
 
-    public static readonly float NormalTimeOffset = 4f;
-    public static readonly float SecondsPerHour = 5f;
-    public static readonly int HoursPerDay = 24;
-    public static readonly int SunriseHour = 4;
-    public static readonly int SundownHour = 20;
-
     public static readonly float WaterDepletionRate = 0.005f;
     public static readonly float SpinnerSpeed = 2f;
     public static readonly float FoodMaximum = 60f;
@@ -32,18 +26,11 @@ public class GV {
     public static readonly float shadowBuffer = 5f;
     public static readonly float sunAngleBuffer = 2; 
 
-
     public static bool Paused = false;
-    public static bool ClockStopped = false;
 
     public static void SetPause(bool _paused)
     {
         Paused = _paused;
-    }
-
-    public static void SetClockStopped(bool _clockStopped)
-    {
-        ClockStopped = _clockStopped;
     }
 
     public static float SunFactor(float sun)   // arg range: [0, 1];  return range: [0, 1]
@@ -94,7 +81,7 @@ public class GV {
 
     public static float GetSunRotation(float normalTime)
     {
-        return normalTime * (-360f / (float)GV.HoursPerDay) - 90f;
+        return normalTime * (-360f / (float)DayNightCycle.hoursPerDay) - 90f;
     }
 
     public static Vector2 GetRadialCoordinates(float angle, float radius, float verticalOffset)
