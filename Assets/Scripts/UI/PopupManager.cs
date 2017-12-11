@@ -466,6 +466,9 @@ public class PopupManager : MonoBehaviour
         popupParent.gameObject.SetActive(true);
         panelFader.FadeIn(1f);
         messageFader.FadeIn(1f, 0.5f);
+
+        if (messages[currentIndex].type == Message.Type.Info)
+            GV.ws.pc.SetInputActive(false);
         //messageZoomBouncer.ZoomBounceIn(1.0f, 0f, 1.03f);
     }
 
@@ -497,6 +500,9 @@ public class PopupManager : MonoBehaviour
             FadeInIcon(0.3f, 0f, CheckFadedIn);
             ZoomBounceInIcon(0.7f);
         }
+
+        if (messages[currentIndex].type == Message.Type.Info)
+            GV.ws.pc.SetInputActive(false);
     }
 
     private void BeginClosing()
@@ -525,6 +531,8 @@ public class PopupManager : MonoBehaviour
             FadeInIcon(0.3f, 0f, CheckFadedIn);
             ZoomBounceInIcon(0.7f);
         }
+
+        GV.ws.pc.SetInputActive(true);
     }
 
     private void HasOpened()
@@ -563,9 +571,13 @@ public class PopupManager : MonoBehaviour
         }
         ApplyInputState(messages[currentIndex].type == Message.Type.Info);
 
-
         if (callFlow)
             Flow();
+
+        if (messages[currentIndex].type == Message.Type.Info)
+            GV.ws.pc.SetInputActive(false);
+        else
+            GV.ws.pc.SetInputActive(true);
     }
 
     private void HasClosed()
