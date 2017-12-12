@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour {
     float mouseJumpTolerance = 1; //higher than that amt to jump
     bool inputActive = true;
     bool inputHardLock = false; //Use if you dont want popupmanager interfering
+    float timeSinceInitialJumpBurst = 0;
+    readonly float MaxTimeBetweenJumpBurst = 1;
 
     public void Initialize()
     {
@@ -50,6 +52,7 @@ public class PlayerController : MonoBehaviour {
         if(inputActive)
             im.UpdateInput(dt); //update input
 		anim.Refresh(dt);
+        timeSinceInitialJumpBurst += dt;
     }
 
     public float RaycastToSun() //Efficency of raycast to the sun
@@ -76,24 +79,29 @@ public class PlayerController : MonoBehaviour {
 		if (dir.x != 0)
 			Move (dir.x, _dt);
 		if (dir.y != 0)
-            if(jumpHeldTime < jumpMaxHoldTime)
+            
                 Jump(dir.y, _dt);
     }
 
 	public void Jump(float direction, float _dt){
-        float jumpForce;
         
-        if (isJumping)
+        if (jumpHeldTime < jumpMaxHoldTime)
         {
-            jumpForce = jumpForcePerSec * _dt;
-            jumpHeldTime += _dt;
+            float jumpForce = 0;
+            if (isGrounded && !isJumping && timeSinceInitialJumpBurst >= MaxTimeBetweenJumpBurst)
+            {
+                timeSinceInitialJumpBurst = 0;
+                jumpForce = jumpForceInitial;
+                isJumping = true;
+            }
+            else
+            {
+                jumpForce = jumpForcePerSec * _dt;
+                jumpHeldTime += _dt;
+            }
+            body.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
-        else
-        {
-            jumpForce = jumpForceInitial;
-            isJumping = true;
-        }
-        body.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+        
     }
 
 	public void Move(float direction, float _dt)
@@ -106,15 +114,16 @@ public class PlayerController : MonoBehaviour {
 
     public void OnCollisionEnter2D(Collision2D coli)
     {
-        Debug.Log("Colliding with: " + coli.gameObject.name + " whose tag is " + coli.gameObject.tag);
         switch(coli.gameObject.tag)
         {
             case "Platform":
+                Debug.Log("touched platform: " + coli.gameObject.name);
                 TouchedGround();
                 break;
             case "Water":
                 break;
             case "Aphid":
+                Debug.Log("aphid touch");
                 TouchedGround();
                 if (!coli.gameObject.GetComponent<Aphid>().isOutCold)
                     GetHitByAphid(coli.gameObject.transform);
@@ -124,6 +133,7 @@ public class PlayerController : MonoBehaviour {
 
     private void TouchedGround()
     {
+        Debug.Log("Touched ground");
         isGrounded = true;
         isJumping = false;
         jumpHeldTime = 0;
@@ -135,27 +145,16 @@ public class PlayerController : MonoBehaviour {
         Debug.Log("Get hit by aphid");
     }
 
-    public void OnTriggerEnter2D(Collider2D coli)
-    {
-        switch (coli.gameObject.tag)
-        {
-            case "Aphid":
-                coli.gameObject.GetComponent<Aphid>().HoppedOn();
-                break;
-        }
-    }
-
     public virtual void OnCollisionExit2D(Collision2D coli)
     {
+        Debug.Log("Exit collider: " + coli.gameObject.name);
         switch (coli.gameObject.tag)
         {
 		case "Platform":
 				isGrounded = false;
 				anim.Grounded (false);
                 break;
-
         }
-
     }
 
 
