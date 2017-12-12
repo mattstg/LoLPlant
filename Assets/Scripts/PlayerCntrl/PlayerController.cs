@@ -53,6 +53,10 @@ public class PlayerController : MonoBehaviour {
             im.UpdateInput(dt); //update input
 		anim.Refresh(dt);
         timeSinceInitialJumpBurst += dt;
+		if (isGrounded)
+			body.drag = 0.5f;
+		else
+			body.drag = 0f;
     }
 
     public float RaycastToSun() //Efficency of raycast to the sun
@@ -120,6 +124,9 @@ public class PlayerController : MonoBehaviour {
             case "Platform":
                 Debug.Log("touched platform: " + coli.gameObject.name);
                 TouchedGround();
+				Platform plat = coli.gameObject.GetComponent<Platform> ();
+				if(plat != null)
+					plat.AddPlayer (this.gameObject);
                 break;
             case "Water":
                 break;
@@ -152,9 +159,12 @@ public class PlayerController : MonoBehaviour {
         switch (coli.gameObject.tag)
         {
 		case "Platform":
-				isGrounded = false;
-				anim.Grounded (false);
-                break;
+			isGrounded = false;
+			anim.Grounded (false);
+			Platform plat = coli.gameObject.GetComponent<Platform> ();
+			if(plat != null)
+				plat.RemovePlayer ();
+            break;
         }
     }
 
