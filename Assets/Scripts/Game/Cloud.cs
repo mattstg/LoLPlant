@@ -15,7 +15,7 @@ public class Cloud : MonoBehaviour {
     float altitude;
 
 
-    public void Initialize()
+    public virtual void Initialize()
     {
         sprite = this.GetComponent<SpriteRenderer>();
 

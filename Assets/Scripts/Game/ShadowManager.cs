@@ -27,9 +27,10 @@ public class ShadowManager : MonoBehaviour {
         GameObject go = Instantiate(Resources.Load("Prefabs/Shadow")) as GameObject;
         Shadow shadow = go.GetComponent<Shadow>();
         if (isStatic)
-            shadow.Initialize(cs);
-        else
             shadow.InitializeAsStatic(cs, cs.RetrieveShadowEdges());
+        else
+            shadow.Initialize(cs);
+        
         shadows.Add(shadow);
         go.transform.SetParent(parentTransform);
     }

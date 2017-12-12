@@ -54,7 +54,8 @@ public class Platform : MonoBehaviour, CastsShadow {
         moves = (numOfWP > 1);
 
         if (castsShadow)
-            RegisterShadow(!moves);
+            RegisterShadow(true);
+        //RegisterShadow(!moves);
     }
 
 	public void Refresh(float dt)
