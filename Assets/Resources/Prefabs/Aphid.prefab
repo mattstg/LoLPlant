@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 114327019569929966}
   - component: {fileID: 61273921027286024}
   - component: {fileID: 114392795025508980}
+  - component: {fileID: 61590311267504204}
   m_Layer: 0
   m_Name: Aphid
   m_TagString: Aphid
@@ -53,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1905990319748504}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.767, y: 0, z: 0}
+  m_LocalPosition: {x: -12.784, y: 4.501, z: 0}
   m_LocalScale: {x: 0.076357104, y: 0.09226796, z: 1}
   m_Children:
   - {fileID: 4831571889106716}
@@ -85,10 +86,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.955, y: 1.2345941}
+  m_Offset: {x: -0.35, y: 0.64}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 5.91, y: 3.27}
     newSize: {x: 8, y: 6}
     adaptiveTilingThreshold: 0.5
@@ -96,7 +97,32 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.91, y: 2.4691882}
+  m_Size: {x: 5.23, y: 0.28}
+  m_EdgeRadius: 0
+--- !u!61 &61590311267504204
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1905990319748504}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.59}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.91, y: 3.27}
+    newSize: {x: 8, y: 6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.91, y: 1.95}
   m_EdgeRadius: 0
 --- !u!114 &114327019569929966
 MonoBehaviour:

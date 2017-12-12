@@ -9,20 +9,22 @@ public class Aphid : MonoBehaviour {
     float timeToCrossPlatform = 3;  //Time to cross platform regardless of size
     float outCold = 0;
     float outColdMax = 3;
+	bool collidersOn = true;
     bool headingRight = true;
-    Vector3 offset;
     float progress = 0;
     public bool isOutCold { get { return outCold > 0; } }
     GameObject koAnimation;
+
 
     
     public void Initialize(Platform _parentPlatform)
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         parentPlatform = _parentPlatform;
-        offset = (headingRight) ? parentPlatform.GetSidePoint(headingRight): parentPlatform.GetSidePoint(!headingRight);
-        transform.position = Vector3.Lerp(parentPlatform.GetSidePoint(headingRight), parentPlatform.GetSidePoint(!headingRight), progress);
-        koAnimation = transform.GetChild(0).gameObject;
+		headingRight = Random.Range (0, 2) == 0;
+		sr.flipX = !headingRight;
+		transform.position = Vector3.Lerp(parentPlatform.GetSidePoint(headingRight) + new Vector2(0,transform.localScale.y/2), parentPlatform.GetSidePoint(!headingRight) + new Vector2(0,transform.localScale.y/2),progress);
+		koAnimation = transform.GetChild(0).gameObject;
     }
 
     public void HoppedOn()
@@ -32,6 +34,7 @@ public class Aphid : MonoBehaviour {
             Debug.Log("Hopped on Aphid");
             outCold = outColdMax;
             koAnimation.SetActive(true);
+			flopColliders ();
         }
     }
   
@@ -44,6 +47,7 @@ public class Aphid : MonoBehaviour {
             {
                 outCold = 0;
                 koAnimation.SetActive(false);
+				flopColliders ();
             }
         }
         else
@@ -53,14 +57,21 @@ public class Aphid : MonoBehaviour {
             {
                 progress = 0;
                 headingRight = !headingRight;
-				Flip ();
+				sr.flipX = !headingRight;
             }
         }
-        transform.position = Vector3.Lerp(parentPlatform.GetSidePoint(headingRight), parentPlatform.GetSidePoint(!headingRight), progress);
+		transform.position = Vector3.Lerp(parentPlatform.GetSidePoint(headingRight) + new Vector2(0,transform.localScale.y/2), parentPlatform.GetSidePoint(!headingRight) + new Vector2(0,transform.localScale.y/2), progress);
     }
-
-	public void Flip(){
-		Vector3 newScale = gameObject.transform.localScale;
-		gameObject.transform.localScale = new Vector3 (newScale.x * -1, newScale.y, newScale.z);
+		
+	public void OnTriggerEnter2D(Collider2D other){
+		if(other.gameObject.GetComponent<PlayerController> () != null)
+			other.gameObject.GetComponent<PlayerController> ().GetHitByAphid(transform);
 	}
+
+	public void flopColliders(){
+		collidersOn = !collidersOn;
+		foreach (BoxCollider2D b in GetComponents<BoxCollider2D>())
+			b.enabled = collidersOn;
+	}
+
 }

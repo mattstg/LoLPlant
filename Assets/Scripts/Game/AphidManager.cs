@@ -38,6 +38,4 @@ public class AphidManager : MonoBehaviour {
             foreach (Aphid a in aphids)
                 a.Refresh(dt);
     }
-
-   
 }

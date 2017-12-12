@@ -130,12 +130,12 @@ public class PlayerController : MonoBehaviour {
                 break;
             case "Water":
                 break;
-            case "Aphid":
-                Debug.Log("aphid touch");
-                TouchedGround();
-                if (!coli.gameObject.GetComponent<Aphid>().isOutCold)
-                    GetHitByAphid(coli.gameObject.transform);
-                break;
+		case "Aphid":
+			Debug.Log ("aphid touch");
+			TouchedGround ();
+			if (!coli.gameObject.GetComponent<Aphid> ().isOutCold)
+				coli.gameObject.GetComponent<Aphid> ().HoppedOn ();
+            break;
         }
     }
 
@@ -151,7 +151,8 @@ public class PlayerController : MonoBehaviour {
 
     public void GetHitByAphid(Transform aphidTransform)
     {
-        Debug.Log("Get hit by aphid");
+		//body.velocity.Set (0, 0);
+		body.velocity =  ((transform.position - aphidTransform.position).normalized * 3);
     }
 
     public virtual void OnCollisionExit2D(Collision2D coli)
@@ -168,6 +169,4 @@ public class PlayerController : MonoBehaviour {
             break;
         }
     }
-
-
 }
