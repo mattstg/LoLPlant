@@ -66,6 +66,8 @@ public class DayNightCycle : MonoBehaviour
 
     public void SetTime(int _day, int _hour)
     {
+        _day = _day % 7;
+        _hour = _hour % hoursPerDay;
         float nTime = _day * hoursPerDay + _hour;
         time = (nTime - normalTimeOffset) * secondsPerHour;
         UpdateDNC();
