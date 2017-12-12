@@ -6,7 +6,7 @@ using UnityEngine;
 public class Platform : MonoBehaviour, CastsShadow {
 
     public bool hasAphid;
-    public bool castsShadow;
+    public bool castsShadow = true;
 
     public float speed = 1;
     int curWP = 0;

@@ -11,17 +11,12 @@ public class Shadow : MonoBehaviour {
     float angleBuffer = GV.sunAngleBuffer;
     Vector3[] vertices = new Vector3[4];
     Mesh mesh;
-    float theta;
-
     public CastsShadow parentObj;
     Vector2[] staticEdges;
     bool isStatic;
 
-    
-
     public void InitializeAsStatic(CastsShadow _parent,Vector2[] _staticEdges)
     {
-        theta = GV.ws.dnc.groundToSunAngle;
         staticEdges = _staticEdges;
         parentObj = _parent;
         isStatic = true;
@@ -32,7 +27,6 @@ public class Shadow : MonoBehaviour {
 
     public void Initialize(CastsShadow _parent)
     {
-        theta = GV.ws.dnc.groundToSunAngle;
         parentObj = _parent;
         isStatic = false;
         SetupMesh();
@@ -44,17 +38,15 @@ public class Shadow : MonoBehaviour {
         rend.sortingLayerName = "Shadows";
 
         mesh = this.GetComponent<MeshFilter>().mesh;
-        int[] triangles = new int[6] { 2, 0, 3, 0, 1, 3 };
-        Vector3[] zeroVertices = new Vector3[4];
+        int[] triangles = new int[6] { 2, 1, 3, 1, 2, 0 };
         mesh.triangles = triangles;
-        mesh.vertices = zeroVertices;
     }
 
 	public void Refresh()
     {
-        if(theta > angleBuffer && theta < 180 - angleBuffer) //shadows stop updating when the sun gets close to horizon
+        float theta = GV.ws.dnc.groundToSunAngle;
+        if ((theta > angleBuffer) && (theta < 180 - angleBuffer)) //shadows stop updating when the sun gets close to horizon
         {
-            
             if(!isStatic)
             {
                 vertices[0] = parentObj.RetrieveShadowEdges()[0];
@@ -70,13 +62,12 @@ public class Shadow : MonoBehaviour {
             }
             else if(!(theta == 90))
             {
-                float m = Mathf.Tan(theta); //slope of sunlight
+                float m = Mathf.Tan(theta * Mathf.Deg2Rad); //slope of sunlight
                 vertices[2] = GetVertex(vertices[0], m);
                 vertices[3] = GetVertex(vertices[1], m);
             }
         }
         mesh.vertices = vertices;
-        
     }
 
     private Vector2 GetVertex(Vector2 vertexAbove, float m)

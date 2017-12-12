@@ -82,6 +82,9 @@ TagManager:
   - name: grass front
     uniqueID: 234517999
     locked: 0
+  - name: Shadows
+    uniqueID: 2686338415
+    locked: 0
   - name: Popup
     uniqueID: 2843504725
     locked: 0
