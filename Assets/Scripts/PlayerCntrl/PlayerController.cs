@@ -90,6 +90,7 @@ public class PlayerController : MonoBehaviour {
             float jumpForce = 0;
             if (isGrounded && !isJumping && timeSinceInitialJumpBurst >= MaxTimeBetweenJumpBurst)
             {
+				anim.Jump ();
                 timeSinceInitialJumpBurst = 0;
                 jumpForce = jumpForceInitial;
                 isJumping = true;
