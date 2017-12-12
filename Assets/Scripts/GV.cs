@@ -23,7 +23,7 @@ public class GV {
 
     public static readonly float worldWidth = 40.96f; //these dimension values do not actually control the world size; they just reflect it in order to inform other stuff like shadows
     public static readonly float worldHeight = 23.04f;
-    public static readonly float shadowBuffer = 5f;
+    public static readonly float shadowBuffer = 20f;
     public static readonly float sunAngleBuffer = 2; 
 
     public static bool Paused = false;
