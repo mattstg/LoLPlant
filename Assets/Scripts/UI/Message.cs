@@ -13,12 +13,22 @@ public class Message
     public Position position;
     public bool promptSuccess;
 
-    public Message(string messageName, Type messageType = Type.Info, Position messagePosition = Position.Bottom)
+    public Message(string _name, Type _type = Type.Info, Position _position = Position.Bottom)
     {
-        name = messageName;
-        message = LangDict.Instance.GetText(name);
-        type = messageType;
-        position = messagePosition;
+        Initialize(_name, LangDict.Instance.GetText(_name), _type, _position);
+    }
+
+    public Message(string _name, string _message, Type _type = Type.Info, Position _position = Position.Bottom)
+    {
+        Initialize(_name, _message, _type, _position);
+    }
+
+    public void Initialize(string _name, string _message, Type _type, Position _position)
+    {
+        name = _name;
+        message = _message;
+        type = _type;
+        position = _position;
         promptSuccess = false;
     }
 }
