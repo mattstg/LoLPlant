@@ -8,7 +8,7 @@ public class AnimationController : MonoBehaviour {
 	private static float _airTimeUntilFall = 0.75f;
 	private static float _timeBetweenJumpAnims = 1.5f;
 	private static float _moveAnimSpeedMin = 0.75f;
-	private static float _moveAnimSpeedModifier = 4;
+	private static float _moveAnimSpeedModifier = 2;
 	private static float _moveAnimSpeedDampener = 2;
 	private static float _moveDampener = 5;
 	private static bool facingRight = true;
@@ -42,8 +42,8 @@ public class AnimationController : MonoBehaviour {
 		else
 			fallTimer = 0;
 		jumpTimer += dt;
-		Velo (player.velocity.x, player.velocity.y);
-		MoveSpeed (Mathf.Clamp(player.velocity.x / _moveAnimSpeedDampener, _moveAnimSpeedMin, _moveAnimSpeedModifier));
+		Velo (Mathf.Abs(player.velocity.x), player.velocity.y);
+		MoveSpeed (Mathf.Clamp(Mathf.Abs(player.velocity.x) / _moveAnimSpeedDampener, _moveAnimSpeedMin, _moveAnimSpeedModifier));
 		Move (Mathf.Abs(player.velocity.x) / _moveDampener);
 		if ((facingRight && player.velocity.x < -0.05f) || (!facingRight && player.velocity.x > 0.05f))
 			Flip ();
