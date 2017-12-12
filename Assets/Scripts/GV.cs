@@ -8,7 +8,7 @@ public class GV {
     public static MainScript ms;
 
     public static bool Sound_Active = true;
-    public static readonly float PlatformSunblock = .3f;
+    public static readonly float PlatformSunblock = .5f;
 
     public static readonly float WaterDepletionRate = 0.005f;
     public static readonly float SpinnerSpeed = 2f;
@@ -145,6 +145,23 @@ public class GV {
             return Mathf.Clamp(((1f - k) / 2f) * Mathf.Cos((Mathf.PI * progress) / h) + ((1f + k) / 2f), 0f, k);
         else
             return Mathf.Clamp(a * Mathf.Pow(progress - h, 2f) + k, 0f, k);
+    }
+
+    public static Vector2 RadianToVector2(float radian)
+    {
+        return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
+    }
+    public static Vector2 RadianToVector2(float radian, float length)
+    {
+        return RadianToVector2(radian) * length;
+    }
+    public static Vector2 DegreeToVector2(float degree)
+    {
+        return RadianToVector2(degree * Mathf.Deg2Rad);
+    }
+    public static Vector2 DegreeToVector2(float degree, float length)
+    {
+        return RadianToVector2(degree * Mathf.Deg2Rad) * length;
     }
 
     public static void SetAlpha(Color color, float alpha)

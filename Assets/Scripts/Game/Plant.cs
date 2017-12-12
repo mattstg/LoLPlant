@@ -9,6 +9,7 @@ public class Plant : MonoBehaviour {
 
     public float sun = 0;
     [HideInInspector] public float shadowFactor = 1f;
+    [HideInInspector] public int numOfShadowsBlocking = 0;
     [HideInInspector] public float sunFactor = 0;
     [HideInInspector] public float sunDamp = 0;
     [HideInInspector] private float sunVelocity = 0;
@@ -61,9 +62,11 @@ public class Plant : MonoBehaviour {
     public void UpdateSun(float dt)
     {
         //sun = Mathf.Clamp(sun, 0, 1);
+        if (numOfShadowsBlocking < 0)
+            numOfShadowsBlocking = 0;
+        shadowFactor = Mathf.Clamp01(Mathf.Pow(GV.PlatformSunblock, numOfShadowsBlocking)); //numOfShadowsBlocking
         sun = Mathf.Clamp(GV.ws.dnc.ambientSunLevel * shadowFactor, 0, 1);
         //sun = GV.ws.dnc.ambientSunLevel * (2f/3f);
-
         sunFactor = GV.SunFactor(sun);
         sunDamp = Mathf.SmoothDamp(sunDamp, sun, ref sunVelocity, dampTime, Mathf.Infinity, dt);
     }
