@@ -148,35 +148,6 @@ public class PopupManager : MonoBehaviour
             messages.AddRange(_messages);
         }
         Flow();
-
-        /*
-        if (messages.Count > 0 &&)
-            messages.AddRange(_messages);
-        else
-        {
-            messages = _messages;
-            currentIndex = 0;
-            messageText.text = messages[currentIndex].message;
-        }
-
-        //temp:
-        state = targetState = State.Open;
-        icon = Icon.Arrow;
-        popupParent.gameObject.SetActive(true);
-        messageText.gameObject.SetActive(true);
-        arrowFader.gameObject.SetActive(true);
-        panelFader.SetPresentAlpha(1f);
-        messageFader.SetPresentAlpha(1f);
-        arrowFader.SetPresentAlpha(1f);
-        //updatePosition = true;
-        updatePanel = true;
-        updateMessage = true;
-        updateMessageSpace = true;
-        updateIcon = true;
-
-        foreach (Message m in _messages)
-            Debug.Log("Popup: " + m.message);
-        */
     }
 
     public void Refresh(float dt)
@@ -223,7 +194,6 @@ public class PopupManager : MonoBehaviour
     private void UpdatePanel(float dt)
     {
         panelFader.UpdateFader(dt);
-        //popup position, messages[currentIndex].position
     }
 
     private void UpdateMessage(float dt)
@@ -248,7 +218,7 @@ public class PopupManager : MonoBehaviour
             msdVelocity = Vector2.zero;
             messageSpaceLE.minWidth = messageSpaceDimensions.x;
             messageSpaceLE.minHeight = messageSpaceDimensions.y;
-            //updateMessageSpace = false; //un-comment once flow is built
+            //updateMessageSpace = false;
         }
     }
 
@@ -469,7 +439,6 @@ public class PopupManager : MonoBehaviour
 
         if (messages[currentIndex].type == Message.Type.Info)
             GV.ws.pc.SetInputActive(false);
-        //messageZoomBouncer.ZoomBounceIn(1.0f, 0f, 1.03f);
     }
 
     private void BeginProceeding()
@@ -540,7 +509,7 @@ public class PopupManager : MonoBehaviour
         updatePosition = false;
         updatePanel = false;
         updateMessage = false;
-        updateMessageSpace = false;
+        updateMessageSpace = true; // false; //also, UpdateMessageSpace(): uncomment "updateMessageSpace = false;"
         updateIcon = true;
 
         bool callFlow = false;
