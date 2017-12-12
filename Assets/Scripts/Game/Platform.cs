@@ -15,7 +15,9 @@ public class Platform : MonoBehaviour, CastsShadow {
     public bool isStaticPlatform { get { return !moves; } }
     bool moves;
     Vector2[] edgeOffsets;
-   
+
+	private GameObject player;
+
     public Vector2[] GetEdges()
     {
         return new Vector2[] { edgeOffsets[0] + (Vector2)transform.position, edgeOffsets[1] + (Vector2)transform.position };
@@ -57,14 +59,27 @@ public class Platform : MonoBehaviour, CastsShadow {
 
 	public void Refresh(float dt)
     {
+		
         if (!moves)
             return;
-        transform.position = Vector2.MoveTowards(transform.position, wp[curWP], speed * dt);
-        if(ReachedDest(transform.position,wp[curWP]))
-        {
-            curWP++;
-            curWP %= numOfWP;
-        }
+		
+		if (player == null) {
+			transform.position = Vector2.MoveTowards (transform.position, wp [curWP], speed * dt);
+			if (ReachedDest (transform.position, wp [curWP])) {
+				curWP++;
+				curWP %= numOfWP;
+			}
+		} else {
+			Vector3 prevPos = transform.position;
+
+			transform.position = Vector2.MoveTowards (transform.position, wp [curWP], speed * dt);
+			Vector3 playersNewPos = player.transform.position + transform.position - prevPos;
+			player.transform.position = playersNewPos;
+			if (ReachedDest (transform.position, wp [curWP])) {
+				curWP++;
+				curWP %= numOfWP;
+			}
+		}
     }
 
     
@@ -82,4 +97,12 @@ public class Platform : MonoBehaviour, CastsShadow {
     {
         return GetEdges();
     }
+
+	public void AddPlayer(GameObject _player){
+		player = _player;
+	}
+
+	public void RemovePlayer(){
+		player = null;
+	}
 }
