@@ -16,6 +16,7 @@ public class GameFlow : Flow
         GV.ws.popupManager.Initialize();
         GV.ws.cloudManager.Initialize();
         GV.ws.shadowManager.Initialize();
+		GV.ws.aphidManager.Initialize();   
     }
 
     public override void Update(float dt)
@@ -31,8 +32,9 @@ public class GameFlow : Flow
             GV.ws.popupManager.Refresh(dt);
             foreach (Parallax p in GV.ws.parallaxes)
                 p.Refresh(dt);
-            GV.ws.cloudManager.Refresh(dt);
+			GV.ws.cloudManager.Refresh(dt);
             GV.ws.shadowManager.Refresh();
+			GV.ws.aphidManager.Refresh(dt); 
         }
     }
 }

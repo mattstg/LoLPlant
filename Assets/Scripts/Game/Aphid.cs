@@ -20,10 +20,8 @@ public class Aphid : MonoBehaviour {
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         parentPlatform = _parentPlatform;
-        headingRight = Random.Range(0, 2) == 0;
         offset = (headingRight) ? parentPlatform.GetSidePoint(headingRight): parentPlatform.GetSidePoint(!headingRight);
         transform.position = Vector3.Lerp(parentPlatform.GetSidePoint(headingRight), parentPlatform.GetSidePoint(!headingRight), progress);
-        sr.flipX = !headingRight;
         koAnimation = transform.GetChild(0).gameObject;
     }
 
@@ -55,9 +53,14 @@ public class Aphid : MonoBehaviour {
             {
                 progress = 0;
                 headingRight = !headingRight;
-                sr.flipX = !headingRight;
+				Flip ();
             }
         }
         transform.position = Vector3.Lerp(parentPlatform.GetSidePoint(headingRight), parentPlatform.GetSidePoint(!headingRight), progress);
     }
+
+	public void Flip(){
+		Vector3 newScale = gameObject.transform.localScale;
+		gameObject.transform.localScale = new Vector3 (newScale.x * -1, newScale.y, newScale.z);
+	}
 }
