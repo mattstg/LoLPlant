@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class WS : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class WS : MonoBehaviour
     public Plant plant;
     public DayNightCycle dnc;
     public PlayerController pc;
+    public EventSystem es;
 
     public DashboardManager dm;
     public PopupManager popupManager;

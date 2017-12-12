@@ -68,16 +68,19 @@ public class PlayerController : MonoBehaviour {
         Vector2 shadowAngle = GV.DegreeToVector2(GV.ws.dnc.groundToSunAngle);
         RaycastHit2D[] rayhits = Physics2D.RaycastAll(transform.position, shadowAngle, 30, layerMask);
         if (rayhits == null)
-            GV.ws.plant.numOfShadowsBlocking = 0;
+            GV.ws.plant.shadowCount = 0;
         else
-            GV.ws.plant.numOfShadowsBlocking = rayhits.Length;
+            GV.ws.plant.shadowCount = rayhits.Length;
     }
 
 	public void MouseDown(Vector2 mouseWorldPos, float _dt)
     {
-        Vector2 relativePress = new Vector2(Mathf.Clamp(mouseWorldPos.x - transform.position.x,-1,1), Mathf.Clamp(mouseWorldPos.y - transform.position.y,-1,1));
-        relativePress.y = (Mathf.Abs(relativePress.y) >= mouseJumpTolerance) ?-1:0;            
-        KeysPressed(relativePress, _dt);
+        if (!GV.ws.es.IsPointerOverGameObject())
+        {
+            Vector2 relativePress = new Vector2(Mathf.Clamp(mouseWorldPos.x - transform.position.x, -1, 1), Mathf.Clamp(mouseWorldPos.y - transform.position.y, -1, 1));
+            relativePress.y = (Mathf.Abs(relativePress.y) >= mouseJumpTolerance) ? -1 : 0;
+            KeysPressed(relativePress, _dt);
+        }
     }
 
 	public void KeysPressed(Vector2 dir, float _dt)
@@ -154,7 +157,8 @@ public class PlayerController : MonoBehaviour {
     public void GetHitByAphid(Transform aphidTransform)
     {
 		//body.velocity.Set (0, 0);
-		body.velocity =  ((transform.position - aphidTransform.position).normalized * 3);
+		body.velocity =  ((transform.position - aphidTransform.position).normalized * 5);
+        GV.ws.plant.LoseFood(15);
     }
 
     public virtual void OnCollisionExit2D(Collision2D coli)

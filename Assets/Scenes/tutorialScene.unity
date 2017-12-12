@@ -2480,7 +2480,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 234517999
-  m_SortingLayer: 12
+  m_SortingLayer: 13
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300014, guid: 638ea825f63ff2c4eb8bf92ec431bd27, type: 3}
   m_Color: {r: 0.83823526, g: 0.71105474, b: 0, a: 1}
@@ -5284,6 +5284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sun: 0
+  shadowCount: 0
   shadowFactor: 1
   sunFactor: 0
   sunDamp: 0
@@ -5342,6 +5343,7 @@ MonoBehaviour:
   plant: {fileID: 1162851678}
   dnc: {fileID: 1162851677}
   pc: {fileID: 1675826963}
+  es: {fileID: 1744147473}
   dm: {fileID: 1178843295}
   popupManager: {fileID: 1130468986}
   parallaxes:
@@ -6852,15 +6854,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4cada5666d9c9045b6e5f2c412ed235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clouds:
-  - {fileID: 471660284}
-  - {fileID: 2115557611}
-  - {fileID: 65199094}
-  - {fileID: 708658868}
-  - {fileID: 899350425}
-  - {fileID: 1491385463}
-  - {fileID: 96831105}
-  - {fileID: 1061429123}
 --- !u!1 &1561187445
 GameObject:
   m_ObjectHideFlags: 0
