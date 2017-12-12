@@ -57,18 +57,20 @@ public class PlayerController : MonoBehaviour {
 			body.drag = 0.5f;
 		else
 			body.drag = 0f;
+        RaycastToSun();
     }
 
-    public float RaycastToSun() //Efficency of raycast to the sun
+    public void RaycastToSun() //Efficency of raycast to the sun
     {
         //Need layer mask
-        int layerMask = LayerMask.NameToLayer("Platform");
-        float d = Vector2.Distance(transform.position, GV.ws.sun.transform.position);
+        var layerMask = (1 << LayerMask.NameToLayer("Platform")) | (1 << LayerMask.NameToLayer("Cloud")) ;
         //need distance
-        RaycastHit2D[] rayhits = Physics2D.RaycastAll(transform.position, transform.position - GV.ws.sun.transform.position, d, layerMask);
+        Vector2 shadowAngle = GV.DegreeToVector2(GV.ws.dnc.groundToSunAngle);
+        RaycastHit2D[] rayhits = Physics2D.RaycastAll(transform.position, shadowAngle, 30, layerMask);
         if (rayhits == null)
-            return 1;
-        return 1 - rayhits.Length;
+            GV.ws.plant.numOfShadowsBlocking = 0;
+        else
+            GV.ws.plant.numOfShadowsBlocking = rayhits.Length;
     }
 
 	public void MouseDown(Vector2 mouseWorldPos, float _dt)
