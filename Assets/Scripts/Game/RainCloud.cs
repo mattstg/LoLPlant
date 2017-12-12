@@ -10,7 +10,7 @@ public class RainCloud : Cloud, CastsShadow {
     public override void Initialize()
     {
         base.Initialize();
-        GV.ws.shadowManager.RegisterShadow(this, false, transform);
+        GV.ws.shadowManager.RegisterShadow(this, transform);
     }
 
     public override void Refresh(float dt)
@@ -27,14 +27,8 @@ public class RainCloud : Cloud, CastsShadow {
 
     /////////////////////////////////////////////
 
-    public void RegisterShadow(bool _isStatic)
-    {
-        //do nothing atm
-    }
-
     public Vector2[] RetrieveShadowEdges()
     {
-        Debug.Log("Cloud Transform: " + transform.position + ", edges(L/R): " + leftRightEdges[0].transform.position + " ,,, " + leftRightEdges[1].transform.position);
         return new Vector2[] { leftRightEdges[0].transform.position, leftRightEdges[1].transform.position };
     }
 }

@@ -54,8 +54,7 @@ public class Platform : MonoBehaviour, CastsShadow {
         moves = (numOfWP > 1);
 
         if (castsShadow)
-            RegisterShadow(true);
-        //RegisterShadow(!moves);
+            GV.ws.shadowManager.RegisterShadow(this, transform);
     }
 
 	public void Refresh(float dt)
@@ -89,11 +88,6 @@ public class Platform : MonoBehaviour, CastsShadow {
         return (pos1 - pos2).sqrMagnitude < .1f;
     }
 
-    public void RegisterShadow(bool isStatic)
-    {
-        GV.ws.shadowManager.RegisterShadow(this, isStatic, transform);
-    }
-    
     public Vector2[] RetrieveShadowEdges()
     {
         return GetEdges();

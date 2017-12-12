@@ -15,21 +15,15 @@ public class ShadowManager : MonoBehaviour {
     public void Refresh()
     {
         foreach(Shadow s in shadows)
-        {
             s.Refresh();
-        }
-        
     }
 
-    public void RegisterShadow(CastsShadow cs, bool isStatic, Transform parentTransform)
+    public void RegisterShadow(CastsShadow cs, Transform parentTransform)
     {
         //step one, create shadow object for it
         GameObject go = Instantiate(Resources.Load("Prefabs/Shadow")) as GameObject;
         Shadow shadow = go.GetComponent<Shadow>();
-        if (isStatic)
-            shadow.InitializeAsStatic(cs, cs.RetrieveShadowEdges());
-        else
-            shadow.Initialize(cs);
+        shadow.Initialize(cs, cs.RetrieveShadowEdges());
         
         shadows.Add(shadow);
         go.transform.SetParent(parentTransform);

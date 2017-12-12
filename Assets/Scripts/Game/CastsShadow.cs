@@ -4,6 +4,5 @@ using UnityEngine;
 
 public interface CastsShadow
 {
-    void RegisterShadow(bool _isStatic);
     Vector2[] RetrieveShadowEdges();
 }
