@@ -210,6 +210,8 @@ public class DashboardManager : MonoBehaviour
             iconFillAmount = foodMeter.fillAmount;
         float x = -5.5f + iconFillAmount * (-18.5f + 5.5f);
         float y = 24.5f + iconFillAmount * (416.5f - 24.5f);
+        x = 0.5f + (int)x;
+        y = 0.5f + (int)y;
         foodIcon.anchoredPosition = new Vector2(x, y);
 
         bool lockRequested = foodBouncer.lockRequested = (plant.psDamp < 0.08f);
