@@ -60,6 +60,8 @@ public class DashboardManager : MonoBehaviour
 
     private Plant plant;
 
+    public Bouncer foodBouncer;
+
     public void Initialize()
     {
         plant = GV.ws.plant;
@@ -68,6 +70,7 @@ public class DashboardManager : MonoBehaviour
             sunControl.onValueChanged.AddListener(delegate { SunControlValueChanged(); });
         if (waterControl)
             waterControl.onValueChanged.AddListener(delegate { WaterControlValueChanged(); });
+        foodBouncer.InitializeBouncer();
     }
 
     public void Refresh(float dt)
@@ -76,7 +79,7 @@ public class DashboardManager : MonoBehaviour
         UpdateInputs();
         UpdatePhotosynthesis();
         UpdateSpinner(dt);
-        UpdateFood();
+        UpdateFood(dt);
         UpdateSundial();
         UpdateDayText();
         UpdateHourText();
@@ -186,7 +189,7 @@ public class DashboardManager : MonoBehaviour
             spinnerTracer.color = ballFader.GetImage().color;
     }
 
-    public void UpdateFood()
+    public void UpdateFood(float dt)
     {
         foodMeter.fillAmount = Mathf.Clamp(plant.foodDamp / GV.FoodMaximum, 0, 1);
         if (plant.foodLossState != foodLossState)
@@ -208,6 +211,9 @@ public class DashboardManager : MonoBehaviour
         float x = -5.5f + iconFillAmount * (-18.5f + 5.5f);
         float y = 24.5f + iconFillAmount * (416.5f - 24.5f);
         foodIcon.anchoredPosition = new Vector2(x, y);
+
+        foodBouncer.UpdateBouncer(dt);
+
             // bottom: A(x, y); top: B(x, y); iconFillAmount: K; position = (Ax + K(Bx - Ax), Ay + K(By- Ay))
 
         //iconFillAmount = Mathf.Max(iconFillAmount, 0.095f);

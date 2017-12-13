@@ -53,6 +53,13 @@ public class Plant : MonoBehaviour {
     {
         UpdateSun(dt);
         UpdateWater(dt);
+
+        //force 0 shadows and 50% water, to determine max possible food production:
+        //sun = sunDamp = GV.ws.dnc.ambientSunLevel;
+        //sunFactor = GV.SunFactor(sun);
+        //water = waterDamp = 0.5f;
+        //waterFactor = GV.WaterFactor(water);
+
         UpdatePhotosynthesis(dt);
         UpdatePsProgress(dt);
         UpdateFood(dt);
