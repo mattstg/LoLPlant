@@ -45,7 +45,7 @@ public class TAActivate : TAEvent
                 GV.ws.platformManager.SetPlatformsActive(setActive);
                 break;
             case "Clouds":
-                GV.ws.cloudManager.SetCloudsVisible(setActive);
+                GV.ws.raincloudManager.gameObject.SetActive(setActive);
                 break;
             case "Aphids":
                 GV.ws.aphidManager.SetAphidsActive(setActive);

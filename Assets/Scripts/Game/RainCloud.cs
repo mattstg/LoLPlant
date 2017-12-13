@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RainCloud : Cloud, CastsShadow {
-    GameObject raindrop;
+    protected GameObject raindrop;
     public Transform[] leftRightEdges;
     public Transform rainEdgeLeft;
     public Transform rainEdgeRight;
     bool raining = false;
     Vector2 rainRateRange;
-    float rainRate;
-    float targetSpeed; //when targetSpeed is reached, a new targetSpeed is selected randomly from within speed range, and the speed is lerped towards it, for constantly varied speed. same for rainRate.
-    float targetRainRate;
-    int maxDropsPerFrame;
+    protected float rainRate;
+    protected float targetSpeed; //when targetSpeed is reached, a new targetSpeed is selected randomly from within speed range, and the speed is lerped towards it, for constantly varied speed. same for rainRate.
+    protected float targetRainRate;
+    protected int maxDropsPerFrame;
 
-    Vector2 speedInterpolaterRange;
-    Vector2 rainRateInterpolaterRange;
-    float speedInterpolater;
-    float rainRateInterpolater;
-    float speedLerper = 0f;
-    float rainRateLerper = 0f;
+    protected Vector2 speedInterpolaterRange;
+    protected Vector2 rainRateInterpolaterRange;
+    protected float speedInterpolater;
+    protected float rainRateInterpolater;
+    protected float speedLerper = 0f;
+    protected float rainRateLerper = 0f;
 
     public override void Initialize()
     {
@@ -103,7 +103,7 @@ public class RainCloud : Cloud, CastsShadow {
         }
     }
 
-    void Rain()
+    protected void Rain()
     {
         
         for(int i = 0; i < maxDropsPerFrame; i++)
@@ -111,7 +111,6 @@ public class RainCloud : Cloud, CastsShadow {
             if (Random.Range(0, (int)rainRate) == 0)
             {
                 Vector2 spawnPos = new Vector2(Random.Range(rainEdgeLeft.position.x, rainEdgeRight.position.x), rainEdgeLeft.position.y);
-
                 Instantiate(raindrop, spawnPos, Quaternion.identity);
             }
         }

@@ -170,7 +170,6 @@ public class PlayerController : MonoBehaviour {
 
     public virtual void OnCollisionExit2D(Collision2D coli)
     {
-        Debug.Log("Exit collider: " + coli.gameObject.name);
         switch (coli.gameObject.tag)
         {
 		case "Platform":

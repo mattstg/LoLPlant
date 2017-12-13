@@ -58,6 +58,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TAActivate("DashboardWater", true));
                 taQueue.Enqueue(new TAActivate("Clouds", true));
                 taQueue.Enqueue(new TATrigger("Water"));
+                taQueue.Enqueue(new TAPromptSuccess("H20Req"));
                 taQueue.Enqueue(new TACreatePopup(new Message("Evaporation")));
                 taQueue.Enqueue(new TACreatePopup(new Message("ReqBothForSugar")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));

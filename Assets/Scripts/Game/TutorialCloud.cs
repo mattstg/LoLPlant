@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class TutorialCloud : RainCloud
 {
+    public override void Initialize()
+    {
+        altitudeRange = GV.raincloudAltitudeRange;
+        travelRange = GV.raincloudTravelRange;
+        maxDropsPerFrame = GV.maxDropsPerFrame;
+
+        rainRate = 40;
+        raindrop = GV.ws.raincloudManager.raindrop;
+        
+        GV.ws.shadowManager.RegisterShadow(this, transform);
+    }
+
     public override void Refresh(float dt)
     {
-        //base.Refresh(dt);
+        Rain();
     }
 
 }
