@@ -36,6 +36,7 @@ public class SpriteTinter
     {
         if (!tintObjectList.Contains(to))
             tintObjectList.Add(to);
+        InitialSpriteUpdate(to);
     }
 
     public void RemoveSprite(TintObject to)
@@ -74,5 +75,27 @@ public class SpriteTinter
         }
         lastLightLevel = lightLevel;
         lastPlayerLightLevel = playerLightLevel;
+    }
+
+    private void InitialSpriteUpdate(TintObject to)
+    {
+        if (to.isPlayer)
+        {
+            if (lastPlayerLightLevel >= 0 && lastPlayerLightLevel <= 1f)
+            {
+                Color c = to.spriteRenderer.color;
+                c.r = c.g = c.b = lastPlayerLightLevel;
+                to.spriteRenderer.color = c;
+            }
+        }
+        else
+        {
+            if (lastLightLevel >= 0 && lastLightLevel <= 1f)
+            {
+                Color c = to.spriteRenderer.color;
+                c.r = c.g = c.b = lastLightLevel;
+                to.spriteRenderer.color = c;
+            }
+        }
     }
 }
