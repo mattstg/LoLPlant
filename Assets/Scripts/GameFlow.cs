@@ -15,6 +15,7 @@ public class GameFlow : Flow
         GV.ws.dm.Initialize();
         GV.ws.popupManager.Initialize();
         GV.ws.cloudManager.Initialize();
+        GV.ws.raincloudManager.Initialize();
         GV.ws.shadowManager.Initialize();
 		GV.ws.aphidManager.Initialize();   
     }
@@ -33,6 +34,7 @@ public class GameFlow : Flow
             foreach (Parallax p in GV.ws.parallaxes)
                 p.Refresh(dt);
 			GV.ws.cloudManager.Refresh(dt);
+            GV.ws.raincloudManager.Refresh(dt);
             GV.ws.shadowManager.Refresh();
 			GV.ws.aphidManager.Refresh(dt); 
         }

@@ -25,17 +25,17 @@ public class GV {
     public static readonly float sortingLayerCriticalValue = 1.3f; //clouds moving faster than this speed will pass in front of mountains; slower ones will pass behind
 
     //Rainclouds
-    public static readonly Vector2 raincloudSpeedRange = new Vector2(.2f, 1f);
-    public static readonly Vector2 raincloudAltitudeRange = new Vector2(4f, 6f);
-    public static readonly Vector2 raincloudTravelRange = new Vector2(-20f, 20f);
+    public static readonly Vector2 raincloudSpeedRange = new Vector2(.2f, 1.5f);
+    public static readonly Vector2 raincloudAltitudeRange = new Vector2(7f, 10f);
+    public static readonly Vector2 raincloudTravelRange = new Vector2(-60f, 60f);
     public static readonly Vector2 rainRateRange = new Vector2(1f, 2f);
-    public static readonly float raincloudSpeedInterpolater = .05f;
-    public static readonly float rainRateInterpolater = .05f;
+    public static readonly float raincloudSpeedInterpolater = .005f;
+    public static readonly float rainRateInterpolater = .004f;
 
-    //For shadows
-
-    public static readonly float shadowBuffer = 20f;
-    public static readonly float sunAngleBuffer = 2; 
+    //Shadows
+    public static readonly float shadowBuffer = 60f;
+    public static readonly float sunAngleBuffer = 2;
+    public static readonly float raincloudShadowAlpha = .4f; 
 
     public static bool Paused = false;
 

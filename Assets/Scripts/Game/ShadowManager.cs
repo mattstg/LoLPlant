@@ -24,7 +24,8 @@ public class ShadowManager : MonoBehaviour {
         GameObject go = Instantiate(Resources.Load("Prefabs/Shadow")) as GameObject;
         Shadow shadow = go.GetComponent<Shadow>();
         shadow.Initialize(cs, cs.RetrieveShadowEdges());
-        
+        if(parentTransform.gameObject.CompareTag("Rain Cloud")) //rainclouds cast darker shadows
+            go.GetComponent<MeshRenderer>().material = Resources.Load("Materials/Cloud Shadow") as Material;
         shadows.Add(shadow);
         go.transform.SetParent(parentTransform);
     }

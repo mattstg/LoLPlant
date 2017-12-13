@@ -22,8 +22,9 @@ public class WS : MonoBehaviour
 
     public PlatformManager platformManager;
     public AphidManager aphidManager;
-    public Transform cloudParent;
+    
     public CloudManager cloudManager;
+    public RaincloudManager raincloudManager;
     public ShadowManager shadowManager;
     public Transform sun;
 

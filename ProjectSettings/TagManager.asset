@@ -9,6 +9,7 @@ TagManager:
   - Raindrop
   - RainCollector
   - Aphid
+  - Rain Cloud
   layers:
   - Default
   - TransparentFX
@@ -81,6 +82,9 @@ TagManager:
     locked: 0
   - name: Shadows
     uniqueID: 2686338415
+    locked: 0
+  - name: Rain Clouds
+    uniqueID: 2798980417
     locked: 0
   - name: grass front
     uniqueID: 234517999
