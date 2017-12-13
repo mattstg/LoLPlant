@@ -39,8 +39,8 @@ public class Platform : MonoBehaviour, CastsShadow {
         EdgeCollider2D ec = GetComponent<EdgeCollider2D>();
         edgeOffsets[0] = ec.points[0] * transform.localScale.x;  //Edge points dont take scale into account in unity editor
         edgeOffsets[1] = ec.points[1] * transform.localScale.x;
-        edgeOffsets[0].y += ec.offset.y;
-        edgeOffsets[1].y += ec.offset.y;
+        edgeOffsets[0].y += ec.offset.y * transform.localScale.y;
+        edgeOffsets[1].y += ec.offset.y * transform.localScale.y;
 
         //Calculate Waypoints
         numOfWP = transform.childCount + 1; //Includes its starting position as a waypoint
