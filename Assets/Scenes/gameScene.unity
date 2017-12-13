@@ -1763,7 +1763,7 @@ MonoBehaviour:
   checkBouncer: {fileID: 740898473}
   messageZoomBouncer: {fileID: 801590194}
   arrowZoomBouncer: {fileID: 1427514387}
-  checkZoomBouncer: {fileID: 0}
+  checkZoomBouncer: {fileID: 740898471}
   nextButtons:
   - {fileID: 1549642192}
   arrowImage: {fileID: 1427514391}
