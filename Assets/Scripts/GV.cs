@@ -35,7 +35,9 @@ public class GV {
     //Shadows
     public static readonly float shadowBuffer = 60f;
     public static readonly float sunAngleBuffer = 2;
-    public static readonly float raincloudShadowAlpha = .4f; 
+    public static readonly float raincloudShadowAlpha = .4f;
+
+    public static readonly int LastTutorialProgressPoint = 6;
 
     public static bool Paused = false;
 

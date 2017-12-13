@@ -8,6 +8,7 @@ public enum CurrentState { MainMenu, Tutorial, Game, PostGame}
 public class MainScript : MonoBehaviour
 {
     public static int progressPoint = 0;
+    public static int score = 0;
     bool lolsdkFinishedLoading = false;
     bool flowInitialized = false;
 
@@ -29,24 +30,27 @@ public class MainScript : MonoBehaviour
 
         if (lolsdkFinishedLoading && !flowInitialized)  //Once recieved jsons, initialize the flow
         {             
-            curFlow = InitializeFlowScript(currentState, progressPoint);  //initial flow initialize
+            curFlow = InitializeFlowScript(currentState, progressPoint, true);  //initial flow initialize
             flowInitialized = true;
         }
 
         if (flowInitialized)
         {
             if (curFlow == null)
-                return; //This means Initialize hasnt been called yet, can happen in weird Awake/Update way (should though, but be safe)
+                return; //This means Initialize hasnt been called yet, can happen in weird Awake/Update way (should not though, but be safe)
             float dt = Time.deltaTime;
             curFlow.Update(dt);
         }
 	}
 
-    private Flow InitializeFlowScript(CurrentState flowType, int progressPoint)
+    private Flow InitializeFlowScript(CurrentState flowType, int progressPoint, bool sceneAlreadyLoaded)
     {
         Flow newFlow;
         switch (flowType)
         {
+            case CurrentState.MainMenu:
+                newFlow = new MainFlow();
+                break;
             case CurrentState.Game:
                 newFlow = new GameFlow();
                 break;
@@ -56,14 +60,45 @@ public class MainScript : MonoBehaviour
             default:
                 return null;
         }
-        newFlow.Initialize(progressPoint);
+
+        if(!sceneAlreadyLoaded)
+            SceneManager.sceneLoaded += OnSceneLoaded; //Delay flow initialization until 
+        else
+            newFlow.Initialize(progressPoint);
+
         return newFlow;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        //Old scenes might still be listening, so doublecheck
+        bool verified = false;
+        switch(scene.name)
+        {
+            case "menuScene":
+                verified = (currentState == CurrentState.MainMenu);
+                break;
+            case "tutorialScene":
+                verified = (currentState == CurrentState.Tutorial);
+                break;
+            case "gameScene":
+                verified = (currentState == CurrentState.Game);
+                break;
+            default:
+                Debug.Log("Switch case not found: " + scene.name);
+                break;
+        }
+
+        Debug.Log("OnSceneLoaded: " + scene.name);
+        Debug.Log(mode);
+        if(verified)
+            curFlow.Initialize(progressPoint);
     }
 
     public void GoToNextFlow(CurrentState cs)
     {
         //Assume Flow called Clean already
-        
+        Debug.Log("Umm this code is called?");
         //Load the next scene        
         switch (cs)
         {
@@ -83,8 +118,8 @@ public class MainScript : MonoBehaviour
                 Debug.LogError("Unhandled Switch: " + cs);
                 return;
         }
-
+        currentState = cs;
         //Initialize the flow script for the scene
-        curFlow = InitializeFlowScript(currentState, progressPoint);
+        curFlow = InitializeFlowScript(cs, progressPoint, false);
     }
 }

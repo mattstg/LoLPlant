@@ -9,6 +9,8 @@
     }
   },
   "en": {
+    "Start":"Start Game",
+    "Continue":"Continue",
     "Day0": "Monday",
     "Day1": "Tuesday",
     "Day2": "Wednesday",

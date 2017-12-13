@@ -52,6 +52,24 @@ public class SDKLoader {
     {
         //Given start game info, load the language and text files
         startGameData = JSON.Parse(json);
+        try
+        {
+            MainScript.progressPoint = int.Parse(startGameData["progress"].Value);
+        }
+        catch
+        {
+            Debug.Log("Faulty LoL progress key, defaulted to zero");
+            MainScript.progressPoint = 0;
+        }
+        try
+        {
+            MainScript.score = int.Parse(startGameData["score"].Value);
+        }
+        catch
+        {
+            Debug.Log("Faulty LoL score key, defaulted to zero");
+            MainScript.score = 0;
+        }
         startgameLoaded = true;
     }
 
