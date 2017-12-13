@@ -12,7 +12,7 @@ public class GV {
 
     public static readonly float WaterDepletionRate = 0.012f;
     public static readonly float SpinnerSpeed = 2f;
-    public static readonly float FoodMaximum = 60f;
+    public static readonly float FoodMaximum = 120f;
     public static readonly float FoodHeightRatio = 1f;
 
     public static readonly float worldWidth = 40.96f; //these dimension values do not actually control the world size; they just reflect it in order to inform other stuff like shadows
@@ -41,7 +41,9 @@ public class GV {
     public static readonly float raincloudShadowAlpha = .4f;
 
     public static readonly int LastTutorialProgressPoint = 6;
-    public static readonly float waterPerDrop = .025f;
+    public static readonly float waterPerDrop = .04f;
+        //see Raindrop.OnTriggerEnter2D(): waterDelta is weighted so that rain is worth more when you're lower on water and less when you're higher.
+        //Current setting (may be too extreme): At 0% water, the value of a drop is equal to waterPerDrop. At 100% water, a drop's value would be equal to (waterPerDrop / 4).
 
     public static bool Paused = false;
 

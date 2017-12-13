@@ -23,7 +23,7 @@ public class DayNightCycle : MonoBehaviour
     public Transform sky;
 
     public static readonly float normalTimeOffset = 4f;
-    public static readonly float secondsPerHour = 7.5f;
+    public static readonly float secondsPerHour = 15f;
     public static readonly int hoursPerDay = 24;
     public static readonly int sunriseHour = 4;
     public static readonly int sundownHour = 20;
