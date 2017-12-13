@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using LoLSDK;
 
 public class PopupManager : MonoBehaviour
 {
@@ -439,6 +440,8 @@ public class PopupManager : MonoBehaviour
 
         if (messages[currentIndex].type == Message.Type.Info)
             GV.ws.pc.SetInputActive(false);
+
+        LOLSDK.Instance.SpeakText(messages[currentIndex].message); //Read the message outloud here
     }
 
     private void BeginProceeding()
@@ -472,10 +475,14 @@ public class PopupManager : MonoBehaviour
 
         if (messages[currentIndex].type == Message.Type.Info)
             GV.ws.pc.SetInputActive(false);
+
+        LOLSDK.Instance.SpeakText(messages[currentIndex].message); //Read the message outloud here
     }
 
     private void BeginClosing()
     {
+        //Force end text reading
+
         updatePanel = true;
         updateMessage = true;
         updateIcon = true;
@@ -502,6 +509,7 @@ public class PopupManager : MonoBehaviour
         }
 
         GV.ws.pc.SetInputActive(true);
+        LOLSDK.Instance.SpeakText("");
     }
 
     private void HasOpened()
