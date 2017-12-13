@@ -212,6 +212,9 @@ public class DashboardManager : MonoBehaviour
         float y = 24.5f + iconFillAmount * (416.5f - 24.5f);
         foodIcon.anchoredPosition = new Vector2(x, y);
 
+        bool lockRequested = foodBouncer.lockRequested = (plant.psDamp < 0.08f);
+        if (!lockRequested)
+            foodBouncer.locked = false;
         foodBouncer.UpdateBouncer(dt);
 
             // bottom: A(x, y); top: B(x, y); iconFillAmount: K; position = (Ax + K(Bx - Ax), Ay + K(By- Ay))

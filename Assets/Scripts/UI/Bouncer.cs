@@ -20,6 +20,7 @@ public class Bouncer : MonoBehaviour
 
     public bool useWaveMotion = false;
     public bool locked = false;
+    public bool lockRequested = false;
 
     public void InitializeBouncer()
     {
@@ -46,11 +47,22 @@ public class Bouncer : MonoBehaviour
 
             progress = (isPausing) ? (timer + timerOffset) / pauseTime : (timer + timerOffset) / bounceTime;
 
+            if (isPausing && lockRequested)
+            {
+                locked = true;
+                lockRequested = false;
+            }
+
             if (progress >= 1f)
             {
                 timer -= (isPausing) ? pauseTime : bounceTime;
                 isPausing = (!isPausing && pauseTime > 0f);
                 progress = (isPausing) ? (timer + timerOffset) / pauseTime : (timer + timerOffset) / bounceTime;
+                if (lockRequested)
+                {
+                    locked = true;
+                    lockRequested = false;
+                }
             }
 
             rectTransform.anchoredPosition = new Vector2(origin.x + offset.x, origin.y + offset.y + ((isPausing) ? 0f : ((useWaveMotion) ? GV.WaveFactor(progress) : GV.BounceFactor(progress)) * bounceHeight));
