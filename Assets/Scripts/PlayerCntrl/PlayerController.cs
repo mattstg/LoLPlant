@@ -90,8 +90,6 @@ public class PlayerController : MonoBehaviour {
 		if (dir.x != 0)
 			Move (dir.x, _dt);
 
-        Debug.Log("diry: " + dir.y);
-
         if (dir.y < 0)
             Jump(dir.y, _dt);
         else if (dir.y > 0)
