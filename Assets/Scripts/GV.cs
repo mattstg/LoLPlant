@@ -41,7 +41,7 @@ public class GV {
     public static readonly float raincloudShadowAlpha = .4f;
 
     public static readonly int LastTutorialProgressPoint = 6;
-    public static readonly float waterPerDrop = .02f;
+    public static readonly float waterPerDrop = .025f;
 
     public static bool Paused = false;
 

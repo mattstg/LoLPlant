@@ -89,8 +89,6 @@ public class MainScript : MonoBehaviour
                 break;
         }
 
-        Debug.Log("OnSceneLoaded: " + scene.name);
-        Debug.Log(mode);
         if(verified)
             curFlow.Initialize(progressPoint);
     }
@@ -98,7 +96,6 @@ public class MainScript : MonoBehaviour
     public void GoToNextFlow(CurrentState cs)
     {
         //Assume Flow called Clean already
-        Debug.Log("Umm this code is called?");
         //Load the next scene        
         switch (cs)
         {

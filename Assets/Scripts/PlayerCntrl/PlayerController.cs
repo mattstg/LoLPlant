@@ -138,7 +138,6 @@ public class PlayerController : MonoBehaviour {
         switch(coli.gameObject.tag)
         {
             case "Platform":
-                Debug.Log("touched platform: " + coli.gameObject.name);
                 TouchedGround();
 				Platform plat = coli.gameObject.GetComponent<Platform> ();
 				if(plat != null)
@@ -147,7 +146,6 @@ public class PlayerController : MonoBehaviour {
             case "Water":
                 break;
 		case "Aphid":
-			Debug.Log ("aphid touch");
 			TouchedGround ();
 			if (!coli.gameObject.GetComponent<Aphid> ().isOutCold)
 				coli.gameObject.GetComponent<Aphid> ().HoppedOn ();
