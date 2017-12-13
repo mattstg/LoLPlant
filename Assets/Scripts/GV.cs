@@ -19,18 +19,21 @@ public class GV {
     public static readonly float worldHeight = 23.04f;
 
     //Clouds (background)
-    public static readonly Vector2 cloudSpeedRange = new Vector2(.2f, 0.5f);
-    public static readonly Vector2 cloudAltitudeRange = new Vector2(-3f, 7f);
+    public static readonly Vector2 cloudSpeedRange = new Vector2(.075f, 0.3f);
+    public static readonly Vector2 cloudAltitudeRange = new Vector2(-1f, 7f);
     public static readonly Vector2 cloudTravelRange = new Vector2(-20f, 20f); //x value is background x value past which a cloud will respawn on right; y value is background x value where cloud will respawn
-    public static readonly float sortingLayerCriticalValue = .35f; //clouds moving faster than this speed will pass in front of mountains; slower ones will pass behind
+    public static readonly float sortingLayerCriticalValue = .2f; //clouds moving faster than this speed will pass in front of mountains; slower ones will pass behind
 
     //Rainclouds
-    public static readonly Vector2 raincloudSpeedRange = new Vector2(.2f,2f);
+    public static readonly Vector2 raincloudSpeedRange = new Vector2(.2f,1.2f);
     public static readonly Vector2 raincloudAltitudeRange = new Vector2(9f, 13f);
     public static readonly Vector2 raincloudTravelRange = new Vector2(-60f, 60f);
-    public static readonly Vector2 rainRateRange = new Vector2(.05f, 1f);//between 0-1
-    public static readonly float raincloudSpeedInterpolater = .005f;
-    public static readonly float rainRateInterpolater = .005f;
+
+    public static readonly Vector2 rainRateRange = new Vector2(1,30); //int >= 1. rainRate will lerp around randomly to values in this range. 
+    public static readonly int maxDropsPerFrame = 4; // this many 'rain dice' will be rolled each frame, with each die having 1/rainRate chance of spawning a drop
+
+    public static readonly Vector2 raincloudSpeedInterpolaterRange = new Vector2(.001f, .006f) ;
+    public static readonly Vector2 rainRateInterpolaterRange = new Vector2(.0005f, 004f);
 
     //Shadows
     public static readonly float shadowBuffer = 60f;

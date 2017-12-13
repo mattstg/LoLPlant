@@ -12,7 +12,10 @@ public class RainCloud : Cloud, CastsShadow {
     float rainRate;
     float targetSpeed; //when targetSpeed is reached, a new targetSpeed is selected randomly from within speed range, and the speed is lerped towards it, for constantly varied speed. same for rainRate.
     float targetRainRate;
+    int maxDropsPerFrame;
 
+    Vector2 speedInterpolaterRange;
+    Vector2 rainRateInterpolaterRange;
     float speedInterpolater;
     float rainRateInterpolater;
     float speedLerper = 0f;
@@ -24,16 +27,18 @@ public class RainCloud : Cloud, CastsShadow {
         altitudeRange = GV.raincloudAltitudeRange;
         travelRange = GV.raincloudTravelRange;
         rainRateRange = GV.rainRateRange;
-        speedInterpolater = GV.raincloudSpeedInterpolater;
-        targetRainRate = GV.rainRateInterpolater;
+        speedInterpolaterRange = GV.raincloudSpeedInterpolaterRange;
+        rainRateInterpolaterRange = GV.rainRateInterpolaterRange;
+        maxDropsPerFrame = GV.maxDropsPerFrame;
 
         speed = Random.Range(speedRange.x, speedRange.y);
         targetSpeed = Random.Range(speedRange.x, speedRange.y);
         altitude = Random.Range(altitudeRange.x, altitudeRange.y);
         rainRate = Random.Range(rainRateRange.x, rainRateRange.y);
         targetRainRate = Random.Range(rainRateRange.x, rainRateRange.y);
+        speedInterpolater = Random.Range(speedInterpolaterRange.x, speedInterpolaterRange.y);
+        rainRateInterpolater = Random.Range(rainRateInterpolaterRange.x, rainRateInterpolaterRange.y);
         raindrop = GV.ws.raincloudManager.raindrop;
-        
 
         this.transform.Translate(0, altitude - this.transform.localPosition.y, 0);
         if (this.transform.localPosition.x >= -1 * (GV.worldWidth / 2) && this.transform.localPosition.x <= GV.worldWidth / 2) //if cloud is over game world
@@ -100,13 +105,17 @@ public class RainCloud : Cloud, CastsShadow {
 
     void Rain()
     {
-        int rangeMax = Mathf.CeilToInt((1 - rainRate) * 25); //rainRate determines the size of a range that a random int is selected from. if it == 0, then a raindrop is dropped this frame
-        if (Random.Range(0, rangeMax) == 0)
+        
+        for(int i = 0; i < maxDropsPerFrame; i++)
         {
-            //Vector2 spawnPos = new Vector2(Random.Range(rainEdgeLeft.position.x, rainEdgeRight.position.x), rainEdgeLeft.position.y);
-            Vector2 spawnPos = this.transform.position;
-            Instantiate(raindrop, spawnPos, Quaternion.identity);
+            if (Random.Range(0, (int)rainRate) == 0)
+            {
+                Vector2 spawnPos = new Vector2(Random.Range(rainEdgeLeft.position.x, rainEdgeRight.position.x), rainEdgeLeft.position.y);
+
+                Instantiate(raindrop, spawnPos, Quaternion.identity);
+            }
         }
+        
     }
 
     public override void Reinitialize() //called when a cloud passes far enough past the left edge of the background to 'respawn' on the right
@@ -115,6 +124,8 @@ public class RainCloud : Cloud, CastsShadow {
         speed = Random.Range(speedRange.x, speedRange.y);
         altitude = Random.Range(altitudeRange.x, altitudeRange.y);
         this.transform.Translate(0, altitude - this.transform.localPosition.y, 0);
+        speedInterpolater = Random.Range(speedInterpolaterRange.x, speedInterpolaterRange.y);
+        rainRateInterpolater = Random.Range(rainRateInterpolaterRange.x, rainRateInterpolaterRange.y);
     }
 
 
