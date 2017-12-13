@@ -12,18 +12,11 @@ public class TintObject : MonoBehaviour
         Initialize();
     }
 
-    public void ForceAwake()
-    {
-        Initialize();
-    }
-
     public void Initialize()
     {
-        if (spriteRenderer)
-            return;
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer)
-            SpriteTinter.Instance.AddSprite(this);
+        if (!spriteRenderer)
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        SpriteTinter.Instance.AddSprite(this);
     }
 
     void OnDestroy()
