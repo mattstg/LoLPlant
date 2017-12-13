@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
     float jumpMaxHoldTime = 1.5f;
     float jumpHeldTime = 0; //Counter that increases while held
     bool isJumping = false;
-    float mouseJumpTolerance = 1; //higher than that amt to jump
+    float mouseJumpTolerance = .4f; //higher than that amt to jump
     bool inputActive = true;
     bool inputHardLock = false; //Use if you dont want popupmanager interfering
     float timeSinceInitialJumpBurst = 0;
@@ -99,7 +99,6 @@ public class PlayerController : MonoBehaviour {
 
     private void DropDown(float dt)
     {
-        Debug.Log("called");
         body.AddForce(new Vector2(0, -1*dropForcePerSec * dt), ForceMode2D.Impulse);
     }
 
@@ -155,7 +154,6 @@ public class PlayerController : MonoBehaviour {
 
     private void TouchedGround()
     {
-        Debug.Log("Touched ground");
         isGrounded = true;
         isJumping = false;
         jumpHeldTime = 0;

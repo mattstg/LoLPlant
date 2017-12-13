@@ -6,6 +6,12 @@ public class TutorialFlow : Flow
 {
     public override void Initialize(int progressNumber)
     {
+        if(progressNumber > GV.LastTutorialProgressPoint)
+        {
+            Debug.Log("Progress point retrieved from JSON too high for tutorial scene, reseting progress to 0");
+            progressNumber = MainScript.progressPoint = 0;
+        }
+
         GameObject.FindObjectOfType<WS>().LinkToGV(this); //Force the link of WS into GV so can set the links below
         GV.ws.dnc.Initialize();
         GV.ws.plant.Initialize();

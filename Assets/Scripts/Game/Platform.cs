@@ -32,7 +32,7 @@ public class Platform : MonoBehaviour, CastsShadow {
             return edgeOffsets[side];
     }
 
-    public void Initialize()
+    public virtual void Initialize()
     {
         //Calculate edges
         edgeOffsets = new Vector2[2];
@@ -88,7 +88,7 @@ public class Platform : MonoBehaviour, CastsShadow {
         return (pos1 - pos2).sqrMagnitude < .1f;
     }
 
-    public Vector2[] RetrieveShadowEdges()
+    public virtual Vector2[] RetrieveShadowEdges()
     {
         return GetEdges();
     }
