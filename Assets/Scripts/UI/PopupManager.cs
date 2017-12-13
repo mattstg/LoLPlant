@@ -44,7 +44,7 @@ public class PopupManager : MonoBehaviour
     private int currentIndex;
     private float transitionProgress = 2f;
     private readonly float transitionDuration = 3f;
-    private readonly float promptProceedDelay = 2f;
+    private readonly float promptProceedDelay = 3f;
 
     private bool updatePosition = false;
     private bool updatePanel = false;
@@ -588,7 +588,7 @@ public class PopupManager : MonoBehaviour
     public void CheckFadedIn()
     {
         if (icon == Icon.Check)
-            FadeOutIcon(0.5f, 1.5f);
+            FadeOutIcon(0.5f, 2.5f);
     }
 
     public void Next() //called by button click

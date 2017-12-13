@@ -12,23 +12,12 @@ public class Shadow : MonoBehaviour {
     Vector3[] vertices = new Vector3[4];
     Mesh mesh;
     public CastsShadow parentObj;
-    Vector2[] staticEdges;
-    bool isStatic;
 
-    public void InitializeAsStatic(CastsShadow _parent,Vector2[] _staticEdges)
-    {
-        staticEdges = _staticEdges;
-        parentObj = _parent;
-        isStatic = true;
-        vertices[0] = staticEdges[0];
-        vertices[1] = staticEdges[1];
-        SetupMesh();
-    }
-
-    public void Initialize(CastsShadow _parent)
+    public void Initialize(CastsShadow _parent, Vector2[] _staticEdges)
     {
         parentObj = _parent;
-        isStatic = false;
+        vertices[0] = _staticEdges[0];
+        vertices[1] = _staticEdges[1];
         SetupMesh();
     }
 
@@ -47,12 +36,6 @@ public class Shadow : MonoBehaviour {
         float theta = GV.ws.dnc.groundToSunAngle;
         if ((theta > angleBuffer) && (theta < 180 - angleBuffer)) //shadows stop updating when the sun gets close to horizon
         {
-            if(!isStatic)
-            {
-                vertices[0] = parentObj.RetrieveShadowEdges()[0];
-                vertices[1] = parentObj.RetrieveShadowEdges()[1];
-            }
-
             if(theta == 90) // catch for sun directly overhead: tan(90) is division by 0
             {
                 vertices[2].x = vertices[0].x;
