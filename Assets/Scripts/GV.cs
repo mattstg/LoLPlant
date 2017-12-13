@@ -19,14 +19,14 @@ public class GV {
     public static readonly float worldHeight = 23.04f;
 
     //Clouds (background)
-    public static readonly Vector2 cloudSpeedRange = new Vector2(.3f, 1.8f);
-    public static readonly Vector2 cloudAltitudeRange = new Vector2(-2f, 6f);
+    public static readonly Vector2 cloudSpeedRange = new Vector2(.2f, 0.5f);
+    public static readonly Vector2 cloudAltitudeRange = new Vector2(-3f, 7f);
     public static readonly Vector2 cloudTravelRange = new Vector2(-20f, 20f); //x value is background x value past which a cloud will respawn on right; y value is background x value where cloud will respawn
-    public static readonly float sortingLayerCriticalValue = 1.3f; //clouds moving faster than this speed will pass in front of mountains; slower ones will pass behind
+    public static readonly float sortingLayerCriticalValue = .35f; //clouds moving faster than this speed will pass in front of mountains; slower ones will pass behind
 
     //Rainclouds
-    public static readonly Vector2 raincloudSpeedRange = new Vector2(.2f, 1.5f);
-    public static readonly Vector2 raincloudAltitudeRange = new Vector2(7f, 10f);
+    public static readonly Vector2 raincloudSpeedRange = new Vector2(.2f,2f);
+    public static readonly Vector2 raincloudAltitudeRange = new Vector2(9f, 13f);
     public static readonly Vector2 raincloudTravelRange = new Vector2(-60f, 60f);
     public static readonly Vector2 rainRateRange = new Vector2(.05f, 1f);//between 0-1
     public static readonly float raincloudSpeedInterpolater = .005f;

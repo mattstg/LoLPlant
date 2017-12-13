@@ -100,7 +100,7 @@ public class RainCloud : Cloud, CastsShadow {
 
     void Rain()
     {
-        int rangeMax = Mathf.CeilToInt((1 - rainRate) * 100); //rainRate determines the size of a range that a random int is selected from. if it == 0, then a raindrop is dropped this frame
+        int rangeMax = Mathf.CeilToInt((1 - rainRate) * 25); //rainRate determines the size of a range that a random int is selected from. if it == 0, then a raindrop is dropped this frame
         if (Random.Range(0, rangeMax) == 0)
         {
             //Vector2 spawnPos = new Vector2(Random.Range(rainEdgeLeft.position.x, rainEdgeRight.position.x), rainEdgeLeft.position.y);
