@@ -18,11 +18,12 @@ public class TutorialFlow : Flow
         GV.ws.shadowManager.Initialize();
         GV.ws.aphidManager.Initialize();        //Create all aphids, must be called after platform manager
         TAEventManager.Instance.Initialize(progressNumber);
+        initialized = true;
     }
 
     public override void Update(float dt)
     {
-        if (!GV.Paused)
+        if (!GV.Paused && initialized)
         {
             GV.ws.dnc.Refresh(dt);
             GV.ws.plant.Refresh(dt);

@@ -17,12 +17,13 @@ public class GameFlow : Flow
         GV.ws.cloudManager.Initialize();
         GV.ws.raincloudManager.Initialize();
         GV.ws.shadowManager.Initialize();
-		GV.ws.aphidManager.Initialize();   
+		GV.ws.aphidManager.Initialize();
+        initialized = true;
     }
 
     public override void Update(float dt)
     {
-        if (!GV.Paused)
+        if (!GV.Paused && initialized)
         {
             GV.ws.dnc.Refresh(dt);
             GV.ws.plant.Refresh(dt);

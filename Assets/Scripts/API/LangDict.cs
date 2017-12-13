@@ -23,14 +23,7 @@ public class LangDict {
     }
     #endregion
 
-    
-    public string languageSelected = "en";
     JSONNode langNode;
-
-    public void SetLanguage(string lang)
-    {
-        languageSelected = lang;
-    }
 
     //Already sent with language selected?
     public void SetNode(JSONNode js)
@@ -47,7 +40,7 @@ public class LangDict {
         }
         catch
         {
-            return "error, no text found for key: " + keyName + " in langauge: " + languageSelected;
+            return "error, no text found for key: " + keyName;
         }
         
     }
