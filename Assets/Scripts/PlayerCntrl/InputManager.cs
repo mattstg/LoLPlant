@@ -14,15 +14,7 @@ public class InputManager : MonoBehaviour {
 
 	public void UpdateInput(float dt)
     {
-        //Mouse/touch click
-        if(Input.GetMouseButton(0))  //Continous press
-        {
-            _MouseClicked(Input.mousePosition,dt);
-        }
-        else if(Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved))
-        {
-			_MouseClicked(Input.GetTouch(0).position,dt);
-        }
+        bool inputProcessed = false;
 
         //Keyboard input
         Vector2 keysPressed = new Vector2();
@@ -32,8 +24,27 @@ public class InputManager : MonoBehaviour {
             keysPressed.x += 1;
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space))
             keysPressed.y = -1;
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            keysPressed.y = 1;
         if (keysPressed.x != 0 || keysPressed.y != 0)
-			pc.KeysPressed(keysPressed,dt);
+        {
+            pc.KeysPressed(keysPressed, dt);
+            inputProcessed = true;
+        }
+
+
+        //Mouse/touch click
+        if (!inputProcessed)
+        {
+            if (Input.GetMouseButton(0))  //Continous press
+            {
+                _MouseClicked(Input.mousePosition, dt);
+            }
+            else if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved))
+            {
+                _MouseClicked(Input.GetTouch(0).position, dt);
+            }
+        }        
     }
 
 	public void OnMouseOver()

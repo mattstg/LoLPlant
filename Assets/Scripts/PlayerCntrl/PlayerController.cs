@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour {
 	Rigidbody2D body;
     
     bool isGrounded;
-    float moveForce = 10.5f;  //
-    float maxSpeed = 6f;
+    float moveForce = 7.5f;  //
+    float maxSpeed = 4.5f;
     //All jump related
     float jumpForceInitial = 4f;
     float jumpForcePerSec = 7f;
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour {
     bool inputHardLock = false; //Use if you dont want popupmanager interfering
     float timeSinceInitialJumpBurst = 0;
     readonly float MaxTimeBetweenJumpBurst = 1;
+    float dropForcePerSec = 7; //pressing down on purpose to drop
 
     public void Initialize()
     {
@@ -88,9 +89,20 @@ public class PlayerController : MonoBehaviour {
     {
 		if (dir.x != 0)
 			Move (dir.x, _dt);
-		if (dir.y != 0)
-            
-                Jump(dir.y, _dt);
+
+        Debug.Log("diry: " + dir.y);
+
+        if (dir.y < 0)
+            Jump(dir.y, _dt);
+        else if (dir.y > 0)
+            DropDown(_dt);
+
+    }
+
+    private void DropDown(float dt)
+    {
+        Debug.Log("called");
+        body.AddForce(new Vector2(0, -1*dropForcePerSec * dt), ForceMode2D.Impulse);
     }
 
 	public void Jump(float direction, float _dt){
@@ -159,7 +171,7 @@ public class PlayerController : MonoBehaviour {
     {
 		//body.velocity.Set (0, 0);
 		body.velocity =  ((transform.position - aphidTransform.position).normalized * 5);
-        GV.ws.plant.LoseFood(15);
+        GV.ws.plant.LoseFood(5);
     }
 
     public virtual void OnCollisionExit2D(Collision2D coli)

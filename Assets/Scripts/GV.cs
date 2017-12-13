@@ -10,7 +10,7 @@ public class GV {
     public static bool Sound_Active = true;
     public static readonly float PlatformSunblock = .5f;
 
-    public static readonly float WaterDepletionRate = 0.0125f;
+    public static readonly float WaterDepletionRate = 0.012f;
     public static readonly float SpinnerSpeed = 2f;
     public static readonly float FoodMaximum = 60f;
     public static readonly float FoodHeightRatio = 1f;
@@ -41,7 +41,7 @@ public class GV {
     public static readonly float raincloudShadowAlpha = .4f;
 
     public static readonly int LastTutorialProgressPoint = 6;
-    public static readonly float waterPerDrop = .015f;
+    public static readonly float waterPerDrop = .02f;
 
     public static bool Paused = false;
 
