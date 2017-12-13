@@ -44,6 +44,9 @@ public class TAEventManager
                 taQueue.Enqueue(new TACreatePopup(new Message("GatherSun", Message.Type.Prompt)));
                 taQueue.Enqueue(new TACreatePopup(new Message("ControlsKey")));
                 taQueue.Enqueue(new TACreatePopup(new Message("ControlsTouch")));
+                taQueue.Enqueue(new TATimer("Timer", 12));
+                taQueue.Enqueue(new TATrigger("Timer"));
+                taQueue.Enqueue(new TAPromptSuccess("GatherSun"));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TAActivate("DashboardSun", true));
                 taQueue.Enqueue(new TATrigger("Sun"));
