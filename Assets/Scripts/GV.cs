@@ -10,7 +10,7 @@ public class GV {
     public static bool Sound_Active = true;
     public static readonly float PlatformSunblock = .5f;
 
-    public static readonly float WaterDepletionRate = 0.005f;
+    public static readonly float WaterDepletionRate = 0.0125f;
     public static readonly float SpinnerSpeed = 2f;
     public static readonly float FoodMaximum = 60f;
     public static readonly float FoodHeightRatio = 1f;
@@ -29,7 +29,7 @@ public class GV {
     public static readonly Vector2 raincloudAltitudeRange = new Vector2(9f, 13f);
     public static readonly Vector2 raincloudTravelRange = new Vector2(-60f, 60f);
 
-    public static readonly Vector2 rainRateRange = new Vector2(1,30); //int >= 1. rainRate will lerp around randomly to values in this range. 
+    public static readonly Vector2 rainRateRange = new Vector2(10,24); //int >= 1. rainRate will lerp around randomly to values in this range. 
     public static readonly int maxDropsPerFrame = 4; // this many 'rain dice' will be rolled each frame, with each die having 1/rainRate chance of spawning a drop
 
     public static readonly Vector2 raincloudSpeedInterpolaterRange = new Vector2(.001f, .006f) ;
@@ -41,7 +41,7 @@ public class GV {
     public static readonly float raincloudShadowAlpha = .4f;
 
     public static readonly int LastTutorialProgressPoint = 6;
-    public static readonly float waterPerDrop = .05f;
+    public static readonly float waterPerDrop = .015f;
 
     public static bool Paused = false;
 

@@ -73,7 +73,7 @@ public class Plant : MonoBehaviour {
 
     public void UpdateWater(float dt)
     {
-        water -= (photosynthesis + (sun / 2f)) * GV.WaterDepletionRate * dt;
+        water -= (photosynthesis + sun) * GV.WaterDepletionRate * dt;
         water = Mathf.Clamp(water, 0, 1);
         waterFactor = GV.WaterFactor(water);
         waterDamp = Mathf.SmoothDamp(waterDamp, water, ref waterVelocity, dampTime, Mathf.Infinity, dt);
