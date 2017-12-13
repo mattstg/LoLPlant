@@ -28,9 +28,9 @@ public class GV {
     public static readonly Vector2 raincloudSpeedRange = new Vector2(.2f, 1.5f);
     public static readonly Vector2 raincloudAltitudeRange = new Vector2(7f, 10f);
     public static readonly Vector2 raincloudTravelRange = new Vector2(-60f, 60f);
-    public static readonly Vector2 rainRateRange = new Vector2(1f, 2f);
+    public static readonly Vector2 rainRateRange = new Vector2(.05f, 1f);//between 0-1
     public static readonly float raincloudSpeedInterpolater = .005f;
-    public static readonly float rainRateInterpolater = .004f;
+    public static readonly float rainRateInterpolater = .005f;
 
     //Shadows
     public static readonly float shadowBuffer = 60f;

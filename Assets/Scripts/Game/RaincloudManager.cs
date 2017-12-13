@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RaincloudManager : MonoBehaviour {
 
+    public GameObject raindrop;
     List<RainCloud> rainclouds;
 
     public void Initialize()

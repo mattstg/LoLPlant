@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RainCloud : Cloud, CastsShadow {
-
+    GameObject raindrop;
     public Transform[] leftRightEdges;
+    public Transform rainEdgeLeft;
+    public Transform rainEdgeRight;
     bool raining = false;
     Vector2 rainRateRange;
     float rainRate;
@@ -30,6 +32,7 @@ public class RainCloud : Cloud, CastsShadow {
         altitude = Random.Range(altitudeRange.x, altitudeRange.y);
         rainRate = Random.Range(rainRateRange.x, rainRateRange.y);
         targetRainRate = Random.Range(rainRateRange.x, rainRateRange.y);
+        raindrop = GV.ws.raincloudManager.raindrop;
         
 
         this.transform.Translate(0, altitude - this.transform.localPosition.y, 0);
@@ -97,7 +100,13 @@ public class RainCloud : Cloud, CastsShadow {
 
     void Rain()
     {
-
+        int rangeMax = Mathf.CeilToInt((1 - rainRate) * 100); //rainRate determines the size of a range that a random int is selected from. if it == 0, then a raindrop is dropped this frame
+        if (Random.Range(0, rangeMax) == 0)
+        {
+            //Vector2 spawnPos = new Vector2(Random.Range(rainEdgeLeft.position.x, rainEdgeRight.position.x), rainEdgeLeft.position.y);
+            Vector2 spawnPos = this.transform.position;
+            Instantiate(raindrop, spawnPos, Quaternion.identity);
+        }
     }
 
     public override void Reinitialize() //called when a cloud passes far enough past the left edge of the background to 'respawn' on the right
