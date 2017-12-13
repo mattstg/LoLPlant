@@ -6,6 +6,8 @@ public class CloudManager : MonoBehaviour {
 
 	List<Cloud> clouds;
     bool cloudsVisible = true;
+    
+    
 
     public void Initialize()
     {
@@ -29,5 +31,6 @@ public class CloudManager : MonoBehaviour {
         if(cloudsVisible)
             foreach (Cloud c in clouds)
                 c.Refresh(dt);
+
     }
 }

@@ -15,14 +15,25 @@ public class GV {
     public static readonly float FoodMaximum = 60f;
     public static readonly float FoodHeightRatio = 1f;
 
+    public static readonly float worldWidth = 40.96f; //these dimension values do not actually control the world size; they just reflect it in order to inform other stuff like shadows
+    public static readonly float worldHeight = 23.04f;
+
     //Clouds (background)
     public static readonly Vector2 cloudSpeedRange = new Vector2(.3f, 1.8f);
     public static readonly Vector2 cloudAltitudeRange = new Vector2(-2f, 6f);
     public static readonly Vector2 cloudTravelRange = new Vector2(-20f, 20f); //x value is background x value past which a cloud will respawn on right; y value is background x value where cloud will respawn
     public static readonly float sortingLayerCriticalValue = 1.3f; //clouds moving faster than this speed will pass in front of mountains; slower ones will pass behind
 
-    public static readonly float worldWidth = 40.96f; //these dimension values do not actually control the world size; they just reflect it in order to inform other stuff like shadows
-    public static readonly float worldHeight = 23.04f;
+    //Rainclouds
+    public static readonly Vector2 raincloudSpeedRange = new Vector2(.2f, 1f);
+    public static readonly Vector2 raincloudAltitudeRange = new Vector2(4f, 6f);
+    public static readonly Vector2 raincloudTravelRange = new Vector2(-20f, 20f);
+    public static readonly Vector2 rainRateRange = new Vector2(1f, 2f);
+    public static readonly float raincloudSpeedInterpolater = .05f;
+    public static readonly float rainRateInterpolater = .05f;
+
+    //For shadows
+
     public static readonly float shadowBuffer = 20f;
     public static readonly float sunAngleBuffer = 2; 
 

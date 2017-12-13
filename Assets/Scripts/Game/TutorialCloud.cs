@@ -6,7 +6,6 @@ public class TutorialCloud : RainCloud
 {
     public override void Refresh(float dt)
     {
-        UpdateRain(dt);
         //base.Refresh(dt);
     }
 

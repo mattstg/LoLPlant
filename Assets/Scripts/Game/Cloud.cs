@@ -5,14 +5,14 @@ using UnityEngine;
 public class Cloud : MonoBehaviour {
 
     
-    Vector2 speedRange;
-    Vector2 altitudeRange;
-    Vector2 travelRange;
+    protected Vector2 speedRange;
+    protected Vector2 altitudeRange;
+    protected Vector2 travelRange;
     float sortingLayerCriticalValue;
 
     SpriteRenderer sprite;
-    float speed;
-    float altitude;
+    protected float speed;
+    protected float altitude;
 
 
     public virtual void Initialize()
@@ -44,7 +44,7 @@ public class Cloud : MonoBehaviour {
             Reinitialize();
     }
 
-    public void Reinitialize() //called when a cloud passes far enough past the left edge of the background to 'respawn' on the right
+    public virtual void Reinitialize() //called when a cloud passes far enough past the left edge of the background to 'respawn' on the right
     {
         this.transform.Translate(2 * travelRange.y, 0, 0);
         speed = Random.Range(speedRange.x, speedRange.y);
