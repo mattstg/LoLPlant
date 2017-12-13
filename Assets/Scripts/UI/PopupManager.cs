@@ -110,8 +110,8 @@ public class PopupManager : MonoBehaviour
 
         currentIndex = 0;
         messageText.text = "";
-        currentPosition = GetPosition(Message.Position.Bottom);
-        popupParent.anchoredPosition = currentPosition;
+        currentPosition = GetPositionVector(Message.Position.Bottom);
+        popupParent.anchorMin = popupParent.anchorMax = currentPosition;
 
         icon = Icon.None;
         ApplyIcon(0f);
@@ -178,7 +178,7 @@ public class PopupManager : MonoBehaviour
 
     private void UpdatePosition(float dt)
     {
-        float nearZeroMargin = 0.1f;
+        float nearZeroMargin = 0.0001f;
         if (Mathf.Abs(targetPosition.x - currentPosition.x) > nearZeroMargin || Mathf.Abs(targetPosition.y - currentPosition.y) > nearZeroMargin)
         {
             currentPosition = Vector2.SmoothDamp(currentPosition, targetPosition, ref positionVelocity, dampTime, Mathf.Infinity, dt);
@@ -189,7 +189,7 @@ public class PopupManager : MonoBehaviour
             positionVelocity = Vector2.zero;
             updatePosition = false;
         }
-        popupParent.anchoredPosition = currentPosition;
+        popupParent.anchorMin = popupParent.anchorMax = currentPosition;
     }
 
     private void UpdatePanel(float dt)
@@ -431,7 +431,7 @@ public class PopupManager : MonoBehaviour
 
         currentIndex = 0;
         messageText.text = messages[currentIndex].message;
-        popupParent.anchoredPosition = targetPosition = currentPosition = GetPosition(messages[currentIndex].position);
+        popupParent.anchorMin = popupParent.anchorMax = targetPosition = currentPosition = GetPositionVector(messages[currentIndex].position);
         ApplyInputState(false);
 
         popupParent.gameObject.SetActive(true);
@@ -576,7 +576,7 @@ public class PopupManager : MonoBehaviour
 
             if (messages[currentIndex].position != messages[currentIndex - 1].position)
             {
-                targetPosition = GetPosition(messages[currentIndex].position);
+                targetPosition = GetPositionVector(messages[currentIndex].position);
                 updatePosition = true;
             }
             messageText.text = messages[currentIndex].message;
@@ -664,18 +664,22 @@ public class PopupManager : MonoBehaviour
         return (currentIndex == messages.Count - 1);
     }
 
-    private Vector2 GetPosition(Message.Position _position)
+    private Vector2 GetPositionVector(Message.Position _position)
     {
         switch (_position)
         {
-            case Message.Position.Bottom:
-                return new Vector2(0f, 60f);
+            case Message.Position.Center:
+                return new Vector2(0.5f, 0.5f);
             case Message.Position.Top:
-                return new Vector2(0f, 296f);
+                return new Vector2(0.5f, 1f);
+            case Message.Position.Bottom:
+                return new Vector2(0.5f, 0f);
+            case Message.Position.Left:
+                return new Vector2(0f, 0.5f);
             case Message.Position.Right:
-                return new Vector2(240f, 158f);
+                return new Vector2(1f, 0.5f);
             default:
-                return new Vector2(0f, 0f);
+                return new Vector2(0.5f, 0.5f);
         }
     }
 }
