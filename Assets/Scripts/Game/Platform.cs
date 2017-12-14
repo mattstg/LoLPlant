@@ -20,7 +20,7 @@ public class Platform : MonoBehaviour, CastsShadow {
 
     public Vector2[] GetEdges()
     {
-        return new Vector2[] { edgeOffsets[0] + (Vector2)transform.position, edgeOffsets[1] + (Vector2)transform.position };
+        return new Vector2[] { edgeOffsets[0] + (Vector2)transform.position + new Vector2(0, -.311f), edgeOffsets[1] + (Vector2)transform.position + new Vector2(0, -.311f) };
     }
 
     public Vector2 GetSidePoint(bool left, bool offset = false)
