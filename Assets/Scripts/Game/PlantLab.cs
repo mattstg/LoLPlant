@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlantLab : Plant
 {
     float waterTriggerThreshold = .5f;
-    float sunTriggerThreshold = .9f;
+    float sunTriggerThreshold = .95f;
 
     public override void Refresh(float dt)
     {
-        Debug.Log("water > thresh: " + water + " >= " + waterTriggerThreshold);
+        Debug.Log("sun: " + sun);
         if (water >= waterTriggerThreshold)
         {
             Debug.Log("water threshold sent");
