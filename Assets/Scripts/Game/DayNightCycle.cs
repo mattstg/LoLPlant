@@ -42,6 +42,11 @@ public class DayNightCycle : MonoBehaviour
         }
     }
 
+    public float GetSunAngle()
+    {
+        return GV.GetAngle(sunPosition);
+    }
+
     public void UpdateDNC()
     {
         normalTime = (time / secondsPerHour) + normalTimeOffset;

@@ -38,7 +38,6 @@ public class Aphid : MonoBehaviour {
     {
         if (!isOutCold)
         {
-            Debug.Log("Hopped on Aphid");
             outCold = outColdMax;
 			anim.SetTrigger ("Die");
 			flopColliders ();
