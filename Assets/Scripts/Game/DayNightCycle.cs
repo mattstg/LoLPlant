@@ -5,6 +5,8 @@ using UnityEngine;
 public class DayNightCycle : MonoBehaviour
 {
     public bool clockActive = true;
+    private bool isDaytime = true;
+    private bool stateIsDaytime = true;
 
     public float time = 0f;
     public float normalTime = 0f;
@@ -12,7 +14,6 @@ public class DayNightCycle : MonoBehaviour
     public int hour = 0;
     public int hour12 = 0;
     public bool isMorning = true;
-    public int totalDays = 5;
 
     public Vector2 sunPosition;
     public float groundToSunAngle = 0f;
@@ -26,7 +27,7 @@ public class DayNightCycle : MonoBehaviour
     public static readonly float secondsPerHour = 15f;
     public static readonly int hoursPerDay = 24;
     public static readonly int sunriseHour = 4;
-    public static readonly int sundownHour = 20;
+    public static readonly int sunsetHour = 20;
 
     public void Initialize(bool _clockActive = true)
     {
@@ -35,19 +36,26 @@ public class DayNightCycle : MonoBehaviour
 
     public void Refresh(float dt)
     {
-        if (clockActive)
-        {
-            time += dt;
-            UpdateDNC();
-        }
+        if (!stateIsDaytime)
+            NightUpdate(dt);
+        else if (clockActive)
+            DayUpdate(dt);
     }
 
-    public float GetSunAngle()
+    private void DayUpdate(float dt)
     {
-        return GV.GetAngle(sunPosition);
+        time += dt;
+        UpdateDNC();
+        if (isDaytime != stateIsDaytime)
+            BeginNight();
     }
 
-    public void UpdateDNC()
+    private void NightUpdate(float dt)
+    {
+
+    }
+
+    private void UpdateDNC()
     {
         normalTime = (time / secondsPerHour) + normalTimeOffset;
         day = (int)(normalTime / hoursPerDay);
@@ -56,6 +64,8 @@ public class DayNightCycle : MonoBehaviour
         if (hour12 == 0)
             hour12 = (int)(hoursPerDay * 0.5f);
         isMorning = (hour < hoursPerDay * 0.5f);
+        float hourFloat = normalTime % hoursPerDay;
+        isDaytime = (hourFloat >= sunriseHour && hourFloat < sunsetHour);
 
         sunPosition = GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 1f, -0.5f);
         groundToSunAngle = GV.GetAngle(sunPosition);
@@ -69,11 +79,21 @@ public class DayNightCycle : MonoBehaviour
         SpriteTinter.Instance.UpdateSpriteTints(1f - Mathf.Pow(illumination - 1f, 2f), playerIlluminationOffset);
     }
 
-    public void SetTime(int _day, int _hour)
+    private void BeginNight()
+    {
+
+    }
+
+    private void BeginDay()
+    {
+
+    }
+
+    public void SetTime(int _day, float _hourFloat)
     {
         _day = _day % 7;
-        _hour = _hour % hoursPerDay;
-        float nTime = _day * hoursPerDay + _hour;
+        _hourFloat = _hourFloat % hoursPerDay;
+        float nTime = _day * hoursPerDay + _hourFloat;
         time = (nTime - normalTimeOffset) * secondsPerHour;
         UpdateDNC();
     }
@@ -105,5 +125,10 @@ public class DayNightCycle : MonoBehaviour
     public void SetClockActive(bool _clockActive)
     {
         clockActive = _clockActive;
+    }
+
+    public float GetSunAngle()
+    {
+        return GV.GetAngle(sunPosition);
     }
 }

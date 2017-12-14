@@ -41,9 +41,9 @@ public class GV {
     public static readonly float raincloudShadowAlpha = .4f;
 
     public static readonly int LastTutorialProgressPoint = 6;
-    public static readonly float waterPerDrop = .04f;
+    public static readonly float waterPerDrop = .03f;
         //see Raindrop.OnTriggerEnter2D(): waterDelta is weighted so that rain is worth more when you're lower on water and less when you're higher.
-        //Current setting (may be too extreme): At 0% water, the value of a drop is equal to waterPerDrop. At 100% water, a drop's value would be equal to (waterPerDrop / 4).
+        //Current setting: At 0% water, the value of a drop is equal to waterPerDrop. At 100% water, a drop's value would be equal to (waterPerDrop / 3).
 
     public static bool Paused = false;
 
@@ -190,35 +190,6 @@ public class GV {
 
     public static string GetWeekdayString(int day)
     {
-        day = day % 7;
-        string weekdayString;
-        switch (day)
-        {
-            case 0:
-                weekdayString = "MONDAY";
-                break;
-            case 1:
-                weekdayString = "TUESDAY";
-                break;
-            case 2:
-                weekdayString = "WEDNESDAY";
-                break;
-            case 3:
-                weekdayString = "THURSDAY";
-                break;
-            case 4:
-                weekdayString = "FRIDAY";
-                break;
-            case 5:
-                weekdayString = "SATURDAY";
-                break;
-            case 6:
-                weekdayString = "SUNDAY";
-                break;
-            default:
-                weekdayString = "";
-                break;
-        }
-        return weekdayString;
+        return LangDict.Instance.GetText("Day" + (day % 7));
     }
 }
