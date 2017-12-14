@@ -13,9 +13,9 @@ public class Aphid : MonoBehaviour {
     bool headingRight = true;
     float progress = 0;
     public bool isOutCold { get { return outCold > 0; } }
-    GameObject koAnimation;
+	public Animator anim;
 	Vector2 verticalOffset;
-
+	bool hasRecover = true;
 
     
     public void Initialize(Platform _parentPlatform)
@@ -26,8 +26,13 @@ public class Aphid : MonoBehaviour {
 		sr.flipX = !headingRight;
 		verticalOffset = new Vector2(0,transform.localScale.y / 2 + _parentPlatform.gameObject.transform.localScale.y / 2) * 0.4f;
 		transform.position = Vector3.Lerp(parentPlatform.GetSidePoint(headingRight) + verticalOffset, parentPlatform.GetSidePoint(!headingRight) + verticalOffset,progress);
-		koAnimation = transform.GetChild(0).gameObject;
     }
+
+	public void EndRecoveryAnimation(){
+		//called from within animator to indicate end of recovery animation
+		flopColliders ();
+		hasRecover = true;
+	}
 
     public void HoppedOn()
     {
@@ -35,24 +40,22 @@ public class Aphid : MonoBehaviour {
         {
             Debug.Log("Hopped on Aphid");
             outCold = outColdMax;
-            koAnimation.SetActive(true);
+			anim.SetTrigger ("Die");
 			flopColliders ();
+			hasRecover = false;
         }
     }
   
     public void Refresh(float dt)
     {
-        if(outCold > 0)
-        {
-            outCold -= dt;
-            if (outCold <= 0)
-            {
-                outCold = 0;
-                koAnimation.SetActive(false);
-				flopColliders ();
-            }
-        }
-        else
+		if (outCold > 0) {
+			outCold -= dt;
+			if (outCold <= 0) {
+				outCold = 0;
+				anim.SetTrigger ("Recover");
+			}
+		}
+		else if (hasRecover) 
         {
             progress += (dt / timeToCrossPlatform);
             if(progress >= 1)
