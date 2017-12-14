@@ -74,6 +74,9 @@ TagManager:
   - name: foreground trees
     uniqueID: 3667843209
     locked: 0
+  - name: rocks back
+    uniqueID: 594588869
+    locked: 0
   - name: Platform
     uniqueID: 943831127
     locked: 0
@@ -91,4 +94,7 @@ TagManager:
     locked: 0
   - name: Popup
     uniqueID: 2843504725
+    locked: 0
+  - name: rocks front
+    uniqueID: 3086569933
     locked: 0
