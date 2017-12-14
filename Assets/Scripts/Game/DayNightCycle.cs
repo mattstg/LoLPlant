@@ -17,14 +17,13 @@ public class DayNightCycle : MonoBehaviour
 
     public Vector2 sunPosition;
     public float groundToSunAngle = 0f;
-    public float groundToSunMagnitude = 0f;
     public float ambientSunLevel = 1f;
     public float playerIlluminationOffset = 0f;
 
     public Transform sky;
 
     public static readonly float normalTimeOffset = 4f;
-    public static readonly float secondsPerHour = 15f;
+    public static readonly float secondsPerHour = 18.75f; //15: 4-minute daytime, 18.75: 5-minute daytime
     public static readonly int hoursPerDay = 24;
     public static readonly int sunriseHour = 4;
     public static readonly int sunsetHour = 20;
@@ -69,7 +68,6 @@ public class DayNightCycle : MonoBehaviour
 
         sunPosition = GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 1f, -0.5f);
         groundToSunAngle = GV.GetAngle(sunPosition);
-        groundToSunMagnitude = GV.GetDistance(sunPosition);
 
         ambientSunLevel = Mathf.Min(Mathf.Max(sunPosition.y, 0) * (2f / 3f) * 1.2f, 1f);
 

@@ -438,8 +438,7 @@ public class PopupManager : MonoBehaviour
         panelFader.FadeIn(1f);
         messageFader.FadeIn(1f, 0.5f);
 
-        if (messages[currentIndex].type == Message.Type.Info)
-            GV.ws.pc.SetInputActive(false);
+        GV.ws.pc.SetInputActive(messages[currentIndex].type == Message.Type.Prompt);
 
         LOLSDK.Instance.SpeakText(messages[currentIndex].message); //Read the message outloud here
     }
@@ -473,8 +472,7 @@ public class PopupManager : MonoBehaviour
             ZoomBounceInIcon(0.7f);
         }
 
-        if (messages[currentIndex].type == Message.Type.Info)
-            GV.ws.pc.SetInputActive(false);
+        GV.ws.pc.SetInputActive(messages[currentIndex].type == Message.Type.Prompt);
 
         LOLSDK.Instance.SpeakText(messages[currentIndex].message); //Read the message outloud here
     }
@@ -508,7 +506,7 @@ public class PopupManager : MonoBehaviour
             ZoomBounceInIcon(0.7f);
         }
 
-        GV.ws.pc.SetInputActive(true);
+        //GV.ws.pc.SetInputActive(true);
         LOLSDK.Instance.SpeakText("");
     }
 
@@ -548,23 +546,20 @@ public class PopupManager : MonoBehaviour
         }
         ApplyInputState(messages[currentIndex].type == Message.Type.Info);
 
+        //if (messages[currentIndex].type == Message.Type.Info)
+        //    GV.ws.pc.SetInputActive(false);
+        //else
+        //    GV.ws.pc.SetInputActive(true);
+
         if (callFlow)
             Flow();
-
-        if (messages[currentIndex].type == Message.Type.Info)
-            GV.ws.pc.SetInputActive(false);
-        else
-            GV.ws.pc.SetInputActive(true);
     }
 
     private void HasClosed()
     {
         Clear();
+        GV.ws.pc.SetInputActive(true);
         TAEventManager.Instance.ReceiveActionTrigger("ClosePopup");
-    }
-
-    public void ClosePopup()
-    {
     }
 
     public void MessageFadedForProceed()
