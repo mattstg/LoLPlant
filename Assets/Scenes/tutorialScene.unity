@@ -1109,7 +1109,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 649300505}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: -5765324120231101433, guid: 0000000000000000d000000000000000, type: 0}
@@ -2371,7 +2371,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1447278781}
   - component: {fileID: 1447278782}
-  m_Layer: 0
+  - component: {fileID: 1447278783}
+  - component: {fileID: 1447278784}
+  m_Layer: 12
   m_Name: shadowPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2410,6 +2412,40 @@ MonoBehaviour:
   shadowEdges:
   - {fileID: 2035790583}
   - {fileID: 1875964618}
+--- !u!68 &1447278783
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1447278780}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -8.373751, y: -0.44543922}
+  - {x: -6.4031124, y: -1.7744586}
+--- !u!68 &1447278784
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1447278780}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -8.333094, y: -0.17643791}
+  - {x: -6.2873907, y: -1.2447623}
 --- !u!4 &1453844938 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4263938468097906, guid: 076f4b56a2130a24a8cd7f7a297556b6,
@@ -2895,7 +2931,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1855471268}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: -5765324120231101433, guid: 0000000000000000d000000000000000, type: 0}
@@ -2923,7 +2959,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1875964618}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: -5765324120231101433, guid: 0000000000000000d000000000000000, type: 0}
@@ -2954,7 +2990,8 @@ GameObject:
   - component: {fileID: 1889822372}
   - component: {fileID: 1889822371}
   - component: {fileID: 1889822370}
-  m_Layer: 0
+  - component: {fileID: 1889822373}
+  m_Layer: 13
   m_Name: cloudsPNG_24
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3049,6 +3086,23 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!68 &1889822373
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1889822368}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -1.47}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -1.8465346, y: 0.018045664}
+  - {x: 1.6661599, y: 0.018045664}
 --- !u!4 &1934233737 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4263938468097906, guid: 076f4b56a2130a24a8cd7f7a297556b6,
@@ -3285,7 +3339,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2035790583}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: -5765324120231101433, guid: 0000000000000000d000000000000000, type: 0}

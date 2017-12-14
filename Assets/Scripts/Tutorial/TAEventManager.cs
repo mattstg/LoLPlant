@@ -44,8 +44,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TACreatePopup(new Message("GatherSun", Message.Type.Prompt, Message.Position.Right)));
                 taQueue.Enqueue(new TACreatePopup(new Message("ControlsKey", Message.Type.Info, Message.Position.Left)));
                 taQueue.Enqueue(new TACreatePopup(new Message("ControlsTouch", Message.Type.Info, Message.Position.Top)));
-                taQueue.Enqueue(new TATimer("Timer", 12));
-                taQueue.Enqueue(new TATrigger("Timer"));
+                taQueue.Enqueue(new TATrigger("Sun"));
                 taQueue.Enqueue(new TAPromptSuccess("GatherSun"));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TAActivate("DashboardSun", true));
@@ -68,9 +67,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TACreatePopup(new Message("Sugar")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TAFreezeChar(true));
-                taQueue.Enqueue(new TAActivate("Aphids", true));
-                taQueue.Enqueue(new TATrigger("AphidDamage"));
-                taQueue.Enqueue(new TAActivate("Aphids", false));
+                
                 taQueue.Enqueue(new TAFreezeChar(false));
                 taQueue.Enqueue(new TACreatePopup(new Message("SugarGrowthRate")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
@@ -82,6 +79,7 @@ public class TAEventManager
             case 4:
                 taQueue.Enqueue(new TACreatePopup(new Message("Escape", Message.Type.Prompt)));
                 taQueue.Enqueue(new TAActivate("Platforms", true));
+                taQueue.Enqueue(new TAActivate("Aphids", true));
                 taQueue.Enqueue(new TATrigger("FinalPlatform"));
                 // TAPromptSuccess
                 taQueue.Enqueue(new TAFreezeChar(true));

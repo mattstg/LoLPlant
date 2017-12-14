@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour {
             body.velocity = new Vector2(maxSpeed * Mathf.Sign(body.velocity.x),body.velocity.y);
 	}
 
-    public void OnCollisionEnter2D(Collision2D coli)
+    public virtual void OnCollisionEnter2D(Collision2D coli)
     {
         switch(coli.gameObject.tag)
         {
