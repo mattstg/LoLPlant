@@ -14,6 +14,7 @@ public class Aphid : MonoBehaviour {
     float progress = 0;
     public bool isOutCold { get { return outCold > 0; } }
     GameObject koAnimation;
+	Vector2 verticalOffset;
 
 
     
@@ -23,7 +24,8 @@ public class Aphid : MonoBehaviour {
         parentPlatform = _parentPlatform;
 		headingRight = Random.Range (0, 2) == 0;
 		sr.flipX = !headingRight;
-		transform.position = Vector3.Lerp(parentPlatform.GetSidePoint(headingRight) + new Vector2(0,transform.localScale.y/2), parentPlatform.GetSidePoint(!headingRight) + new Vector2(0,transform.localScale.y/2),progress);
+		verticalOffset = new Vector2(0,transform.localScale.y / 2 + _parentPlatform.gameObject.transform.localScale.y / 2) * 0.4f;
+		transform.position = Vector3.Lerp(parentPlatform.GetSidePoint(headingRight) + verticalOffset, parentPlatform.GetSidePoint(!headingRight) + verticalOffset,progress);
 		koAnimation = transform.GetChild(0).gameObject;
     }
 
@@ -60,7 +62,7 @@ public class Aphid : MonoBehaviour {
 				sr.flipX = !headingRight;
             }
         }
-		transform.position = Vector3.Lerp(parentPlatform.GetSidePoint(headingRight) + new Vector2(0,transform.localScale.y/2), parentPlatform.GetSidePoint(!headingRight) + new Vector2(0,transform.localScale.y/2), progress);
+		transform.position = Vector3.Lerp(parentPlatform.GetSidePoint(headingRight) + verticalOffset, parentPlatform.GetSidePoint(!headingRight) + verticalOffset,progress);
     }
 		
 	public void OnTriggerEnter2D(Collider2D other){
