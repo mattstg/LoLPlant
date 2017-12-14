@@ -11,5 +11,6 @@ public class TutorialPC : PlayerController {
                 TAEventManager.Instance.ReceiveActionTrigger("Aphid");
                 break;
         }
+        base.OnCollisionEnter2D(coli);
     }
 }
