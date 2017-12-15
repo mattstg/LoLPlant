@@ -9,24 +9,25 @@ public class ShadowManager : MonoBehaviour {
     List<Material> allPlatformMaterials = new List<Material>();
     List<Material> allCloudMaterials = new List<Material>();
 
-    readonly float defaultShadowAlpha = 100/255f;
-    readonly float defaultCloudShadowAlpha = 150/255f;
-    readonly float currentShadowIntensity = 1;
+    readonly float defaultShadowAlpha = 80/255f;
+    readonly float defaultCloudShadowAlpha = 120/255f;
     readonly float sunAngleMaxAlpha = 25;
+    readonly float sunAngleMinAlpha = 8;
+    float alphaLastTurn = 1;
+
 
     public void Initialize()
     {
         //At this point, shadows have not called Awake yet, so no shadows
     }
 
-    public static float alphaLastTurn = 1;
     public void Refresh()
     {
         float sunAngle = GV.ws.dnc.GetSunAngle();
         float angleReduced = Mathf.Min(sunAngle, 180 - sunAngle);
         float setAlpha;
         if (angleReduced <= sunAngleMaxAlpha)
-            setAlpha = Mathf.Clamp01(angleReduced / sunAngleMaxAlpha);
+            setAlpha = Mathf.Clamp01((angleReduced - sunAngleMinAlpha) / (sunAngleMaxAlpha - sunAngleMinAlpha));
         else
             setAlpha = 1;
 
