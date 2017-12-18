@@ -60,6 +60,7 @@ public class DashboardManager : MonoBehaviour
 
     private Plant plant;
 
+    public Bouncer heightBouncer;
     public Bouncer foodBouncer;
 
     public void Initialize()
@@ -71,6 +72,7 @@ public class DashboardManager : MonoBehaviour
         if (waterControl)
             waterControl.onValueChanged.AddListener(delegate { WaterControlValueChanged(); });
         foodBouncer.InitializeBouncer();
+        heightBouncer.InitializeBouncer();
     }
 
     public void Refresh(float dt)
@@ -83,7 +85,7 @@ public class DashboardManager : MonoBehaviour
         UpdateSundial();
         UpdateDayText();
         UpdateHourText();
-        UpdateHeightText();
+        UpdateHeight(dt);
 
         if (fpsOverride)    //dev feature: psMeter shows fps instead
         {
@@ -95,20 +97,23 @@ public class DashboardManager : MonoBehaviour
     public void UpdateControls()
     {
         if (sunControl)
-            sunControl.value = GV.ws.plant.sun;
+        {
+            //sunControl.value = plant.sun;
+            sunControl.value = Mathf.Clamp01(GV.ws.dnc.sunPosition.y * (2f / 3f));
+        }
         if (waterControl)
-            waterControl.value = GV.ws.plant.water;
+            waterControl.value = plant.water;
     }
 
     public void SunControlValueChanged()
     {
-        GV.ws.plant.shadowFactor = Mathf.Min(sunControl.value / GV.ws.dnc.ambientSunLevel, 1f);
-        GV.ws.plant.sun = GV.ws.dnc.ambientSunLevel * GV.ws.plant.shadowFactor;
+        //plant.shadowFactor = Mathf.Min(sunControl.value / GV.ws.dnc.ambientSunLevel, 1f);
+        //plant.sun = GV.ws.dnc.ambientSunLevel * plant.shadowFactor;
     }
 
     public void WaterControlValueChanged()
     {
-        GV.ws.plant.water = waterControl.value;
+        plant.water = waterControl.value;
     }
 
     public void UpdateInputs()
@@ -251,9 +256,12 @@ public class DashboardManager : MonoBehaviour
         amPmText.text = (GV.ws.dnc.isMorning) ? "am" : "pm";
     }
 
-    public void UpdateHeightText()
+    public void UpdateHeight(float dt)
     {
-
+        bool lockRequested = heightBouncer.lockRequested = true;    //should be false iff converting food to height at night
+        if (!lockRequested)
+            heightBouncer.locked = false;
+        heightBouncer.UpdateBouncer(dt);
     }
 
     public void ShowNextElementSet()
