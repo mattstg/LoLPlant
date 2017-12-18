@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 114816959244526842}
   - component: {fileID: 114237299870352174}
   m_Layer: 5
-  m_Name: ExitGameButton
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 114872366586016272}
   - component: {fileID: 114285577340308752}
   m_Layer: 5
-  m_Name: PlayAgainButton
+  m_Name: ReplayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1433,7 +1433,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupParent: {fileID: 224344248389458882}
   messageRect: {fileID: 224280436138830242}
+  buttonsParent: {fileID: 224695485762774678}
   messageText: {fileID: 114470025180257156}
+  replayText: {fileID: 114300674787142590}
+  exitText: {fileID: 114765403371781706}
   messageSpaceLE: {fileID: 114165791460239394}
   panelFader: {fileID: 114820879020398450}
   messageFader: {fileID: 114823613630137384}
@@ -1443,6 +1446,10 @@ MonoBehaviour:
   - {fileID: 114474512705623082}
   - {fileID: 114140454198642232}
   checkFader: {fileID: 114329070073762494}
+  replayButtonFader: {fileID: 114285577340308752}
+  replayTextFader: {fileID: 114158732984792964}
+  exitButtonFader: {fileID: 114237299870352174}
+  exitTextFader: {fileID: 114587676323403960}
   arrowBouncer: {fileID: 114688830394163228}
   dotsBouncers:
   - {fileID: 114406094358067198}
