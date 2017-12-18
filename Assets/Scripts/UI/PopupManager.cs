@@ -50,19 +50,22 @@ public class PopupManager : MonoBehaviour
     private Icon icon;
     private List<Message> messages;
     private int currentIndex;
-    private float transitionProgress = 2f;
-    private readonly float transitionDuration = 3f;
+    private float transitionProgress = -1f;
+    private readonly float openingDuration = 3f;
+    private readonly float proceedingDuration = 3f;
     private readonly float promptProceedDelay = 3f;
 
     private bool updatePosition = false;
     private bool updatePanel = false;
     private bool updateMessage = false;
+    private bool updateButtons = false;
     private bool updateMessageSpace = false;
     private bool updateIcon = false;     
 
     private bool inputAccepted = false;
     private bool arrowSelected = false;
 
+    private bool buttonsActive = false;
     private readonly float buttonsExtraHeight = 60f;
     private Vector2 messageSpaceDimensions = new Vector2(120f, 30f);
     private Vector2 msdVelocity = Vector2.zero;
@@ -71,11 +74,18 @@ public class PopupManager : MonoBehaviour
     public void Initialize()
     {
         messages = new List<Message>();
+        InitializeButtonText();
         InitializeArrow();
         InitializeFaders();
         InitializeBouncers();
         InitializeZoomBouncers();
         Clear();
+    }
+
+    private void InitializeButtonText()
+    {
+        replayText.text = LangDict.Instance.GetText("PlayAgain");
+        exitText.text = LangDict.Instance.GetText("ExitGame");
     }
 
     private void InitializeArrow()
@@ -88,6 +98,12 @@ public class PopupManager : MonoBehaviour
     {
         panelFader.InitializeFader();
         messageFader.InitializeFader();
+
+        replayButtonFader.InitializeFader();
+        replayTextFader.InitializeFader();
+        exitButtonFader.InitializeFader();
+        exitTextFader.InitializeFader();
+
         arrowFader.InitializeFader();
         foreach (Fader f in dotsFaders)
             f.InitializeFader();
@@ -128,11 +144,17 @@ public class PopupManager : MonoBehaviour
 
         panelFader.SetPresentAlpha(0f);
         messageFader.SetPresentAlpha(0f);
+        replayButtonFader.SetPresentAlpha(0f);
+        replayTextFader.SetPresentAlpha(0f);
+        exitButtonFader.SetPresentAlpha(0f);
+        exitTextFader.SetPresentAlpha(0f);
         popupParent.gameObject.SetActive(false);
+        SetButtonsActive(false);
 
         updatePosition = false;
         updatePanel = false;
         updateMessage = false;
+        updateButtons = false;
         updateMessageSpace = false;
         updateIcon = false;
     }
@@ -167,6 +189,8 @@ public class PopupManager : MonoBehaviour
             UpdatePanel(dt);
         if (updateMessage)
             UpdateMessage(dt);
+        if (updateButtons)
+            UpdateButtons(dt);
         if (updateMessageSpace)
             UpdateMessageSpace(dt);
         if (updateIcon)
@@ -174,8 +198,10 @@ public class PopupManager : MonoBehaviour
 
         if ((state == State.Opening || state == State.Proceeding) && transitionProgress >= 0f)
         {
+            float transitionDuration = (state == State.Opening) ? openingDuration : proceedingDuration;
+            transitionDuration += (state == State.Proceeding && messages[currentIndex - 1].type == Message.Type.Prompt) ? promptProceedDelay : 0f;
             transitionProgress += dt;
-            if (transitionProgress >= transitionDuration + ((state == State.Proceeding && messages[currentIndex - 1].type == Message.Type.Prompt) ? promptProceedDelay : 0f))
+            if (transitionProgress >= transitionDuration)
             {
                 transitionProgress = -1f;
                 targetState = State.Open;
@@ -208,12 +234,20 @@ public class PopupManager : MonoBehaviour
     private void UpdateMessage(float dt)
     {
         messageFader.UpdateFader(dt);
-        messageZoomBouncer.UpdateZoomBouncer(dt);
+    }
+
+    private void UpdateButtons(float dt)
+    {
+        replayButtonFader.UpdateFader(dt);
+        replayTextFader.UpdateFader(dt);
+        exitButtonFader.UpdateFader(dt);
+        exitTextFader.UpdateFader(dt);
     }
 
     private void UpdateMessageSpace(float dt)
     {
-        Vector2 messageTextDimensions = new Vector2((float)((int)(messageRect.rect.width / 2f) * 2), (float)((int)(messageRect.rect.height / 2f) * 2));
+        float extraHeight = (buttonsActive) ? buttonsExtraHeight : 0f;
+        Vector2 messageTextDimensions = new Vector2((float)((int)(messageRect.rect.width / 2f) * 2), (float)((int)((messageRect.rect.height + extraHeight) / 2f) * 2));
         float nearZeroMargin = 0.1f;
         if (Mathf.Abs(messageTextDimensions.x - messageSpaceDimensions.x) > nearZeroMargin || Mathf.Abs(messageTextDimensions.y - messageSpaceDimensions.y) > nearZeroMargin)
         {
@@ -367,6 +401,12 @@ public class PopupManager : MonoBehaviour
         }
     }
 
+    private void SetButtonsActive(bool active)
+    {
+        buttonsActive = active;
+        buttonsParent.gameObject.SetActive(buttonsActive);
+    }
+
     private void Flow()
     {
         if (state != targetState)
@@ -431,13 +471,14 @@ public class PopupManager : MonoBehaviour
 
     private void BeginOpening()
     {
+        currentIndex = 0;
+
         updatePanel = true;
         updateMessage = true;
         updateMessageSpace = true;
 
         transitionProgress = 0f;
 
-        currentIndex = 0;
         messageText.text = messages[currentIndex].message;
         popupParent.anchorMin = popupParent.anchorMax = targetPosition = currentPosition = GetPositionVector(messages[currentIndex].position);
         ApplyInputState(false);
@@ -445,6 +486,7 @@ public class PopupManager : MonoBehaviour
         popupParent.gameObject.SetActive(true);
         panelFader.FadeIn(1f);
         messageFader.FadeIn(1f, 0.5f);
+        SetButtonsActive(messages[currentIndex].type == Message.Type.Endgame);
 
         GV.ws.pc.SetInputActive(messages[currentIndex].type == Message.Type.Prompt);
 
@@ -453,17 +495,26 @@ public class PopupManager : MonoBehaviour
 
     private void BeginProceeding()
     {
+        currentIndex += 1;
+        bool wasEndgameMessage = (messages[currentIndex - 1].type == Message.Type.Endgame);
+
         updatePosition = true;
         updateMessage = true;
-        updateMessageSpace = true;
+        updateButtons = wasEndgameMessage;
         updateIcon = true;
-
-        currentIndex += 1;
 
         transitionProgress = 0f;
         ApplyInputState(false);
 
-        if (messages[currentIndex - 1].type == Message.Type.Info)
+        if (wasEndgameMessage)
+        {
+            messageFader.FadeOut(1f, 0.5f, MessageFadedForProceed);
+            replayButtonFader.FadeOut(0.7f);
+            replayTextFader.FadeOut(0.7f);
+            exitButtonFader.FadeOut(0.7f);
+            exitTextFader.FadeOut(0.7f);
+        }
+        else if (messages[currentIndex - 1].type == Message.Type.Info)
         {
             messageFader.FadeOut(1f, 0.5f, MessageFadedForProceed);
             ZoomBounceOutIcon(0.7f);
@@ -489,14 +540,25 @@ public class PopupManager : MonoBehaviour
     {
         //Force end text reading
 
+        bool isEndgameMessage = (messages[currentIndex].type == Message.Type.Endgame);
+
         updatePanel = true;
         updateMessage = true;
-        updateIcon = true;
+        updateButtons = isEndgameMessage;
+        updateIcon = !isEndgameMessage;
 
-        transitionProgress = 0f;
         ApplyInputState(false);
 
-        if (messages[currentIndex].type == Message.Type.Info)
+        if (isEndgameMessage)
+        {
+            panelFader.FadeOut(1f, 1f, PanelFadedForClose);
+            messageFader.FadeOut(1f, 0.5f);
+            replayButtonFader.FadeOut(0.7f);
+            replayTextFader.FadeOut(0.7f);
+            exitButtonFader.FadeOut(0.7f);
+            exitTextFader.FadeOut(0.7f);
+        }
+        else if (messages[currentIndex].type == Message.Type.Info)
         {
             panelFader.FadeOut(1f, 1f, PanelFadedForClose);
             messageFader.FadeOut(1f, 0.5f);
@@ -520,14 +582,19 @@ public class PopupManager : MonoBehaviour
 
     private void HasOpened()
     {
+        bool isEndgameMessage = (messages[currentIndex].type == Message.Type.Endgame);
+
         updatePosition = false;
         updatePanel = false;
         updateMessage = false;
-        updateMessageSpace = true; // false; //also, UpdateMessageSpace(): uncomment "updateMessageSpace = false;"
-        updateIcon = true;
+        updateButtons = isEndgameMessage;
+        updateMessageSpace = isEndgameMessage;
+        updateIcon = !isEndgameMessage;
 
         bool callFlow = false;
-        if (messages[currentIndex].type == Message.Type.Info)
+        if (isEndgameMessage)
+            icon = Icon.None;
+        else if (messages[currentIndex].type == Message.Type.Info)
             icon = Icon.Arrow;
         else
         {
@@ -552,7 +619,15 @@ public class PopupManager : MonoBehaviour
                 f.gameObject.SetActive(false);
             }
         }
-        ApplyInputState(messages[currentIndex].type == Message.Type.Info);
+        if (isEndgameMessage)
+        {
+            buttonsParent.gameObject.SetActive(true);
+            replayButtonFader.FadeIn(0.5f);
+            replayTextFader.FadeIn(0.5f);
+            exitButtonFader.FadeIn(0.5f);
+            exitTextFader.FadeIn(0.5f);
+        }
+        ApplyInputState(messages[currentIndex].type != Message.Type.Prompt);
 
         //if (messages[currentIndex].type == Message.Type.Info)
         //    GV.ws.pc.SetInputActive(false);
@@ -574,7 +649,10 @@ public class PopupManager : MonoBehaviour
     {
         if (state == State.Proceeding)
         {
+            updateMessageSpace = true;
+            updateButtons = messages[currentIndex].type == Message.Type.Endgame;
             updateIcon = false;
+            SetButtonsActive(updateButtons);
             icon = Icon.None;
 
             if (messages[currentIndex].position != messages[currentIndex - 1].position)

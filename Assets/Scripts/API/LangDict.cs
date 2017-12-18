@@ -35,7 +35,7 @@ public class LangDict {
     {
         try
         {
-            //Not spouse to use language?
+            //Not supposed to use language?
             return langNode[keyName].Value;
         }
         catch

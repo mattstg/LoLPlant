@@ -69,11 +69,11 @@ public class DayNightCycle : MonoBehaviour
         sunPosition = GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 1f, -0.5f);
         groundToSunAngle = GV.GetAngle(sunPosition);
 
-        ambientSunLevel = Mathf.Min(Mathf.Max(sunPosition.y, 0) * (2f / 3f) * 1.2f, 1f);
+        ambientSunLevel = Mathf.Clamp01(sunPosition.y * (2f / 3f) * 1.2f);
 
         sky.localPosition = new Vector3(sky.localPosition.x, GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 12.4f, 0f).y, sky.localPosition.z);
 
-        float illumination = Mathf.Clamp(GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 2f / 3f, -0.5f).y, 0f, 1f);
+        float illumination = Mathf.Clamp01(GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 2f / 3f, -0.5f).y);
         SpriteTinter.Instance.UpdateSpriteTints(1f - Mathf.Pow(illumination - 1f, 2f), playerIlluminationOffset);
     }
 
