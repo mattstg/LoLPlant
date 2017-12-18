@@ -34,6 +34,7 @@ public class TAEventManager
         {
             case 1:
                 //
+                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Sliders, false));
                 taQueue.Enqueue(new TASetDNC(false, 12, 0));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardNone, true));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
@@ -42,7 +43,6 @@ public class TAEventManager
                 taQueue.Enqueue(new TATimer("Timer", 2));
                 taQueue.Enqueue(new TATrigger("Timer"));
                 taQueue.Enqueue(new TACreatePopup(new Message("SunReq")));
-                taQueue.Enqueue(new TACreatePopup(new Message("GameOver", Message.Type.Endgame, Message.Position.Center)));
                 taQueue.Enqueue(new TACreatePopup(new Message("GatherSun", Message.Type.Prompt)));
                 taQueue.Enqueue(new TACreatePopup(new Message("ControlsKey", Message.Type.Info)));
                 taQueue.Enqueue(new TACreatePopup(new Message("ControlsTouch", Message.Type.Info)));

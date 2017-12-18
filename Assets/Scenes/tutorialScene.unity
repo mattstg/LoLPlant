@@ -1889,10 +1889,8 @@ MonoBehaviour:
   hour: 0
   hour12: 0
   isMorning: 1
-  totalDays: 5
   sunPosition: {x: 0, y: 0}
   groundToSunAngle: 0
-  groundToSunMagnitude: 0
   ambientSunLevel: 1
   playerIlluminationOffset: 0
   sky: {fileID: 1661590827}
@@ -2346,6 +2344,14 @@ Prefab:
         type: 2}
       propertyPath: m_LocalPosition.y
       value: -57
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617714232391400, guid: 0380f8fa15b33294588b7bd184be5d3c, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1289418806152258, guid: 0380f8fa15b33294588b7bd184be5d3c, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0380f8fa15b33294588b7bd184be5d3c, type: 2}
@@ -3074,7 +3080,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1495986879
-  m_SortingLayer: 13
+  m_SortingLayer: 14
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300048, guid: 638ea825f63ff2c4eb8bf92ec431bd27, type: 3}
   m_Color: {r: 0.8235294, g: 0.22404847, b: 0.22404847, a: 1}
@@ -3163,7 +3169,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 943831127
-  m_SortingLayer: 10
+  m_SortingLayer: 11
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d3217ebd3c6b7244797816c8400a3f2f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3507,7 +3513,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 943831127
-  m_SortingLayer: 10
+  m_SortingLayer: 11
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7bde6c86d6cbfa244ab3ee534290af97, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
