@@ -11,8 +11,11 @@ public class PopupManager : MonoBehaviour
 
     public RectTransform popupParent;
     public RectTransform messageRect;
+    public RectTransform buttonsParent;
 
     public Text messageText;
+    public Text replayText;
+    public Text exitText;
     public LayoutElement messageSpaceLE;
 
     public Fader panelFader;
@@ -20,6 +23,10 @@ public class PopupManager : MonoBehaviour
     public Fader arrowFader;
     public List<Fader> dotsFaders = new List<Fader>();
     public Fader checkFader;
+    public Fader replayButtonFader;
+    public Fader replayTextFader;
+    public Fader exitButtonFader;
+    public Fader exitTextFader;
 
     public Bouncer arrowBouncer;
     public List<Bouncer> dotsBouncers = new List<Bouncer>();
@@ -56,6 +63,7 @@ public class PopupManager : MonoBehaviour
     private bool inputAccepted = false;
     private bool arrowSelected = false;
 
+    private readonly float buttonsExtraHeight = 60f;
     private Vector2 messageSpaceDimensions = new Vector2(120f, 30f);
     private Vector2 msdVelocity = Vector2.zero;
     private float dampTime = 0.25f;

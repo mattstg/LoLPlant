@@ -51,8 +51,6 @@ public class ShadowManager : MonoBehaviour {
             }
         }
             
-        Debug.Log("Alpha would be: " + setAlpha);
-        Debug.Log("sun angle: " + GV.ws.dnc.GetSunAngle());
         foreach (Shadow s in shadows)
             s.Refresh();
     }

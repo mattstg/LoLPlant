@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Message
 {
-    public enum Type { Info, Prompt }
+    public enum Type { Info, Prompt, Endgame }
     public enum Position { Center, Top, Bottom, Left, Right }
 
     public string name;
