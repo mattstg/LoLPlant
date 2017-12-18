@@ -7,7 +7,7 @@ public class TASetDNC : TAEvent
     float timer;
     string eventName;
 
-    public TASetDNC(bool clockActive, int hour = -1, int day = -1) : base(TAEventType.Action)
+    public TASetDNC(bool clockActive, float hour = -1, int day = -1) : base(TAEventType.Action)
     {
         if (hour >= 0)
         {

@@ -28,14 +28,15 @@ public class TAEventManager
     public void Initialize(int progressPoint)
     {
         taQueue.Clear();
+        Debug.Log("setup for p point: " + progressPoint);
         //Setup the entire stack here
         switch (progressPoint)
         {
-            case 0:
+            case 1:
                 //
                 taQueue.Enqueue(new TASetDNC(false, 12, 0));
-                taQueue.Enqueue(new TAActivate("DashboardNone", true));
-                taQueue.Enqueue(new TAActivate("Aphids", false));
+                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardNone, true));
+                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
                 //taQueue.Enqueue(new TAActivate("Platforms", false));
                 taQueue.Enqueue(new TAFreezeChar(true,false));
                 taQueue.Enqueue(new TATimer("Timer", 2));
@@ -48,23 +49,23 @@ public class TAEventManager
                 taQueue.Enqueue(new TATrigger("Sun"));
                 taQueue.Enqueue(new TAPromptSuccess("GatherSun"));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
-                taQueue.Enqueue(new TAActivate("DashboardSun", true));
+                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardSun, true));
                 taQueue.Enqueue(new TATrigger("Sun"));
                 taQueue.Enqueue(new TACreatePopup(new Message("SunMeter")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
-                goto case 1;
-            case 1:
+                goto case 2;
+            case 2:
                 taQueue.Enqueue(new TACreatePopup(new Message("H20Req", Message.Type.Prompt)));
-                taQueue.Enqueue(new TAActivate("DashboardWater", true));
-                taQueue.Enqueue(new TAActivate("Clouds", true));
+                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardWater, true));
+                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, true));
                 taQueue.Enqueue(new TATrigger("Water"));
                 taQueue.Enqueue(new TAPromptSuccess("H20Req"));
                 taQueue.Enqueue(new TACreatePopup(new Message("Evaporation")));
                 taQueue.Enqueue(new TACreatePopup(new Message("ReqBothForSugar")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
-                goto case 2;
-            case 2:
-                taQueue.Enqueue(new TAActivate("DashboardFood", true));
+                goto case 3;
+            case 3:
+                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardFood, true));
                 taQueue.Enqueue(new TACreatePopup(new Message("Sugar")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TAFreezeChar(true));
@@ -72,15 +73,15 @@ public class TAEventManager
                 taQueue.Enqueue(new TAFreezeChar(false));
                 taQueue.Enqueue(new TACreatePopup(new Message("SugarGrowthRate")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
-                goto case 3;
-            case 3:
-                //Special lab popup
-                //Close button for special lab pressed
                 goto case 4;
             case 4:
+                //Special lab popup
+                //Close button for special lab pressed
+                goto case 5;
+            case 5:
                 taQueue.Enqueue(new TACreatePopup(new Message("Escape", Message.Type.Prompt)));
-                taQueue.Enqueue(new TAActivate("Platforms", true));
-                taQueue.Enqueue(new TAActivate("Aphids", true));
+                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Platforms, true));
+                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, true));
                 taQueue.Enqueue(new TATrigger("FinalPlatform"));
                 // TAPromptSuccess
                 taQueue.Enqueue(new TAFreezeChar(true));
@@ -91,9 +92,45 @@ public class TAEventManager
                 // HERE< SPECIAL END LEVEL POPUP
                 //ENDS LEVEL WHEN CLOSES
                 break;
+            case 6:
+                AddEndOfDayScene();
+                goto case 7;
+            case 7:
+                AddEndOfDayScene();
+                goto case 8;
+            case 8:
+                //Game end reached
+                taQueue.Enqueue(new TAFreezeChar(false, true));
+                taQueue.Enqueue(new TASetDNC(false));
+                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
+                //taQueue.Enqueue(new TACreatePopup(new Message("TheGrowthPanel", Message.Type.Endgame, Message.Position.Right)));
+                break;
+
         }
         ProcessStack();
     }
+
+    private void AddEndOfDayScene()
+    { //
+        taQueue.Enqueue(new TATrigger("NightTimeStart"));
+        taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids,false));
+        taQueue.Enqueue(new TAFreezeChar(true, true));
+        taQueue.Enqueue(new TACamZoom(GV.cameraGrowthZoom));
+        taQueue.Enqueue(new TASetDNC(false,DayNightCycle.sunsetHour));
+        taQueue.Enqueue(new TAPlayerTinter(1));
+        taQueue.Enqueue(new TAGrowthSequence(true));
+        taQueue.Enqueue(new TATrigger("GrowthSequenceDone"));
+        //taQueue.Enqueue(new TACreatePopup(new Message("TheGrowthPanel", Message.Type.Info, Message.Position.Right)));
+        //taQueue.Enqueue(new TACreatePopup(new Message("TheGrowthPanel", Message.Type.Endgame, Message.Position.Right)));
+        //trigger 
+        taQueue.Enqueue(new TASetDNC(true, DayNightCycle.sunriseHour));
+        taQueue.Enqueue(new TAFreezeChar(false, true));
+        taQueue.Enqueue(new TACamZoom(GV.cameraDefaultZoom));
+        taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, true));
+        //Reposition character
+    }
+
+
 
     public void RecieveLock(string newLock)
     {
@@ -102,10 +139,13 @@ public class TAEventManager
 
     private void ProcessStack()
     {
-        TAEvent nextEvent = taQueue.Dequeue();
-        nextEvent.PerformEvent();
-        if (nextEvent.eventType == TAEvent.TAEventType.Action)  //If it was an action, then the lock is not set, so do next action
-            ProcessStack();
+        if (taQueue.Count > 0)
+        {
+            TAEvent nextEvent = taQueue.Dequeue();
+            nextEvent.PerformEvent();
+            if (nextEvent.eventType == TAEvent.TAEventType.Action)  //If it was an action, then the lock is not set, so do next action
+                ProcessStack();
+        }
     }
 
     public void ReceiveActionTrigger(string triggerName)

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class TAActivate : TAEvent
 {
-    string toActivate;
+    public enum ActivateType { DashboardNext, DashboardNone, DashboardSun, DashboardWater, DashboardPhotosynthesis, DashboardFood, DashboardHeight, DashboardSundial, Platforms, Clouds, Aphids }
+    ActivateType toActivate;
     bool setActive;
     //activate meters, platforms, aphid
-    public TAActivate(string _toActivate, bool _setActive) : base(TAEventType.Action)
+    public TAActivate(ActivateType _toActivate, bool _setActive) : base(TAEventType.Action)
     {
         toActivate = _toActivate;
         setActive = _setActive;
@@ -17,37 +18,37 @@ public class TAActivate : TAEvent
     {
         switch(toActivate)
         {
-            case "Dashboard":
+            case ActivateType.DashboardNext:
                 GV.ws.dm.ShowNextElementSet();
                 break;
-            case "DashboardNone":
+            case ActivateType.DashboardNone:
                 GV.ws.dm.ShowElementSet(DashboardManager.DashboardElementSet.None);
                 break;
-            case "DashboardSun":
+            case ActivateType.DashboardSun:
                 GV.ws.dm.ShowElementSet(DashboardManager.DashboardElementSet.Sun);
                 break;
-            case "DashboardWater":
+            case ActivateType.DashboardWater:
                 GV.ws.dm.ShowElementSet(DashboardManager.DashboardElementSet.Water);
                 break;
-            case "DashboardPhotosynthesis":
+            case ActivateType.DashboardPhotosynthesis:
                 GV.ws.dm.ShowElementSet(DashboardManager.DashboardElementSet.Photosynthesis);
                 break;
-            case "DashboardFood":
+            case ActivateType.DashboardFood:
                 GV.ws.dm.ShowElementSet(DashboardManager.DashboardElementSet.Food);
                 break;
-            case "DashboardHeight":
+            case ActivateType.DashboardHeight:
                 GV.ws.dm.ShowElementSet(DashboardManager.DashboardElementSet.Height);
                 break;
-            case "DashboardSundial":
+            case ActivateType.DashboardSundial:
                 GV.ws.dm.ShowElementSet(DashboardManager.DashboardElementSet.All);
                 break;
-            case "Platforms":
+            case ActivateType.Platforms:
                 GV.ws.platformManager.SetPlatformsActive(setActive);
                 break;
-            case "Clouds":
+            case ActivateType.Clouds:
                 GV.ws.raincloudManager.gameObject.SetActive(setActive);
                 break;
-            case "Aphids":
+            case ActivateType.Aphids:
                 GV.ws.aphidManager.SetAphidsActive(setActive);
                 break;
         }

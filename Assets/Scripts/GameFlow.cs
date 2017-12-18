@@ -6,6 +6,11 @@ public class GameFlow : Flow
 {
     public override void Initialize(int progressNumber)
     {
+        if(progressNumber <= GV.LastTutorialProgressPoint)
+        {
+            Debug.Log("Progress point set for Tutorial but force loaded in gameFlow");
+            progressNumber = GV.LastTutorialProgressPoint + 1;
+        }
         GameObject.FindObjectOfType<WS>().LinkToGV(this);
         GV.ws.dnc.Initialize();
         GV.ws.plant.Initialize();
@@ -19,6 +24,7 @@ public class GameFlow : Flow
         GV.ws.shadowManager.Initialize();
 		GV.ws.aphidManager.Initialize();
         initialized = true;
+        TAEventManager.Instance.Initialize(progressNumber);
     }
 
     public override void Update(float dt)

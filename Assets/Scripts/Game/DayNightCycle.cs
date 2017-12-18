@@ -13,6 +13,7 @@ public class DayNightCycle : MonoBehaviour
     public int day = 0;
     public int hour = 0;
     public int hour12 = 0;
+    float hourFloat = 0;
     public bool isMorning = true;
 
     public Vector2 sunPosition;
@@ -27,6 +28,7 @@ public class DayNightCycle : MonoBehaviour
     public static readonly int hoursPerDay = 24;
     public static readonly int sunriseHour = 4;
     public static readonly int sunsetHour = 20;
+    public static readonly float lengthOfNight = 8f; //In seconds for the sequence to play out
 
     public void Initialize(bool _clockActive = true)
     {
@@ -63,7 +65,7 @@ public class DayNightCycle : MonoBehaviour
         if (hour12 == 0)
             hour12 = (int)(hoursPerDay * 0.5f);
         isMorning = (hour < hoursPerDay * 0.5f);
-        float hourFloat = normalTime % hoursPerDay;
+        hourFloat = normalTime % hoursPerDay;
         isDaytime = (hourFloat >= sunriseHour && hourFloat < sunsetHour);
 
         sunPosition = GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 1f, -0.5f);
@@ -75,6 +77,21 @@ public class DayNightCycle : MonoBehaviour
 
         float illumination = Mathf.Clamp01(GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 2f / 3f, -0.5f).y);
         SpriteTinter.Instance.UpdateSpriteTints(1f - Mathf.Pow(illumination - 1f, 2f), playerIlluminationOffset);
+
+        if(hourFloat >= sunsetHour)
+        {
+            TAEventManager.Instance.ReceiveActionTrigger("NightTimeStart");
+        }
+    }
+
+    public void StartGrowthSequence()
+    {
+        //Time should use GV.LengthOfNight, assumed starting at sunsetHour and ending at sunriseHour
+    }
+
+    public void SetPlayerTint(float newTintLevel)
+    {
+
     }
 
     private void BeginNight()

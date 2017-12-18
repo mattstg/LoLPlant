@@ -35,13 +35,18 @@ public class GV {
     public static readonly Vector2 raincloudSpeedInterpolaterRange = new Vector2(.001f, .006f) ;
     public static readonly Vector2 rainRateInterpolaterRange = new Vector2(.0005f, 004f);
 
+    public static readonly float cameraDefaultZoom = 2.88f;
+    public static readonly float cameraGrowthZoom  = 1.22f;
+
     //Shadows
     public static readonly float shadowBuffer = 60f;
     public static readonly float sunAngleBuffer = 2;
     public static readonly float raincloudShadowAlpha = .4f;
 
-    public static readonly int LastTutorialProgressPoint = 6;
+    public static readonly int LastTutorialProgressPoint = 4;    
     public static readonly float waterPerDrop = .03f;
+
+    
         //see Raindrop.OnTriggerEnter2D(): waterDelta is weighted so that rain is worth more when you're lower on water and less when you're higher.
         //Current setting: At 0% water, the value of a drop is equal to waterPerDrop. At 100% water, a drop's value would be equal to (waterPerDrop / 3).
 

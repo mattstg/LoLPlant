@@ -86,6 +86,12 @@ public class Plant : MonoBehaviour {
         waterDamp = Mathf.SmoothDamp(waterDamp, water, ref waterVelocity, dampTime, Mathf.Infinity, dt);
     }
 
+    public void BeginGrowthSequence()
+    {
+        float totalTimeToGrow = DayNightCycle.lengthOfNight;
+        //when finished send event: GrowthSequenceDone
+    }
+
     public void UpdatePhotosynthesis(float dt)
     {
         photosynthesis = sunFactor * waterFactor;
