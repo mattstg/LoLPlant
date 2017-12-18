@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TAActivate : TAEvent
 {
-    public enum ActivateType { DashboardNext, DashboardNone, DashboardSun, DashboardWater, DashboardPhotosynthesis, DashboardFood, DashboardHeight, DashboardSundial, Platforms, Clouds, Aphids }
+    public enum ActivateType { DashboardNext, DashboardNone, DashboardSun, DashboardWater, DashboardPhotosynthesis, DashboardFood, DashboardHeight, DashboardSundial, Platforms, Clouds, Aphids, Sliders }
     ActivateType toActivate;
     bool setActive;
     //activate meters, platforms, aphid
@@ -47,6 +47,8 @@ public class TAActivate : TAEvent
                 break;
             case ActivateType.Clouds:
                 GV.ws.raincloudManager.gameObject.SetActive(setActive);
+                break;
+            case ActivateType.Sliders:
                 break;
             case ActivateType.Aphids:
                 GV.ws.aphidManager.SetAphidsActive(setActive);

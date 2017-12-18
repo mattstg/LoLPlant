@@ -31,7 +31,8 @@ public class InputManager : MonoBehaviour {
             pc.KeysPressed(keysPressed, dt);
             inputProcessed = true;
         }
-
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+            GV.ws.popupManager.Next();
 
         //Mouse/touch click
         if (!inputProcessed)

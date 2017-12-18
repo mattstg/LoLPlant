@@ -22,7 +22,8 @@ public class ProgressTracker {
     #endregion
 
     public int maxProgress = 8;
-    public int score;
+    public int currentProgress = 1;
+    public int score = 0;
 
 	private ProgressTracker()
 	{        
@@ -36,6 +37,12 @@ public class ProgressTracker {
     public void ModScore(int _score)
     {
         score += _score;
+    }
+
+    public void SubmitAndIncrementProgress()
+    {
+        SubmitProgress(currentProgress, score);
+        currentProgress = Mathf.Clamp(currentProgress++,0,maxProgress);
     }
 
     public void SubmitProgress(int progressNumber, int progressScore)

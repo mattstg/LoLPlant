@@ -100,7 +100,7 @@ public class MainScript : MonoBehaviour
         switch (cs)
         {
             case CurrentState.MainMenu:
-                SceneManager.LoadScene("Scenes/menuScene");
+                SceneManager.LoadScene("Scenes/_init");
                 break;
             case CurrentState.Game:
                 SceneManager.LoadScene("Scenes/gameScene");

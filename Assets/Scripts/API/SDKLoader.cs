@@ -59,7 +59,7 @@ public class SDKLoader {
         catch
         {
             Debug.Log("Faulty LoL progress key, defaulted to zero");
-            MainScript.progressPoint = 0;
+            MainScript.progressPoint = 1;
         }
         try
         {

@@ -53,6 +53,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TATrigger("Sun"));
                 taQueue.Enqueue(new TACreatePopup(new Message("SunMeter")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 goto case 2;
             case 2:
                 taQueue.Enqueue(new TACreatePopup(new Message("H20Req", Message.Type.Prompt)));
@@ -63,6 +64,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TACreatePopup(new Message("Evaporation")));
                 taQueue.Enqueue(new TACreatePopup(new Message("ReqBothForSugar")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 goto case 3;
             case 3:
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardFood, true));
@@ -73,10 +75,14 @@ public class TAEventManager
                 taQueue.Enqueue(new TAFreezeChar(false));
                 taQueue.Enqueue(new TACreatePopup(new Message("SugarGrowthRate")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 goto case 4;
             case 4:
+                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Sliders, true));
                 //Special lab popup
                 //Close button for special lab pressed
+                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Sliders, false));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 goto case 5;
             case 5:
                 taQueue.Enqueue(new TACreatePopup(new Message("Escape", Message.Type.Prompt)));
@@ -108,7 +114,6 @@ public class TAEventManager
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
                 taQueue.Enqueue(new TACreatePopup(new Message("GameOver", Message.Type.Endgame, Message.Position.Right)));
                 break;
-
         }
         ProcessStack();
     }
@@ -129,6 +134,7 @@ public class TAEventManager
         taQueue.Enqueue(new TAFreezeChar(false, true));
         taQueue.Enqueue(new TACamZoom(GV.cameraDefaultZoom));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, true));
+        taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
         //Reposition character
     }
 
