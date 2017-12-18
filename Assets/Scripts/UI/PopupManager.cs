@@ -183,6 +183,9 @@ public class PopupManager : MonoBehaviour
 
     public void Refresh(float dt)
     {
+        if (Input.GetKeyDown(KeyCode.Return))
+            Next();
+
         if (updatePosition)
             UpdatePosition(dt);
         if (updatePanel)
