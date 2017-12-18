@@ -86,6 +86,7 @@ public class DayNightCycle : MonoBehaviour
 
     public void StartGrowthSequence()
     {
+        //Not take into account a set start time
         //Time should use GV.LengthOfNight, assumed starting at sunsetHour and ending at sunriseHour
     }
 

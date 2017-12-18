@@ -89,10 +89,13 @@ public class TAEventManager
                 taQueue.Enqueue(new TATrigger("Timer"));
                 taQueue.Enqueue(new TACreatePopup(new Message("SugarsToGrowth")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
+                //Zoom to sunset
+                AddEndOfDayScene();
                 // HERE< SPECIAL END LEVEL POPUP
                 //ENDS LEVEL WHEN CLOSES
                 break;
             case 6:
+                //Initial day popup
                 AddEndOfDayScene();
                 goto case 7;
             case 7:
@@ -103,7 +106,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TAFreezeChar(false, true));
                 taQueue.Enqueue(new TASetDNC(false));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
-                //taQueue.Enqueue(new TACreatePopup(new Message("TheGrowthPanel", Message.Type.Endgame, Message.Position.Right)));
+                taQueue.Enqueue(new TACreatePopup(new Message("GameOver", Message.Type.Endgame, Message.Position.Right)));
                 break;
 
         }
@@ -121,7 +124,6 @@ public class TAEventManager
         taQueue.Enqueue(new TAGrowthSequence(true));
         taQueue.Enqueue(new TATrigger("GrowthSequenceDone"));
         //taQueue.Enqueue(new TACreatePopup(new Message("TheGrowthPanel", Message.Type.Info, Message.Position.Right)));
-        //taQueue.Enqueue(new TACreatePopup(new Message("TheGrowthPanel", Message.Type.Endgame, Message.Position.Right)));
         //trigger 
         taQueue.Enqueue(new TASetDNC(true, DayNightCycle.sunriseHour));
         taQueue.Enqueue(new TAFreezeChar(false, true));
