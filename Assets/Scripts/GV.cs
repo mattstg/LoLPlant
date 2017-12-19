@@ -52,7 +52,7 @@ public class GV {
 
 
 	public static readonly float[] platformSpriteScales = { 0.4f, 0.5f, 0.8f, 1.0f, 1.2f, 1.4f, 1.5f};
-	public static readonly float platformHeight = 0.03f;
+	public static readonly float platformHeight = 0.07f;
 
     public static Sprite[] platformSprites;
     
