@@ -32,18 +32,24 @@ public class Plant : MonoBehaviour {
     private float foodVelocity = 0;
     
     public FoodLossState foodLossState = FoodLossState.Normal;
-    public float foodLossDelay = 2f;
+    private float foodLossDelay = 2f;
     private float foodLossCounter = 0f;
-    public float foodLossTarget = -1f;
+    private float foodLossTarget = -1f;
     public float foodLossDamp = 0;
     private float foodLossVelocity = 0;
     
     public float height = 0;
-    public float heightDamp = 0;
-    public int heightDampInt = 0;
-    private float heightVelocity = 0;
+    public int heightInt = 0;
+    public int oldHeightInt = -1;
+
     public bool isGrowing = false;
-    public float growthTime;
+    private float growthDuration = 8f;
+    private float growthProgress = 0f;
+    private float sourceFood = 0f;
+    private float targetFood = 1f;
+    private float sourceHeight = 0f;
+    private float targetHeight = 1f;
+    private float growthPerFood = 1f;
 
     public float highScore = 0;
     
@@ -52,7 +58,7 @@ public class Plant : MonoBehaviour {
     public void Initialize(float initialHeight)
     {
         height = initialHeight;
-        growthTime = 2f;
+        growthDuration = 2f;
     }
 
     public virtual void Refresh(float dt)
@@ -79,7 +85,6 @@ public class Plant : MonoBehaviour {
             shadowCount = 0;
         shadowFactor = Mathf.Clamp01(Mathf.Pow(GV.PlatformSunblock, shadowCount)); //numOfShadowsBlocking
         sun = Mathf.Clamp(GV.ws.dnc.ambientSunLevel * shadowFactor, 0, 1);
-        //sun = GV.ws.dnc.ambientSunLevel * (2f/3f);
         sunFactor = GV.SunFactor(sun);
         sunDamp = Mathf.SmoothDamp(sunDamp, sun, ref sunVelocity, dampTime, Mathf.Infinity, dt);
     }
@@ -90,12 +95,6 @@ public class Plant : MonoBehaviour {
         water = Mathf.Clamp(water, 0, 1);
         waterFactor = GV.WaterFactor(water);
         waterDamp = Mathf.SmoothDamp(waterDamp, water, ref waterVelocity, dampTime, Mathf.Infinity, dt);
-    }
-
-    public void BeginGrowthSequence()
-    {
-        float totalTimeToGrow = DayNightCycle.lengthOfNight;
-        //when finished send event: GrowthSequenceDone
     }
 
     public void UpdatePhotosynthesis(float dt)
@@ -112,14 +111,17 @@ public class Plant : MonoBehaviour {
 
     public void UpdateFood(float dt)
     {
+        float foodDampTime = dampTime * 2f;
+
         if (!isGrowing)
-            food += photosynthesis * dt;
-        float foodDampTime = (isGrowing) ? growthTime : dampTime * 2f;
-        foodDamp = Mathf.SmoothDamp(foodDamp, food, ref foodVelocity, foodDampTime, Mathf.Infinity, dt);
-        if (Mathf.Abs(foodDamp - food) < 0.01f)
         {
-            foodDamp = food;
-            foodVelocity = 0f;
+            food += photosynthesis * dt;
+            foodDamp = Mathf.SmoothDamp(foodDamp, food, ref foodVelocity, foodDampTime, Mathf.Infinity, dt);
+            if (Mathf.Abs(foodDamp - food) < 0.01f)
+            {
+                foodDamp = food;
+                foodVelocity = 0f;
+            }
         }
 
         switch (foodLossState)
@@ -161,17 +163,23 @@ public class Plant : MonoBehaviour {
     {
         if (isGrowing)
         {
-            if (Mathf.Abs(heightDamp - height) < 0.5f)
+            growthProgress += dt;
+
+            if (growthProgress >= growthDuration)
             {
+                growthProgress = growthDuration;
+                food = targetFood;
+                height = targetHeight;
                 isGrowing = false;
-                heightDamp = height;
-                heightDampInt = (int)heightDamp;
-                heightVelocity = 0f;
+                TAEventManager.Instance.ReceiveActionTrigger("GrowthComplete");
             }
             else
             {
-                heightDamp = Mathf.SmoothDamp(heightDamp, height, ref heightVelocity, growthTime);
-                heightDampInt = (int)heightDamp;
+                float integral = GV.SmoothIntegral(growthProgress / growthDuration);
+                food = foodDamp = targetFood * integral + sourceFood * (1f - integral);
+                height = targetHeight * integral + sourceHeight * (1f - integral);
+                oldHeightInt = heightInt;
+                heightInt = (int)height;
             }
         }
     }
@@ -205,6 +213,13 @@ public class Plant : MonoBehaviour {
 
     public void ConvertFoodToHeight()
     {
+        growthDuration = DayNightCycle.lengthOfNight;
+        growthProgress = 0f;
+        sourceFood = food;
+        targetFood = 0f;
+        sourceHeight = height;
+        targetHeight = height + (food * growthPerFood);
+
         if (food > 0)
         {
             float score = (food);
@@ -212,8 +227,15 @@ public class Plant : MonoBehaviour {
             if (scoreInt > highScore)
                 highScore = scoreInt;
             height += score;
-            food = 0f;
             isGrowing = true;
+        }
+        else
+        {
+            growthProgress = growthDuration;
+            food = targetFood;
+            height = targetHeight;
+            isGrowing = false;
+            TAEventManager.Instance.ReceiveActionTrigger("GrowthComplete");
         }
     }
 }

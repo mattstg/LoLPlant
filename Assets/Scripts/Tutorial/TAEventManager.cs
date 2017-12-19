@@ -127,7 +127,7 @@ public class TAEventManager
         taQueue.Enqueue(new TASetDNC(false,DayNightCycle.sunsetHour));
         taQueue.Enqueue(new TAPlayerTinter(1));
         taQueue.Enqueue(new TAGrowthSequence(true));
-        taQueue.Enqueue(new TATrigger("GrowthSequenceDone"));
+        taQueue.Enqueue(new TATrigger("GrowthComplete"));
         //taQueue.Enqueue(new TACreatePopup(new Message("TheGrowthPanel", Message.Type.Info, Message.Position.Right)));
         //trigger 
         taQueue.Enqueue(new TASetDNC(true, DayNightCycle.sunriseHour));
@@ -163,6 +163,7 @@ public class TAEventManager
             currentLock = "";
             ProcessStack();
         }
+        Debug.Log("EventManager.ReceiveTrigger(): " + triggerName);
     }
 	
 }

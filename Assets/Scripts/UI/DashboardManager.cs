@@ -253,12 +253,13 @@ public class DashboardManager : MonoBehaviour
     public void UpdateHourText()
     {
         hourText.text = GV.ws.dnc.hour12.ToString();
-        amPmText.text = (GV.ws.dnc.isMorning) ? "am" : "pm";
+        amPmText.text = (GV.ws.dnc.isMorning) ? "AM" : "PM";
     }
 
     public void UpdateHeight(float dt)
     {
-        heightText.text = plant.heightDampInt.ToString();
+        if (plant.height != plant.oldHeightInt)
+            heightText.text = plant.heightInt.ToString();
         bool lockRequested = heightBouncer.lockRequested = !plant.isGrowing;
         if (!lockRequested)
             heightBouncer.locked = false;

@@ -23,7 +23,6 @@ public class DayNightCycle : MonoBehaviour
 
     public Transform sky;
 
-    public static readonly float normalTimeOffset = 4f;
     public static readonly float secondsPerHour = 18.75f; //15: 4-minute daytime, 18.75: 5-minute daytime
     public static readonly int hoursPerDay = 24;
     public static readonly int sunriseHour = 4;
@@ -58,7 +57,7 @@ public class DayNightCycle : MonoBehaviour
 
     private void UpdateDNC()
     {
-        normalTime = (time / secondsPerHour) + normalTimeOffset;
+        normalTime = (time / secondsPerHour) + sunriseHour;
         day = (int)(normalTime / hoursPerDay);
         hour = (int)(normalTime % hoursPerDay);
         hour12 = (int)(normalTime % (hoursPerDay * 0.5f));
@@ -110,7 +109,7 @@ public class DayNightCycle : MonoBehaviour
         _day = _day % 7;
         _hourFloat = _hourFloat % hoursPerDay;
         float nTime = _day * hoursPerDay + _hourFloat;
-        time = (nTime - normalTimeOffset) * secondsPerHour;
+        time = (nTime - sunriseHour) * secondsPerHour;
         UpdateDNC();
     }
 

@@ -226,4 +226,24 @@ public class GV {
 			return new float[] { i, platformSpriteScales [i] };
 		return GetSpriteAndEdge (scale, i + (int) (Mathf.Abs (dif) / dif));
 	}
+
+    public static float SmoothVelocity(float progress)
+    {
+        if (progress >= 0 && progress <= 1)
+            return -4 * Mathf.Abs(progress - 0.5f) + 2;
+        else
+            return 0;
+    }
+
+    public static float SmoothIntegral(float progress)
+    {
+        if (progress < 0)
+            return 0;
+        else if (progress > 1)
+            return 1;
+        else if (progress <= 0.5)
+            return progress * SmoothVelocity(progress) / 2;
+        else
+            return 0.5f + ((progress - 0.5f) * (SmoothVelocity(progress) + 2) / 2);
+    }
 }
