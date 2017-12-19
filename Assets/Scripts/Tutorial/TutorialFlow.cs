@@ -23,7 +23,7 @@ public class TutorialFlow : Flow
         GV.ws.cloudManager.Initialize();
         GV.ws.shadowManager.Initialize();
         GV.ws.aphidManager.Initialize();        //Create all aphids, must be called after platform manager
-        GV.ws.raincloudManager.Initialize();
+        GV.ws.raincloudManager.Initialize(false);
         TAEventManager.Instance.Initialize(progressNumber);
         initialized = true;
     }

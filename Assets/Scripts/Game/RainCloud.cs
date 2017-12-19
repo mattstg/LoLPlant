@@ -14,6 +14,8 @@ public class RainCloud : Cloud, CastsShadow {
     protected float targetRainRate;
     protected int maxDropsPerFrame;
 
+    public bool castsShadow = true;
+
     protected Vector2 speedInterpolaterRange;
     protected Vector2 rainRateInterpolaterRange;
     protected float speedInterpolater;
@@ -21,11 +23,19 @@ public class RainCloud : Cloud, CastsShadow {
     protected float speedLerper = 0f;
     protected float rainRateLerper = 0f;
 
-    public override void Initialize()
+    public override void Initialize(bool singleLockedScreen)
     {
         speedRange = GV.raincloudSpeedRange;
-        altitudeRange = GV.raincloudAltitudeRange;
-        travelRange = GV.raincloudTravelRange;
+        if (!singleLockedScreen)
+        {
+            altitudeRange = GV.cloudAltitudeRange;
+            travelRange = GV.cloudTravelRange;
+        }
+        else
+        {
+            altitudeRange = GV.cloudSingleScreenAltitudeRange;
+            travelRange = GV.cloudSingleScreenTravelRange;
+        }
         rainRateRange = GV.rainRateRange;
         speedInterpolaterRange = GV.raincloudSpeedInterpolaterRange;
         rainRateInterpolaterRange = GV.rainRateInterpolaterRange;
@@ -44,7 +54,8 @@ public class RainCloud : Cloud, CastsShadow {
         if (this.transform.localPosition.x >= -1 * (GV.worldWidth / 2) && this.transform.localPosition.x <= GV.worldWidth / 2) //if cloud is over game world
             raining = true;
 
-        GV.ws.shadowManager.RegisterShadow(this, transform);   
+        if(castsShadow)
+            GV.ws.shadowManager.RegisterShadow(this, transform);   
     }
 
     public override void Refresh(float dt)

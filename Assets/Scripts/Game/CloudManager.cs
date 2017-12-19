@@ -9,14 +9,14 @@ public class CloudManager : MonoBehaviour {
     
     
 
-    public void Initialize()
+    public void Initialize(bool singleLockedScreen = false)
     {
         clouds = new List<Cloud>();
         foreach (Transform child in transform)
         {
             Cloud c = child.GetComponent<Cloud>();
             clouds.Add(c);
-            c.Initialize();
+            c.Initialize(singleLockedScreen);
         }
     }
 

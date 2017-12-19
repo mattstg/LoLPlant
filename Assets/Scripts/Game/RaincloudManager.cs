@@ -7,14 +7,14 @@ public class RaincloudManager : MonoBehaviour {
     public GameObject raindrop;
     List<RainCloud> rainclouds;
 
-    public void Initialize()
+    public void Initialize(bool singleScreenLock)
     {
         rainclouds = new List<RainCloud>();
         foreach (Transform child in transform)
         {
             RainCloud rc = child.GetComponent<RainCloud>();
             rainclouds.Add(rc);
-            rc.Initialize();
+            rc.Initialize(singleScreenLock);
         }
     }
 

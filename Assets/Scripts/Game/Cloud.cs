@@ -15,13 +15,22 @@ public class Cloud : MonoBehaviour {
     protected float altitude;
 
 
-    public virtual void Initialize()
+    public virtual void Initialize(bool singleLockedScreen)
     {
         sprite = this.GetComponent<SpriteRenderer>();
 
         speedRange = GV.cloudSpeedRange;
-        altitudeRange = GV.cloudAltitudeRange;
-        travelRange = GV.cloudTravelRange;
+
+        if (!singleLockedScreen)
+        {
+            altitudeRange = GV.cloudAltitudeRange;
+            travelRange = GV.cloudTravelRange;
+        }
+        else
+        {
+            altitudeRange = GV.cloudSingleScreenAltitudeRange;
+            travelRange = GV.cloudSingleScreenTravelRange;
+        }
         sortingLayerCriticalValue = GV.sortingLayerCriticalValue;
 
         speed = Random.Range(speedRange.x, speedRange.y);

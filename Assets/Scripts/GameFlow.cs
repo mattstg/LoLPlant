@@ -20,7 +20,7 @@ public class GameFlow : Flow
         GV.ws.dm.Initialize();
         GV.ws.popupManager.Initialize();
         GV.ws.cloudManager.Initialize();
-        GV.ws.raincloudManager.Initialize();
+        GV.ws.raincloudManager.Initialize(false);
         GV.ws.shadowManager.Initialize();
 		GV.ws.aphidManager.Initialize();
         initialized = true;

@@ -49,7 +49,7 @@ public class MainScript : MonoBehaviour
         switch (flowType)
         {
             case CurrentState.MainMenu:
-                newFlow = new MainFlow();
+                newFlow = new MainMenuFlow();
                 break;
             case CurrentState.Game:
                 newFlow = new GameFlow();

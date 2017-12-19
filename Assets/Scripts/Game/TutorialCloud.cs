@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class TutorialCloud : RainCloud
 {
-    public override void Initialize()
+    public override void Initialize(bool singleScreenLoad)
     {
+        //Single screen load is assumed for tutorial cloud
         altitudeRange = GV.raincloudAltitudeRange;
         travelRange = GV.raincloudTravelRange;
         maxDropsPerFrame = GV.maxDropsPerFrame;
