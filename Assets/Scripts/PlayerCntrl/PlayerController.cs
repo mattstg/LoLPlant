@@ -7,10 +7,10 @@ public class PlayerController : MonoBehaviour {
     InputManager im;
 
     public float YClickJumpThreshold = 1.5f; //Clicking this much units higher will cause the jump
-	AnimationController anim;
-	Rigidbody2D body;
+	protected AnimationController anim;
+	protected Rigidbody2D body;
     
-    bool isGrounded;
+	protected bool isGrounded;
     float moveForce = 7.5f;  //
     float maxSpeed = 4.5f;
     //All jump related
@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour {
     float mouseJumpTolerance = .4f; //higher than that amt to jump
     bool inputActive = true;
     bool inputHardLock = false; //Use if you dont want popupmanager interfering
-    float timeSinceInitialJumpBurst = 0;
+	protected float timeSinceInitialJumpBurst = 0;
     readonly float MaxTimeBetweenJumpBurst = 1;
     float dropForcePerSec = 7; //pressing down on purpose to drop
 
@@ -77,24 +77,22 @@ public class PlayerController : MonoBehaviour {
 
 	public void MouseDown(Vector2 mouseWorldPos, float _dt)
     {
-        if (!GV.ws.es.IsPointerOverGameObject())
-        {
-            Vector2 relativePress = new Vector2(Mathf.Clamp(mouseWorldPos.x - transform.position.x, -1, 1), Mathf.Clamp(mouseWorldPos.y - transform.position.y, -1, 1));
-            relativePress.y = (Mathf.Abs(relativePress.y) >= mouseJumpTolerance) ? -1 : 0;
-            KeysPressed(relativePress, _dt);
-        }
+			if (!GV.ws.es.IsPointerOverGameObject ()) {
+				Vector2 relativePress = new Vector2 (Mathf.Clamp (mouseWorldPos.x - transform.position.x, -1, 1), Mathf.Clamp (mouseWorldPos.y - transform.position.y, -1, 1));
+				relativePress.y = (Mathf.Abs (relativePress.y) >= mouseJumpTolerance) ? -1 : 0;
+				KeysPressed (relativePress, _dt);
+			}
     }
 
 	public void KeysPressed(Vector2 dir, float _dt)
     {
-		if (dir.x != 0)
-			Move (dir.x, _dt);
+			if (dir.x != 0)
+				Move (dir.x, _dt);
 
-        if (dir.y < 0)
-            Jump(dir.y, _dt);
-        else if (dir.y > 0)
-            DropDown(_dt);
-
+			if (dir.y < 0)
+				Jump (dir.y, _dt);
+			else if (dir.y > 0)
+				DropDown (_dt);
     }
 
     private void DropDown(float dt)

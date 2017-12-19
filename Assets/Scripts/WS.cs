@@ -25,6 +25,7 @@ public class WS : MonoBehaviour
     
     public CloudManager cloudManager;
     public RaincloudManager raincloudManager;
+	public GameObject raindrops;
     public ShadowManager shadowManager;
     public Transform sun;
 

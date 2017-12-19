@@ -9,6 +9,7 @@ public class MainMenuFlow : Flow {
         UnityEngine.GameObject.FindObjectOfType<WS>().LinkToGV(this);
         GV.ws.cloudManager.Initialize(true);
         GV.ws.raincloudManager.Initialize(true);
+		GV.ws.pc.Initialize ();
         initialized = true;
     }
 
@@ -16,5 +17,6 @@ public class MainMenuFlow : Flow {
     {
         GV.ws.cloudManager.Refresh(dt);
         GV.ws.raincloudManager.Refresh(dt);
+		GV.ws.pc.Refresh (dt);
     }
 }
