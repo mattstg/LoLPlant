@@ -39,7 +39,7 @@ public class GV {
     public static readonly float cameraGrowthZoom  = 1.22f;
 
     //Shadows
-    public static readonly float shadowBuffer = 60f;
+    public static readonly float shadowBuffer = 15f;
     public static readonly float sunAngleBuffer = 2;
     public static readonly float raincloudShadowAlpha = .4f;
 

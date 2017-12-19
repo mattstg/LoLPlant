@@ -46,8 +46,8 @@ public class Shadow : MonoBehaviour {
             else if(!(theta == 90))
             {
                 float m = Mathf.Tan(theta * Mathf.Deg2Rad); //slope of sunlight
-                vertices[2] = GetVertex(vertices[0], m);
-                vertices[3] = GetVertex(vertices[1], m);
+                vertices[2] = this.transform.InverseTransformPoint((Vector3)(GetVertex(transform.TransformPoint(vertices[0]), m))) ;
+                vertices[3] = this.transform.InverseTransformPoint((Vector3)(GetVertex(transform.TransformPoint(vertices[1]), m))) ;  
             }
         }
         mesh.vertices = vertices;
