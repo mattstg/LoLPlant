@@ -24,52 +24,62 @@ public class SDKLoader {
         // Create the WebGL (or mock) object
 #if UNITY_EDITOR
         ILOLSDK webGL = new LoLSDK.MockWebGL();
-		#elif UNITY_WEBGL
+#elif UNITY_WEBGL
 			ILOLSDK webGL = new LoLSDK.WebGL();
-		#endif
-        
-        
-		// Initialize the object, passing in the WebGL
-		LOLSDK.Init (webGL, "com.Pansimula.LPlant");
-
-		// Register event handlers
-		LOLSDK.Instance.StartGameReceived += new StartGameReceivedHandler (HandleStartGame);
+#endif
+        // Initialize the object, passing in the WebGL
+        LOLSDK.Init (webGL, "com.Pansimula.LPlant");
+        // Register event handlers
+        LOLSDK.Instance.StartGameReceived += new StartGameReceivedHandler (HandleStartGame);
 		LOLSDK.Instance.GameStateChanged += new GameStateChangedHandler (HandleGameStateChange);   
 	    LOLSDK.Instance.QuestionsReceived += new QuestionListReceivedHandler (HandleQuestions);
 	    LOLSDK.Instance.LanguageDefsReceived += new LanguageDefsReceivedHandler (HandleLanguageDefs);
-
-		// Mock the platform-to-game messages when in the Unity editor.
-		#if UNITY_EDITOR
-			LoadMockData();
+        // Mock the platform-to-game messages when in the Unity editor.
+#if UNITY_EDITOR
+        LoadMockData();
 		#endif
 
 		// Then, tell the platform the game is ready.
 		LOLSDK.Instance.GameIsReady();
-	}
+    }
 
 	// Start the game here
 	static void HandleStartGame (string json)
     {
+        //Load default scores
+        MainScript.progressPoint = 1;
+        MainScript.score = 0;
+
         //Given start game info, load the language and text files
+        Debug.Log("QQ Handle start game called");
         startGameData = JSON.Parse(json);
-        try
+        if(startGameData != null)
         {
-            MainScript.progressPoint = int.Parse(startGameData["progress"].Value);
+            //Extract Progress
+            if (startGameData["progress"] != null)
+            {
+                int result = 1;
+                bool parseSuccess = int.TryParse(startGameData["progress"].Value, out result);
+                if (parseSuccess)
+                {
+                    Debug.Log("QQ successful progress parse");
+                    MainScript.progressPoint = result;
+                }
+            }
+
+            //Extract Score
+            if (startGameData["score"] != null)
+            {
+                int result = 1;
+                bool parseSuccess = int.TryParse(startGameData["score"].Value, out result);
+                if (parseSuccess)
+                {
+                    Debug.Log("QQ successful score parse");
+                    MainScript.score = result;
+                }
+            }
         }
-        catch
-        {
-            Debug.Log("Faulty LoL progress key, defaulted to zero");
-            MainScript.progressPoint = 1;
-        }
-        try
-        {
-            MainScript.score = int.Parse(startGameData["score"].Value);
-        }
-        catch
-        {
-            Debug.Log("Faulty LoL score key, defaulted to zero");
-            MainScript.score = 0;
-        }
+        Debug.Log("QQ Handle start game finished");
         startgameLoaded = true;
     }
 
@@ -80,28 +90,32 @@ public class SDKLoader {
 
     // Handle pause / resume
     static void HandleGameStateChange (GameState gameState) {
-		// Either GameState.Paused or GameState.Resumed
-		Debug.Log("HandleGameStateChange");
+        // Either GameState.Paused or GameState.Resumed
+        Debug.Log("QQ HandleGameStateChange");
 	}
 
     // Store the questions and show them in order based on your game flow.
     static void HandleQuestions (MultipleChoiceQuestionList questionList) {
-		Debug.Log("HandleQuestions");
-        SharedState.QuestionList = questionList;
+        //Debug.Log("QQ HandleQuestions");
+        //SharedState.QuestionList = questionList;
 	}
 
     // Use language to populate UI
     static void HandleLanguageDefs (string json)
     {
-		JSONNode langDefs = JSON.Parse(json);
+        Debug.Log("QQ Hnadle Lang called");
+        JSONNode langDefs = JSON.Parse(json);
         LangDict.Instance.SetNode(langDefs);
         languageLoaded = true;
-	}
+        Debug.Log("QQ Hnadle Lang finished");
+    }
     static private void LoadMockData () {
-		#if UNITY_EDITOR
-			// Load Dev Language File from StreamingAssets
+        Debug.Log("QQ Mock data called");
 
-			string startDataFilePath = Path.Combine (Application.streamingAssetsPath, startGameJSONFilePath);
+#if UNITY_EDITOR
+        // Load Dev Language File from StreamingAssets
+
+        string startDataFilePath = Path.Combine (Application.streamingAssetsPath, startGameJSONFilePath);
 			string langCode = "en";
 
 			Debug.Log(File.Exists (startDataFilePath));
