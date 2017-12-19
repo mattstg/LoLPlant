@@ -215,16 +215,16 @@ public class GV {
     }
 
 	public static float[] GetSpriteAndEdge(float scale){
-		return GetSpriteAndEdge (scale, 3);
+		return GetSpriteAndEdge (scale, 3, 0);
 	}
 
-	public static float[] GetSpriteAndEdge(float scale, int i){
-		if(i > platformSpriteScales.Length || i < 0)
-				return new float[] {0,0};
+	public static float[] GetSpriteAndEdge(float scale, int i, int c){
+		if(i > platformSpriteScales.Length || i < 0 || c > 3)
+			return new float[] {1,3}; // default (size 1) plank
 		float dif = scale - platformSpriteScales [i];
 		if (Mathf.Abs(dif) < 0.01f)
 			return new float[] { i, platformSpriteScales [i] };
-		return GetSpriteAndEdge (scale, i + (int) (Mathf.Abs (dif) / dif));
+		return GetSpriteAndEdge (scale, i + (int) (Mathf.Abs (dif) / dif), c + 1);
 	}
 
     public static float SmoothVelocity(float progress)
