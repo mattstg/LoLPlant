@@ -50,13 +50,25 @@ public class GV {
     public static readonly int LastTutorialProgressPoint = 4;    
     public static readonly float waterPerDrop = .03f;
 
+
 	public static readonly float[] platformSpriteScales = { 0.4f, 0.5f, 0.8f, 1.0f, 1.2f, 1.4f, 1.5f};
 	public static readonly float[] platformEdgeSizes = { 1, 1, 1, 1, 1, 1, 1 };
 	public static readonly float platformHeight = 0.5f;
+
+    public static Sprite[] platformSprites;
+    
         //see Raindrop.OnTriggerEnter2D(): waterDelta is weighted so that rain is worth more when you're lower on water and less when you're higher.
         //Current setting: At 0% water, the value of a drop is equal to waterPerDrop. At 100% water, a drop's value would be equal to (waterPerDrop / 3).
 
 	public static bool Paused = false;
+
+
+    public static Sprite GetPlatformSprite(int index)
+    {
+        if(platformSprites == null)
+            platformSprites = Resources.LoadAll<Sprite>("Sprites/platform_sheet");
+        return platformSprites[index];
+    }
 
     public static void SetPause(bool _paused)
     {
