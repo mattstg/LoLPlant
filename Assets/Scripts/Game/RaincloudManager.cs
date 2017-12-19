@@ -9,6 +9,8 @@ public class RaincloudManager : MonoBehaviour {
 
     public void Initialize(bool singleScreenLock)
     {
+		GV.ws.raindrops = new GameObject ();
+		GV.ws.raindrops.name = "Raindrops";
         rainclouds = new List<RainCloud>();
         foreach (Transform child in transform)
         {

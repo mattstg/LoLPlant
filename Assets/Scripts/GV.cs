@@ -23,8 +23,8 @@ public class GV {
     public static readonly Vector2 cloudAltitudeRange = new Vector2(-1f, 11f);
     public static readonly Vector2 cloudTravelRange = new Vector2(-20f, 20f); //x value is background x value past which a cloud will respawn on right; y value is background x value where cloud will respawn
 
-    public static readonly Vector2 cloudSingleScreenAltitudeRange = new Vector2(-1f, 11f);
-    public static readonly Vector2 cloudSingleScreenTravelRange = new Vector2(-20f, 20f); //x value is background x value past which a cloud will respawn on right; y value is background x value where cloud will respawn
+    public static readonly Vector2 cloudSingleScreenAltitudeRange = new Vector2(0.5f, 5f);
+    public static readonly Vector2 cloudSingleScreenTravelRange = new Vector2(-13f, 13f); //x value is background x value past which a cloud will respawn on right; y value is background x value where cloud will respawn
 
     public static readonly float sortingLayerCriticalValue = .2f; //clouds moving faster than this speed will pass in front of mountains; slower ones will pass behind
 
