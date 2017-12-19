@@ -61,6 +61,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, true));
                 taQueue.Enqueue(new TATrigger("Water"));
                 taQueue.Enqueue(new TAPromptSuccess("H20Req"));
+                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, false));
                 taQueue.Enqueue(new TACreatePopup(new Message("Evaporation")));
                 taQueue.Enqueue(new TACreatePopup(new Message("ReqBothForSugar")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
@@ -73,8 +74,6 @@ public class TAEventManager
                 taQueue.Enqueue(new TAFreezeChar(true));
                 
                 taQueue.Enqueue(new TAFreezeChar(false));
-                taQueue.Enqueue(new TACreatePopup(new Message("SugarGrowthRate")));
-                taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 goto case 4;
             case 4:
@@ -89,6 +88,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Platforms, true));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, true));
                 taQueue.Enqueue(new TATrigger("FinalPlatform"));
+                taQueue.Enqueue(new TAPromptSuccess("Escape"));
                 // TAPromptSuccess
                 taQueue.Enqueue(new TAFreezeChar(true));
                 taQueue.Enqueue(new TATimer("Timer", 2));

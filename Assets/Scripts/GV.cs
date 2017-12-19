@@ -57,11 +57,10 @@ public class GV {
 
     public static Sprite[] platformSprites;
     
-        //see Raindrop.OnTriggerEnter2D(): waterDelta is weighted so that rain is worth more when you're lower on water and less when you're higher.
-        //Current setting: At 0% water, the value of a drop is equal to waterPerDrop. At 100% water, a drop's value would be equal to (waterPerDrop / 3).
+    //see Raindrop.OnTriggerEnter2D(): waterDelta is weighted so that rain is worth more when you're lower on water and less when you're higher.
+    //Current setting: At 0% water, the value of a drop is equal to waterPerDrop. At 100% water, a drop's value would be equal to (waterPerDrop / 3).
 
 	public static bool Paused = false;
-
 
     public static Sprite GetPlatformSprite(int index)
     {

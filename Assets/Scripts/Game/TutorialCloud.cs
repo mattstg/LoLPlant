@@ -11,7 +11,7 @@ public class TutorialCloud : RainCloud
         travelRange = GV.raincloudTravelRange;
         maxDropsPerFrame = GV.maxDropsPerFrame;
 
-        rainRate = 40;
+        rainRate = 15;
         raindrop = GV.ws.raincloudManager.raindrop;
         
         GV.ws.shadowManager.RegisterShadow(this, transform);

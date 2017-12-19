@@ -10,8 +10,8 @@ public class PlatformTrigger : MonoBehaviour {
     {
         if(coli.gameObject.CompareTag("Player"))
         {
+            Debug.Log("THIS HAPPENS");
             TAEventManager.Instance.ReceiveActionTrigger(triggerName);
-            Destroy(this);
         }
     }
 }

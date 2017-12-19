@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class TASetDNC : TAEvent
 {
-    float timer;
-    string eventName;
+    float hour;
+    int day;
+    bool clockActive;
 
-    public TASetDNC(bool clockActive, float hour = -1, int day = -1) : base(TAEventType.Action)
+    public TASetDNC(bool _clockActive, float _hour = -1, int _day = -1) : base(TAEventType.Action)
+    {
+        clockActive = _clockActive;
+        hour = _hour;
+        day = _day;
+    }
+
+    public override void PerformEvent()
     {
         if (hour >= 0)
         {
@@ -15,11 +23,6 @@ public class TASetDNC : TAEvent
                 day = GV.ws.dnc.day;
             GV.ws.dnc.SetTime(day, hour);
         }
-        GV.ws.dnc.SetClockActive(clockActive);
-    }
-
-    public override void PerformEvent()
-    {
-        (GameObject.Instantiate(Resources.Load("Prefabs/TATimer")) as GameObject).GetComponent<TAEventTimer>().Initialize(timer,eventName);
+        GV.ws.dnc.SetClockActive(clockActive);        
     }
 }
