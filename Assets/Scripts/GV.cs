@@ -52,7 +52,6 @@ public class GV {
 
 
 	public static readonly float[] platformSpriteScales = { 0.4f, 0.5f, 0.8f, 1.0f, 1.2f, 1.4f, 1.5f};
-	public static readonly float[] platformEdgeSizes = { 0.4f, 0.5f, 0.8f, 1, 1.2f, 1.4f, 1.5f };
 	public static readonly float platformHeight = 0.03f;
 
     public static Sprite[] platformSprites;
@@ -224,7 +223,7 @@ public class GV {
 				return new float[] {0,0};
 		float dif = scale - platformSpriteScales [i];
 		if (Mathf.Abs(dif) < 0.01f)
-			return new float[] { i, platformEdgeSizes [i] };
+			return new float[] { i, platformSpriteScales [i] };
 		return GetSpriteAndEdge (scale, i + (int) (Mathf.Abs (dif) / dif));
 	}
 }
