@@ -3955,6 +3955,46 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 114103214227607684, guid: 7df1df070bb35a34fb259557ff2c3ebd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2087831454}
+    - target: {fileID: 114103214227607684, guid: 7df1df070bb35a34fb259557ff2c3ebd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ConvertFoodToHeight
+      objectReference: {fileID: 0}
+    - target: {fileID: 114906950995337654, guid: 7df1df070bb35a34fb259557ff2c3ebd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2087831454}
+    - target: {fileID: 114906950995337654, guid: 7df1df070bb35a34fb259557ff2c3ebd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoseFood
+      objectReference: {fileID: 0}
+    - target: {fileID: 114895511466815076, guid: 7df1df070bb35a34fb259557ff2c3ebd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2087831456}
+    - target: {fileID: 114895511466815076, guid: 7df1df070bb35a34fb259557ff2c3ebd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleClockActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 114514412648741162, guid: 7df1df070bb35a34fb259557ff2c3ebd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2087831456}
+    - target: {fileID: 114514412648741162, guid: 7df1df070bb35a34fb259557ff2c3ebd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TogglePause
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7df1df070bb35a34fb259557ff2c3ebd, type: 2}
   m_IsPrefabParent: 0
@@ -9772,7 +9812,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1411334647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9837,7 +9877,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1411334646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 512, y: 288, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 549529165}
@@ -15101,14 +15141,11 @@ MonoBehaviour:
   food: 0
   foodDamp: 0
   foodLossState: 0
-  foodLossDelay: 2
-  foodLossTarget: -1
   foodLossDamp: 0
   height: 0
-  heightDamp: 0
-  heightDampInt: 0
+  heightInt: 0
+  oldHeightInt: -1
   isGrowing: 0
-  growthTime: 0
   highScore: 0
   dampTime: 0.25
 --- !u!114 &2087831456

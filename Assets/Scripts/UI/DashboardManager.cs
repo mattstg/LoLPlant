@@ -73,6 +73,7 @@ public class DashboardManager : MonoBehaviour
             waterControl.onValueChanged.AddListener(delegate { WaterControlValueChanged(); });
         foodBouncer.InitializeBouncer();
         heightBouncer.InitializeBouncer();
+        //Application.targetFrameRate = 120;
     }
 
     public void Refresh(float dt)
@@ -89,7 +90,8 @@ public class DashboardManager : MonoBehaviour
 
         if (fpsOverride)    //dev feature: psMeter shows fps instead
         {
-            fpsDamp = Mathf.SmoothDamp(fpsDamp, (1f / Time.deltaTime) / 120f, ref fpsVelocity, 0.1f);
+            //fpsDamp = (1f / dt) / 120f;
+            fpsDamp = Mathf.SmoothDamp(fpsDamp, (1f / dt) / 120f, ref fpsVelocity, 0.1f);
             psMeter.eulerAngles = new Vector3(psMeter.eulerAngles.x, psMeter.eulerAngles.y, -180 * fpsDamp + 90);
         }
     }
