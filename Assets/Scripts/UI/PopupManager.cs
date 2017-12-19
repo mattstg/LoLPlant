@@ -685,7 +685,7 @@ public class PopupManager : MonoBehaviour
 
     public void Next() //called by button click
     {
-        if (state == State.Open)
+        if (state == State.Open && messages[currentIndex].type == Message.Type.Info)
         {
             if (IsCurrentIndexLast() || messages.Count == 0)
             {
