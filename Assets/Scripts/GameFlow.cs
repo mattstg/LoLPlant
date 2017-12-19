@@ -13,7 +13,7 @@ public class GameFlow : Flow
         }
         GameObject.FindObjectOfType<WS>().LinkToGV(this);
         GV.ws.dnc.Initialize();
-        GV.ws.plant.Initialize();
+        GV.ws.plant.Initialize(MainScript.score);
         GV.ws.pc.Initialize();
         GV.ws.cameraManager.Initialize();
         GV.ws.platformManager.Initialize();
