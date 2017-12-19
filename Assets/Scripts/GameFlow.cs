@@ -13,7 +13,7 @@ public class GameFlow : Flow
         }
         GameObject.FindObjectOfType<WS>().LinkToGV(this);
         GV.ws.dnc.Initialize();
-        GV.ws.plant.Initialize();
+        GV.ws.plant.Initialize(MainScript.score);
         GV.ws.pc.Initialize();
         GV.ws.cameraManager.Initialize();
         GV.ws.platformManager.Initialize();
@@ -24,7 +24,12 @@ public class GameFlow : Flow
         GV.ws.shadowManager.Initialize();
 		GV.ws.aphidManager.Initialize();
         initialized = true;
-        TAEventManager.Instance.Initialize(progressNumber);
+        if (progressNumber >= 8)
+            TAEventManager.Instance.Initialize(7);
+        else
+            TAEventManager.Instance.Initialize(progressNumber);
+
+        
     }
 
     public override void Update(float dt)
@@ -43,7 +48,7 @@ public class GameFlow : Flow
 			GV.ws.cloudManager.Refresh(dt);
             GV.ws.raincloudManager.Refresh(dt);
             GV.ws.shadowManager.Refresh();
-			GV.ws.aphidManager.Refresh(dt); 
+			GV.ws.aphidManager.Refresh(dt);            
         }
     }
 }

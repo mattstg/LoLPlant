@@ -44,9 +44,9 @@ public class Plant : MonoBehaviour {
     
     public float dampTime = 0.25f;
     
-    public void Initialize()
+    public void Initialize(float initialHeight)
     {
-
+        height = initialHeight;
     }
 
     public virtual void Refresh(float dt)

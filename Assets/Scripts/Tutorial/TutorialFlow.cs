@@ -10,11 +10,12 @@ public class TutorialFlow : Flow
         {
             Debug.Log("Progress point retrieved from JSON too high for tutorial scene, reseting progress to 0");
             progressNumber = MainScript.progressPoint = 0;
+            
         }
 
         GameObject.FindObjectOfType<WS>().LinkToGV(this); //Force the link of WS into GV so can set the links below
         GV.ws.dnc.Initialize();
-        GV.ws.plant.Initialize();
+        GV.ws.plant.Initialize(0);
         GV.ws.pc.Initialize();
         // GV.ws.cameraManager.Initialize();    //Cam is locked for tut, don't update
         GV.ws.platformManager.Initialize();
