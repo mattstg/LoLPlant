@@ -766,4 +766,16 @@ public class PopupManager : MonoBehaviour
                 return new Vector2(0.5f, 0.5f);
         }
     }
+
+    public void ExitPressed()
+    {
+        ProgressTracker.Instance.SubmitProgress(8, MainScript.score);
+        LOLSDK.Instance.CompleteGame();
+    }
+
+    public void PlayAgainPressed()
+    {
+        GameObject.FindObjectOfType<MainScript>().GoToNextFlow(CurrentState.Game);
+    }
+
 }

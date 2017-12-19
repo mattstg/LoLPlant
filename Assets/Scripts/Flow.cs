@@ -16,9 +16,10 @@ public class Flow
 		
 
 	}
-    public virtual void EndFlow(CurrentState nextState)
-    { //Ends the current flow, loads next scene, then runs initialize flow
-
+    public virtual void EndFlow()
+    { 
+        initialized = false;
     }
+    
     
 }

@@ -61,8 +61,11 @@ public class MainScript : MonoBehaviour
                 return null;
         }
 
-        if(!sceneAlreadyLoaded)
+        if (!sceneAlreadyLoaded)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded; //Clean any listener already on
             SceneManager.sceneLoaded += OnSceneLoaded; //Delay flow initialization until 
+        }
         else
             newFlow.Initialize(progressPoint);
 
@@ -89,12 +92,14 @@ public class MainScript : MonoBehaviour
                 break;
         }
 
-        if(verified)
+        if (verified)
             curFlow.Initialize(progressPoint);
     }
 
     public void GoToNextFlow(CurrentState cs)
     {
+        if (curFlow != null)
+            curFlow.EndFlow();
         //Assume Flow called Clean already
         //Load the next scene        
         switch (cs)
