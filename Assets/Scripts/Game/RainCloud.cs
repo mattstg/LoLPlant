@@ -58,6 +58,11 @@ public class RainCloud : Cloud, CastsShadow {
             GV.ws.shadowManager.RegisterShadow(this, transform);   
     }
 
+    //public int NumberOfCloudsNearX(float x)
+    //{
+    //
+    //}
+
     public override void Refresh(float dt)
     {
 

@@ -22,11 +22,35 @@ public class LOLAudio
     #endregion
     
     AudioSource musicPlayer;
+    AudioSource bgMusicPlayer;
 
     private LOLAudio()
     {
     }
 
+
+    public void PlayBackgroundAudio(string _name)
+    {
+#if UNITY_EDITOR
+        GameObject go = new GameObject();
+        AudioSource audioSrc = go.AddComponent<AudioSource>();
+        audioSrc.clip = Resources.Load<AudioClip>("Music/" + _name);
+        audioSrc.loop = true;
+        audioSrc.Play();
+        bgMusicPlayer = audioSrc;
+#elif UNITY_WEBGL
+        LOLSDK.Instance.PlaySound("Resources/" + _name, true, true);
+#endif
+    }
+
+    public void SetBGLevel(float volume)
+    {
+#if UNITY_EDITOR
+        bgMusicPlayer.volume = volume;
+#elif UNITY_WEBGL
+        LOLSDK.Instance.ConfigureSound(1, volume, 1); //Should be 0 or 1? who knows
+#endif
+    }
 
     public void PlayAudio(string _name, bool loop = false)
     {
@@ -65,8 +89,8 @@ public class LOLAudio
                 musicPlayer = go.AddComponent<AudioSource>();
             }
             _name = System.IO.Path.GetFileNameWithoutExtension(_name);
-            AudioClip ac = Resources.Load<AudioClip>(_name);
-            musicPlayer.PlayOneShot(Resources.Load<AudioClip>(_name));
+            AudioClip ac = Resources.Load<AudioClip>("Music/" + _name);
+            musicPlayer.PlayOneShot(ac);
             //AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>(_name), new Vector3());
             //AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>(_name), new Vector3());
         }

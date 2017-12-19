@@ -28,8 +28,7 @@ public class GameFlow : Flow
             TAEventManager.Instance.Initialize(7);
         else
             TAEventManager.Instance.Initialize(progressNumber);
-
-        
+        LOLAudio.Instance.PlayAudio("bgMusic.mp3",true);
     }
 
     public override void Update(float dt)
