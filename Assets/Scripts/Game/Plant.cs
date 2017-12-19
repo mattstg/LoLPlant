@@ -10,43 +10,49 @@ public class Plant : MonoBehaviour {
     public int shadowCount = 0;
     public float shadowFactor = 1f;
     public float sun = 0;
-    [HideInInspector] public float sunFactor = 0;
-    [HideInInspector] public float sunDamp = 0;
-    [HideInInspector] private float sunVelocity = 0;
+    public float sunFactor = 0;
+    public float sunDamp = 0;
+    private float sunVelocity = 0;
     
     public float water = 0;
-    [HideInInspector] public float waterFactor = 0;
-    [HideInInspector] public float waterDamp = 0;
-    [HideInInspector] private float waterVelocity = 0;
+    public float waterFactor = 0;
+    public float waterDamp = 0;
+    private float waterVelocity = 0;
     
     public float photosynthesis = 0;
-    [HideInInspector] public float psDamp = 0;
-    [HideInInspector] private float psVelocity = 0;
+    public float psDamp = 0;
+    private float psVelocity = 0;
     
-    [HideInInspector] public float psProgress = 0;
-    [HideInInspector] public float psProgressDamp = 0;
-    [HideInInspector] public float psProgressVelocity = 0;
+    public float psProgress = 0;
+    public float psProgressDamp = 0;
+    public float psProgressVelocity = 0;
     
     public float food = 0;
-    [HideInInspector] public float foodDamp = 0;
-    [HideInInspector] private float foodVelocity = 0;
+    public float foodDamp = 0;
+    private float foodVelocity = 0;
     
-    [HideInInspector] public FoodLossState foodLossState = FoodLossState.Normal;
-    [HideInInspector] public float foodLossDelay = 2f;
-    [HideInInspector] private float foodLossCounter = 0f;
-    [HideInInspector] public float foodLossTarget = -1f;
-    [HideInInspector] public float foodLossDamp = 0;
-    [HideInInspector] private float foodLossVelocity = 0;
+    public FoodLossState foodLossState = FoodLossState.Normal;
+    public float foodLossDelay = 2f;
+    private float foodLossCounter = 0f;
+    public float foodLossTarget = -1f;
+    public float foodLossDamp = 0;
+    private float foodLossVelocity = 0;
     
     public float height = 0;
-    [HideInInspector] public float heightDamp = 0;
-    [HideInInspector] private float heightVelocity = 0;
+    public float heightDamp = 0;
+    public int heightDampInt = 0;
+    private float heightVelocity = 0;
+    public bool isGrowing = false;
+    public float growthTime;
+
+    public float highScore = 0;
     
     public float dampTime = 0.25f;
     
     public void Initialize(float initialHeight)
     {
         height = initialHeight;
+        growthTime = 2f;
     }
 
     public virtual void Refresh(float dt)
@@ -106,9 +112,15 @@ public class Plant : MonoBehaviour {
 
     public void UpdateFood(float dt)
     {
-        food += photosynthesis * dt;
-        float oldFoodDamp = foodDamp;
-        foodDamp = Mathf.SmoothDamp(foodDamp, food, ref foodVelocity, dampTime * 2f, Mathf.Infinity, dt);
+        if (!isGrowing)
+            food += photosynthesis * dt;
+        float foodDampTime = (isGrowing) ? growthTime : dampTime * 2f;
+        foodDamp = Mathf.SmoothDamp(foodDamp, food, ref foodVelocity, foodDampTime, Mathf.Infinity, dt);
+        if (Mathf.Abs(foodDamp - food) < 0.01f)
+        {
+            foodDamp = food;
+            foodVelocity = 0f;
+        }
 
         switch (foodLossState)
         {
@@ -125,14 +137,14 @@ public class Plant : MonoBehaviour {
             case FoodLossState.Dropping:
                 if (foodLossTarget < 0f)
                 {
-                    foodLossDamp = Mathf.SmoothDamp(foodLossDamp, foodDamp, ref foodLossVelocity, dampTime * 2f, Mathf.Infinity, dt);
+                    foodLossDamp = Mathf.SmoothDamp(foodLossDamp, foodDamp, ref foodLossVelocity, foodDampTime, Mathf.Infinity, dt);
                     if (foodLossDamp < foodDamp + 0.05f)
                         foodLossState = FoodLossState.Normal;
                 }
                 else
                 {
                     foodLossCounter += dt;
-                    foodLossDamp = Mathf.SmoothDamp(foodLossDamp, foodLossTarget, ref foodLossVelocity, dampTime * 2f, Mathf.Infinity, dt);
+                    foodLossDamp = Mathf.SmoothDamp(foodLossDamp, foodLossTarget, ref foodLossVelocity, foodDampTime, Mathf.Infinity, dt);
                     if (foodLossDamp < foodLossTarget + 0.1f)
                     {
                         foodLossTarget = -1;
@@ -147,7 +159,21 @@ public class Plant : MonoBehaviour {
 
     public void UpdateHeight(float dt)
     {
-
+        if (isGrowing)
+        {
+            if (Mathf.Abs(heightDamp - height) < 0.5f)
+            {
+                isGrowing = false;
+                heightDamp = height;
+                heightDampInt = (int)heightDamp;
+                heightVelocity = 0f;
+            }
+            else
+            {
+                heightDamp = Mathf.SmoothDamp(heightDamp, height, ref heightVelocity, growthTime);
+                heightDampInt = (int)heightDamp;
+            }
+        }
     }
 
     public void LoseFood(float foodLost)
@@ -174,6 +200,20 @@ public class Plant : MonoBehaviour {
                 default:
                     break;
             }
+        }
+    }
+
+    public void ConvertFoodToHeight()
+    {
+        if (food > 0)
+        {
+            float score = (food);
+            int scoreInt = (int)score;
+            if (scoreInt > highScore)
+                highScore = scoreInt;
+            height += score;
+            food = 0f;
+            isGrowing = true;
         }
     }
 }

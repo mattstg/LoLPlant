@@ -258,7 +258,8 @@ public class DashboardManager : MonoBehaviour
 
     public void UpdateHeight(float dt)
     {
-        bool lockRequested = heightBouncer.lockRequested = true;    //should be false iff converting food to height at night
+        heightText.text = plant.heightDampInt.ToString();
+        bool lockRequested = heightBouncer.lockRequested = !plant.isGrowing;
         if (!lockRequested)
             heightBouncer.locked = false;
         heightBouncer.UpdateBouncer(dt);
