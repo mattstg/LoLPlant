@@ -21,6 +21,7 @@ public class MainScript : MonoBehaviour
         GV.ms = this; //set link so rest can access this script easily
         SDKLoader.StartLoader(); //Will link SDK calls from LoL to us (to recieve)
         currentState = cs;
+        Debug.Log("QQ Mainscript finished initializing");
     }
 
 	void Update ()
@@ -28,8 +29,10 @@ public class MainScript : MonoBehaviour
         if (!lolsdkFinishedLoading)
             lolsdkFinishedLoading = SDKLoader.CheckIfEverythingLoaded();  //If have not recieved lols jsons yet
 
+
         if (lolsdkFinishedLoading && !flowInitialized)  //Once recieved jsons, initialize the flow
-        {             
+        {
+            Debug.Log("QQ Everything finished and initialized");
             curFlow = InitializeFlowScript(currentState, progressPoint, true);  //initial flow initialize
             flowInitialized = true;
         }
@@ -41,7 +44,7 @@ public class MainScript : MonoBehaviour
             float dt = Time.deltaTime;
             curFlow.Update(dt);
         }
-	}
+    }
 
     private Flow InitializeFlowScript(CurrentState flowType, int progressPoint, bool sceneAlreadyLoaded)
     {

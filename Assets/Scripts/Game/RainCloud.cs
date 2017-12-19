@@ -28,8 +28,8 @@ public class RainCloud : Cloud, CastsShadow {
         speedRange = GV.raincloudSpeedRange;
         if (!singleLockedScreen)
         {
-            altitudeRange = GV.cloudAltitudeRange;
-            travelRange = GV.cloudTravelRange;
+            altitudeRange = GV.raincloudAltitudeRange;
+            travelRange = GV.raincloudTravelRange;
         }
         else
         {

@@ -7,9 +7,12 @@ public class MainMenuFlow : Flow {
     {
         UnityEngine.GameObject.FindObjectOfType<MainMenu>().SDKLoaded(progressNumber);
         UnityEngine.GameObject.FindObjectOfType<WS>().LinkToGV(this);
+
         GV.ws.cloudManager.Initialize(true);
+        GV.ws.raincloudManager.gameObject.SetActive(true);
         GV.ws.raincloudManager.Initialize(true);
-		GV.ws.pc.Initialize ();
+        GV.ws.pc.gameObject.SetActive(true);
+        GV.ws.pc.Initialize ();
         initialized = true;
     }
 
