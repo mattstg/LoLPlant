@@ -20,7 +20,7 @@ public class Platform : MonoBehaviour, CastsShadow {
 
     public Vector2[] GetEdges()
     {
-        return new Vector2[] { edgeOffsets[0] + (Vector2)transform.position + new Vector2(0, -.311f), edgeOffsets[1] + (Vector2)transform.position + new Vector2(0, -.311f) };
+		return new Vector2[] { edgeOffsets[0] + (Vector2)transform.position + new Vector2(0, -GV.platformHeight), edgeOffsets[1] + (Vector2)transform.position + new Vector2(0, -GV.platformHeight) };
     }
 
     public Vector2 GetSidePoint(bool left, bool offset = false)
@@ -35,12 +35,14 @@ public class Platform : MonoBehaviour, CastsShadow {
     public virtual void Initialize()
     {
         //Calculate edges
-        edgeOffsets = new Vector2[2];
+		/*
+		 * 	edgeOffsets = new Vector2[2];
         EdgeCollider2D ec = GetComponent<EdgeCollider2D>();
         edgeOffsets[0] = ec.points[0] * transform.localScale.x;  //Edge points dont take scale into account in unity editor
         edgeOffsets[1] = ec.points[1] * transform.localScale.x;
         edgeOffsets[0].y += ec.offset.y * transform.localScale.y;
         edgeOffsets[1].y += ec.offset.y * transform.localScale.y;
+		*/
 
         //Calculate Waypoints
         numOfWP = transform.childCount + 1; //Includes its starting position as a waypoint
@@ -53,6 +55,15 @@ public class Platform : MonoBehaviour, CastsShadow {
             Destroy(t.gameObject); //delete children wp
         moves = (numOfWP > 1);
 
+		float[] spriteAndEdge = GV.GetSpriteAndEdge (transform.localScale.x);
+		transform.localScale = new Vector3(1,1,1);
+		GetComponent<SpriteRenderer> ().sprite = GV.GetPlatformSprite (6 - (int)spriteAndEdge [0]);
+		edgeOffsets = new Vector2[2];
+		EdgeCollider2D ec = GetComponent<EdgeCollider2D>();
+		ec.offset = new Vector2(0,GV.platformHeight);
+		ec.points = new Vector2[] { new Vector2(-spriteAndEdge [1],0),new Vector2(spriteAndEdge [1],0)};
+		edgeOffsets [0] = ec.points [0];
+		edgeOffsets [1] = ec.points [1];
         if (castsShadow)
             GV.ws.shadowManager.RegisterShadow(this, transform);
     }
