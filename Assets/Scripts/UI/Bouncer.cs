@@ -55,21 +55,18 @@ public class Bouncer : MonoBehaviour
 
             if (progress >= 1f)
             {
-                timer -= (isPausing) ? pauseTime : bounceTime;
+                timer = -timerOffset;
+                progress = 0f;
                 isPausing = (!isPausing && pauseTime > 0f);
-                progress = (isPausing) ? (timer + timerOffset) / pauseTime : (timer + timerOffset) / bounceTime;
+                //timer -= (isPausing) ? pauseTime : bounceTime;
+                //progress = (isPausing) ? (timer + timerOffset) / pauseTime : (timer + timerOffset) / bounceTime;
                 if (lockRequested)
                 {
                     locked = true;
-                    lockRequested = false;
+                    lockRequested = true;
                 }
             }
 
-            rectTransform.anchoredPosition = new Vector2(origin.x + offset.x, origin.y + offset.y + ((isPausing) ? 0f : ((useWaveMotion) ? GV.WaveFactor(progress) : GV.BounceFactor(progress)) * bounceHeight));
-        }
-        else if (progress > 0f)
-        {
-            progress = 0;
             rectTransform.anchoredPosition = new Vector2(origin.x + offset.x, origin.y + offset.y + ((isPausing) ? 0f : ((useWaveMotion) ? GV.WaveFactor(progress) : GV.BounceFactor(progress)) * bounceHeight));
         }
     }

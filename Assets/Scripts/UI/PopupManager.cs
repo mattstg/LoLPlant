@@ -181,6 +181,23 @@ public class PopupManager : MonoBehaviour
         Flow();
     }
 
+    public void LoadScorePopup()
+    {
+        Plant plant = GV.ws.plant;
+        string scoreMessage = LangDict.Instance.GetText("Congratulations") + "\n\n";
+        scoreMessage += LangDict.Instance.GetText("GrowthAchievement") + "\n";
+        scoreMessage += "      <size=36>" + plant.newScore.ToString() + "</size> mm\n\n";
+        if (plant.newScore >= plant.highScore)
+            scoreMessage += LangDict.Instance.GetText("HighScoreNew");
+        else
+        {
+            scoreMessage += LangDict.Instance.GetText("HighScoreUnchanged") + "\n";
+            scoreMessage += "      <size=36>" + plant.highScore + "</size> mm";
+        }
+        Message m = new Message("ScoreMessage", scoreMessage, Message.Type.Info, Message.Position.Right);
+        LoadPopup(new List<Message>() { m });
+    }
+
     public void Refresh(float dt)
     {
         if (Input.GetKeyDown(KeyCode.Return))
