@@ -150,4 +150,9 @@ public class RainCloud : Cloud, CastsShadow {
     {
         return new Vector2[] { leftRightEdges[0].transform.position, leftRightEdges[1].transform.position };
     }
+
+    public void SetRaining(bool _raining)
+    {
+        raining = _raining;
+    }
 }

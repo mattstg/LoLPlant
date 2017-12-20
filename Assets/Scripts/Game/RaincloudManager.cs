@@ -20,11 +20,15 @@ public class RaincloudManager : MonoBehaviour {
         }
     }
 
-    
-
     public void Refresh(float dt)
     {
         foreach (RainCloud rc in rainclouds)
             rc.Refresh(dt);
+    }
+
+    public void SetRaining(bool raining)
+    {
+        foreach (RainCloud rc in rainclouds)
+            rc.SetRaining(raining);
     }
 }

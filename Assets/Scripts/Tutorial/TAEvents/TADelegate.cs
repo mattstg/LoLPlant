@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TADelegate : TAEvent {
-    enum DelegateSelected { None, String, Float }
+    enum DelegateSelected { None, String, Float, Bool }
     public delegate void ParameterlessDelegate();
     public delegate void DelegateString(string s);
     public delegate void DelegateFloat(float f);
+    public delegate void DelegateBool(bool b);
     ParameterlessDelegate delegateFunc;
     DelegateString delegateFuncString;
     DelegateFloat delegateFuncFloat;
+    DelegateBool delegateFuncBool;
     DelegateSelected delegateSelected;
     string triggerWhenInvoke = "";
     string string1;
     float float1;
+    bool bool1;
 
     public TADelegate(ParameterlessDelegate _delegateFunc, string _triggerWhenInvoked = "") : base(TAEventType.Action)
     {
@@ -38,6 +41,14 @@ public class TADelegate : TAEvent {
         float1 = arg2;
     }
 
+    public TADelegate(DelegateBool _delegateFunc, bool arg3, string _triggerWhenInvoked = "") : base(TAEventType.Action)
+    {
+        delegateFuncBool = _delegateFunc;
+        triggerWhenInvoke = _triggerWhenInvoked;
+        delegateSelected = DelegateSelected.Bool;
+        bool1 = arg3;
+    }
+
     public override void PerformEvent()
     {
         switch(delegateSelected)
@@ -50,6 +61,9 @@ public class TADelegate : TAEvent {
                 break;
             case DelegateSelected.Float:
                 delegateFuncFloat.Invoke(float1);
+                break;
+            case DelegateSelected.Bool:
+                delegateFuncBool.Invoke(bool1);
                 break;
         }
         
