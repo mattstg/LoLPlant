@@ -55,13 +55,15 @@ public class Bouncer : MonoBehaviour
 
             if (progress >= 1f)
             {
-                timer -= (isPausing) ? pauseTime : bounceTime;
+                timer = -timerOffset;
+                progress = 0f;
                 isPausing = (!isPausing && pauseTime > 0f);
-                progress = (isPausing) ? (timer + timerOffset) / pauseTime : (timer + timerOffset) / bounceTime;
+                //timer -= (isPausing) ? pauseTime : bounceTime;
+                //progress = (isPausing) ? (timer + timerOffset) / pauseTime : (timer + timerOffset) / bounceTime;
                 if (lockRequested)
                 {
                     locked = true;
-                    lockRequested = false;
+                    lockRequested = true;
                 }
             }
 

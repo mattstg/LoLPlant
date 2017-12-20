@@ -152,18 +152,21 @@ public class PlayerController : MonoBehaviour {
 
     private void TouchedGround()
     {
+        if(body.velocity.y <= 0)
+            LOLAudio.Instance.PlayAudio("land.wav");
         isGrounded = true;
         isJumping = false;
         jumpHeldTime = 0;
         anim.Grounded(true);
-        //LOLAudio.Instance.PlayAudio("DesiJourney.wav");   Need uncorrupted files from tony
+        
     }
 
     public void GetHitByAphid(Transform aphidTransform)
     {
-		//body.velocity.Set (0, 0);
-		body.velocity =  ((transform.position - aphidTransform.position).normalized * 5);
+        //body.velocity.Set (0, 0);
+        body.velocity =  ((transform.position - aphidTransform.position).normalized * 5);
         GV.ws.plant.LoseFood(5);
+        LOLAudio.Instance.PlayAudio("aphidHit.wav");
     }
 
     public virtual void OnCollisionExit2D(Collision2D coli)

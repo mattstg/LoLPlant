@@ -17,7 +17,7 @@ public class TutorialFlow : Flow
         GV.ws.dnc.Initialize();
         GV.ws.plant.Initialize(0);
         GV.ws.pc.Initialize();
-        // GV.ws.cameraManager.Initialize();    //Cam is locked for tut, don't update
+        GV.ws.cameraManager.Initialize();
         GV.ws.platformManager.Initialize();
         GV.ws.dm.Initialize();
         GV.ws.popupManager.Initialize();

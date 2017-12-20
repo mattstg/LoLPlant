@@ -13,7 +13,7 @@ public class TAGrowthSequence : TAEvent {
 
     public override void PerformEvent()
     {
-        GV.ws.dnc.StartGrowthSequence();
-        GV.ws.plant.ConvertFoodToHeight();
+        GV.ws.dnc.BeginGrowing();
+        GV.ws.plant.BeginGrowing();
     }
 }

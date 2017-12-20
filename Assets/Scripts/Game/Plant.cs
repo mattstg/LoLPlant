@@ -51,7 +51,8 @@ public class Plant : MonoBehaviour {
     private float targetHeight = 1f;
     private float growthPerFood = 1f;
 
-    public float highScore = 0;
+    public int highScore = 0;
+    public int newScore = 0;
     
     public float dampTime = 0.25f;
     
@@ -171,7 +172,7 @@ public class Plant : MonoBehaviour {
                 food = targetFood;
                 height = targetHeight;
                 isGrowing = false;
-                TAEventManager.Instance.ReceiveActionTrigger("GrowthComplete");
+                //TAEventManager.Instance.ReceiveActionTrigger("GrowthComplete"); //already sent by DNC
             }
             else
             {
@@ -211,31 +212,18 @@ public class Plant : MonoBehaviour {
         }
     }
 
-    public void ConvertFoodToHeight()
+    public void BeginGrowing()
     {
-        growthDuration = DayNightCycle.lengthOfNight;
+        growthDuration = DayNightCycle.growthDuration;
         growthProgress = 0f;
         sourceFood = food;
         targetFood = 0f;
+        float score = (food * growthPerFood);
         sourceHeight = height;
-        targetHeight = height + (food * growthPerFood);
-
-        if (food > 0)
-        {
-            float score = (food);
-            int scoreInt = (int)score;
-            if (scoreInt > highScore)
-                highScore = scoreInt;
-            height += score;
-            isGrowing = true;
-        }
-        else
-        {
-            growthProgress = growthDuration;
-            food = targetFood;
-            height = targetHeight;
-            isGrowing = false;
-            TAEventManager.Instance.ReceiveActionTrigger("GrowthComplete");
-        }
+        targetHeight = height + score;
+        newScore = (int)score;
+        if (newScore > highScore)
+            highScore = newScore;
+        isGrowing = true;
     }
 }

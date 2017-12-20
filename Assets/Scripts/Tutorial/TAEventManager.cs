@@ -43,9 +43,9 @@ public class TAEventManager
                 taQueue.Enqueue(new TATimer("Timer", 2));
                 taQueue.Enqueue(new TATrigger("Timer"));
                 taQueue.Enqueue(new TACreatePopup(new Message("SunReq")));
-                taQueue.Enqueue(new TACreatePopup(new Message("GatherSun", Message.Type.Prompt)));
-                taQueue.Enqueue(new TACreatePopup(new Message("ControlsKey", Message.Type.Info)));
-                taQueue.Enqueue(new TACreatePopup(new Message("ControlsTouch", Message.Type.Info)));
+                taQueue.Enqueue(new TACreatePopup(new Message("GatherSun", Message.Type.Prompt, Message.Position.Top)));
+                taQueue.Enqueue(new TACreatePopup(new Message("ControlsKey", Message.Type.Info, Message.Position.Top)));
+                taQueue.Enqueue(new TACreatePopup(new Message("ControlsTouch", Message.Type.Info, Message.Position.Top)));
                 taQueue.Enqueue(new TATrigger("Sun"));
                 taQueue.Enqueue(new TAPromptSuccess("GatherSun"));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
@@ -59,9 +59,11 @@ public class TAEventManager
                 taQueue.Enqueue(new TACreatePopup(new Message("H20Req", Message.Type.Prompt)));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardWater, true));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, true));
+                taQueue.Enqueue(new TADelegate(LOLAudio.Instance.PlayBackgroundAudio, "lightRain"));
                 taQueue.Enqueue(new TATrigger("Water"));
                 taQueue.Enqueue(new TAPromptSuccess("H20Req"));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, false));
+                taQueue.Enqueue(new TADelegate(LOLAudio.Instance.SetBGLevel, 0));
                 taQueue.Enqueue(new TACreatePopup(new Message("Evaporation")));
                 taQueue.Enqueue(new TACreatePopup(new Message("ReqBothForSugar")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
@@ -96,49 +98,61 @@ public class TAEventManager
                 taQueue.Enqueue(new TACreatePopup(new Message("SugarsToGrowth")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 //Zoom to sunset
-                AddEndOfDayScene();
+                NightSequence();
+                taQueue.Enqueue(new TATimer("Timer", 2));
+                taQueue.Enqueue(new TATrigger("Timer"));
+                taQueue.Enqueue(new TAChangeFlow(CurrentState.Game));
                 // HERE< SPECIAL END LEVEL POPUP
                 //ENDS LEVEL WHEN CLOSES
                 break;
             case 6:
                 //Initial day popup
-                AddEndOfDayScene();
+                InitiateDay();
+                NightSequence();
                 goto case 7;
             case 7:
-                AddEndOfDayScene();
+                InitiateDay();
+                NightSequence();
                 goto case 8;
             case 8:
-                //Game end reached
-                taQueue.Enqueue(new TAFreezeChar(false, true));
-                taQueue.Enqueue(new TASetDNC(false));
-                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
                 taQueue.Enqueue(new TACreatePopup(new Message("GameOver", Message.Type.Endgame, Message.Position.Right)));
                 break;
         }
         ProcessStack();
     }
 
-    private void AddEndOfDayScene()
-    { //
-        taQueue.Enqueue(new TATrigger("NightTimeStart"));
-        taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids,false));
-        taQueue.Enqueue(new TAFreezeChar(true, true));
-        taQueue.Enqueue(new TACamZoom(GV.cameraGrowthZoom));
-        taQueue.Enqueue(new TASetDNC(false,DayNightCycle.sunsetHour));
-        taQueue.Enqueue(new TAPlayerTinter(1));
-        taQueue.Enqueue(new TAGrowthSequence(true));
-        taQueue.Enqueue(new TATrigger("GrowthComplete"));
-        //taQueue.Enqueue(new TACreatePopup(new Message("TheGrowthPanel", Message.Type.Info, Message.Position.Right)));
-        //trigger 
+    private void InitiateDay()
+    {
         taQueue.Enqueue(new TASetDNC(true, DayNightCycle.sunriseHour));
+        taQueue.Enqueue(new TADelegate(GV.ws.dnc.BeginDay));
         taQueue.Enqueue(new TAFreezeChar(false, true));
-        taQueue.Enqueue(new TACamZoom(GV.cameraDefaultZoom));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, true));
-        taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
-        //Reposition character
+        taQueue.Enqueue(new TADelegate(GV.ws.raincloudManager.SetRaining, true));
+        //reposition player
     }
 
+    private void NightSequence()
+    {
+        taQueue.Enqueue(new TATrigger("BeginNight"));
+        taQueue.Enqueue(new TASetDNC(false, DayNightCycle.sunsetHour));
+        taQueue.Enqueue(new TAFreezeChar(true, true));
+        taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids,false));
+        taQueue.Enqueue(new TADelegate(GV.ws.raincloudManager.SetRaining, false));
 
+        taQueue.Enqueue(new TADelegate(GV.ws.dnc.BeginZoomIn));
+        taQueue.Enqueue(new TATrigger("ZoomComplete"));
+
+        taQueue.Enqueue(new TAGrowthSequence(true));
+        taQueue.Enqueue(new TATrigger("GrowthComplete"));
+
+        taQueue.Enqueue(new TADelegate(GV.ws.popupManager.LoadScorePopup));
+        taQueue.Enqueue(new TATrigger("ClosePopup"));
+
+        taQueue.Enqueue(new TADelegate(GV.ws.dnc.BeginZoomOut));
+        taQueue.Enqueue(new TATrigger("ZoomComplete"));
+
+        taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
+    }
 
     public void RecieveLock(string newLock)
     {
@@ -163,7 +177,7 @@ public class TAEventManager
             currentLock = "";
             ProcessStack();
         }
-        //Debug.Log("EventManager.ReceiveTrigger(): " + triggerName);
+
     }
 	
 }

@@ -22,11 +22,39 @@ public class LOLAudio
     #endregion
     
     AudioSource musicPlayer;
+    AudioSource bgMusicPlayer;
+    AudioClip landingAC;
 
     private LOLAudio()
     {
+        landingAC = Resources.Load<AudioClip>("Music/land");
     }
 
+
+    public void PlayBackgroundAudio(string _name)
+    {
+#if UNITY_EDITOR
+        GameObject go = new GameObject();
+        go.name = "RainSound";
+        AudioSource audioSrc = go.AddComponent<AudioSource>();
+        string filePath = "Music/" + System.IO.Path.GetFileNameWithoutExtension(_name);
+        audioSrc.clip = Resources.Load<AudioClip>(filePath);
+        audioSrc.loop = true;
+        audioSrc.Play();
+        bgMusicPlayer = audioSrc;
+#elif UNITY_WEBGL
+        LOLSDK.Instance.PlaySound(_name, true, true);
+#endif
+    }
+
+    public void SetBGLevel(float volume)
+    {
+#if UNITY_EDITOR
+        bgMusicPlayer.volume = volume;
+#elif UNITY_WEBGL
+        LOLSDK.Instance.ConfigureSound(1, volume, 1); //Should be 0 or 1? who knows
+#endif
+    }
 
     public void PlayAudio(string _name, bool loop = false)
     {
@@ -36,7 +64,7 @@ public class LOLAudio
 #if UNITY_EDITOR
         PlayEditorAudio(_name, loop);        
 #elif UNITY_WEBGL
-        LOLSDK.Instance.PlaySound("Resources/" + _name, false, loop);
+        LOLSDK.Instance.PlaySound(_name, false, loop);
 #endif
     }
 
@@ -65,8 +93,8 @@ public class LOLAudio
                 musicPlayer = go.AddComponent<AudioSource>();
             }
             _name = System.IO.Path.GetFileNameWithoutExtension(_name);
-            AudioClip ac = Resources.Load<AudioClip>(_name);
-            musicPlayer.PlayOneShot(Resources.Load<AudioClip>(_name));
+            AudioClip ac = (_name == "land")? landingAC : Resources.Load<AudioClip>("Music/" + _name);
+            musicPlayer.PlayOneShot(ac);
             //AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>(_name), new Vector3());
             //AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>(_name), new Vector3());
         }

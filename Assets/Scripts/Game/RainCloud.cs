@@ -58,6 +58,11 @@ public class RainCloud : Cloud, CastsShadow {
             GV.ws.shadowManager.RegisterShadow(this, transform);   
     }
 
+    //public int NumberOfCloudsNearX(float x)
+    //{
+    //
+    //}
+
     public override void Refresh(float dt)
     {
 
@@ -144,5 +149,10 @@ public class RainCloud : Cloud, CastsShadow {
     public Vector2[] RetrieveShadowEdges()
     {
         return new Vector2[] { leftRightEdges[0].transform.position, leftRightEdges[1].transform.position };
+    }
+
+    public void SetRaining(bool _raining)
+    {
+        raining = _raining;
     }
 }
