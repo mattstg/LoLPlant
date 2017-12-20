@@ -41,6 +41,9 @@ public class DashboardManager : MonoBehaviour
     private FoodLossState foodLossState = FoodLossState.Normal;
     public RectTransform foodIcon;
 
+    public RectTransform foodScoreParent;
+    public Text foodScoreText;
+
     public Transform heightParent;
     public Text heightText;
 
@@ -73,6 +76,8 @@ public class DashboardManager : MonoBehaviour
             waterControl.onValueChanged.AddListener(delegate { WaterControlValueChanged(); });
         foodBouncer.InitializeBouncer();
         heightBouncer.InitializeBouncer();
+        foodScoreText.text = "0";
+        heightText.text = "0";
         //Application.targetFrameRate = 120;
     }
 
@@ -225,6 +230,9 @@ public class DashboardManager : MonoBehaviour
         if (!lockRequested)
             foodBouncer.locked = false;
         foodBouncer.UpdateBouncer(dt);
+
+        if (plant.foodScore != plant.oldFoodScore)
+            foodScoreText.text = plant.foodScore.ToString();
 
             // bottom: A(x, y); top: B(x, y); iconFillAmount: K; position = (Ax + K(Bx - Ax), Ay + K(By- Ay))
 

@@ -30,6 +30,9 @@ public class Plant : MonoBehaviour {
     public float food = 0;
     public float foodDamp = 0;
     private float foodVelocity = 0;
+    private float foodScoreScale = 10f;
+    public int foodScore = -1;
+    public int oldFoodScore = -2;
     
     public FoodLossState foodLossState = FoodLossState.Normal;
     private float foodLossDelay = 2f;
@@ -125,6 +128,8 @@ public class Plant : MonoBehaviour {
                 foodVelocity = 0f;
             }
         }
+        oldFoodScore = foodScore;
+        foodScore = (int)(foodDamp * foodScoreScale);
 
         switch (foodLossState)
         {
