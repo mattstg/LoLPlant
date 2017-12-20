@@ -47,7 +47,7 @@ public class GV {
     public static readonly float sunAngleBuffer = 2;
     public static readonly float raincloudShadowAlpha = .4f;
 
-    public static readonly int LastTutorialProgressPoint = 4;    
+    public static readonly int LastTutorialProgressPoint = 5;    
     public static readonly float waterPerDrop = .03f;
 
 

@@ -43,9 +43,9 @@ public class TAEventManager
                 taQueue.Enqueue(new TATimer("Timer", 2));
                 taQueue.Enqueue(new TATrigger("Timer"));
                 taQueue.Enqueue(new TACreatePopup(new Message("SunReq")));
-                taQueue.Enqueue(new TACreatePopup(new Message("GatherSun", Message.Type.Prompt)));
-                taQueue.Enqueue(new TACreatePopup(new Message("ControlsKey", Message.Type.Info)));
-                taQueue.Enqueue(new TACreatePopup(new Message("ControlsTouch", Message.Type.Info)));
+                taQueue.Enqueue(new TACreatePopup(new Message("GatherSun", Message.Type.Prompt, Message.Position.Top)));
+                taQueue.Enqueue(new TACreatePopup(new Message("ControlsKey", Message.Type.Info, Message.Position.Top)));
+                taQueue.Enqueue(new TACreatePopup(new Message("ControlsTouch", Message.Type.Info, Message.Position.Top)));
                 taQueue.Enqueue(new TATrigger("Sun"));
                 taQueue.Enqueue(new TAPromptSuccess("GatherSun"));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
@@ -104,9 +104,14 @@ public class TAEventManager
                 break;
             case 6:
                 //Initial day popup
+                taQueue.Enqueue(new TASetDNC(true, DayNightCycle.sunriseHour));
+                taQueue.Enqueue(new TADelegate(GV.ws.dnc.BeginDay));
                 AddEndOfDayScene();
                 goto case 7;
             case 7:
+                //reposition player
+                taQueue.Enqueue(new TASetDNC(true, DayNightCycle.sunriseHour));
+                taQueue.Enqueue(new TADelegate(GV.ws.dnc.BeginDay));
                 AddEndOfDayScene();
                 goto case 8;
             case 8:
@@ -121,23 +126,30 @@ public class TAEventManager
     }
 
     private void AddEndOfDayScene()
-    { //
-        taQueue.Enqueue(new TATrigger("NightTimeStart"));
-        taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids,false));
+    {
+        taQueue.Enqueue(new TATrigger("BeginNight"));
+        taQueue.Enqueue(new TASetDNC(false, DayNightCycle.sunsetHour));
         taQueue.Enqueue(new TAFreezeChar(true, true));
-        taQueue.Enqueue(new TACamZoom(GV.cameraGrowthZoom));
-        taQueue.Enqueue(new TASetDNC(false,DayNightCycle.sunsetHour));
-        taQueue.Enqueue(new TAPlayerTinter(1));
+        taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids,false));
+
+        taQueue.Enqueue(new TADelegate(GV.ws.dnc.BeginZoomIn));
+        taQueue.Enqueue(new TATrigger("ZoomComplete"));
+
         taQueue.Enqueue(new TAGrowthSequence(true));
         taQueue.Enqueue(new TATrigger("GrowthComplete"));
-        //taQueue.Enqueue(new TACreatePopup(new Message("TheGrowthPanel", Message.Type.Info, Message.Position.Right)));
-        //trigger 
-        taQueue.Enqueue(new TASetDNC(true, DayNightCycle.sunriseHour));
+
+        //this needs to be a delegate action to popupmanager special function LoadScorePopup so plant.newScore is available
+        string scoreMessage = LangDict.Instance.GetText("Congratulations") + "\n\n" + LangDict.Instance.GetText("GrowthAchievement") + "\n<size=32>" + GV.ws.plant.newScore.ToString() + "</size> mm";
+        taQueue.Enqueue(new TACreatePopup(new Message("GrowthAchievement", scoreMessage, Message.Type.Info, Message.Position.Right)));
+        taQueue.Enqueue(new TATrigger("ClosePopup"));
+        //
+
+        taQueue.Enqueue(new TADelegate(GV.ws.dnc.BeginZoomOut));
+        taQueue.Enqueue(new TATrigger("ZoomComplete"));
+
         taQueue.Enqueue(new TAFreezeChar(false, true));
-        taQueue.Enqueue(new TACamZoom(GV.cameraDefaultZoom));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, true));
         taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
-        //Reposition character
     }
 
 
