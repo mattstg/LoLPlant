@@ -81,6 +81,9 @@ public class DayNightCycle : MonoBehaviour
                 zoomProgress = zoomDuration;
                 zoom = Camera.main.orthographicSize = targetZoom;
                 playerIlluminationOffset = targetPIO;
+                float cameraOffsetX = targetPIO * 1.2f;
+                float cameraOffsetY = targetPIO * 0.5f;
+                GV.ws.cameraManager.offset = new Vector3(cameraOffsetX, cameraOffsetY, 0f);
                 float illumination = Mathf.Clamp01(GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 2f / 3f, -0.5f).y);
                 SpriteTinter.Instance.UpdateSpriteTints(1f - Mathf.Pow(illumination - 1f, 2f), playerIlluminationOffset);
                 TAEventManager.Instance.ReceiveActionTrigger("ZoomComplete");
@@ -91,6 +94,9 @@ public class DayNightCycle : MonoBehaviour
                 zoom = targetZoom * integral + sourceZoom * (1f - integral);
                 Camera.main.orthographicSize = zoom;
                 playerIlluminationOffset = targetPIO * integral + sourcePIO * (1f - integral);
+                float cameraOffsetX = playerIlluminationOffset * 1.2f;
+                float cameraOffsetY = playerIlluminationOffset * 0.5f;
+                GV.ws.cameraManager.offset = new Vector3(cameraOffsetX, cameraOffsetY, 0f);
                 float illumination = Mathf.Clamp01(GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 2f / 3f, -0.5f).y);
                 SpriteTinter.Instance.UpdateSpriteTints(1f - Mathf.Pow(illumination - 1f, 2f), playerIlluminationOffset);
             }

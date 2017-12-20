@@ -692,10 +692,8 @@ MonoBehaviour:
   bounceHeight: 5
   bounceTime: 0.7
   pauseTime: 0
-  timer: 0
-  timerOffset: 0
+  timeOffset: 0
   isPausing: 0
-  progress: 0
   useWaveMotion: 0
   locked: 0
   lockRequested: 0
@@ -715,10 +713,8 @@ MonoBehaviour:
   bounceHeight: 6
   bounceTime: 0.5
   pauseTime: 2
-  timer: 0
-  timerOffset: 1
+  timeOffset: 1.5
   isPausing: 0
-  progress: 0
   useWaveMotion: 0
   locked: 0
   lockRequested: 0
@@ -798,10 +794,8 @@ MonoBehaviour:
   bounceHeight: 6
   bounceTime: 0.5
   pauseTime: 2
-  timer: 0
-  timerOffset: 0.5
+  timeOffset: 2
   isPausing: 0
-  progress: 0
   useWaveMotion: 0
   locked: 0
   lockRequested: 0
@@ -1062,10 +1056,8 @@ MonoBehaviour:
   bounceHeight: 6
   bounceTime: 0.5
   pauseTime: 2
-  timer: 0
-  timerOffset: 1.5
+  timeOffset: 1
   isPausing: 0
-  progress: 0
   useWaveMotion: 0
   locked: 0
   lockRequested: 0
@@ -1582,10 +1574,8 @@ MonoBehaviour:
   bounceHeight: 5
   bounceTime: 0.7
   pauseTime: 0
-  timer: 0
-  timerOffset: 0
+  timeOffset: 0
   isPausing: 0
-  progress: 0
   useWaveMotion: 0
   locked: 0
   lockRequested: 0

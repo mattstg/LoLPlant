@@ -118,7 +118,7 @@ public class TAEventManager
                 NightSequence();
                 goto case 8;
             case 8:
-                taQueue.Enqueue(new TACreatePopup(new Message("GameOver", Message.Type.Endgame, Message.Position.Right)));
+                taQueue.Enqueue(new TACreatePopup(new Message("GameOver", Message.Type.Endgame, Message.Position.Center)));
                 break;
         }
         ProcessStack();
