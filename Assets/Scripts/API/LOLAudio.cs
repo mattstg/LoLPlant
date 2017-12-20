@@ -39,7 +39,7 @@ public class LOLAudio
         audioSrc.Play();
         bgMusicPlayer = audioSrc;
 #elif UNITY_WEBGL
-        LOLSDK.Instance.PlaySound("Resources/" + _name, true, true);
+        LOLSDK.Instance.PlaySound(_name, true, true);
 #endif
     }
 
@@ -60,7 +60,7 @@ public class LOLAudio
 #if UNITY_EDITOR
         PlayEditorAudio(_name, loop);        
 #elif UNITY_WEBGL
-        LOLSDK.Instance.PlaySound("Resources/" + _name, false, loop);
+        LOLSDK.Instance.PlaySound(_name, false, loop);
 #endif
     }
 
