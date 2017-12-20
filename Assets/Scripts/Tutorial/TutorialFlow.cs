@@ -36,7 +36,7 @@ public class TutorialFlow : Flow
             GV.ws.dnc.Refresh(dt);
             GV.ws.plant.Refresh(dt);
             GV.ws.pc.Refresh(dt);
-            // GV.ws.cameraManager.Refresh(dt);     //Cam is locked for tut, don't update
+            GV.ws.cameraManager.Refresh(dt);     //Cam is locked for tut, don't update
             GV.ws.platformManager.Refresh(dt);
             GV.ws.dm.Refresh(dt);
             GV.ws.popupManager.Refresh(dt);
