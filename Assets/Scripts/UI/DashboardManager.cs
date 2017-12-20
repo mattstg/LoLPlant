@@ -292,6 +292,7 @@ public class DashboardManager : MonoBehaviour
                 waterParent.gameObject.SetActive(false);
                 psParent.gameObject.SetActive(false);
                 foodParent.gameObject.SetActive(false);
+                foodScoreParent.gameObject.SetActive(false);
                 heightParent.gameObject.SetActive(false);
                 sundialParent.gameObject.SetActive(false);
 
@@ -304,6 +305,7 @@ public class DashboardManager : MonoBehaviour
                 waterParent.gameObject.SetActive(false);
                 psParent.gameObject.SetActive(false);
                 foodParent.gameObject.SetActive(false);
+                foodScoreParent.gameObject.SetActive(false);
                 heightParent.gameObject.SetActive(false);
                 sundialParent.gameObject.SetActive(false);
 
@@ -316,6 +318,7 @@ public class DashboardManager : MonoBehaviour
                 waterParent.gameObject.SetActive(true);
                 psParent.gameObject.SetActive(false);
                 foodParent.gameObject.SetActive(false);
+                foodScoreParent.gameObject.SetActive(false);
                 heightParent.gameObject.SetActive(false);
                 sundialParent.gameObject.SetActive(false);
 
@@ -328,6 +331,7 @@ public class DashboardManager : MonoBehaviour
                 waterParent.gameObject.SetActive(true);
                 psParent.gameObject.SetActive(true);
                 foodParent.gameObject.SetActive(false);
+                foodScoreParent.gameObject.SetActive(false);
                 heightParent.gameObject.SetActive(false);
                 sundialParent.gameObject.SetActive(false);
 
@@ -341,6 +345,7 @@ public class DashboardManager : MonoBehaviour
                 waterParent.gameObject.SetActive(true);
                 psParent.gameObject.SetActive(true);
                 foodParent.gameObject.SetActive(true);
+                foodScoreParent.gameObject.SetActive(true);
                 heightParent.gameObject.SetActive(false);
                 sundialParent.gameObject.SetActive(false);
 
@@ -354,6 +359,7 @@ public class DashboardManager : MonoBehaviour
                 waterParent.gameObject.SetActive(true);
                 psParent.gameObject.SetActive(true);
                 foodParent.gameObject.SetActive(true);
+                foodScoreParent.gameObject.SetActive(true);
                 heightParent.gameObject.SetActive(true);
                 sundialParent.gameObject.SetActive(false);
 
@@ -367,6 +373,7 @@ public class DashboardManager : MonoBehaviour
                 waterParent.gameObject.SetActive(true);
                 psParent.gameObject.SetActive(true);
                 foodParent.gameObject.SetActive(true);
+                foodScoreParent.gameObject.SetActive(true);
                 heightParent.gameObject.SetActive(true);
                 sundialParent.gameObject.SetActive(true);
 
