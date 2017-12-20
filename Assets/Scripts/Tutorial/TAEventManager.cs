@@ -163,7 +163,7 @@ public class TAEventManager
             currentLock = "";
             ProcessStack();
         }
-        Debug.Log("EventManager.ReceiveTrigger(): " + triggerName);
+        //Debug.Log("EventManager.ReceiveTrigger(): " + triggerName);
     }
 	
 }

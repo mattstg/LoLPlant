@@ -86,6 +86,9 @@ TagManager:
   - name: Shadows
     uniqueID: 2686338415
     locked: 0
+  - name: lab
+    uniqueID: 1653702817
+    locked: 0
   - name: Rain Clouds
     uniqueID: 2798980417
     locked: 0
