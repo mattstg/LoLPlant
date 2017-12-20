@@ -30,14 +30,19 @@ public class TAEventManager
         taQueue.Clear();
         Debug.Log("setup for p point: " + progressPoint);
         //Setup the entire stack here
+        taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Sliders, false));
+        taQueue.Enqueue(new TASetDNC(false, 12, 0));
+        taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardNone, true));
+        taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
+
         switch (progressPoint)
         {
             case 1:
                 //
-                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Sliders, false));
-                taQueue.Enqueue(new TASetDNC(false, 12, 0));
-                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardNone, true));
-                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
+                //taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Sliders, false));
+                //taQueue.Enqueue(new TASetDNC(false, 12, 0));
+                //taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardNone, true));
+                //taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
                 //taQueue.Enqueue(new TAActivate("Platforms", false));
                 taQueue.Enqueue(new TAFreezeChar(true,false));
                 taQueue.Enqueue(new TATimer("Timer", 2));
@@ -64,7 +69,22 @@ public class TAEventManager
                 taQueue.Enqueue(new TATrigger("Water"));
                 taQueue.Enqueue(new TAPromptSuccess("H20Req"));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, false));
-                taQueue.Enqueue(new TADelegate(LOLAudio.Instance.SetBGLevel, 0));
+                
+                //Slowly fade audio
+                taQueue.Enqueue(new TADelegate(LOLAudio.Instance.SetBGLevel, .6f));
+                taQueue.Enqueue(new TATimer("Timer", 1f));
+                taQueue.Enqueue(new TATrigger("Timer"));
+                taQueue.Enqueue(new TADelegate(LOLAudio.Instance.SetBGLevel, .4f));
+                taQueue.Enqueue(new TATimer("Timer", 1f));
+                taQueue.Enqueue(new TATrigger("Timer"));
+                taQueue.Enqueue(new TADelegate(LOLAudio.Instance.SetBGLevel, .1f));
+                taQueue.Enqueue(new TATimer("Timer", 1f));
+                taQueue.Enqueue(new TATrigger("Timer"));
+                taQueue.Enqueue(new TADelegate(LOLAudio.Instance.SetBGLevel, .05f));
+                taQueue.Enqueue(new TATimer("Timer", 1f));
+                taQueue.Enqueue(new TATrigger("Timer"));
+                taQueue.Enqueue(new TADelegate(LOLAudio.Instance.SetBGLevel, 0f));
+
                 taQueue.Enqueue(new TACreatePopup(new Message("Evaporation")));
                 taQueue.Enqueue(new TACreatePopup(new Message("ReqBothForSugar")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
@@ -93,8 +113,10 @@ public class TAEventManager
                 taQueue.Enqueue(new TACreatePopup(new Message("Escape", Message.Type.Prompt)));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Platforms, true));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, true));
+                taQueue.Enqueue(new TADelegate(delegate () { GameObject.Find("TempWall").SetActive(false); }));
                 taQueue.Enqueue(new TATrigger("FinalPlatform"));
                 taQueue.Enqueue(new TAPromptSuccess("Escape"));
+                
                 // TAPromptSuccess
                 taQueue.Enqueue(new TAFreezeChar(true));
                 taQueue.Enqueue(new TATimer("Timer", 2));
@@ -104,6 +126,7 @@ public class TAEventManager
                 //Zoom to sunset
                 taQueue.Enqueue(new TATimer("BeginNight", 2));
                 NightSequence();
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 taQueue.Enqueue(new TAChangeFlow(CurrentState.Game));
                 // HERE< SPECIAL END LEVEL POPUP
                 //ENDS LEVEL WHEN CLOSES
@@ -112,10 +135,14 @@ public class TAEventManager
                 //Initial day popup
                 InitiateDay();
                 NightSequence();
+                taQueue.Enqueue(new TASubmitScore());
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 goto case 7;
             case 7:
                 InitiateDay();
                 NightSequence();
+                taQueue.Enqueue(new TASubmitScore());
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 goto case 8;
             case 8:
                 taQueue.Enqueue(new TACreatePopup(new Message("GameOver", Message.Type.Endgame, Message.Position.Center)));
@@ -154,7 +181,7 @@ public class TAEventManager
         taQueue.Enqueue(new TADelegate(GV.ws.dnc.BeginZoomOut));
         taQueue.Enqueue(new TATrigger("ZoomComplete"));
 
-        taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
+        
     }
 
     public void RecieveLock(string newLock)
@@ -175,9 +202,6 @@ public class TAEventManager
 
     public void ReceiveActionTrigger(string triggerName)
     {
-        Debug.Log("Trigger Recieved: " + triggerName);
-        if (triggerName == "BeginNight")
-            Debug.Log("");
         if (triggerName == currentLock)
         {
             currentLock = "";

@@ -41,8 +41,11 @@ public class ProgressTracker {
 
     public void SubmitAndIncrementProgress()
     {
+        Debug.Log("progress: " + currentProgress + " score: " + score + " submitted");
         SubmitProgress(currentProgress, score);
-        currentProgress = Mathf.Clamp(currentProgress++,0,maxProgress);
+        currentProgress++;
+        currentProgress = Mathf.Clamp(currentProgress,0,maxProgress);
+        
     }
 
     public void SubmitProgress(int progressNumber, int progressScore)
