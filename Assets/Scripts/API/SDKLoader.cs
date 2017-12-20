@@ -59,7 +59,7 @@ public class SDKLoader {
             if (startGameData["progress"] != null)
             {
                 int result = 1;
-                bool parseSuccess = int.TryParse(startGameData["progress"].Value, out result);
+                bool parseSuccess = int.TryParse(startGameData["currentProgress"].Value, out result);
                 if (parseSuccess)
                 {
                     Debug.Log("QQ successful progress parse");

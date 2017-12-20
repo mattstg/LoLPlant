@@ -33,13 +33,15 @@ public class LOLAudio
     {
 #if UNITY_EDITOR
         GameObject go = new GameObject();
+        go.name = "RainSound";
         AudioSource audioSrc = go.AddComponent<AudioSource>();
-        audioSrc.clip = Resources.Load<AudioClip>("Music/" + _name);
+        string filePath = "Music/" + System.IO.Path.GetFileNameWithoutExtension(_name);
+        audioSrc.clip = Resources.Load<AudioClip>(filePath);
         audioSrc.loop = true;
         audioSrc.Play();
         bgMusicPlayer = audioSrc;
 #elif UNITY_WEBGL
-        LOLSDK.Instance.PlaySound("Resources/" + _name, true, true);
+        LOLSDK.Instance.PlaySound(_name, true, true);
 #endif
     }
 
@@ -60,7 +62,7 @@ public class LOLAudio
 #if UNITY_EDITOR
         PlayEditorAudio(_name, loop);        
 #elif UNITY_WEBGL
-        LOLSDK.Instance.PlaySound("Resources/" + _name, false, loop);
+        LOLSDK.Instance.PlaySound(_name, false, loop);
 #endif
     }
 

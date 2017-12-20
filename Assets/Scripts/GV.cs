@@ -33,6 +33,10 @@ public class GV {
     public static readonly Vector2 raincloudAltitudeRange = new Vector2(9f, 13f);
     public static readonly Vector2 raincloudTravelRange = new Vector2(-60f, 60f);
 
+	//raomcloud sound
+	public static readonly float rainHearingDist = worldWidth / 4;
+	public static readonly float[] worldRange = {-10,7} ;
+
     public static readonly Vector2 rainRateRange = new Vector2(10,24); //int >= 1. rainRate will lerp around randomly to values in this range. 
     public static readonly int maxDropsPerFrame = 4; // this many 'rain dice' will be rolled each frame, with each die having 1/rainRate chance of spawning a drop
 
@@ -49,7 +53,6 @@ public class GV {
 
     public static readonly int LastTutorialProgressPoint = 5;    
     public static readonly float waterPerDrop = .03f;
-
 
 	public static readonly float[] platformSpriteScales = { 0.4f, 0.5f, 0.8f, 1.0f, 1.2f, 1.4f, 1.5f};
 	public static readonly float platformHeight = 0.07f;
