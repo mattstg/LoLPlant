@@ -99,6 +99,9 @@ public class TAEventManager
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 //Zoom to sunset
                 NightSequence();
+                taQueue.Enqueue(new TATimer("Timer", 2));
+                taQueue.Enqueue(new TATrigger("Timer"));
+                taQueue.Enqueue(new TAChangeFlow(CurrentState.Game));
                 // HERE< SPECIAL END LEVEL POPUP
                 //ENDS LEVEL WHEN CLOSES
                 break;
@@ -174,7 +177,6 @@ public class TAEventManager
             currentLock = "";
             ProcessStack();
         }
-        Debug.Log("EventManager.ReceiveTrigger(): " + triggerName);
     }
 	
 }
