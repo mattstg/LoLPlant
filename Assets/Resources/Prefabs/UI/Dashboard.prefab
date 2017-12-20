@@ -227,7 +227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1102439276884718
 GameObject:
   m_ObjectHideFlags: 1
@@ -1600,7 +1600,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.9
-  m_Text: PAUSE
+  m_Text: JUMP
 --- !u!114 &114263042229914804
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2021,7 +2021,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: TogglePause
+        m_MethodName: JumpToMorning
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

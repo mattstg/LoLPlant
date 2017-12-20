@@ -13,7 +13,7 @@ public class DayNightCycle : MonoBehaviour
     public int day = 0;
     public int hour = 0;
     public int hour12 = 0;
-    float hourFloat = 0;
+    public float hourFloat = 0;
     public bool isMorning = true;
 
     public Vector2 sunPosition;
@@ -45,6 +45,11 @@ public class DayNightCycle : MonoBehaviour
     private float sourcePIO;
     private float targetPIO;
 
+    private bool isJumping = false;
+    private float jumpDuration = 2f;
+    private float jumpProgress = 0f;
+    private float sourceJumpTime;
+    private float targetJumpTime;
 
     public void Initialize(bool _clockActive = true)
     {
@@ -56,22 +61,28 @@ public class DayNightCycle : MonoBehaviour
 
     public void Refresh(float dt)
     {
-        if (!stateIsDaytime)
-            NightUpdate(dt);
-        else if (clockActive)
+        if (stateIsDaytime)
             DayUpdate(dt);
+        else
+            NightUpdate(dt);
     }
 
     private void DayUpdate(float dt)
     {
-        time += dt;
-        UpdateDNC();
-        if (!isDaytime && stateIsDaytime)
+        if (clockActive && !isGrowing && !isJumping)
+            time += dt;
+        bool updatedDNC = UpdateJump(dt);
+        if(!updatedDNC)
+            UpdateDNC();
+        if (!isDaytime && stateIsDaytime && !isJumping)
             BeginNight();
     }
 
     private void NightUpdate(float dt)
     {
+        if (isJumping)
+            UpdateJump(dt);
+
         if (isZooming)
         {
             zoomProgress += dt;
@@ -94,8 +105,8 @@ public class DayNightCycle : MonoBehaviour
                 zoom = targetZoom * integral + sourceZoom * (1f - integral);
                 Camera.main.orthographicSize = zoom;
                 playerIlluminationOffset = targetPIO * integral + sourcePIO * (1f - integral);
-                float cameraOffsetX = playerIlluminationOffset * 1.2f;
-                float cameraOffsetY = playerIlluminationOffset * 0.5f;
+                float cameraOffsetX = playerIlluminationOffset * 1.2f;      //too lazy to make a new independent set of transition variables for camera offset
+                float cameraOffsetY = playerIlluminationOffset * 0.5f;      //works well though because playerIlluminationOffset always moves back and forth between 0 and 1
                 GV.ws.cameraManager.offset = new Vector3(cameraOffsetX, cameraOffsetY, 0f);
                 float illumination = Mathf.Clamp01(GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 2f / 3f, -0.5f).y);
                 SpriteTinter.Instance.UpdateSpriteTints(1f - Mathf.Pow(illumination - 1f, 2f), playerIlluminationOffset);
@@ -147,6 +158,38 @@ public class DayNightCycle : MonoBehaviour
         SpriteTinter.Instance.UpdateSpriteTints(1f - Mathf.Pow(illumination - 1f, 2f), playerIlluminationOffset);
     }
 
+    private bool UpdateJump(float dt)
+    {
+        bool updatedDNC = false;
+        if (isJumping)
+        {
+            jumpProgress += dt;
+
+            if (isGrowing)
+            {
+                isJumping = false;
+                jumpProgress = jumpDuration;
+            }
+            else if (jumpProgress >= jumpDuration)
+            {
+                isJumping = false;
+                jumpProgress = jumpDuration;
+                time = targetJumpTime;
+                UpdateDNC();
+                updatedDNC = true;
+                TAEventManager.Instance.ReceiveActionTrigger("JumpComplete");
+            }
+            else
+            {
+                float integral = GV.SmoothIntegral(jumpProgress / jumpDuration);
+                time = targetJumpTime * integral + sourceJumpTime * (1f - integral);
+                UpdateDNC();
+                updatedDNC = true;
+            }
+        }
+        return updatedDNC;
+    }
+
     private void BeginNight()
     {
         stateIsDaytime = false;
@@ -156,6 +199,7 @@ public class DayNightCycle : MonoBehaviour
     public void BeginDay()
     {
         stateIsDaytime = true;
+        TAEventManager.Instance.ReceiveActionTrigger("BeginDay");
     }
 
     public void BeginZoomIn()
@@ -184,6 +228,24 @@ public class DayNightCycle : MonoBehaviour
         sourceTime = time;
         targetTime = GetTime(day + 1, sunriseHour);
         growthProgress = 0f;
+    }
+
+    public void BeginJumping(float _targetTime)
+    {
+        isJumping = true;
+        sourceJumpTime = time;
+        targetJumpTime = _targetTime;
+        jumpProgress = 0f;
+    }
+
+    public void JumpToMorning()
+    {
+        BeginJumping(GetTime(day + ((hourFloat <= 6f) ? 0 : 1), 6f));
+    }
+
+    public void JumpToSunset()
+    {
+        BeginJumping(GetTime(day + ((hourFloat <= sunsetHour) ? 0 : 1), sunsetHour));
     }
 
     public void SetTime(int _day, float _hourFloat)
