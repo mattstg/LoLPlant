@@ -184,7 +184,7 @@ public class PopupManager : MonoBehaviour
     public void LoadScorePopup()
     {
         Plant plant = GV.ws.plant;
-        string scoreMessage = LangDict.Instance.GetText("Congratulations") + "\n\n";
+        string scoreMessage = "<size=36>" + LangDict.Instance.GetText("Congratulations") + "</size>\n\n";
         scoreMessage += LangDict.Instance.GetText("GrowthAchievement") + "\n";
         scoreMessage += "      <b><size=36>" + plant.newScore.ToString() + "</size> mm</b>\n\n";
         if (plant.newScore >= plant.highScore)
