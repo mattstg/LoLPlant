@@ -767,13 +767,13 @@ public class PopupManager : MonoBehaviour
         }
     }
 
-    public void ExitPressed()
+    public void Exit()
     {
         ProgressTracker.Instance.SubmitProgress(8, MainScript.score);
         LOLSDK.Instance.CompleteGame();
     }
 
-    public void PlayAgainPressed()
+    public void Replay()
     {
         GameObject.FindObjectOfType<MainScript>().GoToNextFlow(CurrentState.Game);
     }
