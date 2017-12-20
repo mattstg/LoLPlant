@@ -157,6 +157,7 @@ public class TAEventManager
         taQueue.Enqueue(new TADelegate(GV.ws.dnc.BeginDay));
         taQueue.Enqueue(new TAFreezeChar(false, true));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, true));
+        taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardSundial, true));
         taQueue.Enqueue(new TADelegate(GV.ws.raincloudManager.SetRaining, true));
         //reposition player
     }
