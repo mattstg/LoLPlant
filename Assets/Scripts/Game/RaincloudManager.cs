@@ -42,6 +42,5 @@ public class RaincloudManager : MonoBehaviour {
         
 		toReturn = (toReturn < 0) ? 0 : toReturn * heightModifier;
 		LOLAudio.Instance.SetBGLevel(toReturn);
-        Debug.Log("Rain Volume: " + toReturn);
 	}
 }

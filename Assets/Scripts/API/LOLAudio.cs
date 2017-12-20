@@ -23,9 +23,11 @@ public class LOLAudio
     
     AudioSource musicPlayer;
     AudioSource bgMusicPlayer;
+    AudioClip landingAC;
 
     private LOLAudio()
     {
+        landingAC = Resources.Load<AudioClip>("Music/land");
     }
 
 
@@ -91,7 +93,7 @@ public class LOLAudio
                 musicPlayer = go.AddComponent<AudioSource>();
             }
             _name = System.IO.Path.GetFileNameWithoutExtension(_name);
-            AudioClip ac = Resources.Load<AudioClip>("Music/" + _name);
+            AudioClip ac = (_name == "land")? landingAC : Resources.Load<AudioClip>("Music/" + _name);
             musicPlayer.PlayOneShot(ac);
             //AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>(_name), new Vector3());
             //AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>(_name), new Vector3());
