@@ -33,8 +33,10 @@ public class LOLAudio
     {
 #if UNITY_EDITOR
         GameObject go = new GameObject();
+        go.name = "RainSound";
         AudioSource audioSrc = go.AddComponent<AudioSource>();
-        audioSrc.clip = Resources.Load<AudioClip>("Music/" + _name);
+        string filePath = "Music/" + System.IO.Path.GetFileNameWithoutExtension(_name);
+        audioSrc.clip = Resources.Load<AudioClip>(filePath);
         audioSrc.loop = true;
         audioSrc.Play();
         bgMusicPlayer = audioSrc;

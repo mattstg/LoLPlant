@@ -37,11 +37,11 @@ public class RaincloudManager : MonoBehaviour {
 
 	public void SetSoundVolume(float closestRain){
 		float heightModifier = (charPos.y > GV.worldRange[1]) ? 1 : ((charPos.y - GV.worldRange[0]) / (GV.worldRange[1] - GV.worldRange[0]));
-		heightModifier = (heightModifier < 0) ? 0 : heightModifier;
-		heightModifier = (heightModifier > 1) ? 1 : heightModifier;
-		float toReturn = (closestRain > GV.rainHearingDist) ? 1 : (GV.rainHearingDist - closestRain) / GV.rainHearingDist;
-
+        heightModifier = Mathf.Clamp01(heightModifier);
+		float toReturn = (closestRain > GV.rainHearingDist) ? 0 : (GV.rainHearingDist - closestRain) / GV.rainHearingDist;
+        
 		toReturn = (toReturn < 0) ? 0 : toReturn * heightModifier;
 		LOLAudio.Instance.SetBGLevel(toReturn);
+        Debug.Log("Rain Volume: " + toReturn);
 	}
 }

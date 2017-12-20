@@ -35,7 +35,7 @@ public class GV {
 
 	//raomcloud sound
 	public static readonly float rainHearingDist = worldWidth / 4;
-	public static readonly float[] worldRange = {-10,8} ;
+	public static readonly float[] worldRange = {-10,7} ;
 
     public static readonly Vector2 rainRateRange = new Vector2(10,24); //int >= 1. rainRate will lerp around randomly to values in this range. 
     public static readonly int maxDropsPerFrame = 4; // this many 'rain dice' will be rolled each frame, with each die having 1/rainRate chance of spawning a drop
