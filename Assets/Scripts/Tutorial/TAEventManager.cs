@@ -56,6 +56,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 goto case 2;
             case 2:
+                taQueue.Enqueue(new TASetDNC(false, 12, 0));
                 taQueue.Enqueue(new TACreatePopup(new Message("H20Req", Message.Type.Prompt)));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardWater, true));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, true));
@@ -70,6 +71,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 goto case 3;
             case 3:
+                taQueue.Enqueue(new TASetDNC(false, 12, 0));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardFood, true));
                 taQueue.Enqueue(new TACreatePopup(new Message("Sugar")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
@@ -79,6 +81,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 goto case 4;
             case 4:
+                taQueue.Enqueue(new TASetDNC(false, 12, 0));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Sliders, true));
                 //Special lab popup
                 //Close button for special lab pressed
@@ -86,6 +89,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 goto case 5;
             case 5:
+                taQueue.Enqueue(new TASetDNC(false, 12, 0));
                 taQueue.Enqueue(new TACreatePopup(new Message("Escape", Message.Type.Prompt)));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Platforms, true));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, true));
@@ -98,9 +102,8 @@ public class TAEventManager
                 taQueue.Enqueue(new TACreatePopup(new Message("SugarsToGrowth")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 //Zoom to sunset
+                taQueue.Enqueue(new TATimer("BeginNight", 2));
                 NightSequence();
-                taQueue.Enqueue(new TATimer("Timer", 2));
-                taQueue.Enqueue(new TATrigger("Timer"));
                 taQueue.Enqueue(new TAChangeFlow(CurrentState.Game));
                 // HERE< SPECIAL END LEVEL POPUP
                 //ENDS LEVEL WHEN CLOSES
@@ -172,6 +175,9 @@ public class TAEventManager
 
     public void ReceiveActionTrigger(string triggerName)
     {
+        Debug.Log("Trigger Recieved: " + triggerName);
+        if (triggerName == "BeginNight")
+            Debug.Log("");
         if (triggerName == currentLock)
         {
             currentLock = "";

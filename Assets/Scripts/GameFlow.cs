@@ -6,8 +6,14 @@ public class GameFlow : Flow
 {
     public override void Initialize(int progressNumber)
     {
+        LOLAudio.Instance.StopAudio("heavyRain.mp3");
+        LOLAudio.Instance.PlayBackgroundAudio("heavyRain.mp3");
+        LOLAudio.Instance.SetBGLevel(1);
+        LOLAudio.Instance.StopAudio("bgMusic.mp3");
+        LOLAudio.Instance.PlayAudio("bgMusic.mp3", true);
 
-        if(progressNumber <= GV.LastTutorialProgressPoint)
+
+        if (progressNumber <= GV.LastTutorialProgressPoint)
         {
             Debug.Log("Progress point set for Tutorial but force loaded in gameFlow");
             progressNumber = GV.LastTutorialProgressPoint + 1;
@@ -29,8 +35,6 @@ public class GameFlow : Flow
             TAEventManager.Instance.Initialize(7);
         else
             TAEventManager.Instance.Initialize(progressNumber);
-        LOLAudio.Instance.PlayBackgroundAudio("heavyRain.mp3");
-        LOLAudio.Instance.PlayAudio("bgMusic.mp3",true);
     }
 
     public override void Update(float dt)

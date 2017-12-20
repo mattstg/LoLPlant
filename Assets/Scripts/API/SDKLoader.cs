@@ -56,7 +56,7 @@ public class SDKLoader {
         if(startGameData != null)
         {
             //Extract Progress
-            if (startGameData["progress"] != null)
+            if (startGameData["currentProgress"] != null)
             {
                 int result = 1;
                 bool parseSuccess = int.TryParse(startGameData["currentProgress"].Value, out result);

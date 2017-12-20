@@ -37,8 +37,9 @@ public class Plant : MonoBehaviour {
     private float foodLossTarget = -1f;
     public float foodLossDamp = 0;
     private float foodLossVelocity = 0;
-    
-    public float height = 0;
+
+    private float _height = 0;
+    public float height { set { _height = value; UpdateHeightGraphic(); } get { return _height; } }
     public int heightInt = 0;
     public int oldHeightInt = -1;
 
@@ -225,5 +226,10 @@ public class Plant : MonoBehaviour {
         if (newScore > highScore)
             highScore = newScore;
         isGrowing = true;
+    }
+
+    private void UpdateHeightGraphic()
+    {
+
     }
 }

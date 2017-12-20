@@ -187,6 +187,9 @@ public class DayNightCycle : MonoBehaviour
         float nTime = _day * hoursPerDay + _hourFloat;
         time = (nTime - sunriseHour) * secondsPerHour;
         UpdateDNC();
+
+        if (!isDaytime && stateIsDaytime)
+            BeginNight();
     }
 
     public float GetTime(int _day, float _hourFloat)
