@@ -1310,6 +1310,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1335096295577174, guid: 0380f8fa15b33294588b7bd184be5d3c, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341348094064348, guid: 0380f8fa15b33294588b7bd184be5d3c, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -15147,6 +15151,7 @@ MonoBehaviour:
   oldHeightInt: -1
   isGrowing: 0
   highScore: 0
+  newScore: 0
   dampTime: 0.25
 --- !u!114 &2087831456
 MonoBehaviour:
