@@ -18,6 +18,9 @@ public class ShadowManager : MonoBehaviour {
 
     public void Initialize()
     {
+        StandaloneShadow[] sass = GameObject.FindObjectsOfType<StandaloneShadow>();
+        foreach (StandaloneShadow sas in sass)
+            sas.Initialize();
         //At this point, shadows have not called Awake yet, so no shadows
     }
 

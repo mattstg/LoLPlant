@@ -28,12 +28,13 @@ public class PlayerController : MonoBehaviour {
 
     public void Initialize()
     {
-		anim = GetComponentInChildren<AnimationController> ();
-        Debug.Log("INITIALIZED CALLED");
+        gameObject.SetActive(true);
+        anim = GetComponentInChildren<AnimationController> ();
 		body = GetComponent<Rigidbody2D> ();
         im = gameObject.AddComponent<InputManager>();
         im.Initialize(this);
 		anim.Initialize();
+        
         //Create both input managers & link here
     }
 
