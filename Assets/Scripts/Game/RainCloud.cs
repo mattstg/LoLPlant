@@ -8,6 +8,7 @@ public class RainCloud : Cloud, CastsShadow {
     public Transform rainEdgeLeft;
     public Transform rainEdgeRight;
     bool raining = false;
+    bool rainCloudActive = true;
     Vector2 rainRateRange;
     protected float rainRate;
     protected float targetSpeed; //when targetSpeed is reached, a new targetSpeed is selected randomly from within speed range, and the speed is lerped towards it, for constantly varied speed. same for rainRate.
@@ -58,13 +59,10 @@ public class RainCloud : Cloud, CastsShadow {
             GV.ws.shadowManager.RegisterShadow(this, transform);   
     }
 
-    //public int NumberOfCloudsNearX(float x)
-    //{
-    //
-    //}
-
     public override void Refresh(float dt)
     {
+        if (!rainCloudActive)
+            return;
 
         if (this.transform.localPosition.x >= travelRange.x) //if still in bounds, update speed and keep moving left
         {
@@ -121,7 +119,6 @@ public class RainCloud : Cloud, CastsShadow {
 
     protected void Rain()
     {
-        
         for(int i = 0; i < maxDropsPerFrame; i++)
         {
             if (Random.Range(0, (int)rainRate) == 0)

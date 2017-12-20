@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RaincloudManager : MonoBehaviour
 {
-
+    public bool rainCloudsPaused = false;
     public GameObject raindrop;
     List<RainCloud> rainclouds;
     private float closestPos = 0;
@@ -26,15 +26,18 @@ public class RaincloudManager : MonoBehaviour
 
     public void Refresh(float dt)
     {
-        charPos = GV.ws.pc.transform.position;
-        closestPos = GV.worldWidth;
-        foreach (RainCloud rc in rainclouds)
+        if (!rainCloudsPaused)
         {
-            rc.Refresh(dt);
-            float pos = Mathf.Abs(charPos.x - rc.transform.position.x);
-            closestPos = (closestPos > pos) ? pos : closestPos;
+            charPos = GV.ws.pc.transform.position;
+            closestPos = GV.worldWidth;
+            foreach (RainCloud rc in rainclouds)
+            {
+                rc.Refresh(dt);
+                float pos = Mathf.Abs(charPos.x - rc.transform.position.x);
+                closestPos = (closestPos > pos) ? pos : closestPos;
+            }
+            SetSoundVolume(closestPos);
         }
-        SetSoundVolume(closestPos);
     }
 
     public void SetRaining(bool raining)

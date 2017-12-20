@@ -158,7 +158,7 @@ public class TAEventManager
         taQueue.Enqueue(new TAFreezeChar(false, true));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, true));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardSundial, true));
-        taQueue.Enqueue(new TADelegate(GV.ws.raincloudManager.SetRaining, true));
+        taQueue.Enqueue(new TADelegate(delegate () { GV.ws.raincloudManager.rainCloudsPaused = false; }));
         //reposition player
     }
 
@@ -168,7 +168,7 @@ public class TAEventManager
         taQueue.Enqueue(new TASetDNC(false, DayNightCycle.sunsetHour));
         taQueue.Enqueue(new TAFreezeChar(true, true));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids,false));
-        taQueue.Enqueue(new TADelegate(GV.ws.raincloudManager.SetRaining, false));
+        taQueue.Enqueue(new TADelegate(delegate () { GV.ws.raincloudManager.rainCloudsPaused = true; }));
 
         taQueue.Enqueue(new TADelegate(GV.ws.dnc.BeginZoomIn));
         taQueue.Enqueue(new TATrigger("ZoomComplete"));
@@ -181,7 +181,6 @@ public class TAEventManager
 
         taQueue.Enqueue(new TADelegate(GV.ws.dnc.BeginZoomOut));
         taQueue.Enqueue(new TATrigger("ZoomComplete"));
-
         
     }
 
