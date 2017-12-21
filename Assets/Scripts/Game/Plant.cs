@@ -232,8 +232,9 @@ public class Plant : MonoBehaviour {
         isGrowing = true;
     }
 
-    private void UpdateHeightGraphic()
-    {
-
-    }
+	private void UpdateHeightGraphic()
+	{
+		if(GV.ws.pc != null)
+			GV.ws.pc.UpdateHeight (height);
+	}
 }
