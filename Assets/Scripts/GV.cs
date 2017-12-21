@@ -10,7 +10,7 @@ public class GV {
     public static readonly float defaultTutorialHour = 8;
 
     public static bool Sound_Active = true;
-    public static readonly float PlatformSunblock = .5f;
+    public static readonly float PlatformSunblock = .8f;
 
     public static readonly float WaterDepletionRate = 0.012f;
     public static readonly float SpinnerSpeed = 2f;
@@ -33,14 +33,14 @@ public class GV {
     //Rainclouds
     public static readonly Vector2 raincloudSpeedRange = new Vector2(.2f,1.2f);
     public static readonly Vector2 raincloudAltitudeRange = new Vector2(9f, 13f);
-    public static readonly Vector2 raincloudTravelRange = new Vector2(-60f, 60f);
+    public static readonly Vector2 raincloudTravelRange = new Vector2(-40f, 40f);
 
 	//raomcloud sound
 	public static readonly float rainHearingDist = worldWidth / 4;
 	public static readonly float[] worldRange = {-10,7} ;
 
-    public static readonly Vector2 rainRateRange = new Vector2(10,24); //int >= 1. rainRate will lerp around randomly to values in this range. 
-    public static readonly int maxDropsPerFrame = 4; // this many 'rain dice' will be rolled each frame, with each die having 1/rainRate chance of spawning a drop
+    public static readonly Vector2 rainRateRange = new Vector2(10,34); //int >= 1. rainRate will lerp around randomly to values in this range. 
+    public static readonly int maxDropsPerFrame = 5; // this many 'rain dice' will be rolled each frame, with each die having 1/rainRate chance of spawning a drop
 
     public static readonly Vector2 raincloudSpeedInterpolaterRange = new Vector2(.001f, .006f) ;
     public static readonly Vector2 rainRateInterpolaterRange = new Vector2(.0005f, 004f);
