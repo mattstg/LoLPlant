@@ -31,7 +31,7 @@ public class TAEventManager
         Debug.Log("setup for p point: " + progressPoint);
         //Setup the entire stack here
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Sliders, false));
-        taQueue.Enqueue(new TASetDNC(false, 12, 0));
+        taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardNone, true));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
 
@@ -61,7 +61,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 goto case 2;
             case 2:
-                taQueue.Enqueue(new TASetDNC(false, 12, 0));
+                taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
                 taQueue.Enqueue(new TACreatePopup(new Message("H20Req", Message.Type.Prompt)));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardWater, true));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, true));
@@ -91,7 +91,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 goto case 3;
             case 3:
-                taQueue.Enqueue(new TASetDNC(false, 12, 0));
+                taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardFood, true));
                 taQueue.Enqueue(new TACreatePopup(new Message("Sugar")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
@@ -101,7 +101,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 goto case 4;
             case 4:
-                taQueue.Enqueue(new TASetDNC(false, 12, 0));
+                taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Sliders, true));
                 //Special lab popup
                 //Close button for special lab pressed
@@ -109,7 +109,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 goto case 5;
             case 5:
-                taQueue.Enqueue(new TASetDNC(false, 12, 0));
+                taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
                 taQueue.Enqueue(new TACreatePopup(new Message("Escape", Message.Type.Prompt)));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Platforms, true));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, true));

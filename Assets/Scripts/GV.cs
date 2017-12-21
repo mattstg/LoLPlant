@@ -7,6 +7,8 @@ public class GV {
     public static WS ws;
     public static MainScript ms;
 
+    public static readonly float defaultTutorialHour = 9f;
+
     public static bool Sound_Active = true;
     public static readonly float PlatformSunblock = .5f;
 
