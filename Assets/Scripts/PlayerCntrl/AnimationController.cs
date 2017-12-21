@@ -11,7 +11,7 @@ public class AnimationController : MonoBehaviour {
 	private static float _moveAnimSpeedModifier = 2;
 	private static float _moveAnimSpeedDampener = 2;
 	private static float _moveDampener = 5;
-	private static bool facingRight = true;
+	private bool facingRight = true;
 
 
 	private Animator anim;

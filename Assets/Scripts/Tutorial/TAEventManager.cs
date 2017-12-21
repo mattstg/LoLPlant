@@ -103,6 +103,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
                 goto case 4;
             case 4:
+                taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardFood, true));
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Sliders, true));

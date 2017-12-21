@@ -63,7 +63,7 @@ public class SDKLoader {
                 if (parseSuccess)
                 {
                     Debug.Log("QQ successful progress parse");
-                    MainScript.progressPoint = result;
+                    MainScript.progressPoint = Mathf.Clamp(result,1,8);
                 }
             }
 
