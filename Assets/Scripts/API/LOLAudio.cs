@@ -24,7 +24,7 @@ public class LOLAudio
     public static readonly string heavyRain = "heavyRain.mp3";
     public static readonly string lightRain = "lightRain.mp3";
     public static readonly string land = "land.wav";
-    public static readonly string collectRain = "collectRain.wav";
+    public static readonly string collectRain = "raindrop.wav";
     public static readonly string aphidHit = "aphidHit.wav";
         
 
