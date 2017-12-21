@@ -1649,6 +1649,7 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114625120400799954, guid: f4f78d0a94fe9ac4a90cd91e11ffe648, type: 2}
+    - {fileID: 114922471018944848, guid: f4f78d0a94fe9ac4a90cd91e11ffe648, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: f4f78d0a94fe9ac4a90cd91e11ffe648, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &814690170
@@ -3196,6 +3197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b851dddf2c4a7834887284c4d166e220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantSprite: {fileID: 0}
   YClickJumpThreshold: 1.5
 --- !u!1 &1532913765
 GameObject:

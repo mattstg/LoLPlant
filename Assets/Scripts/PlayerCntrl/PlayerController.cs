@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour {
 
     public void Initialize()
     {
-		plantSprite = transform.Find ("Plant Sprite").gameObject;
+		plantSprite = transform.GetComponentInChildren<PlantSpriteTag>().gameObject;
         gameObject.SetActive(true);
         anim = GetComponentInChildren<AnimationController> ();
 		body = GetComponent<Rigidbody2D> ();
