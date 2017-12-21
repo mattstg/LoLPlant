@@ -29,7 +29,7 @@ public class ProgressTracker {
 	{        
     }
 
-    public void SubmitScore(int _score)
+    public void SetScore(int _score)
     {
         score = _score;
     }

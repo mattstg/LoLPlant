@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour {
     bool freshGame;
     int progressPt;
     public Button mainButton;
+    public Text mainTitleText;
 
     public void SDKLoaded(int _progressPt)
     {
@@ -16,6 +17,10 @@ public class MainMenu : MonoBehaviour {
         freshGame = (_progressPt == 1);
         mainButton.GetComponentInChildren<Text>().text = (freshGame) ? LangDict.Instance.GetText("Start") : LangDict.Instance.GetText("Continue");
         mainButton.gameObject.SetActive(true);
+
+        mainTitleText.text = LangDict.Instance.GetText("Title");
+        mainTitleText.gameObject.SetActive(true);
+        
     }
 
 	public void StartPressed()

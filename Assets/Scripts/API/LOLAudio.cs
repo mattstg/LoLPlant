@@ -20,19 +20,32 @@ public class LOLAudio
         }
     }
     #endregion
-    
+    public static readonly string bgMusic = "bgMusic.mp3";
+    public static readonly string heavyRain = "heavyRain.mp3";
+    public static readonly string lightRain = "lightRain.mp3";
+    public static readonly string land = "land.wav";
+    public static readonly string collectRain = "collectRain.wav";
+    public static readonly string aphidHit = "aphidHit.wav";
+        
+
+    List<string> disabledSounds;
     AudioSource musicPlayer;
     AudioSource bgMusicPlayer;
     AudioClip landingAC;
+    bool bgPlaying = false;
 
     private LOLAudio()
     {
+        disabledSounds = new List<string>();
         landingAC = Resources.Load<AudioClip>("Music/land");
     }
 
 
     public void PlayBackgroundAudio(string _name)
     {
+        if (disabledSounds.Contains(_name))
+            return;
+
 #if UNITY_EDITOR
         GameObject go = new GameObject();
         go.name = "RainSound";
@@ -42,15 +55,19 @@ public class LOLAudio
         audioSrc.loop = true;
         audioSrc.Play();
         bgMusicPlayer = audioSrc;
+        Object.DontDestroyOnLoad(go);
 #elif UNITY_WEBGL
         LOLSDK.Instance.PlaySound(_name, true, true);
 #endif
+        bgPlaying = true;
     }
 
     public void SetBGLevel(float volume)
     {
-#if UNITY_EDITOR
-        bgMusicPlayer.volume = volume;
+        if (!bgPlaying)
+            return;
+#if UNITY_EDITOR    
+            bgMusicPlayer.volume = volume;
 #elif UNITY_WEBGL
         LOLSDK.Instance.ConfigureSound(1, volume, 1); //Should be 0 or 1? who knows
 #endif
@@ -58,7 +75,7 @@ public class LOLAudio
 
     public void PlayAudio(string _name, bool loop = false)
     {
-        if (!GV.Sound_Active || !LOLSDK.Instance.IsInitialized)
+        if (!GV.Sound_Active || !LOLSDK.Instance.IsInitialized || disabledSounds.Contains(_name))
             return;
 
 #if UNITY_EDITOR
@@ -72,6 +89,8 @@ public class LOLAudio
     {
         if (LOLSDK.Instance.IsInitialized)
             LOLSDK.Instance.StopSound(_name);
+        if (_name == bgMusic)
+            bgPlaying = false;
     }
 
     private void PlayEditorAudio(string _name, bool loop)
@@ -83,6 +102,8 @@ public class LOLAudio
             audioSrc.clip = Resources.Load<AudioClip>(_name);
             audioSrc.loop = true;
             audioSrc.Play();
+            go.name = "AudioLoop_" + _name;
+            Object.DontDestroyOnLoad(go);
         }
         else
         {
@@ -104,4 +125,21 @@ public class LOLAudio
         //musicPlayer.PlayOneShot(Resources.Load<AudioClip>("Music/" + _name));
     }
 
+    public void AddDisabledSound(string toDisable)
+    {
+        if (!disabledSounds.Contains(toDisable))
+            disabledSounds.Add(toDisable);
+    }
+
+
+    public void RemoveDisabledSound(string toRemove)
+    {
+        StopAudio(toRemove);
+        disabledSounds.Remove(toRemove);
+    }
+
+    public void ClearDisabledSounds()
+    {
+        disabledSounds.Clear();
+    }
 }

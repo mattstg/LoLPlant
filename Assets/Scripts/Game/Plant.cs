@@ -43,7 +43,7 @@ public class Plant : MonoBehaviour {
 
     private float _height = 0;
     public float height { set { _height = value; UpdateHeightGraphic(); } get { return _height; } }
-    public int heightInt = 0;
+    public int heightInt { get { return (int)_height; } }
     public int oldHeightInt = -1;
 
     public bool isGrowing = false;
@@ -184,9 +184,8 @@ public class Plant : MonoBehaviour {
             {
                 float integral = GV.SmoothIntegral(growthProgress / growthDuration);
                 food = foodDamp = targetFood * integral + sourceFood * (1f - integral);
-                height = targetHeight * integral + sourceHeight * (1f - integral);
                 oldHeightInt = heightInt;
-                heightInt = (int)height;
+                height = targetHeight * integral + sourceHeight * (1f - integral);
             }
         }
     }

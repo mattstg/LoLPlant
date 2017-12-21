@@ -6,12 +6,10 @@ public class GameFlow : Flow
 {
     public override void Initialize(int progressNumber)
     {
-        LOLAudio.Instance.StopAudio("heavyRain.mp3");
-        LOLAudio.Instance.PlayBackgroundAudio("heavyRain.mp3");
-        LOLAudio.Instance.SetBGLevel(1);
-        LOLAudio.Instance.StopAudio("bgMusic.mp3");
-        LOLAudio.Instance.PlayAudio("bgMusic.mp3", true);
-
+        LOLAudio.Instance.ClearDisabledSounds();
+        LOLAudio.Instance.StopAudio(LOLAudio.heavyRain);
+        LOLAudio.Instance.PlayBackgroundAudio(LOLAudio.heavyRain);
+        LOLAudio.Instance.SetBGLevel(0);
 
         if (progressNumber <= GV.LastTutorialProgressPoint)
         {

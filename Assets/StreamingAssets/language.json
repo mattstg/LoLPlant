@@ -9,6 +9,7 @@
     }
   },
   "en": {
+    "Title":"Grow Hop",
     "Start": "Start game",
     "Continue": "Continue",
     "GameOver": "Would you like to <b>continue playing</b> for another day?",
