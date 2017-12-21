@@ -29,8 +29,9 @@ public class PlayerController : MonoBehaviour {
 
     public void Initialize()
     {
-		plantSprite = transform.GetComponentInChildren<PlantSpriteTag>().gameObject;
+        string n = transform.name;
         gameObject.SetActive(true);
+        plantSprite = transform.GetComponentInChildren<PlantSpriteTag>().gameObject;
         anim = GetComponentInChildren<AnimationController> ();
 		body = GetComponent<Rigidbody2D> ();
         im = gameObject.AddComponent<InputManager>();
@@ -72,7 +73,7 @@ public class PlayerController : MonoBehaviour {
         //need distance
         Vector2 shadowAngle = GV.DegreeToVector2(GV.ws.dnc.groundToSunAngle);
         RaycastHit2D[] rayhits = Physics2D.RaycastAll(transform.position, shadowAngle, 30, layerMask);
-        if (rayhits == null)
+        if (rayhits == null || rayhits.Length <= 0)
             GV.ws.plant.shadowCount = 0;
         else
             GV.ws.plant.shadowCount = rayhits.Length;
@@ -136,6 +137,7 @@ public class PlayerController : MonoBehaviour {
 
     private void TouchedGround()
     {
+        string n = transform.name;
         if (body.velocity.y <= 0)
             LOLAudio.Instance.PlayAudio(LOLAudio.land);
         isGrounded = true;

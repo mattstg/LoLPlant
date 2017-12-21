@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlantLab : Plant
 {
     float waterTriggerThreshold = .5f;
-    float sunTriggerThreshold = .79f;
 
     public override void Refresh(float dt)
     {
@@ -17,8 +16,6 @@ public class PlantLab : Plant
             //Debug.Log("water threshold sent");
             TAEventManager.Instance.ReceiveActionTrigger("Water");
         }
-        if (sun >= sunTriggerThreshold)
-            TAEventManager.Instance.ReceiveActionTrigger("Sun");
     }
 
 }

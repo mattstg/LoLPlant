@@ -1116,7 +1116,7 @@ GameObject:
   - component: {fileID: 642525516}
   - component: {fileID: 642525517}
   - component: {fileID: 642525518}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Lab
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -3703,6 +3703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5647f28277bd69244a61e01be845721f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantSprite: {fileID: 0}
   YClickJumpThreshold: 1.5
 --- !u!4 &1675826966 stripped
 Transform:
@@ -4295,5 +4296,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114625120400799954, guid: f4f78d0a94fe9ac4a90cd91e11ffe648, type: 2}
+    - {fileID: 114922471018944848, guid: f4f78d0a94fe9ac4a90cd91e11ffe648, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: f4f78d0a94fe9ac4a90cd91e11ffe648, type: 2}
   m_IsPrefabParent: 0
