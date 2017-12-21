@@ -129,20 +129,72 @@ public class PlayerController : MonoBehaviour {
         body.AddForce (new Vector2(moveForce, 0), ForceMode2D.Impulse);
         if (Mathf.Abs(body.velocity.x) > maxSpeed)
             body.velocity = new Vector2(maxSpeed * Mathf.Sign(body.velocity.x),body.velocity.y);
+    }
+
+    private void TouchedGround()
+    {
+        if (body.velocity.y <= 0)
+            LOLAudio.Instance.PlayAudio(LOLAudio.land);
+        isGrounded = true;
+        isJumping = false;
+        jumpHeldTime = 0;
+        anim.Grounded(true);
+
+    }
+
+    public void GetHitByAphid(Transform aphidTransform)
+    {
+        //body.velocity.Set (0, 0);
+        body.velocity = ((transform.position - aphidTransform.position).normalized * 5);
+        GV.ws.plant.LoseFood(5);
+        LOLAudio.Instance.PlayAudio(LOLAudio.aphidHit);
+    }
+
+	private GameObject[] colies = new GameObject[3];
+	private int coliCounter = 0;
+
+	private void AddColi(GameObject _coli){
+		if (coliCounter < 3 && coliCounter > -1) {
+			colies [coliCounter] = _coli;
+			coliCounter++;
+		} else {
+			Debug.Log ("WHAT?! YOU ARE STANDING ON MORE THAN 3 PLATFORMS?!?!");
+		}
+	}
+
+	private bool RemoveColi(GameObject _coli){
+		int c = 0;
+		while (c < 3) {
+			if (colies [c] == _coli) {
+				colies [c] = null;
+				if (c != coliCounter - 1) {
+					while (c < 2) {
+						colies [c] = colies [c + 1];
+						c++;
+					}
+				} 
+				coliCounter--;
+				c = 3;
+				return true;
+			}
+			c++;
+		}
+		return false;
 	}
 
     public virtual void OnCollisionEnter2D(Collision2D coli)
     {
         switch(coli.gameObject.tag)
         {
-            case "Platform":
-                TouchedGround();
-				Platform plat = coli.gameObject.GetComponent<Platform> ();
-				if(plat != null)
-					plat.AddPlayer (this.gameObject);
-                break;
-            case "Water":
-                break;
+		case "Platform":
+			TouchedGround ();
+			Platform plat = coli.gameObject.GetComponent<Platform> ();
+			if (plat != null)
+			plat.AddPlayer (this.gameObject);
+			AddColi (coli.gameObject);
+            break;
+        case "Water":
+            break;
 		case "Aphid":
 			TouchedGround ();
 			if (!coli.gameObject.GetComponent<Aphid> ().isOutCold)
@@ -151,36 +203,20 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void TouchedGround()
-    {
-        if(body.velocity.y <= 0)
-            LOLAudio.Instance.PlayAudio(LOLAudio.land);
-        isGrounded = true;
-        isJumping = false;
-        jumpHeldTime = 0;
-        anim.Grounded(true);
-        
-    }
-
-    public void GetHitByAphid(Transform aphidTransform)
-    {
-        //body.velocity.Set (0, 0);
-        body.velocity =  ((transform.position - aphidTransform.position).normalized * 5);
-        GV.ws.plant.LoseFood(5);
-        LOLAudio.Instance.PlayAudio(LOLAudio.aphidHit);
-    }
-
     public virtual void OnCollisionExit2D(Collision2D coli)
     {
         switch (coli.gameObject.tag)
         {
 		case "Platform":
-			isGrounded = false;
-			anim.Grounded (false);
+			RemoveColi (coli.gameObject);
+			if (coliCounter == 0) {
+				isGrounded = false;
+				anim.Grounded (false);
+			}
 			Platform plat = coli.gameObject.GetComponent<Platform> ();
-			if(plat != null)
+			if (plat != null)
 				plat.RemovePlayer ();
-            break;
+			break;
         }
     }
 }
