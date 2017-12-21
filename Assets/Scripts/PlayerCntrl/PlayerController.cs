@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour {
         RaycastToSun();
     }
 
-    public void RaycastToSun() //Efficency of raycast to the sun
+    public virtual void RaycastToSun() //Efficency of raycast to the sun
     {
         //Need layer mask
         var layerMask = (1 << LayerMask.NameToLayer("Platform")) | (1 << LayerMask.NameToLayer("Cloud")) ;
@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour {
             GV.ws.plant.shadowCount = 0;
         else
             GV.ws.plant.shadowCount = rayhits.Length;
+        Debug.Log("shadows: " + GV.ws.plant.shadowCount);
     }
 
 	public void MouseDown(Vector2 mouseWorldPos, float _dt)

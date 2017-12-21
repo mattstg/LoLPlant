@@ -7,7 +7,7 @@ public class GV {
     public static WS ws;
     public static MainScript ms;
 
-    public static readonly float defaultTutorialHour = 8;
+    public static readonly float defaultTutorialHour = 10;
 
     public static bool Sound_Active = true;
     public static readonly float PlatformSunblock = .5f;
@@ -72,6 +72,7 @@ public class GV {
             platformSprites = Resources.LoadAll<Sprite>("Sprites/platform_sheet");
         return platformSprites[index];
     }
+
 
     public static void SetPause(bool _paused)
     {

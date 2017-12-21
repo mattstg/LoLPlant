@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlantLab : Plant
 {
     float waterTriggerThreshold = .5f;
-    float sunTriggerThreshold = .95f;
+    float sunTriggerThreshold = .79f;
 
     public override void Refresh(float dt)
     {
