@@ -14,7 +14,7 @@ public class GV {
 
     public static readonly float WaterDepletionRate = 0.012f;
     public static readonly float SpinnerSpeed = 2f;
-    public static readonly float FoodMaximum = 180f;    //max possible food in one day: 230 (for dnc.secondsPerHour = 18.75)
+    public static readonly float FoodMaximum = 150f;    //dnc.sPH is now 15 again. //max possible food in one day: 230 (for dnc.secondsPerHour = 18.75)
     public static readonly float FoodHeightRatio = 1f;
 
     public static readonly float worldWidth = 40.96f; //these dimension values do not actually control the world size; they just reflect it in order to inform other stuff like shadows

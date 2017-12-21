@@ -23,7 +23,7 @@ public class DayNightCycle : MonoBehaviour
 
     public Transform sky;
 
-    public static readonly float secondsPerHour = 18.75f; //15: 4-minute daytime, 18.75: 5-minute daytime
+    public static readonly float secondsPerHour = 15f; //15: 4-minute daytime, 18.75: 5-minute daytime
     public static readonly int hoursPerDay = 24;
     public static readonly int sunriseHour = 4;
     public static readonly int sunsetHour = 20;
