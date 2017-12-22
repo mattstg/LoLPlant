@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour {
 	protected Rigidbody2D body;
     
 	protected bool isGrounded;
-    float moveForce = 7.5f;  //
+    float moveForce = 8.7f;  //
     float maxSpeed = 4.5f;
     //All jump related
     float jumpForceInitial = 4f;
@@ -25,7 +25,8 @@ public class PlayerController : MonoBehaviour {
     bool inputHardLock = false; //Use if you dont want popupmanager interfering
 	protected float timeSinceInitialJumpBurst = 0;
     readonly float MaxTimeBetweenJumpBurst = 1;
-    float dropForcePerSec = 7; //pressing down on purpose to drop
+    float dropForcePerSec = 9; //pressing down on purpose to drop
+    Vector2 playerDrag = GV.playerDrag;
 
     public void Initialize()
     {
@@ -60,9 +61,9 @@ public class PlayerController : MonoBehaviour {
 		anim.Refresh(dt);
         timeSinceInitialJumpBurst += dt;
 		if (isGrounded)
-			body.drag = 0.5f;
+			body.drag = playerDrag.y;
 		else
-			body.drag = 0f;
+			body.drag = playerDrag.x;
         RaycastToSun();
     }
 

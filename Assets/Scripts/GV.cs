@@ -7,6 +7,8 @@ public class GV {
     public static WS ws;
     public static MainScript ms;
 
+    public static readonly Vector2 playerDrag = new Vector2(.4f, .5f); //the x value is player's linear drag when not grounded; y value is drag when grounded
+
     public static readonly float defaultTutorialHour = 10;
 
     public static bool Sound_Active = true;
