@@ -9,8 +9,8 @@ public class ShadowManager : MonoBehaviour {
     List<Material> allPlatformMaterials = new List<Material>();
     List<Material> allCloudMaterials = new List<Material>();
 
-    readonly float defaultShadowAlpha = 80/255f;
-    readonly float defaultCloudShadowAlpha = 120/255f;
+    readonly float defaultShadowAlpha = 70/255f;
+    readonly float defaultCloudShadowAlpha = 100/255f;
     readonly float sunAngleMaxAlpha = 25;
     readonly float sunAngleMinAlpha = 8;
     float alphaLastTurn = 1;
