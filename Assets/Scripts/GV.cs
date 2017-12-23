@@ -61,6 +61,10 @@ public class GV {
 	public static readonly float[] platformSpriteScales = { 0.4f, 0.5f, 0.8f, 1.0f, 1.2f, 1.4f, 1.5f};
 	public static readonly float platformHeight = 0.07f;
 
+    //Aphids
+    public static readonly float AphidKnockbackVelo = 5; //If an aphid hits you, your velo is set to this away from it
+    public static readonly float AphidKnockbackVeloReduced = 4; //If an aphid hits you and is above you (you jumped up into it), your velo is set to this instead
+
     public static Sprite[] platformSprites;
     
     //see Raindrop.OnTriggerEnter2D(): waterDelta is weighted so that rain is worth more when you're lower on water and less when you're higher.

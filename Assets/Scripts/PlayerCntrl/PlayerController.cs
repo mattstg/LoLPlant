@@ -38,8 +38,6 @@ public class PlayerController : MonoBehaviour {
         im = gameObject.AddComponent<InputManager>();
         im.Initialize(this);
 		anim.Initialize();
-        
-        //Create both input managers & link here
     }
 
     public void SetInputActive(bool _setActive, bool hardLock = false)
@@ -78,7 +76,6 @@ public class PlayerController : MonoBehaviour {
             GV.ws.plant.shadowCount = 0;
         else
             GV.ws.plant.shadowCount = rayhits.Length;
-        Debug.Log("shadows: " + GV.ws.plant.shadowCount);
     }
 
 	public void MouseDown(Vector2 mouseWorldPos, float _dt)
@@ -151,7 +148,9 @@ public class PlayerController : MonoBehaviour {
     public void GetHitByAphid(Transform aphidTransform)
     {
         //body.velocity.Set (0, 0);
-        body.velocity = ((transform.position - aphidTransform.position).normalized * 5);
+        float knockbackVelo = (transform.position.y < aphidTransform.position.y)? GV.AphidKnockbackVeloReduced : GV.AphidKnockbackVelo;
+
+        body.velocity = ((transform.position - aphidTransform.position).normalized * knockbackVelo);
         GV.ws.plant.LoseFood(5);
         LOLAudio.Instance.PlayAudio(LOLAudio.aphidHit);
     }
