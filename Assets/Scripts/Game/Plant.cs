@@ -60,9 +60,9 @@ public class Plant : MonoBehaviour {
     
     public float dampTime = 0.25f;
     
-    public void Initialize(float initialHeight)
+    public void Initialize(int previousHighSore)
     {
-        height = initialHeight;
+        highScore = previousHighSore;
         growthDuration = 2f;
     }
 

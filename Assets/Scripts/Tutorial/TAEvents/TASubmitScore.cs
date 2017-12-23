@@ -11,7 +11,7 @@ public class TASubmitScore : TAEvent {
 
     public override void PerformEvent()
     {
-        ProgressTracker.Instance.SetScore(GV.ws.plant.heightInt);
+        ProgressTracker.Instance.SetScore(GV.ws.plant.highScore);
     }
 
 }
