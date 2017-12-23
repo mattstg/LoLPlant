@@ -236,5 +236,8 @@ public class Plant : MonoBehaviour {
 	{
 		if(GV.ws.pc != null)
 			GV.ws.pc.UpdateHeight (height);
+        Vector3 offset = GV.ws.cameraManager.offset;
+        offset.y = Mathf.Clamp01(1.2f * height / 850f);
+        GV.ws.cameraManager.offset = offset;
 	}
 }

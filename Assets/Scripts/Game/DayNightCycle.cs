@@ -93,8 +93,11 @@ public class DayNightCycle : MonoBehaviour
                 zoom = Camera.main.orthographicSize = targetZoom;
                 playerIlluminationOffset = targetPIO;
                 float cameraOffsetX = targetPIO * 1.2f;
-                float cameraOffsetY = targetPIO * 0.5f;
-                GV.ws.cameraManager.offset = new Vector3(cameraOffsetX, cameraOffsetY, 0f);
+                //float cameraOffsetY = targetPIO * 0.5f;
+                Vector3 offset = GV.ws.cameraManager.offset;
+                offset.x = cameraOffsetX;
+                //offset.y = cameraOffsetY;
+                GV.ws.cameraManager.offset = offset;
                 float illumination = Mathf.Clamp01(GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 2f / 3f, -0.5f).y);
                 SpriteTinter.Instance.UpdateSpriteTints(1f - Mathf.Pow(illumination - 1f, 2f), playerIlluminationOffset);
                 TAEventManager.Instance.ReceiveActionTrigger("ZoomComplete");
@@ -106,8 +109,11 @@ public class DayNightCycle : MonoBehaviour
                 Camera.main.orthographicSize = zoom;
                 playerIlluminationOffset = targetPIO * integral + sourcePIO * (1f - integral);
                 float cameraOffsetX = playerIlluminationOffset * 1.2f;      //too lazy to make a new independent set of transition variables for camera offset
-                float cameraOffsetY = playerIlluminationOffset * 0.5f;      //works well though because playerIlluminationOffset always moves back and forth between 0 and 1
-                GV.ws.cameraManager.offset = new Vector3(cameraOffsetX, cameraOffsetY, 0f);
+                //float cameraOffsetY = playerIlluminationOffset * 0.5f;      //works well though because playerIlluminationOffset always moves back and forth between 0 and 1
+                Vector3 offset = GV.ws.cameraManager.offset;
+                offset.x = cameraOffsetX;
+                //offset.y = cameraOffsetY;
+                GV.ws.cameraManager.offset = offset;
                 float illumination = Mathf.Clamp01(GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 2f / 3f, -0.5f).y);
                 SpriteTinter.Instance.UpdateSpriteTints(1f - Mathf.Pow(illumination - 1f, 2f), playerIlluminationOffset);
             }
