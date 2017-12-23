@@ -252,7 +252,8 @@ public class PlayerController : MonoBehaviour {
 	public void UpdateHeight(float height)
 	{
         float heightScale = -0.005f;
+        float initialOffset = -1.1f;
         if (plantSprite != null)
-            GV.ws.pc.plantSprite.transform.localPosition = new Vector2(0, height * heightScale); //needs to be clamped
+            GV.ws.pc.plantSprite.transform.localPosition = new Vector2(0, Mathf.Clamp(height * heightScale + initialOffset, -5.4f, initialOffset)); //needs to be clamped
 	}
 }
