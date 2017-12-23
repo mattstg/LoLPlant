@@ -15,9 +15,15 @@ public class Platform : MonoBehaviour, CastsShadow {
     public bool isStaticPlatform { get { return !moves; } }
     bool moves;
     Vector2[] edgeOffsets;
-
+    PlatformEffector2D pe2d;
+    
 	private GameObject player;
 
+    //Player dropping through platform mechanics
+    bool isDropping = false;
+    float curDropTime = 0;  //time remaining till solid again
+    float maxDropTime = .6f;  //time is immune to player to drop through
+    
     public Vector2[] GetEdges()
     {
 		return new Vector2[] { edgeOffsets[0] + (Vector2)transform.position + new Vector2(0, -GV.platformHeight), edgeOffsets[1] + (Vector2)transform.position + new Vector2(0, -GV.platformHeight) };
@@ -66,11 +72,22 @@ public class Platform : MonoBehaviour, CastsShadow {
 		edgeOffsets [1] = ec.points [1];
         if (castsShadow)
             GV.ws.shadowManager.RegisterShadow(this, transform);
+
+        pe2d = GetComponent<PlatformEffector2D>();
     }
 
 	public void Refresh(float dt)
     {
-		
+		if(isDropping)
+        {
+            curDropTime -= dt;
+            if(curDropTime <= 0)
+            {
+                isDropping = false;
+                SetEffector(false);
+            }
+        }
+
         if (!moves)
             return;
 		
@@ -93,6 +110,24 @@ public class Platform : MonoBehaviour, CastsShadow {
 		}
     }
 
+    private void SetEffector(bool justRain)
+    {
+        if(!justRain)
+        {
+            pe2d.colliderMask = (1 << LayerMask.NameToLayer("Rain")) | (1 << LayerMask.NameToLayer("PlayerFeet"));
+        }
+        else
+        {
+            pe2d.colliderMask = (1 << LayerMask.NameToLayer("Rain"));
+        }
+    }
+
+    public void SetPlatformTraversable()
+    {
+        SetEffector(true);
+        isDropping = true;
+        curDropTime = maxDropTime; 
+    }
     
     private bool ReachedDest(Vector2 pos1, Vector2 pos2)
     {

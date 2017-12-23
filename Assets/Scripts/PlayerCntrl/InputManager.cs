@@ -16,7 +16,12 @@ public class InputManager : MonoBehaviour {
     {
         bool inputProcessed = false;
 
-        //Keyboard input
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            pc.DownFirstPressed();
+        }
+
+            //Keyboard input
         Vector2 keysPressed = new Vector2();
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             keysPressed.x -= 1;
@@ -39,13 +44,15 @@ public class InputManager : MonoBehaviour {
         {
             if (Input.GetMouseButton(0))  //Continous press
             {
-                _MouseClicked(Input.mousePosition, dt);
+                _MouseClicked(Input.mousePosition, dt,true);
             }
             else if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved))
             {
-                _MouseClicked(Input.GetTouch(0).position, dt);
+                _MouseClicked(Input.GetTouch(0).position, dt, false);
             }
         }        
+
+        
     }
 
 	public void OnMouseOver()
@@ -53,10 +60,10 @@ public class InputManager : MonoBehaviour {
 		MouseOver (Camera.main.ScreenToWorldPoint(Input.mousePosition));
 	}
 
-	private void _MouseClicked(Vector2 clickPos,float _dt)
+	private void _MouseClicked(Vector2 clickPos,float _dt, bool firstClick)
 	{
 		Vector2 clickedPos = Camera.main.ScreenToWorldPoint (clickPos);
-		MouseDown (clickedPos,_dt);
+		MouseDown (clickedPos,_dt, firstClick);
 	}
 
 	protected virtual void MouseOver(Vector2 mouseWorldPos)
@@ -64,9 +71,9 @@ public class InputManager : MonoBehaviour {
 
 	}
 
-	protected virtual void MouseDown(Vector2 mouseWorldPos, float _dt)
+	protected virtual void MouseDown(Vector2 mouseWorldPos, float _dt, bool firstClick)
 	{
-		pc.MouseDown(mouseWorldPos,_dt);
+		pc.MouseDown(mouseWorldPos,_dt, firstClick);
 	}
     
         

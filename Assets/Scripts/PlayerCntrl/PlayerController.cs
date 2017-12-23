@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     InputManager im;
-	public GameObject plantSprite; 
-
+	public GameObject plantSprite;
+    
     public float YClickJumpThreshold = 1.5f; //Clicking this much units higher will cause the jump
 	protected AnimationController anim;
 	protected Rigidbody2D body;
@@ -27,6 +27,13 @@ public class PlayerController : MonoBehaviour {
     readonly float MaxTimeBetweenJumpBurst = 1;
     float dropForcePerSec = 9; //pressing down on purpose to drop
     Vector2 playerDrag = GV.playerDrag;
+
+    //Dropping through platforms
+    List<Platform> platformsTouching = new List<Platform>();
+    public bool playerCanDropThroughPlatforms = true;
+    bool droppingThroughPlatform;
+    float timeDropping;
+    float maxTimeDrop = 1; //time where colliders inactive
 
     public void Initialize()
     {
@@ -78,13 +85,26 @@ public class PlayerController : MonoBehaviour {
             GV.ws.plant.shadowCount = rayhits.Length;
     }
 
-	public void MouseDown(Vector2 mouseWorldPos, float _dt)
+	public void MouseDown(Vector2 mouseWorldPos, float _dt, bool firstPress)
     {
-			if (!GV.ws.es.IsPointerOverGameObject ()) {
-				Vector2 relativePress = new Vector2 (Mathf.Clamp (mouseWorldPos.x - transform.position.x, -1, 1), Mathf.Clamp (mouseWorldPos.y - transform.position.y, -1, 1));
-				relativePress.y = (Mathf.Abs (relativePress.y) >= mouseJumpTolerance) ? -1 : 0;
-				KeysPressed (relativePress, _dt);
-			}
+        if (!GV.ws.es.IsPointerOverGameObject())
+        {
+            Vector2 relativePress = new Vector2(Mathf.Clamp(mouseWorldPos.x - transform.position.x, -1, 1), Mathf.Clamp(mouseWorldPos.y - transform.position.y, -1, 1));
+            relativePress.y *= -1; //inverted cntrls?
+            //relativePress.y = (Mathf.Abs(relativePress.y) >= mouseJumpTolerance) ? -1 : 0;
+            KeysPressed(relativePress, _dt);
+            if (firstPress && Mathf.Sign(relativePress.y) >= 0)
+                DownFirstPressed();
+        }
+    }
+
+    public void DownFirstPressed()
+    {
+        if(isGrounded && platformsTouching.Count > 0)
+        {
+            foreach (Platform p in platformsTouching)
+                p.SetPlatformTraversable();
+        }
     }
 
 	public void KeysPressed(Vector2 dir, float _dt)
@@ -197,6 +217,8 @@ public class PlayerController : MonoBehaviour {
 			if (plat != null)
 			plat.AddPlayer (this.gameObject);
 			AddColi (coli.gameObject);
+            if(coli.gameObject.GetComponent<Platform>())
+                platformsTouching.Add(coli.gameObject.GetComponent<Platform>());
             break;
         case "Water":
             break;
@@ -217,6 +239,8 @@ public class PlayerController : MonoBehaviour {
 			if (coliCounter == 0) {
 				isGrounded = false;
 				anim.Grounded (false);
+                if (coli.gameObject.GetComponent<Platform>())
+                    platformsTouching.Remove(coli.gameObject.GetComponent<Platform>());
 			}
 			Platform plat = coli.gameObject.GetComponent<Platform> ();
 			if (plat != null)
