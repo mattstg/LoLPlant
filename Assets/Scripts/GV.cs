@@ -8,19 +8,22 @@ public class GV {
     public static MainScript ms;
 
     public static readonly Vector2 playerDrag = new Vector2(.4f, .5f); //the x value is player's linear drag when not grounded; y value is drag when grounded
-
     public static readonly float defaultTutorialHour = 10;
-
     public static bool Sound_Active = true;
-    public static readonly float PlatformSunblock = .8f;
-
-    public static readonly float WaterDepletionRate = 0.012f;
     public static readonly float SpinnerSpeed = 2f;
-    public static readonly float FoodMaximum = 150f;    //dnc.sPH is now 15 again. //max possible food in one day: 230 (for dnc.secondsPerHour = 18.75)
-    public static readonly float FoodHeightRatio = 1f;
 
     public static readonly float worldWidth = 40.96f; //these dimension values do not actually control the world size; they just reflect it in order to inform other stuff like shadows
     public static readonly float worldHeight = 23.04f;
+
+    //Plant
+    public static readonly float SunReductionPerPlatform = .8f;
+    public static readonly float WaterPerDrop = .03f;
+    public static readonly float WaterDepletionRate = 0.012f;
+    public static readonly float FoodRate = 10f;
+    public static readonly float FoodLostPerAphid = 5f;
+    public static readonly float FoodMaximum = 1500f;
+    public static readonly float GrowthPerFood = 0.1f;
+    public static readonly float HeightMaximum = 1000f;
 
     //Clouds (background)
     public static readonly Vector2 cloudSpeedRange = new Vector2(.075f, 0.3f);
@@ -57,33 +60,24 @@ public class GV {
     public static readonly float raincloudShadowAlpha = .4f;
 
     public static readonly int LastTutorialProgressPoint = 5;    
-    public static readonly float waterPerDrop = .03f;
 
 	public static readonly float[] platformSpriteScales = { 0.4f, 0.5f, 0.8f, 1.0f, 1.2f, 1.4f, 1.5f};
 	public static readonly float platformHeight = 0.07f;
 
     //Aphids
     public static readonly float AphidKnockbackVelo = 5; //If an aphid hits you, your velo is set to this away from it
-    public static readonly float AphidKnockbackVeloReduced = 4; //If an aphid hits you and is above you (you jumped up into it), your velo is set to this instead
+    public static readonly float AphidKnockbackVeloReduced = 3; //If an aphid hits you and is above you (you jumped up into it), your velo is set to this instead
 
     public static Sprite[] platformSprites;
     
     //see Raindrop.OnTriggerEnter2D(): waterDelta is weighted so that rain is worth more when you're lower on water and less when you're higher.
     //Current setting: At 0% water, the value of a drop is equal to waterPerDrop. At 100% water, a drop's value would be equal to (waterPerDrop / 3).
 
-	public static bool Paused = false;
-
     public static Sprite GetPlatformSprite(int index)
     {
         if(platformSprites == null)
             platformSprites = Resources.LoadAll<Sprite>("Sprites/platform_sheet");
         return platformSprites[index];
-    }
-
-
-    public static void SetPause(bool _paused)
-    {
-        Paused = _paused;
     }
 
     public static float SunFactor(float sun)   // arg range: [0, 1];  return range: [0, 1]

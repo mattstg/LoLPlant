@@ -30,7 +30,6 @@ public class Plant : MonoBehaviour {
     public float food = 0;
     public float foodDamp = 0;
     private float foodVelocity = 0;
-    private float foodScoreScale = 10f;
     public int foodScore = -1;
     public int oldFoodScore = -2;
     
@@ -53,7 +52,6 @@ public class Plant : MonoBehaviour {
     private float targetFood = 1f;
     private float sourceHeight = 0f;
     private float targetHeight = 1f;
-    private float growthPerFood = 1f;
 
     public int highScore = 0;
     public int newScore = 0;
@@ -63,20 +61,12 @@ public class Plant : MonoBehaviour {
     public void Initialize(int previousHighSore)
     {
         highScore = previousHighSore;
-        growthDuration = 2f;
     }
 
     public virtual void Refresh(float dt)
     {
         UpdateSun(dt);
         UpdateWater(dt);
-
-        //force 0 shadows and 50% water, to determine max possible food production:
-        //sun = sunDamp = GV.ws.dnc.ambientSunLevel;
-        //sunFactor = GV.SunFactor(sun);
-        //water = waterDamp = 0.5f;
-        //waterFactor = GV.WaterFactor(water);
-
         UpdatePhotosynthesis(dt);
         UpdatePsProgress(dt);
         UpdateFood(dt);
@@ -85,10 +75,9 @@ public class Plant : MonoBehaviour {
 
     public void UpdateSun(float dt)
     {
-        //sun = Mathf.Clamp(sun, 0, 1);
         if (shadowCount < 0)
             shadowCount = 0;
-        shadowFactor = Mathf.Clamp01(Mathf.Pow(GV.PlatformSunblock, shadowCount)); //numOfShadowsBlocking
+        shadowFactor = Mathf.Clamp01(Mathf.Pow(GV.SunReductionPerPlatform, shadowCount));
         sun = Mathf.Clamp(GV.ws.dnc.ambientSunLevel * shadowFactor, 0, 1);
         sunFactor = GV.SunFactor(sun);
         sunDamp = Mathf.SmoothDamp(sunDamp, sun, ref sunVelocity, dampTime, Mathf.Infinity, dt);
@@ -120,7 +109,7 @@ public class Plant : MonoBehaviour {
 
         if (!isGrowing)
         {
-            food += photosynthesis * dt;
+            food += photosynthesis * GV.FoodRate * dt;
             foodDamp = Mathf.SmoothDamp(foodDamp, food, ref foodVelocity, foodDampTime, Mathf.Infinity, dt);
             if (Mathf.Abs(foodDamp - food) < 0.01f)
             {
@@ -129,7 +118,7 @@ public class Plant : MonoBehaviour {
             }
         }
         oldFoodScore = foodScore;
-        foodScore = (int)(foodDamp * foodScoreScale);
+        foodScore = (int)foodDamp;
 
         switch (foodLossState)
         {
@@ -223,7 +212,7 @@ public class Plant : MonoBehaviour {
         growthProgress = 0f;
         sourceFood = food;
         targetFood = 0f;
-        float score = (food * growthPerFood);
+        float score = (food * GV.GrowthPerFood);
         sourceHeight = height;
         targetHeight = height + score;
         newScore = (int)score;

@@ -37,7 +37,7 @@ public class GameFlow : Flow
 
     public override void Update(float dt)
     {
-        if (!GV.Paused && initialized)
+        if (initialized)
         {
             GV.ws.dnc.Refresh(dt);
             GV.ws.plant.Refresh(dt);

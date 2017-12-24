@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour {
         float knockbackVelo = (transform.position.y < aphidTransform.position.y)? GV.AphidKnockbackVeloReduced : GV.AphidKnockbackVelo;
 
         body.velocity = ((transform.position - aphidTransform.position).normalized * knockbackVelo);
-        GV.ws.plant.LoseFood(5);
+        GV.ws.plant.LoseFood(GV.FoodLostPerAphid);
         LOLAudio.Instance.PlayAudio(LOLAudio.aphidHit);
     }
 
@@ -253,7 +253,8 @@ public class PlayerController : MonoBehaviour {
 	{
         float heightScale = -0.005f;
         float initialOffset = -1.1f;
+        float maxHeight = -4.3f;
         if (plantSprite != null)
-            GV.ws.pc.plantSprite.transform.localPosition = new Vector2(0, Mathf.Clamp(height * heightScale + initialOffset, -5.4f, initialOffset)); //needs to be clamped
+            GV.ws.pc.plantSprite.transform.localPosition = new Vector2(0, Mathf.Clamp(height * heightScale + initialOffset, maxHeight + initialOffset, initialOffset)); //needs to be clamped
 	}
 }

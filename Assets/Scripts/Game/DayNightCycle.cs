@@ -256,10 +256,7 @@ public class DayNightCycle : MonoBehaviour
 
     public void SetTime(int _day, float _hourFloat)
     {
-        _day = _day % 7;
-        _hourFloat = _hourFloat % hoursPerDay;
-        float nTime = _day * hoursPerDay + _hourFloat;
-        time = (nTime - sunriseHour) * secondsPerHour;
+        time = GetTime(_day, _hourFloat);
         UpdateDNC();
 
         if (!isDaytime && stateIsDaytime)
@@ -273,25 +270,6 @@ public class DayNightCycle : MonoBehaviour
         float nTime = _day * hoursPerDay + _hourFloat;
         float _time = (nTime - sunriseHour) * secondsPerHour;
         return _time;
-    }
-
-    public void TogglePause()
-    {
-        GV.SetPause(!GV.Paused);
-        if (GV.Paused)
-        {
-            if (GV.ws.dm.sunControl)
-                GV.ws.dm.sunControl.interactable = false;
-            if (GV.ws.dm.waterControl)
-                GV.ws.dm.waterControl.interactable = false;
-        }
-        else
-        {
-            if (GV.ws.dm.sunControl)
-                GV.ws.dm.sunControl.interactable = true;
-            if (GV.ws.dm.waterControl)
-                GV.ws.dm.waterControl.interactable = true;
-        }
     }
 
     public void ToggleClockActive()
