@@ -44,8 +44,8 @@ public class TutorialFlow : Flow
             GV.ws.platformManager.Refresh(dt);
             GV.ws.dm.Refresh(dt);
             GV.ws.popupManager.Refresh(dt);
-            //foreach (Parallax p in GV.ws.parallaxes)  //No parallax in tutorial
-            //    p.Refresh(dt);
+            foreach (Parallax p in GV.ws.parallaxes)  
+                p.Refresh(dt);
             GV.ws.cloudManager.Refresh(dt);
             GV.ws.shadowManager.Refresh();
             GV.ws.aphidManager.Refresh(dt);

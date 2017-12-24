@@ -8,9 +8,9 @@ public class Cloud : MonoBehaviour {
     protected Vector2 speedRange;
     protected Vector2 altitudeRange;
     protected Vector2 travelRange;
-    float sortingLayerCriticalValue;
+    protected float sortingLayerCriticalValue;
 
-    SpriteRenderer sprite;
+    protected SpriteRenderer sprite;
     protected float speed;
     protected float altitude;
 
