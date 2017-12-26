@@ -20,7 +20,7 @@ public class AiController : PlayerController {
 	}
 
 	private void Act(float dt){
-		if ((transform.position.x > mapBoundary && runDir == 1) || (transform.position.x < -mapBoundary && runDir == -1)) {
+		if ((transform.position.x > mapBoundary && runDir == 1) || (transform.position.x < -mapBoundary && runDir == -1) || (Random.Range(0f, 1) <= 1 / (5 / dt))) {
 			runDir *= -1;
 		}
 		Move (runDir,dt);
