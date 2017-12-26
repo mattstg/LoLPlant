@@ -17,6 +17,11 @@ public class MainMenuFlow : Flow {
         GV.ws.raincloudManager.Initialize(true);
         GV.ws.pc.gameObject.SetActive(true);
         GV.ws.pc.Initialize ();
+
+        GV.ws.platformManager.Initialize();
+        GV.ws.shadowManager.Initialize();
+        GV.ws.aphidManager.Initialize();
+        GV.ws.dnc.Initialize(false);
         initialized = true;
     }
 
@@ -25,5 +30,9 @@ public class MainMenuFlow : Flow {
         GV.ws.cloudManager.Refresh(dt);
         GV.ws.raincloudManager.Refresh(dt);
 		GV.ws.pc.Refresh (dt);
+        GV.ws.shadowManager.Refresh();
+        GV.ws.aphidManager.Refresh(dt);
+        GV.ws.dnc.Refresh(dt);
+        GV.ws.platformManager.Refresh(dt);
     }
 }
