@@ -171,9 +171,11 @@ public class PlayerController : MonoBehaviour {
         float knockbackVelo = (transform.position.y < aphidTransform.position.y)? GV.AphidKnockbackVeloReduced : GV.AphidKnockbackVelo;
 
         body.velocity = ((transform.position - aphidTransform.position).normalized * knockbackVelo);
-        if(GV.ws.plant != null)
+        if (GV.ws.plant != null) //quick dirty check for if it's main menu scene
+        {
             GV.ws.plant.LoseFood(GV.FoodLostPerAphid);
-        LOLAudio.Instance.PlayAudio(LOLAudio.aphidHit);
+            LOLAudio.Instance.PlayAudio(LOLAudio.aphidHit);
+        }
     }
 
 	private GameObject[] colies = new GameObject[3];
