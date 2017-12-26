@@ -5,7 +5,7 @@ using UnityEngine;
 public class AiController : PlayerController {
 	float runDir = 1;
 	float jumpTimer = 0;
-	float jumpHold = 0.8f;
+	float jumpHold = 1f;
 	float mapBoundary = 7.5f;
 
 	public override void Refresh (float dt)
@@ -24,7 +24,7 @@ public class AiController : PlayerController {
 			runDir *= -1;
 		}
 		Move (runDir,dt);
-		if (Random.Range (0f, 1) <= 1/(2.5/dt) || (jumpTimer > 0)) {
+		if (Random.Range (0f, 1) <= 1/(2/dt) || (jumpTimer > 0)) {
 			jumpTimer += dt;
 			Jump (1, dt);
 			if (jumpTimer > jumpHold)

@@ -171,7 +171,8 @@ public class PlayerController : MonoBehaviour {
         float knockbackVelo = (transform.position.y < aphidTransform.position.y)? GV.AphidKnockbackVeloReduced : GV.AphidKnockbackVelo;
 
         body.velocity = ((transform.position - aphidTransform.position).normalized * knockbackVelo);
-        GV.ws.plant.LoseFood(GV.FoodLostPerAphid);
+        if(GV.ws.plant != null)
+            GV.ws.plant.LoseFood(GV.FoodLostPerAphid);
         LOLAudio.Instance.PlayAudio(LOLAudio.aphidHit);
     }
 
