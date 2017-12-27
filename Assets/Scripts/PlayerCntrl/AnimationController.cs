@@ -16,6 +16,8 @@ public class AnimationController : MonoBehaviour {
 
 	private Animator anim;
 	private Rigidbody2D player;
+	public SpriteRenderer bodySprite;
+
 
 
 	private float jumpTimer = 0;
@@ -52,7 +54,7 @@ public class AnimationController : MonoBehaviour {
 	public void Flip(){
 		Vector3 newScale = gameObject.transform.localScale;
 		gameObject.transform.localScale = new Vector3 (newScale.x * -1, newScale.y, newScale.z);
-		facingRight = !facingRight;
+		bodySprite.flipX = facingRight = !facingRight;
 	}
 
 	public void Grounded(bool input){
