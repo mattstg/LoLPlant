@@ -20,7 +20,6 @@ public class GV {
     public static readonly float WaterPerDrop = .03f;
     public static readonly float WaterDepletionRate = 0.012f;
     public static readonly float FoodRate = 10f;
-    public static readonly float FoodLostPerAphid = 5f;
     public static readonly float FoodMaximum = 1500f;
     public static readonly float GrowthPerFood = 0.1f;
     public static readonly float HeightMaximum = 1000f;
@@ -67,6 +66,8 @@ public class GV {
     //Aphids
     public static readonly float AphidKnockbackVelo = 5; //If an aphid hits you, your velo is set to this away from it
     public static readonly float AphidKnockbackVeloReduced = 3; //If an aphid hits you and is above you (you jumped up into it), your velo is set to this instead
+    public static readonly float FoodLostPerAphid = 40f;
+
 
     public static Sprite[] platformSprites;
     
