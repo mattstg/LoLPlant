@@ -24,7 +24,8 @@ public class Aphid : MonoBehaviour {
         parentPlatform = _parentPlatform;
 		headingRight = Random.Range (0, 2) == 0;
 		sr.flipX = !headingRight;
-		verticalOffset = new Vector2(0,transform.localScale.y / 2 + _parentPlatform.gameObject.transform.localScale.y / 2) * 0.4f;
+        //verticalOffset = new Vector2(0,transform.localScale.y / 2 + _parentPlatform.gameObject.transform.localScale.y / 2) * 0.4f;
+        verticalOffset = new Vector2(0f, 0.25f);
 		transform.position = Vector3.Lerp(parentPlatform.GetSidePoint(headingRight) + verticalOffset, parentPlatform.GetSidePoint(!headingRight) + verticalOffset,progress);
     }
 
