@@ -94,6 +94,8 @@ public class Plant : MonoBehaviour {
     public void UpdatePhotosynthesis(float dt)
     {
         photosynthesis = sunFactor * waterFactor;
+        // to measure max food production / growth per day:
+        //photosynthesis = GV.SunFactor(Mathf.Clamp01(GV.ws.dnc.ambientSunLevel));
         psDamp = Mathf.SmoothDamp(psDamp, photosynthesis, ref psVelocity, dampTime, Mathf.Infinity, dt);
     }
 
