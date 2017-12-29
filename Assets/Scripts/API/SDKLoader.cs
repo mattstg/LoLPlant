@@ -48,7 +48,7 @@ public class SDKLoader {
     {
         //Load default scores
         MainScript.progressPoint = 1;
-        MainScript.score = 0;
+        MainScript.score = 50;
 
         //Given start game info, load the language and text files
         Debug.Log("QQ Handle start game called");

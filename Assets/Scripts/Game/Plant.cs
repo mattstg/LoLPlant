@@ -58,9 +58,9 @@ public class Plant : MonoBehaviour {
     
     public float dampTime = 0.25f;
     
-    public void Initialize(int previousHighSore)
+    public void Initialize(int initialHeight)
     {
-        highScore = previousHighSore;
+        height = initialHeight;
     }
 
     public virtual void Refresh(float dt)
@@ -228,7 +228,7 @@ public class Plant : MonoBehaviour {
 		if(GV.ws.pc != null)
 			GV.ws.pc.UpdateHeight (height);
         Vector3 offset = GV.ws.cameraManager.offset;
-        offset.y = Mathf.Clamp01(1.2f * height / 850f);
+        offset.y = Mathf.Max(1.1f * (height - 50f) / 950f, 0f);
         GV.ws.cameraManager.offset = offset;
 	}
 }

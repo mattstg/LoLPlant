@@ -19,7 +19,7 @@ public class TutorialFlow : Flow
 
         GameObject.FindObjectOfType<WS>().LinkToGV(this); //Force the link of WS into GV so can set the links below
         GV.ws.dnc.Initialize();
-        GV.ws.plant.Initialize(0);
+        GV.ws.plant.Initialize(50);
         GV.ws.pc.Initialize();
         GV.ws.cameraManager.Initialize();
         GV.ws.platformManager.Initialize();

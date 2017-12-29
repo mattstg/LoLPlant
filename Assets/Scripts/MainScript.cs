@@ -8,7 +8,7 @@ public enum CurrentState { MainMenu, Tutorial, Game, PostGame}
 public class MainScript : MonoBehaviour
 {
     public static int progressPoint = 0;
-    public static int score = 0;
+    public static int score = 50;
     bool lolsdkFinishedLoading = false;
     bool flowInitialized = false;
 

@@ -66,7 +66,7 @@ public class GV {
     //Aphids
     public static readonly float AphidKnockbackVelo = 5; //If an aphid hits you, your velo is set to this away from it
     public static readonly float AphidKnockbackVeloReduced = 3; //If an aphid hits you and is above you (you jumped up into it), your velo is set to this instead
-    public static readonly float FoodLostPerAphid = 40f;
+    public static readonly float FoodLostPerAphid = 50f;
 
 
     public static Sprite[] platformSprites;
