@@ -44,6 +44,7 @@ public class TAEventManager
                 //taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardNone, true));
                 //taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
                 //taQueue.Enqueue(new TAActivate("Platforms", false));
+                
                 taQueue.Enqueue(new TAFreezeChar(true,false));
                 taQueue.Enqueue(new TATimer("Timer", 2));
                 taQueue.Enqueue(new TATrigger("Timer"));
@@ -92,6 +93,7 @@ public class TAEventManager
                 goto case 3;
             case 3:
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
+                taQueue.Enqueue(new TADelegate(GV.ws.plant.SetFoodTutorial, 350f));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardFood, true));
                 taQueue.Enqueue(new TACreatePopup(new Message("Sugar")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
@@ -102,6 +104,7 @@ public class TAEventManager
                 goto case 4;
             case 4:
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
+                taQueue.Enqueue(new TADelegate(GV.ws.plant.SetFoodTutorial, 350f));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardFood, true));
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Sliders, true));
@@ -111,6 +114,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 5));
                 goto case 5;
             case 5:
+                taQueue.Enqueue(new TADelegate(GV.ws.plant.SetFoodTutorial, 350f));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardAll, true));
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
                 taQueue.Enqueue(new TACreatePopup(new Message("Escape", Message.Type.Prompt)));

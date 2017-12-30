@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TutorialPC : PlayerController {
 
+    int collidedWithAphid = 0; //If collide enough times disable tutorial aphids
     bool inTheSun = false;
     float timeInSunToSendTrigger = 1.5f;
 
@@ -28,6 +29,9 @@ public class TutorialPC : PlayerController {
         {
             case "Aphid":
                 TAEventManager.Instance.ReceiveActionTrigger("Aphid");
+                collidedWithAphid++;
+                if(collidedWithAphid > 8)
+                    GV.ws.aphidManager.SetAphidsActive(false); //Turn off aphids if hit them 8 times in tutorial
                 break;
         }
         base.OnCollisionEnter2D(coli);

@@ -108,6 +108,13 @@ public class Plant : MonoBehaviour {
         psProgressDamp = Mathf.SmoothDamp(psProgressDamp, psProgress, ref psProgressVelocity, dampTime * 2f, Mathf.Infinity, dt);
     }
 
+    public void SetFoodTutorial(float _newValue)
+    { //Used by TADelegate, tutorial gives you a set amt of food so you have some growth, so it doesn't allow you to reduce it
+      //DO NOT USE THIS OUTSIDE TAEVENTMANAGER TUTORIAL
+      if(food < _newValue)
+            food = _newValue;
+    }
+
     public void UpdateFood(float dt)
     {
         float foodDampTime = dampTime * 2f;
