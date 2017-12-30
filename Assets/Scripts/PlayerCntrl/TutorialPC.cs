@@ -23,18 +23,18 @@ public class TutorialPC : PlayerController {
         base.Refresh(dt);
     }
 
-    public override void OnCollisionEnter2D(Collision2D coli)
+    public void OnTriggerEnter2D(Collider2D coli)
     {
         switch (coli.gameObject.tag)
         {
             case "Aphid":
                 TAEventManager.Instance.ReceiveActionTrigger("Aphid");
                 collidedWithAphid++;
+                Debug.Log("coli with aphid");
                 if(collidedWithAphid > 8)
                     GV.ws.aphidManager.SetAphidsActive(false); //Turn off aphids if hit them 8 times in tutorial
                 break;
         }
-        base.OnCollisionEnter2D(coli);
     }
 
     public override void RaycastToSun() //Efficency of raycast to the sun
