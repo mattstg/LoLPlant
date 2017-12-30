@@ -47,8 +47,7 @@ public class SDKLoader {
 	static void HandleStartGame (string json)
     {
         //Load default scores
-        MainScript.progressPoint = 1;
-        MainScript.score = 50;
+        ProgressTracker.Instance.currentProgress = 1;       
 
         //Given start game info, load the language and text files
         Debug.Log("QQ Handle start game called");
@@ -63,7 +62,7 @@ public class SDKLoader {
                 if (parseSuccess)
                 {
                     Debug.Log("QQ successful progress parse");
-                    MainScript.progressPoint = Mathf.Clamp(result,1,8);
+                    ProgressTracker.Instance.currentProgress = Mathf.Clamp(result,1,8);
                 }
             }
 
@@ -75,7 +74,8 @@ public class SDKLoader {
                 if (parseSuccess)
                 {
                     Debug.Log("QQ successful score parse");
-                    MainScript.score = result;
+                    ProgressTracker.Instance.score = result;
+                    ProgressTracker.Instance.SetMaxHeight(result);
                 }
             }
         }

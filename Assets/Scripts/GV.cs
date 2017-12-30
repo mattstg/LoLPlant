@@ -17,7 +17,7 @@ public class GV {
 
     //Plant
     public static readonly float SunReductionPerPlatform = .8f;
-    public static readonly float WaterPerDrop = .03f;
+    public static readonly float WaterPerDrop = .035f;
     public static readonly float WaterDepletionRate = 0.012f;
     public static readonly float FoodRate = 10f;
     public static readonly float FoodMaximum = 1500f;

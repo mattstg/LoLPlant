@@ -187,12 +187,12 @@ public class PopupManager : MonoBehaviour
         string scoreMessage = "<size=36>" + LangDict.Instance.GetText("Congratulations") + "</size>\n\n";
         scoreMessage += LangDict.Instance.GetText("GrowthAchievement") + "\n";
         scoreMessage += "      <b><size=36>" + plant.newScore.ToString() + "</size> mm</b>\n\n";
-        if (plant.newScore >= plant.highScore)
+        if (plant.newScore >= ProgressTracker.Instance.score)
             scoreMessage += LangDict.Instance.GetText("HighScoreNew");
         else
         {
             scoreMessage += LangDict.Instance.GetText("HighScoreUnchanged") + "\n";
-            scoreMessage += "      <b><size=36>" + plant.highScore + "</size> mm</b>";
+            scoreMessage += "      <b><size=36>" + ProgressTracker.Instance.score + "</size> mm</b>";
         }
         Message m = new Message("ScoreMessage", scoreMessage, Message.Type.Info, Message.Position.Right);
         LoadPopup(new List<Message>() { m });
@@ -786,12 +786,13 @@ public class PopupManager : MonoBehaviour
 
     public void Exit()
     {
-        ProgressTracker.Instance.SubmitProgress(8, MainScript.score);
+        ProgressTracker.Instance.SubmitProgress(8, ProgressTracker.Instance.score);
         LOLSDK.Instance.CompleteGame();
     }
 
     public void Replay()
     {
+        ProgressTracker.Instance.SubmitProgress(8, ProgressTracker.Instance.score);
         GameObject.FindObjectOfType<MainScript>().GoToNextFlow(CurrentState.Game);
     }
 

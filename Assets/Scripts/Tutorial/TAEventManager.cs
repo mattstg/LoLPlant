@@ -28,7 +28,6 @@ public class TAEventManager
     public void Initialize(int progressPoint)
     {
         taQueue.Clear();
-        Debug.Log("setup for p point: " + progressPoint);
         //Setup the entire stack here
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Sliders, false));
         taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
@@ -59,7 +58,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TATrigger("Sun"));
                 taQueue.Enqueue(new TACreatePopup(new Message("SunMeter")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
-                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress,2));
                 goto case 2;
             case 2:
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
@@ -90,7 +89,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TACreatePopup(new Message("Evaporation")));
                 taQueue.Enqueue(new TACreatePopup(new Message("ReqBothForSugar")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
-                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress,3));
                 goto case 3;
             case 3:
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
@@ -100,7 +99,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TAFreezeChar(true));
                 
                 taQueue.Enqueue(new TAFreezeChar(false));
-                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress,4));
                 goto case 4;
             case 4:
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
@@ -110,7 +109,7 @@ public class TAEventManager
                 //Special lab popup
                 //Close button for special lab pressed
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Sliders, false));
-                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 5));
                 goto case 5;
             case 5:
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardAll, true));
@@ -134,7 +133,9 @@ public class TAEventManager
                 //Zoom to sunset
                 taQueue.Enqueue(new TATimer("BeginNight", 2));
                 NightSequence();
-                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SetScore, 0));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SetMaxHeight, 0));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 6));
                 taQueue.Enqueue(new TAChangeFlow(CurrentState.Game));
                 // HERE< SPECIAL END LEVEL POPUP
                 //ENDS LEVEL WHEN CLOSES
@@ -144,13 +145,15 @@ public class TAEventManager
                 InitiateDay();
                 NightSequence();
                 taQueue.Enqueue(new TASubmitScore());
-                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SetMaxHeight, (int)GV.ws.plant.height));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 7));
                 goto case 7;
             case 7:
                 InitiateDay();
                 NightSequence();
                 taQueue.Enqueue(new TASubmitScore());
-                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitAndIncrementProgress));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SetMaxHeight, (int)GV.ws.plant.height));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 8));
                 goto case 8;
             case 8:
                 taQueue.Enqueue(new TACreatePopup(new Message("GameOver", Message.Type.Endgame, Message.Position.Center)));

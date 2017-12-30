@@ -7,8 +7,6 @@ public enum CurrentState { MainMenu, Tutorial, Game, PostGame}
 
 public class MainScript : MonoBehaviour
 {
-    public static int progressPoint = 0;
-    public static int score = 50;
     bool lolsdkFinishedLoading = false;
     bool flowInitialized = false;
 
@@ -33,7 +31,7 @@ public class MainScript : MonoBehaviour
         if (lolsdkFinishedLoading && !flowInitialized)  //Once recieved jsons, initialize the flow
         {
             Debug.Log("QQ Everything finished and initialized");
-            curFlow = InitializeFlowScript(currentState, progressPoint, true);  //initial flow initialize
+            curFlow = InitializeFlowScript(currentState, ProgressTracker.Instance.currentProgress, true);  //initial flow initialize
             flowInitialized = true;
         }
 
@@ -96,7 +94,7 @@ public class MainScript : MonoBehaviour
         }
 
         if (verified)
-            curFlow.Initialize(progressPoint);
+            curFlow.Initialize(ProgressTracker.Instance.currentProgress);
     }
 
     public void GoToNextFlow(CurrentState cs)
@@ -125,6 +123,6 @@ public class MainScript : MonoBehaviour
         }
         currentState = cs;
         //Initialize the flow script for the scene
-        curFlow = InitializeFlowScript(cs, progressPoint, false);
+        curFlow = InitializeFlowScript(cs, ProgressTracker.Instance.currentProgress, false);
     }
 }

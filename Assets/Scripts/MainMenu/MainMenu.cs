@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour {
     bool freshGame;
     int progressPt;
     public Button mainButton;
+    public Button lessonAgainBtn;
     public Text mainTitleText;
 
     public void SDKLoaded(int _progressPt)
@@ -17,18 +18,27 @@ public class MainMenu : MonoBehaviour {
         freshGame = (_progressPt == 1);
         mainButton.GetComponentInChildren<Text>().text = (freshGame) ? LangDict.Instance.GetText("Start") : LangDict.Instance.GetText("Continue");
         mainButton.gameObject.SetActive(true);
+        if (!freshGame)
+            lessonAgainBtn.gameObject.SetActive(true);
 
         mainTitleText.text = LangDict.Instance.GetText("Title");
         mainTitleText.gameObject.SetActive(true);
-        
     }
 
 	public void StartPressed()
     {
         if (progressPt <= GV.LastTutorialProgressPoint)
+        {
+            ProgressTracker.Instance.SubmitProgress(1);
             GameObject.FindObjectOfType<MainScript>().GoToNextFlow(CurrentState.Tutorial);
+        }
         else
             GameObject.FindObjectOfType<MainScript>().GoToNextFlow(CurrentState.Game);
     }
-    
+
+    public void LessonAgainPressed()
+    {
+        GameObject.FindObjectOfType<MainScript>().GoToNextFlow(CurrentState.Tutorial);
+    }
+
 }

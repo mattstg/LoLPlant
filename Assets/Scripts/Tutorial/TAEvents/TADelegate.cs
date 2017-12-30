@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TADelegate : TAEvent {
-    enum DelegateSelected { None, String, Float, Bool }
+    enum DelegateSelected { None, String, Float, Bool, Int }
     public delegate void ParameterlessDelegate();
     public delegate void DelegateString(string s);
     public delegate void DelegateFloat(float f);
+    public delegate void DelegateInt(int i);
     public delegate void DelegateBool(bool b);
     ParameterlessDelegate delegateFunc;
     DelegateString delegateFuncString;
     DelegateFloat delegateFuncFloat;
     DelegateBool delegateFuncBool;
+    DelegateInt delegateFuncInt;
     DelegateSelected delegateSelected;
     string triggerWhenInvoke = "";
     string string1;
     float float1;
+    int int1;
     bool bool1;
 
     public TADelegate(ParameterlessDelegate _delegateFunc, string _triggerWhenInvoked = "") : base(TAEventType.Action)
@@ -31,6 +34,14 @@ public class TADelegate : TAEvent {
         triggerWhenInvoke = _triggerWhenInvoked;
         delegateSelected = DelegateSelected.String;
         string1 = arg1;
+    }
+
+    public TADelegate(DelegateInt _delegateFunc, int arg, string _triggerWhenInvoked = "") : base(TAEventType.Action)
+    {
+        delegateFuncInt = _delegateFunc;
+        triggerWhenInvoke = _triggerWhenInvoked;
+        delegateSelected = DelegateSelected.Int;
+        int1 = arg;
     }
 
     public TADelegate(DelegateFloat _delegateFunc, float arg2, string _triggerWhenInvoked = "") : base(TAEventType.Action)
@@ -64,6 +75,9 @@ public class TADelegate : TAEvent {
                 break;
             case DelegateSelected.Bool:
                 delegateFuncBool.Invoke(bool1);
+                break;
+            case DelegateSelected.Int:
+                delegateFuncInt.Invoke(int1);
                 break;
         }
         

@@ -53,14 +53,17 @@ public class Plant : MonoBehaviour {
     private float sourceHeight = 0f;
     private float targetHeight = 1f;
 
-    public int highScore = 0;
     public int newScore = 0;
+
+    private float startHeight = 0; //Used to setup plant start height before player initialized is called and graphics are ready.
     
     public float dampTime = 0.25f;
     
     public void Initialize(int initialHeight)
     {
+        Debug.Log("Initialize plant called");
         height = initialHeight;
+        Debug.Log("Initial height set to: " + height);
     }
 
     public virtual void Refresh(float dt)
@@ -169,6 +172,7 @@ public class Plant : MonoBehaviour {
                 food = targetFood;
                 height = targetHeight;
                 isGrowing = false;
+                ProgressTracker.Instance.SetMaxHeight((int)height);
                 //TAEventManager.Instance.ReceiveActionTrigger("GrowthComplete"); //already sent by DNC
             }
             else
@@ -218,17 +222,17 @@ public class Plant : MonoBehaviour {
         sourceHeight = height;
         targetHeight = height + score;
         newScore = (int)score;
-        if (newScore > highScore)
-            highScore = newScore;
         isGrowing = true;
     }
 
 	private void UpdateHeightGraphic()
 	{
-		if(GV.ws.pc != null)
-			GV.ws.pc.UpdateHeight (height);
+        if (GV.ws.pc != null)
+        {
+            GV.ws.pc.UpdateHeight(height);
+        }
         Vector3 offset = GV.ws.cameraManager.offset;
         offset.y = Mathf.Max(1.1f * (height - 50f) / 950f, 0f);
         GV.ws.cameraManager.offset = offset;
-	}
+    }
 }

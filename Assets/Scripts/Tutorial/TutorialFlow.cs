@@ -12,15 +12,12 @@ public class TutorialFlow : Flow
         LOLAudio.Instance.SetBGLevel(0);
 
         if (progressNumber > GV.LastTutorialProgressPoint)
-        {
-            Debug.Log("Progress point retrieved from JSON too high for tutorial scene, reseting progress to 0");
-            progressNumber = MainScript.progressPoint = 0;
-        }
+            progressNumber = 1; //If playing tut for second time or force loading scene
 
         GameObject.FindObjectOfType<WS>().LinkToGV(this); //Force the link of WS into GV so can set the links below
         GV.ws.dnc.Initialize();
-        GV.ws.plant.Initialize(50);
         GV.ws.pc.Initialize();
+        GV.ws.plant.Initialize(60);
         GV.ws.cameraManager.Initialize();
         GV.ws.platformManager.Initialize();
         GV.ws.dm.Initialize();
