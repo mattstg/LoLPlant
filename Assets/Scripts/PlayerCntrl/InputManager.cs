@@ -44,11 +44,11 @@ public class InputManager : MonoBehaviour {
         {
             if (Input.GetMouseButton(0))  //Continous press
             {
-                _MouseClicked(Input.mousePosition, dt,true);
+                _MouseClicked(Input.mousePosition, dt, Input.GetMouseButtonDown(0));
             }
             else if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved))
             {
-                _MouseClicked(Input.GetTouch(0).position, dt, false);
+                _MouseClicked(Input.GetTouch(0).position, dt, Input.GetTouch(0).phase == TouchPhase.Began);
             }
         }        
 
