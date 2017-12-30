@@ -91,9 +91,12 @@ public class PlayerController : MonoBehaviour {
         {
             Vector2 relativePress = new Vector2(Mathf.Clamp(mouseWorldPos.x - transform.position.x, -1, 1), Mathf.Clamp(mouseWorldPos.y - transform.position.y, -1, 1));
             relativePress.y *= -1; //inverted cntrls?
+            if (Mathf.Abs(relativePress.y) < GV.YDiffToActivate)
+                relativePress.y = 0;
+
             //relativePress.y = (Mathf.Abs(relativePress.y) >= mouseJumpTolerance) ? -1 : 0;
             KeysPressed(relativePress, _dt);
-            if (firstPress && Mathf.Sign(relativePress.y) >= 0)
+            if (firstPress && relativePress.y != 0 && Mathf.Sign(relativePress.y) >= 0)
                 DownFirstPressed();
         }
     }

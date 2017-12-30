@@ -15,6 +15,10 @@ public class GV {
     public static readonly float worldWidth = 40.96f; //these dimension values do not actually control the world size; they just reflect it in order to inform other stuff like shadows
     public static readonly float worldHeight = 23.04f;
 
+    //Player Controls
+    public static readonly float YDiffToActivate = .27f;
+
+
     //Plant
     public static readonly float SunReductionPerPlatform = .8f;
     public static readonly float WaterPerDrop = .035f;
@@ -42,7 +46,7 @@ public class GV {
 
 	//raincloud sound
 	public static readonly float rainHearingDist = worldWidth / 4;
-	public static readonly float[] worldRange = {-10,7} ;
+	public static readonly float[] worldRange = {-8,7} ;
 
     public static readonly Vector2 rainRateRange = new Vector2(10,34); //int >= 1. rainRate will lerp around randomly to values in this range. 
     public static readonly int maxDropsPerFrame = 5; // this many 'rain dice' will be rolled each frame, with each die having 1/rainRate chance of spawning a drop

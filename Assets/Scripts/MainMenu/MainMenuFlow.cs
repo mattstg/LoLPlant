@@ -5,7 +5,6 @@ public class MainMenuFlow : Flow {
 
     public override void Initialize(int progressNumber)
     {
-        LOLAudio.Instance.PlayBackgroundAudio(LOLAudio.bgMusic);
         LOLAudio.Instance.AddDisabledSound(LOLAudio.collectRain);
         LOLAudio.Instance.AddDisabledSound(LOLAudio.land);
 

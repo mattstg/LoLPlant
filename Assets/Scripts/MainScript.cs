@@ -31,6 +31,7 @@ public class MainScript : MonoBehaviour
         if (lolsdkFinishedLoading && !flowInitialized)  //Once recieved jsons, initialize the flow
         {
             Debug.Log("QQ Everything finished and initialized");
+            LOLAudio.Instance.Initialize();
             curFlow = InitializeFlowScript(currentState, ProgressTracker.Instance.currentProgress, true);  //initial flow initialize
             flowInitialized = true;
         }
@@ -123,6 +124,7 @@ public class MainScript : MonoBehaviour
         }
         currentState = cs;
         //Initialize the flow script for the scene
+        LOLAudio.Instance.SetBGLevel(0);
         curFlow = InitializeFlowScript(cs, ProgressTracker.Instance.currentProgress, false);
     }
 }

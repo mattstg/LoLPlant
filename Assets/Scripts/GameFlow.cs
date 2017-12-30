@@ -7,9 +7,6 @@ public class GameFlow : Flow
     public override void Initialize(int progressNumber)
     {
         LOLAudio.Instance.ClearDisabledSounds();
-        LOLAudio.Instance.StopAudio(LOLAudio.heavyRain);
-        LOLAudio.Instance.PlayBackgroundAudio(LOLAudio.heavyRain);
-        LOLAudio.Instance.SetBGLevel(0);
 
         if (progressNumber <= GV.LastTutorialProgressPoint)
         {

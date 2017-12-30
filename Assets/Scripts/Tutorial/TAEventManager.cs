@@ -65,7 +65,6 @@ public class TAEventManager
                 taQueue.Enqueue(new TACreatePopup(new Message("H20Req", Message.Type.Prompt)));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardWater, true));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, true));
-                taQueue.Enqueue(new TADelegate(LOLAudio.Instance.PlayBackgroundAudio, "lightRain"));
                 taQueue.Enqueue(new TADelegate(LOLAudio.Instance.SetBGLevel, 1f));
                 taQueue.Enqueue(new TATrigger("Water"));
                 taQueue.Enqueue(new TAPromptSuccess("H20Req"));

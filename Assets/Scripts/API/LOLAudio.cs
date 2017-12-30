@@ -22,7 +22,7 @@ public class LOLAudio
     #endregion
     public static readonly string bgMusic = "bgMusic.mp3";
     public static readonly string heavyRain = "heavyRain.mp3";
-    public static readonly string lightRain = "lightRain.mp3";
+    //public static readonly string lightRain = "lightRain.mp3";
     public static readonly string land = "land.wav";
     public static readonly string collectRain = "raindrop.wav";
     public static readonly string aphidHit = "aphidHit.wav";
@@ -32,14 +32,21 @@ public class LOLAudio
     AudioSource musicPlayer;
     AudioSource bgMusicPlayer;
     AudioClip landingAC;
-    bool bgPlaying = false;
 
     private LOLAudio()
     {
-        disabledSounds = new List<string>();
-        landingAC = Resources.Load<AudioClip>("Music/land");
+        
     }
 
+    public void Initialize()
+    {
+        disabledSounds = new List<string>();
+        landingAC = Resources.Load<AudioClip>("Music/land");
+        PlayBackgroundAudio(heavyRain);
+        SetBGLevel(0); //Will this work?
+        PlayAudio(bgMusic, true);
+        Debug.Log("called");
+    }
 
     public void PlayBackgroundAudio(string _name)
     {
@@ -59,13 +66,10 @@ public class LOLAudio
 #elif UNITY_WEBGL
         LOLSDK.Instance.PlaySound(_name, true, true);
 #endif
-        bgPlaying = true;
     }
 
     public void SetBGLevel(float volume)
     {
-        if (!bgPlaying)
-            return;
 #if UNITY_EDITOR    
             bgMusicPlayer.volume = volume;
 #elif UNITY_WEBGL
@@ -89,20 +93,20 @@ public class LOLAudio
     {
         if (LOLSDK.Instance.IsInitialized)
             LOLSDK.Instance.StopSound(_name);
-        if (_name == bgMusic)
-            bgPlaying = false;
     }
 
     private void PlayEditorAudio(string _name, bool loop)
     {
+        _name = System.IO.Path.GetFileNameWithoutExtension(_name);
         if (loop)
         {
             GameObject go = new GameObject();
+            go.name = _name;
             AudioSource audioSrc = go.AddComponent<AudioSource>();
-            audioSrc.clip = Resources.Load<AudioClip>(_name);
+            string filePath = "Music/" + System.IO.Path.GetFileNameWithoutExtension(_name);
+            audioSrc.clip = Resources.Load<AudioClip>(filePath);
             audioSrc.loop = true;
-            audioSrc.Play();
-            go.name = "AudioLoop_" + _name;
+            audioSrc.Play();            
             Object.DontDestroyOnLoad(go);
         }
         else
@@ -113,7 +117,7 @@ public class LOLAudio
                 go.name = "musicPlayer";
                 musicPlayer = go.AddComponent<AudioSource>();
             }
-            _name = System.IO.Path.GetFileNameWithoutExtension(_name);
+            
             AudioClip ac = (_name == "land")? landingAC : Resources.Load<AudioClip>("Music/" + _name);
             musicPlayer.PlayOneShot(ac);
             //AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>(_name), new Vector3());
