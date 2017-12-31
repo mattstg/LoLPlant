@@ -34,6 +34,7 @@ public class TAEventManager
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardNone, true));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
         taQueue.Enqueue(new TADelegate(delegate () { GV.ws.plant.water = 0; }));
+        taQueue.Enqueue(new TADelegate(delegate () { GV.ws.plant.food = 800; }));
 
         switch (progressPoint)
         {
@@ -69,7 +70,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(LOLAudio.Instance.SetBGLevel, 1f));
                 taQueue.Enqueue(new TATrigger("Water"));
                 taQueue.Enqueue(new TAPromptSuccess("H20Req"));
-                taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, false));
+                //taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, false));
                 
                 //Slowly fade audio
                 taQueue.Enqueue(new TADelegate(LOLAudio.Instance.SetBGLevel, .6f));
@@ -137,7 +138,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TATimer("BeginNight", 2));
                 NightSequence();
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SetScore, 0));
-                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SetMaxHeight, 0));
+                taQueue.Enqueue(new TADelegate(delegate () { ProgressTracker.Instance.maxGrowthHeight = 0; }));
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 6));
                 taQueue.Enqueue(new TAChangeFlow(CurrentState.Game));
                 // HERE< SPECIAL END LEVEL POPUP
@@ -145,7 +146,6 @@ public class TAEventManager
                 break;
             case 6:
                 //Initial day popup
-                taQueue.Enqueue(new TADelegate(delegate () { GV.ws.plant.water = .5f; }));
                 InitiateDay();
                 NightSequence();
                 taQueue.Enqueue(new TASubmitScore());
@@ -153,7 +153,6 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 7));
                 goto case 7;
             case 7:
-                taQueue.Enqueue(new TADelegate(delegate () { GV.ws.plant.water = .5f; }));
                 InitiateDay();
                 NightSequence();
                 taQueue.Enqueue(new TASubmitScore());
@@ -175,6 +174,8 @@ public class TAEventManager
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, true));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardAll, true));
         taQueue.Enqueue(new TADelegate(delegate () { GV.ws.raincloudManager.rainCloudsPaused = false; }));
+        taQueue.Enqueue(new TADelegate(delegate () { GV.ws.plant.water = .5f; }));
+        taQueue.Enqueue(new TADelegate(delegate () { GV.ws.plant.food = 0f; }));
         //reposition player
     }
 
