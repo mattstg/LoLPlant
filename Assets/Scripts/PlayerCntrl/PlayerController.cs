@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour {
     bool droppingThroughPlatform;
     float timeDropping;
     float maxTimeDrop = 1; //time where colliders inactive
+    Transform bottomOfFeet;
 
     public void Initialize()
     {
@@ -45,6 +46,8 @@ public class PlayerController : MonoBehaviour {
         im = gameObject.AddComponent<InputManager>();
         im.Initialize(this);
 		anim.Initialize();
+        bottomOfFeet = transform.Find("BottomFoot");
+        Debug.Log("found foot: " + (bottomOfFeet != null));
     }
 
     public void SetInputActive(bool _setActive, bool hardLock = false)
@@ -229,9 +232,17 @@ public class PlayerController : MonoBehaviour {
         case "Water":
             break;
 		case "Aphid":
-			TouchedGround ();
-			if (!coli.gameObject.GetComponent<Aphid> ().isOutCold)
-				coli.gameObject.GetComponent<Aphid> ().HoppedOn ();
+                if (bottomOfFeet.position.y <= coli.transform.position.y)
+                {
+                    GetHitByAphid(coli.transform);
+                }
+                else
+                {
+                    TouchedGround();
+                    if (!coli.gameObject.GetComponent<Aphid>().isOutCold)
+                        coli.gameObject.GetComponent<Aphid>().HoppedOn();
+                }
+                
             break;
         }
     }
