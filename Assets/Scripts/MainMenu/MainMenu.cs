@@ -16,9 +16,9 @@ public class MainMenu : MonoBehaviour {
     {
         progressPt = _progressPt;
         freshGame = (_progressPt == 1);
-        mainButton.GetComponentInChildren<Text>().text = (freshGame) ? LangDict.Instance.GetText("Start") : LangDict.Instance.GetText("Continue");
+        mainButton.GetComponentInChildren<Text>().text = (freshGame) ? LangDict.Instance.GetText("StartButton") : LangDict.Instance.GetText("ContinueButton");
         mainButton.gameObject.SetActive(true);
-        lessonAgainBtn.GetComponentInChildren<Text>().text = LangDict.Instance.GetText("ContinueLesson");
+        lessonAgainBtn.GetComponentInChildren<Text>().text = LangDict.Instance.GetText("LessonButton");
         lessonAgainBtn.gameObject.SetActive(!freshGame);
         mainTitleText.text = LangDict.Instance.GetText("ColoredMenuTitle");
         mainTitleText.gameObject.SetActive(true);

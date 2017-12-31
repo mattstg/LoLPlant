@@ -84,8 +84,8 @@ public class PopupManager : MonoBehaviour
 
     private void InitializeButtonText()
     {
-        replayText.text = LangDict.Instance.GetText("PlayAgain");
-        exitText.text = LangDict.Instance.GetText("ExitGame");
+        replayText.text = LangDict.Instance.GetText("PlayAgainButton");
+        exitText.text = LangDict.Instance.GetText("ExitGameButton");
     }
 
     private void InitializeArrow()
