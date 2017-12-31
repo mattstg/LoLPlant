@@ -62,7 +62,7 @@ public class Plant : MonoBehaviour {
     public void Initialize(int initialHeight)
     {
         height = initialHeight;
-        water = .5f;
+        water = 0f;
         Debug.Log("water is now: " + water);
     }
 

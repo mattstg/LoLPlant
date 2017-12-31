@@ -174,7 +174,7 @@ public class TAEventManager
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, true));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardAll, true));
         taQueue.Enqueue(new TADelegate(delegate () { GV.ws.raincloudManager.rainCloudsPaused = false; }));
-        taQueue.Enqueue(new TADelegate(delegate () { GV.ws.plant.water = .5f; }));
+        taQueue.Enqueue(new TADelegate(delegate () { GV.ws.plant.water = 0f; }));
         taQueue.Enqueue(new TADelegate(delegate () { GV.ws.plant.food = 0f; }));
         //reposition player
     }
