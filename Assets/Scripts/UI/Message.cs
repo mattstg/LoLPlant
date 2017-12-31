@@ -5,7 +5,7 @@ using UnityEngine;
 public class Message
 {
     public enum Type { Info, Prompt, Endgame }
-    public enum Position { Center, Top, Bottom, Left, Right }
+    public enum Position { Center, Top, Bottom, Left, Right, TopLeft, TopRight, BottomLeft, BottomRight }
 
     public string name;
     public string message;

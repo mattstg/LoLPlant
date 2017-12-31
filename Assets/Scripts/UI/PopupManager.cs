@@ -771,6 +771,7 @@ public class PopupManager : MonoBehaviour
         {
             case Message.Position.Center:
                 return new Vector2(0.5f, 0.5f);
+
             case Message.Position.Top:
                 return new Vector2(0.5f, 1f);
             case Message.Position.Bottom:
@@ -779,6 +780,16 @@ public class PopupManager : MonoBehaviour
                 return new Vector2(0f, 0.5f);
             case Message.Position.Right:
                 return new Vector2(1f, 0.5f);
+
+            case Message.Position.TopLeft:
+                return new Vector2(0f, 1f);
+            case Message.Position.TopRight:
+                return new Vector2(1f, 1f);
+            case Message.Position.BottomLeft:
+                return new Vector2(0f, 0f);
+            case Message.Position.BottomRight:
+                return new Vector2(1f, 0f);
+
             default:
                 return new Vector2(0.5f, 0.5f);
         }
