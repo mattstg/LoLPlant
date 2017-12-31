@@ -24,7 +24,7 @@ public class ProgressTracker {
     public int maxProgress = 8;
     public int currentProgress = 1;
     public int score = 0;
-    public int maxGrowthHeight = 0;
+    public int maxGrowthHeight = 50;
 
 	private ProgressTracker()
 	{        

@@ -75,7 +75,7 @@ public class SDKLoader {
                 {
                     Debug.Log("QQ successful score parse");
                     ProgressTracker.Instance.score = result;
-                    ProgressTracker.Instance.SetMaxHeight(result);
+                    ProgressTracker.Instance.SetMaxHeight(Mathf.Max(result, 50));
                 }
             }
         }
