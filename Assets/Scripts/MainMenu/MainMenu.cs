@@ -19,10 +19,14 @@ public class MainMenu : MonoBehaviour {
         mainButton.GetComponentInChildren<Text>().text = (freshGame) ? LangDict.Instance.GetText("Start") : LangDict.Instance.GetText("Continue");
         mainButton.gameObject.SetActive(true);
         if (!freshGame)
+        {
             lessonAgainBtn.gameObject.SetActive(true);
+            mainButton.GetComponentInChildren<Text>().text = LangDict.Instance.GetText("ContinueLesson");
+        }
 
         mainTitleText.text = LangDict.Instance.GetText("Title");
         mainTitleText.gameObject.SetActive(true);
+
     }
 
 	public void StartPressed()

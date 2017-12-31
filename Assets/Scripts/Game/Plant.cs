@@ -61,9 +61,9 @@ public class Plant : MonoBehaviour {
     
     public void Initialize(int initialHeight)
     {
-        Debug.Log("Initialize plant called");
         height = initialHeight;
-        Debug.Log("Initial height set to: " + height);
+        water = .5f;
+        Debug.Log("water is now: " + water);
     }
 
     public virtual void Refresh(float dt)

@@ -33,7 +33,7 @@ public class TAEventManager
         taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardNone, true));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
-        taQueue.Enqueue(new TADelegate(delegate() { GV.ws.plant.water = 0; }));
+        taQueue.Enqueue(new TADelegate(delegate () { GV.ws.plant.water = 0; }));
 
         switch (progressPoint)
         {
@@ -145,6 +145,7 @@ public class TAEventManager
                 break;
             case 6:
                 //Initial day popup
+                taQueue.Enqueue(new TADelegate(delegate () { GV.ws.plant.water = .5f; }));
                 InitiateDay();
                 NightSequence();
                 taQueue.Enqueue(new TASubmitScore());
@@ -152,6 +153,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 7));
                 goto case 7;
             case 7:
+                taQueue.Enqueue(new TADelegate(delegate () { GV.ws.plant.water = .5f; }));
                 InitiateDay();
                 NightSequence();
                 taQueue.Enqueue(new TASubmitScore());
