@@ -9,9 +9,11 @@
     }
   },
   "en": {
-    "Title":"Grow Hop",
+    "Title": "Grow Hop",
+    "MenuTitle": "GROW HOP",
     "Start": "Start game",
     "Continue": "Continue",
+    "ContinueLesson": "Lesson",
     "GameOver": "Would you like to <b>continue playing</b> for another day?",
     "PlayAgain": "Play again",
     "ExitGame": "Exit game",
