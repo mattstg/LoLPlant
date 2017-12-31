@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour {
         if (!freshGame)
         {
             lessonAgainBtn.gameObject.SetActive(true);
-            mainButton.GetComponentInChildren<Text>().text = LangDict.Instance.GetText("ContinueLesson");
+            lessonAgainBtn.GetComponentInChildren<Text>().text = LangDict.Instance.GetText("ContinueLesson");
         }
 
         mainTitleText.text = LangDict.Instance.GetText("Title");
