@@ -508,7 +508,7 @@ public class PopupManager : MonoBehaviour
         messageFader.FadeIn(1f, 0.5f);
         SetButtonsActive(messages[currentIndex].type == Message.Type.Endgame);
 
-        GV.ws.pc.SetInputActive(messages[currentIndex].type == Message.Type.Prompt);
+        //GV.ws.pc.SetInputActive(messages[currentIndex].type == Message.Type.Prompt);
 
         LOLSDK.Instance.SpeakText(messages[currentIndex].message); //Read the message outloud here
     }
@@ -551,7 +551,7 @@ public class PopupManager : MonoBehaviour
             ZoomBounceInIcon(0.7f);
         }
 
-        GV.ws.pc.SetInputActive(messages[currentIndex].type == Message.Type.Prompt);
+        //GV.ws.pc.SetInputActive(messages[currentIndex].type == Message.Type.Prompt);
 
         LOLSDK.Instance.SpeakText(messages[currentIndex].message); //Read the message outloud here
     }
@@ -661,7 +661,6 @@ public class PopupManager : MonoBehaviour
     private void HasClosed()
     {
         Clear();
-        GV.ws.pc.SetInputActive(true);
         TAEventManager.Instance.ReceiveActionTrigger("ClosePopup");
     }
 
