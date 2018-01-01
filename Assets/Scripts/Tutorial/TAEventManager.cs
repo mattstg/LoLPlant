@@ -34,7 +34,6 @@ public class TAEventManager
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardNone, true));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
         taQueue.Enqueue(new TADelegate(delegate () { GV.ws.plant.water = 0; }));
-        taQueue.Enqueue(new TADelegate(delegate () { GV.ws.plant.food = 800; }));
 
         switch (progressPoint)
         {
@@ -45,10 +44,11 @@ public class TAEventManager
                 //taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardNone, true));
                 //taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
                 //taQueue.Enqueue(new TAActivate("Platforms", false));
-                
-                taQueue.Enqueue(new TAFreezeChar(true,false));
+
+                taQueue.Enqueue(new TAFreezeChar(true, false));
                 taQueue.Enqueue(new TATimer("Timer", 2));
                 taQueue.Enqueue(new TATrigger("Timer"));
+
                 taQueue.Enqueue(new TACreatePopup(new Message("SunReq")));
                 taQueue.Enqueue(new TACreatePopup(new Message("GatherSun", Message.Type.Prompt, Message.Position.Top)));
                 taQueue.Enqueue(new TACreatePopup(new Message("ControlsKey", Message.Type.Info, Message.Position.Top)));
@@ -60,7 +60,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TATrigger("Sun"));
                 taQueue.Enqueue(new TACreatePopup(new Message("SunMeter")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
-                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress,2));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 2));
                 goto case 2;
             case 2:
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
@@ -71,7 +71,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TATrigger("Water"));
                 taQueue.Enqueue(new TAPromptSuccess("H20Req"));
                 //taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, false));
-                
+
                 //Slowly fade audio
                 taQueue.Enqueue(new TADelegate(LOLAudio.Instance.SetBGLevel, .6f));
                 taQueue.Enqueue(new TATimer("Timer", 1f));
@@ -90,22 +90,22 @@ public class TAEventManager
                 taQueue.Enqueue(new TACreatePopup(new Message("Evaporation")));
                 taQueue.Enqueue(new TACreatePopup(new Message("ReqBothForSugar")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
-                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress,3));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 3));
                 goto case 3;
             case 3:
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
-                taQueue.Enqueue(new TADelegate(GV.ws.plant.SetFoodTutorial, 350f));
+                taQueue.Enqueue(new TADelegate(GV.ws.plant.SetFoodTutorial, 800f));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardFood, true));
                 taQueue.Enqueue(new TACreatePopup(new Message("Sugar")));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TAFreezeChar(true));
-                
+
                 taQueue.Enqueue(new TAFreezeChar(false));
-                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress,4));
+                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 4));
                 goto case 4;
             case 4:
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
-                taQueue.Enqueue(new TADelegate(GV.ws.plant.SetFoodTutorial, 350f));
+                taQueue.Enqueue(new TADelegate(GV.ws.plant.SetFoodTutorial, 800f));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardFood, true));
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Sliders, true));
@@ -115,7 +115,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 5));
                 goto case 5;
             case 5:
-                taQueue.Enqueue(new TADelegate(GV.ws.plant.SetFoodTutorial, 350f));
+                taQueue.Enqueue(new TADelegate(GV.ws.plant.SetFoodTutorial, 800f));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardAll, true));
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
                 taQueue.Enqueue(new TACreatePopup(new Message("Escape", Message.Type.Prompt)));
@@ -124,7 +124,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(delegate () { GameObject.Find("TempWall").SetActive(false); }));
                 taQueue.Enqueue(new TATrigger("FinalPlatform"));
                 taQueue.Enqueue(new TAPromptSuccess("Escape"));
-                
+
                 // TAPromptSuccess
                 taQueue.Enqueue(new TAFreezeChar(true));
                 taQueue.Enqueue(new TATimer("Timer", 2));
@@ -138,8 +138,8 @@ public class TAEventManager
                 taQueue.Enqueue(new TATimer("BeginNight", 2));
                 NightSequence();
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SetScore, 0));
-                taQueue.Enqueue(new TADelegate(delegate () { ProgressTracker.Instance.maxGrowthHeight = 0; }));
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 6));
+                taQueue.Enqueue(new TADelegate(delegate () { ProgressTracker.Instance.maxGrowthHeight = 50; }));
                 taQueue.Enqueue(new TAChangeFlow(CurrentState.Game));
                 // HERE< SPECIAL END LEVEL POPUP
                 //ENDS LEVEL WHEN CLOSES
@@ -184,7 +184,7 @@ public class TAEventManager
         taQueue.Enqueue(new TATrigger("BeginNight"));
         taQueue.Enqueue(new TASetDNC(false, DayNightCycle.sunsetHour));
         taQueue.Enqueue(new TAFreezeChar(true, true));
-        taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids,false));
+        taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
         taQueue.Enqueue(new TADelegate(delegate () { GV.ws.raincloudManager.rainCloudsPaused = true; }));
 
         taQueue.Enqueue(new TADelegate(GV.ws.dnc.BeginZoomIn));
@@ -198,7 +198,7 @@ public class TAEventManager
 
         taQueue.Enqueue(new TADelegate(GV.ws.dnc.BeginZoomOut));
         taQueue.Enqueue(new TATrigger("ZoomComplete"));
-        
+
     }
 
     public void RecieveLock(string newLock)
@@ -226,5 +226,5 @@ public class TAEventManager
         }
 
     }
-	
+
 }
