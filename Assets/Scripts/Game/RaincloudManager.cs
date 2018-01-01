@@ -28,15 +28,15 @@ public class RaincloudManager : MonoBehaviour
     {
         if (!rainCloudsPaused)
         {
-            charPos = GV.ws.pc.transform.position;
-            closestPos = GV.worldWidth;
+            //charPos = GV.ws.pc.transform.position;
+            //closestPos = GV.worldWidth;
             foreach (RainCloud rc in rainclouds)
             {
                 rc.Refresh(dt);
-                float pos = Mathf.Abs(charPos.x - rc.transform.position.x);
-                closestPos = (closestPos > pos) ? pos : closestPos;
+                //float pos = Mathf.Abs(charPos.x - rc.transform.position.x);
+                //closestPos = (closestPos > pos) ? pos : closestPos;
             }
-            SetSoundVolume(closestPos);
+            //SetSoundVolume(closestPos);
         }
     }
 
