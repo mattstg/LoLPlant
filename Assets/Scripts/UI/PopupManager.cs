@@ -51,7 +51,7 @@ public class PopupManager : MonoBehaviour
     private List<Message> messages;
     private int currentIndex;
     private float transitionProgress = -1f;
-    private readonly float openingDuration = 2f;
+    private readonly float openingDuration = 1.5f;
     private readonly float proceedingDuration = 3f;
     private readonly float promptProceedDelay = 3f;
 
