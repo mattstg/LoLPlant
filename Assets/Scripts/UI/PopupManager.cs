@@ -181,18 +181,22 @@ public class PopupManager : MonoBehaviour
         Flow();
     }
 
-    public void LoadScorePopup()
+    public void LoadScorePopup(bool isTutorial = false)
     {
         Plant plant = GV.ws.plant;
         string scoreMessage = "<size=36>" + LangDict.Instance.GetText("Congratulations") + "</size>\n\n";
         scoreMessage += LangDict.Instance.GetText("GrowthAchievement") + "\n";
-        scoreMessage += "      <b><size=36>" + plant.newScore.ToString() + "</size> mm</b>\n\n";
-        if (plant.newScore >= ProgressTracker.Instance.score)
-            scoreMessage += LangDict.Instance.GetText("HighScoreNew");
-        else
+        scoreMessage += "      <b><size=36>" + plant.newScore.ToString() + "</size> mm</b>";
+        if (!isTutorial)
         {
-            scoreMessage += LangDict.Instance.GetText("HighScoreUnchanged") + "\n";
-            scoreMessage += "      <b><size=36>" + ProgressTracker.Instance.score + "</size> mm</b>";
+            scoreMessage += "\n\n";
+            if (plant.newScore >= ProgressTracker.Instance.score)
+                scoreMessage += LangDict.Instance.GetText("HighScoreNew");
+            else
+            {
+                scoreMessage += LangDict.Instance.GetText("HighScoreUnchanged") + "\n";
+                scoreMessage += "      <b><size=36>" + ProgressTracker.Instance.score + "</size> mm</b>";
+            }
         }
         Message m = new Message("ScoreMessage", scoreMessage, Message.Type.Info, Message.Position.Right);
         LoadPopup(new List<Message>() { m });
