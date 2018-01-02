@@ -42,8 +42,8 @@ public class LOLAudio
     {
         disabledSounds = new List<string>();
         landingAC = Resources.Load<AudioClip>("Music/land");
-        PlayBackgroundAudio(heavyRain);
-        SetBGLevel(0);
+        //PlayBackgroundAudio(heavyRain);
+        //SetBGLevel(0);
         PlayAudio(bgMusic, true);
     }
 

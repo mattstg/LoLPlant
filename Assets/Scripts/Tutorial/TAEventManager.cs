@@ -146,12 +146,13 @@ public class TAEventManager
 
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, true));
-                taQueue.Enqueue(new TADelegate(LOLAudio.Instance.SetBGLevel, 1f));
+                taQueue.Enqueue(new TADelegate(LOLAudio.Instance.PlayBackgroundAudio, LOLAudio.heavyRain));
                 taQueue.Enqueue(new TAFreezeChar(false));
                 taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("WaterPrompt", water5, Message.Type.Prompt, Message.Position.TopRight) }));
 
                 taQueue.Enqueue(new TATrigger("Water"));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, false));
+                taQueue.Enqueue(new TADelegate(LOLAudio.Instance.StopAudio, LOLAudio.heavyRain));
                 taQueue.Enqueue(new TAFreezeChar(true));
                 taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", water6),
                                                                       new Message("", water7) }));
@@ -195,6 +196,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TAFreezeChar(false));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, true));
+                taQueue.Enqueue(new TADelegate(LOLAudio.Instance.PlayBackgroundAudio, LOLAudio.heavyRain));
                 taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("ExperimentPrompt", food2, Message.Type.Prompt, Message.Position.TopRight) }));
                 taQueue.Enqueue(new TATimer("Timer", 30f));
 
@@ -286,6 +288,8 @@ public class TAEventManager
 
     private void InitiateDay()
     {
+        taQueue.Enqueue(new TADelegate(LOLAudio.Instance.StopAudio, LOLAudio.heavyRain));
+        taQueue.Enqueue(new TADelegate(LOLAudio.Instance.PlayBackgroundAudio, LOLAudio.heavyRain));
         taQueue.Enqueue(new TASetDNC(true, DayNightCycle.sunriseHour));
         taQueue.Enqueue(new TADelegate(GV.ws.dnc.BeginDay));
         taQueue.Enqueue(new TAFreezeChar(false, true));

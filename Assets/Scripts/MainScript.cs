@@ -124,7 +124,7 @@ public class MainScript : MonoBehaviour
         }
         currentState = cs;
         //Initialize the flow script for the scene
-        LOLAudio.Instance.SetBGLevel(0);
+        //LOLAudio.Instance.SetBGLevel(0);
         curFlow = InitializeFlowScript(cs, ProgressTracker.Instance.currentProgress, false);
     }
 }

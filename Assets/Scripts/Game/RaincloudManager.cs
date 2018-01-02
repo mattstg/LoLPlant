@@ -46,13 +46,13 @@ public class RaincloudManager : MonoBehaviour
             rc.SetRaining(raining);
     }
 
-    public void SetSoundVolume(float closestRain)
-    {
-        float heightModifier = (charPos.y > GV.worldRange[1]) ? 1 : ((charPos.y - GV.worldRange[0]) / (GV.worldRange[1] - GV.worldRange[0]));
-        heightModifier = Mathf.Clamp01(heightModifier);
-		float toReturn = (closestRain > GV.rainHearingDist) ? 0 : (GV.rainHearingDist - closestRain) / GV.rainHearingDist;
-        
-		toReturn = (toReturn < 0) ? 0 : toReturn * heightModifier;
-		LOLAudio.Instance.SetBGLevel(toReturn);
-	}
+    //public void SetSoundVolume(float closestRain)
+    //{
+    //    float heightModifier = (charPos.y > GV.worldRange[1]) ? 1 : ((charPos.y - GV.worldRange[0]) / (GV.worldRange[1] - GV.worldRange[0]));
+    //    heightModifier = Mathf.Clamp01(heightModifier);
+	//	float toReturn = (closestRain > GV.rainHearingDist) ? 0 : (GV.rainHearingDist - closestRain) / GV.rainHearingDist;
+    //    
+	//	toReturn = (toReturn < 0) ? 0 : toReturn * heightModifier;
+	//	LOLAudio.Instance.SetBGLevel(toReturn);
+	//}
 }
