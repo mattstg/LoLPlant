@@ -199,7 +199,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TAFreezeChar(false));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, true));
                 taQueue.Enqueue(new TADelegate(LOLAudio.Instance.PlayBackgroundAudio, LOLAudio.heavyRain));
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("ExperimentPrompt", food2, Message.Type.Prompt, Message.Position.TopRight) }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("ExperimentPrompt", food2, Message.Type.Prompt, Message.Position.TopLeft) }));
                 taQueue.Enqueue(new TATimer("Timer", 30f));
 
                 taQueue.Enqueue(new TATrigger("Timer"));
