@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour {
     readonly float MaxTimeBetweenJumpBurst = 1;
     float dropForcePerSec = 9; //pressing down on purpose to drop
     Vector2 playerDrag = GV.playerDrag;
+	float getHitByAphidTime = 0f;
 
     //Dropping through platforms
     List<Platform> platformsTouching = new List<Platform>();
@@ -174,14 +175,18 @@ public class PlayerController : MonoBehaviour {
     public void GetHitByAphid(Transform aphidTransform)
     {
         //body.velocity.Set (0, 0);
-        float knockbackVelo = (transform.position.y < aphidTransform.position.y)? GV.AphidKnockbackVeloReduced : GV.AphidKnockbackVelo;
+		if(Time.time - getHitByAphidTime > GV.TimeBetweenAphidBites){
+			getHitByAphidTime = Time.time;
+	        float knockbackVelo = (transform.position.y < aphidTransform.position.y)? GV.AphidKnockbackVeloReduced : GV.AphidKnockbackVelo;
 
-        body.velocity = ((transform.position - aphidTransform.position).normalized * knockbackVelo);
-        if (GV.ws.plant != null) //quick dirty check for if it's main menu scene
-        {
-            GV.ws.plant.LoseFood(GV.FoodLostPerAphid);
-            LOLAudio.Instance.PlayAudio(LOLAudio.aphidHit);
-        }
+	        body.velocity = ((transform.position - aphidTransform.position).normalized * knockbackVelo);
+	        if (GV.ws.plant != null) //quick dirty check for if it's main menu scene
+	        {
+	            GV.ws.plant.LoseFood(GV.FoodLostPerAphid);
+	            LOLAudio.Instance.PlayAudio(LOLAudio.aphidHit);
+	        }
+		}
+
     }
 
 	private GameObject[] colies = new GameObject[3];
