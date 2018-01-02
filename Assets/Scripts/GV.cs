@@ -18,6 +18,7 @@ public class GV {
     //Player Controls
     public static readonly float YDiffToActivate = .27f;
 
+	public static readonly float TimeBetweenAphidBites = 0.75f;
     //Plant
     public static readonly float SunReductionPerPlatform = .8f;
     public static readonly float WaterPerDrop = .035f;
