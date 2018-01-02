@@ -98,21 +98,21 @@ public class TAEventManager
                 goto case 2;
 
             case 2:  //sun, controls
-                string sun1 = LangDict.Instance.GetText("Sun2a") + "\n\n" +
+                string sun1 = LangDict.Instance.GetText("Sun1a") + "\n\n" +
+                              LangDict.Instance.GetText("Sun1b");
+                string sun2 = LangDict.Instance.GetText("Sun2a") + "\n\n" +
                               LangDict.Instance.GetText("Sun2b");
-                string sun2 = LangDict.Instance.GetText("Sun3a") + "\n\n" +
+                string sun3 = LangDict.Instance.GetText("Sun3a") + "\n\n" +
                               LangDict.Instance.GetText("Sun3b");
-                string sun3 = LangDict.Instance.GetText("Sun4a") + "\n\n" +
+                string sun4 = LangDict.Instance.GetText("Sun4a") + "\n\n" +
                               LangDict.Instance.GetText("Sun4b");
-                string sun4 = LangDict.Instance.GetText("Sun5a") + "\n\n" +
+                string sun5 = LangDict.Instance.GetText("Sun5a") + "\n\n" +
                               LangDict.Instance.GetText("Sun5b");
-                string sun5 = LangDict.Instance.GetText("Sun6a") + "\n\n" +
+                string sun6 = LangDict.Instance.GetText("Sun6a") + "\n\n" +
                               LangDict.Instance.GetText("Sun6b");
-                string sun6 = LangDict.Instance.GetText("Sun7a") + "\n\n" +
-                              LangDict.Instance.GetText("Sun7b");
-                string sun7 = LangDict.Instance.GetText("Sun8a") + "\n\n" +
-                              LangDict.Instance.GetText("Sun8b") + "\n\n" +
-                              LangDict.Instance.GetText("Sun8c");
+                string sun7 = LangDict.Instance.GetText("Sun7a") + "\n\n" +
+                              LangDict.Instance.GetText("Sun7b") + "\n\n" +
+                              LangDict.Instance.GetText("Sun7c");
 
                 string controls1 = LangDict.Instance.GetText("Controls1a") + "\n\n" +
                                    LangDict.Instance.GetText("Controls1b") + "\n    " +
