@@ -188,7 +188,10 @@ public class PopupManager : MonoBehaviour
         scoreMessage += LangDict.Instance.GetText("GrowthAchievement") + "\n";
         scoreMessage += "      <b><size=36>" + plant.newScore.ToString() + "</size> mm</b>\n\n";
         if (plant.newScore >= ProgressTracker.Instance.score)
+        {
             scoreMessage += LangDict.Instance.GetText("HighScoreNew");
+            ProgressTracker.Instance.score = plant.newScore;
+        }
         else
         {
             scoreMessage += LangDict.Instance.GetText("HighScoreUnchanged") + "\n";

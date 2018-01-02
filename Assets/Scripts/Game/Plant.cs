@@ -179,7 +179,7 @@ public class Plant : MonoBehaviour {
                 food = targetFood;
                 height = targetHeight;
                 isGrowing = false;
-                //ProgressTracker.Instance.SetMaxHeight((int)height); //redundant; already done in TAEventManager, cases 6/7
+                ProgressTracker.Instance.SetMaxHeight((int)height); //redundant; already done in TAEventManager, cases 6/7
                 //TAEventManager.Instance.ReceiveActionTrigger("GrowthComplete"); //already sent by DNC
             }
             else

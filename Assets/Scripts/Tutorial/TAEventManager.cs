@@ -326,14 +326,12 @@ public class TAEventManager
                 InitiateDay();
                 NightSequence();
                 taQueue.Enqueue(new TASubmitScore());
-                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SetMaxHeight, (int)GV.ws.plant.height));
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 7));
                 goto case 7;
             case 7:  //game day 2+
                 InitiateDay();
                 NightSequence();
                 taQueue.Enqueue(new TASubmitScore());
-                taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SetMaxHeight, (int)GV.ws.plant.height));
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 8));
                 goto case 8;
             case 8:  //game over
