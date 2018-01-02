@@ -268,7 +268,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void UpdateHeight(float height)
 	{
-        float heightScale = -0.00453f;
+        float heightScale = -0.0075f;
         float maxHeight = -4.53f;     //=1000mm
         float minHeight = -1.097f;    //=50mm
         float zeroOffset = -0.87f;
