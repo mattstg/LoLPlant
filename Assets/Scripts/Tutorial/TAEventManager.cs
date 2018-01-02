@@ -29,7 +29,6 @@ public class TAEventManager
     {
         taQueue.Clear();
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Sliders, false));
-        taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
         taQueue.Enqueue(new TAFreezeChar(true));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardAll, true));
         taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, false));
@@ -55,6 +54,7 @@ public class TAEventManager
                 string intro7 = LangDict.Instance.GetText("Intro7a") + "\n\n" +
                                 LangDict.Instance.GetText("Intro7b");
 
+                taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardNone, true));
                 taQueue.Enqueue(new TATimer("Timer", 2));
 
@@ -135,6 +135,7 @@ public class TAEventManager
                                 LangDict.Instance.GetText("Water7b") + "\n\n    " +
                                 LangDict.Instance.GetText("Water7c");
 
+                taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardSun, true));
                 taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", water1) }));
 
@@ -177,6 +178,7 @@ public class TAEventManager
                 string food2 = LangDict.Instance.GetText("Food2a") + "\n\n" +
                                LangDict.Instance.GetText("Food2b");
 
+                taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardWater, true));
                 taQueue.Enqueue(new TADelegate(GV.ws.plant.SetFoodTutorial, 500f));
                 taQueue.Enqueue(new TATimer("Timer", 0.5f));
@@ -227,6 +229,7 @@ public class TAEventManager
                 string growth5 = LangDict.Instance.GetText("Growth5a");
                 string growth6 = LangDict.Instance.GetText("Growth6a");
 
+                taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardFood, true));
                 taQueue.Enqueue(new TADelegate(GV.ws.plant.SetFoodTutorial, 500f));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Platforms, true));
@@ -268,6 +271,7 @@ public class TAEventManager
 
             case 6:  //game day 1
                 //Initial day popup
+                taQueue.Enqueue(new TADelegate(delegate () { DayNightCycle.time = GV.ws.dnc.GetTime(1, DayNightCycle.sunriseHour); }));
                 InitiateDay();
                 NightSequence();
                 taQueue.Enqueue(new TASubmitScore());

@@ -8,7 +8,7 @@ public class DayNightCycle : MonoBehaviour
     private bool isDaytime = true;
     private bool stateIsDaytime = true;
 
-    public float time = 0f;
+    public static float time = 0f;
     public float normalTime = 0f;
     public int day = 0;
     public int hour = 0;
@@ -143,15 +143,7 @@ public class DayNightCycle : MonoBehaviour
 
     private void UpdateDNC()
     {
-        normalTime = (time / secondsPerHour) + sunriseHour;
-        day = (int)(normalTime / hoursPerDay);
-        hour = (int)(normalTime % hoursPerDay);
-        hour12 = (int)(normalTime % (hoursPerDay * 0.5f));
-        if (hour12 == 0)
-            hour12 = (int)(hoursPerDay * 0.5f);
-        isMorning = (hour < hoursPerDay * 0.5f);
-        hourFloat = normalTime % hoursPerDay;
-        isDaytime = (hourFloat >= sunriseHour && hourFloat < sunsetHour);
+        UpdateTimeData();
 
         sunPosition = GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 1f, -0.5f);
         groundToSunAngle = GV.GetAngle(sunPosition);
@@ -162,6 +154,21 @@ public class DayNightCycle : MonoBehaviour
 
         float illumination = Mathf.Clamp01(GV.GetRadialCoordinates(GV.GetSunRotation(normalTime), 2f / 3f, -0.5f).y);
         SpriteTinter.Instance.UpdateSpriteTints(1f - Mathf.Pow(illumination - 1f, 2f), playerIlluminationOffset);
+    }
+
+    public void UpdateTimeData()
+    {
+        Debug.Log("DNC.UpdateTimeData() time: " + time);
+
+        normalTime = (time / secondsPerHour) + sunriseHour;
+        day = (int)(normalTime / hoursPerDay);
+        hour = (int)(normalTime % hoursPerDay);
+        hour12 = (int)(normalTime % (hoursPerDay * 0.5f));
+        if (hour12 == 0)
+            hour12 = (int)(hoursPerDay * 0.5f);
+        isMorning = (hour < hoursPerDay * 0.5f);
+        hourFloat = normalTime % hoursPerDay;
+        isDaytime = (hourFloat >= sunriseHour && hourFloat < sunsetHour);
     }
 
     private bool UpdateJump(float dt)
@@ -256,8 +263,13 @@ public class DayNightCycle : MonoBehaviour
 
     public void SetTime(int _day, float _hourFloat)
     {
+        Debug.Log("DNC.SetTime(" + _day + ", " + _hourFloat + ")");
+        Debug.Log("DNC.SetTime(), time (pre):  " + time);
+
         time = GetTime(_day, _hourFloat);
         UpdateDNC();
+
+        Debug.Log("DNC.SetTime(), time (post): " + time);
 
         if (!isDaytime && stateIsDaytime)
             BeginNight();

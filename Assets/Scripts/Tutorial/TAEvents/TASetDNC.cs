@@ -17,6 +17,7 @@ public class TASetDNC : TAEvent
 
     public override void PerformEvent()
     {
+        GV.ws.dnc.UpdateTimeData();
         if (hour >= 0)
         {
             if (day < 0)

@@ -21,6 +21,7 @@ public class MainMenuFlow : Flow {
         GV.ws.shadowManager.Initialize();
         GV.ws.aphidManager.Initialize();
         GV.ws.dnc.Initialize(false);
+        GV.ws.dnc.SetTime(0, GV.defaultTutorialHour);
         initialized = true;
     }
 
