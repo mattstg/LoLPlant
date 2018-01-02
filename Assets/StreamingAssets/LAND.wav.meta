@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: 7d79bc18520882046872a47fc7ea2a3c
+guid: e383aa859b783b54c9e6c90744cfd48e
 timeCreated: 1513733968
 licenseType: Free
-DefaultImporter:
+AudioImporter:
   externalObjects: {}
+  serializedVersion: 6
+  defaultSettings:
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 1
+    conversionMode: 0
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 1
+  preloadAudioData: 1
+  loadInBackground: 0
+  ambisonic: 0
+  3D: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 
