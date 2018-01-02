@@ -50,7 +50,6 @@ public class SDKLoader {
         ProgressTracker.Instance.currentProgress = 1;       
 
         //Given start game info, load the language and text files
-        Debug.Log("QQ Handle start game called");
         startGameData = JSON.Parse(json);
         if(startGameData != null)
         {
@@ -61,7 +60,6 @@ public class SDKLoader {
                 bool parseSuccess = int.TryParse(startGameData["currentProgress"].Value, out result);
                 if (parseSuccess)
                 {
-                    Debug.Log("QQ successful progress parse");
                     ProgressTracker.Instance.currentProgress = Mathf.Clamp(result,1,8);
                 }
             }
@@ -73,13 +71,11 @@ public class SDKLoader {
                 bool parseSuccess = int.TryParse(startGameData["score"].Value, out result);
                 if (parseSuccess)
                 {
-                    Debug.Log("QQ successful score parse");
                     ProgressTracker.Instance.score = result;
                     ProgressTracker.Instance.SetMaxHeight(Mathf.Max(result, 50));
                 }
             }
         }
-        Debug.Log("QQ Handle start game finished");
         startgameLoaded = true;
     }
 
@@ -91,7 +87,6 @@ public class SDKLoader {
     // Handle pause / resume
     static void HandleGameStateChange (GameState gameState) {
         // Either GameState.Paused or GameState.Resumed
-        Debug.Log("QQ HandleGameStateChange");
 	}
 
     // Store the questions and show them in order based on your game flow.
@@ -103,22 +98,17 @@ public class SDKLoader {
     // Use language to populate UI
     static void HandleLanguageDefs (string json)
     {
-        Debug.Log("QQ Hnadle Lang called");
         JSONNode langDefs = JSON.Parse(json);
         LangDict.Instance.SetNode(langDefs);
         languageLoaded = true;
-        Debug.Log("QQ Hnadle Lang finished");
     }
     static private void LoadMockData () {
-        Debug.Log("QQ Mock data called");
 
 #if UNITY_EDITOR
         // Load Dev Language File from StreamingAssets
 
         string startDataFilePath = Path.Combine (Application.streamingAssetsPath, startGameJSONFilePath);
 			string langCode = "en";
-
-			Debug.Log(File.Exists (startDataFilePath));
 
 			if (File.Exists (startDataFilePath))  {
 				string startDataAsJSON = File.ReadAllText (startDataFilePath);

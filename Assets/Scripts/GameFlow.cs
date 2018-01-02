@@ -10,7 +10,6 @@ public class GameFlow : Flow
 
         if (progressNumber <= GV.LastTutorialProgressPoint)
         {
-            Debug.Log("Progress point set for Tutorial but force loaded in gameFlow");
             progressNumber = GV.LastTutorialProgressPoint + 1;
         }
         GameObject.FindObjectOfType<WS>().LinkToGV(this);

@@ -63,7 +63,6 @@ public class Plant : MonoBehaviour {
     {
         height = initialHeight;
         water = 0f;
-        Debug.Log("water is now: " + water);
     }
 
     public virtual void Refresh(float dt)

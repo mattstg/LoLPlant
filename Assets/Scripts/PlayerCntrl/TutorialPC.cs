@@ -30,7 +30,6 @@ public class TutorialPC : PlayerController {
             case "Aphid":
                 TAEventManager.Instance.ReceiveActionTrigger("Aphid");
                 collidedWithAphid++;
-                Debug.Log("coli with aphid");
                 if(collidedWithAphid > 8)
                     GV.ws.aphidManager.SetAphidsActive(false); //Turn off aphids if hit them 8 times in tutorial
                 break;

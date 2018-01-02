@@ -48,7 +48,6 @@ public class PlayerController : MonoBehaviour {
         im.Initialize(this);
 		anim.Initialize();
         bottomOfFeet = transform.Find("BottomFoot");
-        Debug.Log("found foot: " + (bottomOfFeet != null));
     }
 
     public void SetInputActive(bool _setActive, bool hardLock = false)

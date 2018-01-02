@@ -26,7 +26,6 @@ public class TAEventTimer : MonoBehaviour {
         if(time <= 0)
         {
             TAEventManager.Instance.ReceiveActionTrigger(eventName);
-            Debug.Log("Timer triggered");
             Destroy(this.gameObject);
         }	
 	}

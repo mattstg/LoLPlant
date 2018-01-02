@@ -12,7 +12,6 @@ public class TAChangeFlow : TAEvent {
 
     public override void PerformEvent()
     {
-        Debug.Log("next flow called");
         GV.ms.GoToNextFlow(stateChange);
     }
 }

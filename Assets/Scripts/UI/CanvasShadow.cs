@@ -43,7 +43,6 @@ public class CanvasShadow : MaskableGraphic {
         if (p.Count % 2 != 0)
         {
             platformCount = -1;
-            Debug.Log("Error. Public List<Transform> p must have even Count, not odd. Two endpoints for each platform.");
         }
         else
         {

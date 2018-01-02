@@ -158,8 +158,6 @@ public class DayNightCycle : MonoBehaviour
 
     public void UpdateTimeData()
     {
-        Debug.Log("DNC.UpdateTimeData() time: " + time);
-
         normalTime = (time / secondsPerHour) + sunriseHour;
         day = (int)(normalTime / hoursPerDay);
         hour = (int)(normalTime % hoursPerDay);
@@ -263,13 +261,8 @@ public class DayNightCycle : MonoBehaviour
 
     public void SetTime(int _day, float _hourFloat)
     {
-        Debug.Log("DNC.SetTime(" + _day + ", " + _hourFloat + ")");
-        Debug.Log("DNC.SetTime(), time (pre):  " + time);
-
         time = GetTime(_day, _hourFloat);
         UpdateDNC();
-
-        Debug.Log("DNC.SetTime(), time (post): " + time);
 
         if (!isDaytime && stateIsDaytime)
             BeginNight();

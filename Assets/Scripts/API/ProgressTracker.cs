@@ -50,7 +50,6 @@ public class ProgressTracker {
     {
         if (progressScore > currentProgress)
             currentProgress = progressScore;
-        Debug.Log("progress: " + currentProgress + " score: " + score + " submitted");
         SubmitProgress(currentProgress, score);        
     }
 

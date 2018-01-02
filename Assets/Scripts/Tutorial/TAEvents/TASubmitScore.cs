@@ -12,7 +12,6 @@ public class TASubmitScore : TAEvent {
     public override void PerformEvent()
     {
         ProgressTracker.Instance.SetScore(ProgressTracker.Instance.score);
-        Debug.Log("Total height this game: " + GV.ws.plant.heightInt);
     }
 
 }
