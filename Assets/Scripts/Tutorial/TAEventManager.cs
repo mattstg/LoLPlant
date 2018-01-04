@@ -112,10 +112,10 @@ public class TAEventManager
 
                 taQueue.Enqueue(new TATrigger("Sun"));
                 taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", sun4) }));
+                taQueue.Enqueue(new TAFreezeChar(true));
                 taQueue.Enqueue(new TAPromptSuccess("SunPrompt"));
 
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
-                taQueue.Enqueue(new TAFreezeChar(true));
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 3));
                 goto case 3;
 
