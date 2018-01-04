@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 public class WS : MonoBehaviour
 {
     public Flow currentFlow;
-    public DayEndManager dayEndManager;
 
     public Plant plant;
     public DayNightCycle dnc;
