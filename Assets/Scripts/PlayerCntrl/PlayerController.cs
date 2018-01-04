@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     InputManager im;
-	public GameObject plantSprite;
+	public SpriteRenderer plantSprite;
     
     public float YClickJumpThreshold = 1.5f; //Clicking this much units higher will cause the jump
 	protected AnimationController anim;
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour {
     {
         string n = transform.name;
         gameObject.SetActive(true);
-        plantSprite = transform.GetComponentInChildren<PlantSpriteTag>().gameObject;
+        plantSprite = transform.GetComponentInChildren<PlantSpriteTag>().GetComponent<SpriteRenderer>();
         anim = GetComponentInChildren<AnimationController> ();
 		body = GetComponent<Rigidbody2D> ();
         im = gameObject.AddComponent<InputManager>();
@@ -277,6 +277,11 @@ public class PlayerController : MonoBehaviour {
         float minHeight = -1.097f;    //=50mm
         float zeroOffset = -0.87f;
         if (plantSprite != null)
-            GV.ws.pc.plantSprite.transform.localPosition = new Vector2(0, Mathf.Clamp(height * heightScale + zeroOffset, maxHeight + zeroOffset, minHeight));
+            plantSprite.transform.localPosition = new Vector2(0, Mathf.Clamp(height * heightScale + zeroOffset, maxHeight + zeroOffset, minHeight));
 	}
+
+    public void SetPlantSpriteFlip(bool flipped)
+    {
+        plantSprite.flipX = flipped;
+    }
 }

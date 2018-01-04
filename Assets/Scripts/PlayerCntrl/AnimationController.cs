@@ -54,10 +54,12 @@ public class AnimationController : MonoBehaviour {
 	public void Flip(){
 		Vector3 newScale = gameObject.transform.localScale;
 		gameObject.transform.localScale = new Vector3 (newScale.x * -1, newScale.y, newScale.z);
-		bodySprite.flipX = facingRight = !facingRight;
-	}
+        facingRight = !facingRight;
+        bodySprite.flipX = (GV.ws.dnc.isMorning) ? facingRight : !facingRight;
+        GV.ws.pc.SetPlantSpriteFlip(facingRight);
+    }
 
-	public void Grounded(bool input){
+    public void Grounded(bool input){
 		anim.SetBool ("isGrounded", input);
 		if (input) {
 			canFall = true;
