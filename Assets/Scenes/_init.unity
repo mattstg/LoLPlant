@@ -1998,7 +1998,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_SizeDelta: {x: -20, y: -12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &661324276
 MonoBehaviour:
@@ -2031,7 +2031,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 3
   m_Text: Lesson
 --- !u!222 &661324277
 CanvasRenderer:
@@ -2884,7 +2884,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ffb31acd88c7e43914beffa0e9644a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayEndManager: {fileID: 0}
   plant: {fileID: 0}
   dnc: {fileID: 988919070}
   pc: {fileID: 1506910135}
@@ -4046,7 +4045,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_SizeDelta: {x: -20, y: -12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1421403202
 MonoBehaviour:
@@ -4072,14 +4071,14 @@ MonoBehaviour:
     m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 16
+    m_MinSize: 12
     m_MaxSize: 26
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 3
   m_Text: Start
 --- !u!222 &1421403203
 CanvasRenderer:
@@ -5182,7 +5181,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.35}
   m_AnchorMax: {x: 0.5, y: 0.35}
   m_AnchoredPosition: {x: 0, y: -80.5}
-  m_SizeDelta: {x: 110, y: 70}
+  m_SizeDelta: {x: 110, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1897727282
 MonoBehaviour:
@@ -5211,7 +5210,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 21300000, guid: c0db07245f0ee00448b21ebb8f2a9017, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: c96ecdca3548c944daa0612f6e695619, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -5255,7 +5254,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 6fce0abe16d12324eba56050fd0095e0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ac1b8e5ab57940145bd6665df3aa7f29, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
