@@ -54,9 +54,6 @@ public class GV {
     public static readonly Vector2 raincloudSpeedInterpolaterRange = new Vector2(.001f, .006f) ;
     public static readonly Vector2 rainRateInterpolaterRange = new Vector2(.0005f, .004f);
 
-    public static readonly float cameraDefaultZoom = 2.88f;
-    public static readonly float cameraGrowthZoom  = 1.22f;
-
     //Shadows
     public static readonly float shadowBuffer = 15f;
     public static readonly float sunAngleBuffer = 2;
