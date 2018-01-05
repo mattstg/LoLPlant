@@ -58,7 +58,7 @@ public class Plant : MonoBehaviour {
     private float startHeight = 0; //Used to setup plant start height before player initialized is called and graphics are ready.
     
     public float dampTime = 0.25f;
-    
+
     public void Initialize(int initialHeight)
     {
         height = initialHeight;
@@ -238,7 +238,7 @@ public class Plant : MonoBehaviour {
             GV.ws.pc.UpdateHeight(height);
         }
         Vector3 offset = GV.ws.cameraManager.offset;
-        offset.y = Mathf.Max(1.1f * (height - 50f) / 950f, 0f);
+        offset.y = Mathf.Max(1.6f * (Mathf.Min(height, 650) - 50f) / 950f, 0f);
         GV.ws.cameraManager.offset = offset;
     }
 }
