@@ -56,7 +56,7 @@ public class TutorialPC : PlayerController {
         }
         else
         {
-            GV.ws.plant.shadowCount = 1;
+            GV.ws.plant.shadowCount = rayhits.Length;
             inTheSun = false;
         }
     }

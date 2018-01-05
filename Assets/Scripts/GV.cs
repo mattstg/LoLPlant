@@ -48,11 +48,11 @@ public class GV {
 	public static readonly float rainHearingDist = worldWidth / 4;
 	public static readonly float[] worldRange = {-8,7} ;
 
-    public static readonly Vector2 rainRateRange = new Vector2(10,34); //int >= 1. rainRate will lerp around randomly to values in this range. 
+    public static readonly Vector2 rainRateRange = new Vector2(8, 20); //(10,34); //int >= 1. rainRate will lerp around randomly to values in this range. 
     public static readonly int maxDropsPerFrame = 5; // this many 'rain dice' will be rolled each frame, with each die having 1/rainRate chance of spawning a drop
 
     public static readonly Vector2 raincloudSpeedInterpolaterRange = new Vector2(.001f, .006f) ;
-    public static readonly Vector2 rainRateInterpolaterRange = new Vector2(.0005f, 004f);
+    public static readonly Vector2 rainRateInterpolaterRange = new Vector2(.0005f, .004f);
 
     public static readonly float cameraDefaultZoom = 2.88f;
     public static readonly float cameraGrowthZoom  = 1.22f;
