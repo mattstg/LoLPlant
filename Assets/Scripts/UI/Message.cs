@@ -9,24 +9,26 @@ public class Message
 
     public string name;
     public string message;
+    public string ttsName;
     public Type type;
     public Position position;
     public bool promptSuccess;
 
-    public Message(string _name, Type _type = Type.Info, Position _position = Position.Center)
+    public Message(string _name, string _ttsName, Type _type = Type.Info, Position _position = Position.Center)
     {
-        Initialize(_name, LangDict.Instance.GetText(_name), _type, _position);
+        Initialize(_name, LangDict.Instance.GetText(_name), _ttsName, _type, _position);
     }
 
-    public Message(string _name, string _message, Type _type = Type.Info, Position _position = Position.Center)
+    public Message(string _name, string _message, string _ttsName, Type _type = Type.Info, Position _position = Position.Center)
     {
-        Initialize(_name, _message, _type, _position);
+        Initialize(_name, _message, _ttsName, _type, _position);
     }
 
-    public void Initialize(string _name, string _message, Type _type, Position _position)
+    public void Initialize(string _name, string _message, string _ttsName, Type _type, Position _position)
     {
         name = _name;
         message = _message;
+        ttsName = _ttsName;
         type = _type;
         position = _position;
         promptSuccess = false;

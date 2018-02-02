@@ -191,14 +191,16 @@ public class PopupManager : MonoBehaviour
         {
             scoreMessage += "\n\n";
             if (plant.newScore >= ProgressTracker.Instance.score)
+            {
                 scoreMessage += LangDict.Instance.GetText("HighScoreNew");
+            }
             else
             {
                 scoreMessage += LangDict.Instance.GetText("HighScoreUnchanged") + "\n";
-                scoreMessage += "      <b><size=36>" + ProgressTracker.Instance.score + "</size> mm</b>";
+                scoreMessage += "      <b><size=36>" + ProgressTracker.Instance.score.ToString() + "</size> mm</b>";
             }
         }
-        Message m = new Message("ScoreMessage", scoreMessage, Message.Type.Info, Message.Position.Right);
+        Message m = new Message("ScoreMessage", scoreMessage, "TTSEmpty", Message.Type.Info, Message.Position.Right);
         LoadPopup(new List<Message>() { m });
     }
 
@@ -513,8 +515,6 @@ public class PopupManager : MonoBehaviour
         SetButtonsActive(messages[currentIndex].type == Message.Type.Endgame);
 
         //GV.ws.pc.SetInputActive(messages[currentIndex].type == Message.Type.Prompt);
-
-        LOLSDK.Instance.SpeakText(messages[currentIndex].message); //Read the message outloud here
     }
 
     private void BeginProceeding()
@@ -556,8 +556,6 @@ public class PopupManager : MonoBehaviour
         }
 
         //GV.ws.pc.SetInputActive(messages[currentIndex].type == Message.Type.Prompt);
-
-        LOLSDK.Instance.SpeakText(messages[currentIndex].message); //Read the message outloud here
     }
 
     private void BeginClosing()
@@ -657,6 +655,8 @@ public class PopupManager : MonoBehaviour
         //    GV.ws.pc.SetInputActive(false);
         //else
         //    GV.ws.pc.SetInputActive(true);
+
+        LOLSDK.Instance.SpeakText(messages[currentIndex].ttsName); //Read the message out loud here
 
         if (callFlow)
             Flow();

@@ -59,13 +59,13 @@ public class TAEventManager
                 taQueue.Enqueue(new TATimer("Timer", 2));
 
                 taQueue.Enqueue(new TATrigger("Timer"));
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", intro1),
-                                                                      new Message("", intro2),
-                                                                      new Message("", intro3),
-                                                                      new Message("", intro4),
-                                                                      new Message("", intro5),
-                                                                      new Message("", intro6),
-                                                                      new Message("", intro7) }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", intro1, "TTSIntro1"),
+                                                                      new Message("", intro2, "TTSIntro2"),
+                                                                      new Message("", intro3, "TTSIntro3"),
+                                                                      new Message("", intro4, "TTSIntro4"),
+                                                                      new Message("", intro5, "TTSIntro5"),
+                                                                      new Message("", intro6, "TTSIntro6"),
+                                                                      new Message("", intro7, "TTSIntro7") }));
 
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 2));
@@ -101,17 +101,17 @@ public class TAEventManager
 
                 taQueue.Enqueue(new TATrigger("Timer"));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardSun, true));
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", sun1),
-                                                                      new Message("", sun2) }));
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", controls1),
-                                                                      new Message("", controls2) }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", sun1, "TTSSun1"),
+                                                                      new Message("", sun2, "TTSSun2") }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", controls1, "TTSControls1"),
+                                                                      new Message("", controls2, "TTSControls2") }));
 
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TAFreezeChar(false));
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("SunPrompt", sun3, Message.Type.Prompt, Message.Position.TopRight) }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("SunPrompt", sun3, "TTSSun3", Message.Type.Prompt, Message.Position.TopRight) }));
 
                 taQueue.Enqueue(new TATrigger("Sun"));
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", sun4) }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", sun4, "TTSSun4") }));
                 taQueue.Enqueue(new TAFreezeChar(true));
                 taQueue.Enqueue(new TAPromptSuccess("SunPrompt"));
 
@@ -137,26 +137,26 @@ public class TAEventManager
 
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardSun, true));
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", water1) }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", water1, "TTSWater1") }));
 
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardWater, true));
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", water2),
-                                                                      new Message("", water3),
-                                                                      new Message("", water4) }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", water2, "TTSWater2"),
+                                                                      new Message("", water3, "TTSWater3"),
+                                                                      new Message("", water4, "TTSWater4") }));
 
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, true));
                 taQueue.Enqueue(new TADelegate(LOLAudio.Instance.PlayBackgroundAudio, LOLAudio.heavyRain));
                 taQueue.Enqueue(new TAFreezeChar(false));
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("WaterPrompt", water5, Message.Type.Prompt, Message.Position.TopRight) }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("WaterPrompt", water5, "TTSWater5", Message.Type.Prompt, Message.Position.TopRight) }));
 
                 taQueue.Enqueue(new TATrigger("Water"));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, false));
                 taQueue.Enqueue(new TADelegate(LOLAudio.Instance.StopAudio, LOLAudio.heavyRain));
                 taQueue.Enqueue(new TAFreezeChar(true));
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", water6),
-                                                                      new Message("", water7) }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", water6, "TTSWater6"),
+                                                                      new Message("", water7, "TTSWater7") }));
                 taQueue.Enqueue(new TAPromptSuccess("WaterPrompt"));
 
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
@@ -186,20 +186,20 @@ public class TAEventManager
                 taQueue.Enqueue(new TATrigger("Timer"));
                 taQueue.Enqueue(new TADelegate(delegate () { GV.ws.plant.water = 0.75f; }));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardPhotosynthesis, true));
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", photo1),
-                                                                      new Message("", photo2),
-                                                                      new Message("", photo3),
-                                                                      new Message("", photo4) }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", photo1, "TTSPhoto1"),
+                                                                      new Message("", photo2, "TTSPhoto2"),
+                                                                      new Message("", photo3, "TTSPhoto3"),
+                                                                      new Message("", photo4, "TTSPhoto4") }));
 
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardFood, true));
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", food1) }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", food1, "TTSFood1") }));
 
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TAFreezeChar(false));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Clouds, true));
                 taQueue.Enqueue(new TADelegate(LOLAudio.Instance.PlayBackgroundAudio, LOLAudio.heavyRain));
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("ExperimentPrompt", food2, Message.Type.Prompt, Message.Position.TopLeft) }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("ExperimentPrompt", food2, "TTSFood2", Message.Type.Prompt, Message.Position.TopLeft) }));
                 taQueue.Enqueue(new TATimer("Timer", 30f));
 
                 taQueue.Enqueue(new TATrigger("Timer"));
@@ -234,21 +234,21 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(GV.ws.plant.SetFoodTutorial, 500f));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Platforms, true));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.Aphids, true));
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", aphids1) }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", aphids1, "TTSAphids1") }));
 
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
                 taQueue.Enqueue(new TAFreezeChar(false));
                 taQueue.Enqueue(new TADelegate(delegate () { GameObject.Find("TempWall").SetActive(false); }));
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("EscapePrompt", aphids2, Message.Type.Prompt, Message.Position.TopLeft) }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("EscapePrompt", aphids2, "TTSAphids2", Message.Type.Prompt, Message.Position.TopLeft) }));
 
                 taQueue.Enqueue(new TATrigger("FinalPlatform"));
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardAll, true));
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", growth1),
-                                                                      new Message("", growth2),
-                                                                      new Message("", growth3),
-                                                                      new Message("", growth4),
-                                                                      new Message("", growth5),
-                                                                      new Message("", growth6) }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("", growth1, "TTSGrowth1"),
+                                                                      new Message("", growth2, "TTSGrowth2"),
+                                                                      new Message("", growth3, "TTSGrowth3"),
+                                                                      new Message("", growth4, "TTSGrowth4"),
+                                                                      new Message("", growth5, "TTSGrowth5"),
+                                                                      new Message("", growth6, "TTSGrowth6") }));
                 taQueue.Enqueue(new TAPromptSuccess("EscapePrompt"));
                 taQueue.Enqueue(new TAFreezeChar(true));
 
@@ -257,10 +257,10 @@ public class TAEventManager
 
                 taQueue.Enqueue(new TATrigger("JumpComplete"));
                 NightSequence(true);
-                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("PreGame1"),
-                                                                      new Message("PreGame2"),
-                                                                      new Message("PreGame3"),
-                                                                      new Message("PreGame4") }));
+                taQueue.Enqueue(new TACreatePopup(new List<Message> { new Message("PreGame1", "TTSPreGame1"),
+                                                                      new Message("PreGame2", "TTSPreGame2"),
+                                                                      new Message("PreGame3", "TTSPreGame3"),
+                                                                      new Message("PreGame4", "TTSPreGame4") }));
                 taQueue.Enqueue(new TATrigger("ClosePopup"));
 
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SetScore, 0));
@@ -284,7 +284,7 @@ public class TAEventManager
                 taQueue.Enqueue(new TADelegate(ProgressTracker.Instance.SubmitProgress, 8));
                 goto case 8;
             case 8:  //game over
-                taQueue.Enqueue(new TACreatePopup(new Message("GameOver", Message.Type.Endgame, Message.Position.Center)));
+                taQueue.Enqueue(new TACreatePopup(new Message("GameOver", "TTSGameOver", Message.Type.Endgame, Message.Position.Center)));
                 break;
         }
         ProcessStack();
