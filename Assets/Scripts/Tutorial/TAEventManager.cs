@@ -38,20 +38,20 @@ public class TAEventManager
         {
             case 1:  //intro, science: food/photosynthesis
                 string intro1 = "<size=30>" +
-                                LangDict.Instance.GetText("Intro1a") + "</size>\n\n" +
-                                LangDict.Instance.GetText("Intro1b") + "\n   " +
-                                LangDict.Instance.GetText("Intro1c") + "\n   " +
-                                LangDict.Instance.GetText("Intro1d") + "\n   " +
+                                LangDict.Instance.GetText("Intro1a") + "</size>\r\n\r\n" +
+                                LangDict.Instance.GetText("Intro1b") + "\r\n   " +
+                                LangDict.Instance.GetText("Intro1c") + "\r\n   " +
+                                LangDict.Instance.GetText("Intro1d") + "\r\n   " +
                                 LangDict.Instance.GetText("Intro1e");
                 string intro2 = LangDict.Instance.GetText("Intro2a");
-                string intro3 = LangDict.Instance.GetText("Intro3a") + "\n\n" +
+                string intro3 = LangDict.Instance.GetText("Intro3a") + "\r\n\r\n" +
                                 LangDict.Instance.GetText("Intro3b");
                 string intro4 = LangDict.Instance.GetText("Intro4a");
-                string intro5 = LangDict.Instance.GetText("Intro5a") + "\n\n" +
+                string intro5 = LangDict.Instance.GetText("Intro5a") + "\r\n\r\n" +
                                 LangDict.Instance.GetText("Intro5b");
-                string intro6 = LangDict.Instance.GetText("Intro6a") + "\n\n" +
+                string intro6 = LangDict.Instance.GetText("Intro6a") + "\r\n\r\n" +
                                 LangDict.Instance.GetText("Intro6b");
-                string intro7 = LangDict.Instance.GetText("Intro7a") + "\n\n" +
+                string intro7 = LangDict.Instance.GetText("Intro7a") + "\r\n\r\n" +
                                 LangDict.Instance.GetText("Intro7b");
 
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
@@ -72,28 +72,28 @@ public class TAEventManager
                 goto case 2;
 
             case 2:  //sun, controls
-                string sun1 = LangDict.Instance.GetText("Sun1a") + "\n\n" +
+                string sun1 = LangDict.Instance.GetText("Sun1a") + "\r\n\r\n" +
                               LangDict.Instance.GetText("Sun1b");
-                string sun2 = LangDict.Instance.GetText("Sun2a") + "\n\n" +
+                string sun2 = LangDict.Instance.GetText("Sun2a") + "\r\n\r\n" +
                               LangDict.Instance.GetText("Sun2b");
-                string sun3 = LangDict.Instance.GetText("Sun3a") + "\n\n" +
+                string sun3 = LangDict.Instance.GetText("Sun3a") + "\r\n\r\n" +
                               LangDict.Instance.GetText("Sun3b");
-                string sun4 = LangDict.Instance.GetText("Sun4a") + "\n\n" +
+                string sun4 = LangDict.Instance.GetText("Sun4a") + "\r\n\r\n" +
                               LangDict.Instance.GetText("Sun4b");
 
-                string controls1 = LangDict.Instance.GetText("Controls1a") + "\n\n" +
-                                   LangDict.Instance.GetText("Controls1b") + "\n    " +
-                                   LangDict.Instance.GetText("Controls1c") + "\n    " +
-                                   LangDict.Instance.GetText("Controls1d") + "\n    " +
-                                   LangDict.Instance.GetText("Controls1e") + "\n\n" +
-                                   LangDict.Instance.GetText("Controls1f") + "\n" +
+                string controls1 = LangDict.Instance.GetText("Controls1a") + "\r\n\r\n" +
+                                   LangDict.Instance.GetText("Controls1b") + "\r\n    " +
+                                   LangDict.Instance.GetText("Controls1c") + "\r\n    " +
+                                   LangDict.Instance.GetText("Controls1d") + "\r\n    " +
+                                   LangDict.Instance.GetText("Controls1e") + "\r\n\r\n" +
+                                   LangDict.Instance.GetText("Controls1f") + "\r\n" +
                                    LangDict.Instance.GetText("Controls1g");
-                string controls2 = LangDict.Instance.GetText("Controls2a") + "\n\n" +
-                                   LangDict.Instance.GetText("Controls2b") + "\n    " +
-                                   LangDict.Instance.GetText("Controls2c") + "\n    " +
-                                   LangDict.Instance.GetText("Controls2d") + "\n    " +
-                                   LangDict.Instance.GetText("Controls2e") + "\n\n" +
-                                   LangDict.Instance.GetText("Controls2f") + "\n" +
+                string controls2 = LangDict.Instance.GetText("Controls2a") + "\r\n\r\n" +
+                                   LangDict.Instance.GetText("Controls2b") + "\r\n    " +
+                                   LangDict.Instance.GetText("Controls2c") + "\r\n    " +
+                                   LangDict.Instance.GetText("Controls2d") + "\r\n    " +
+                                   LangDict.Instance.GetText("Controls2e") + "\r\n\r\n" +
+                                   LangDict.Instance.GetText("Controls2f") + "\r\n" +
                                    LangDict.Instance.GetText("Controls2g");
 
                 taQueue.Enqueue(new TAActivate(TAActivate.ActivateType.DashboardNone, true));
@@ -120,19 +120,19 @@ public class TAEventManager
                 goto case 3;
 
             case 3:  //water
-                string water1 = LangDict.Instance.GetText("Water1a") + "\n\n" +
+                string water1 = LangDict.Instance.GetText("Water1a") + "\r\n\r\n" +
                                 LangDict.Instance.GetText("Water1b");
-                string water2 = LangDict.Instance.GetText("Water2a") + "\n\n" +
+                string water2 = LangDict.Instance.GetText("Water2a") + "\r\n\r\n" +
                                 LangDict.Instance.GetText("Water2b");
-                string water3 = LangDict.Instance.GetText("Water3a") + "\n\n" +
+                string water3 = LangDict.Instance.GetText("Water3a") + "\r\n\r\n" +
                                 LangDict.Instance.GetText("Water3b");
                 string water4 = LangDict.Instance.GetText("Water4a");
-                string water5 = LangDict.Instance.GetText("Water5a") + "\n\n" +
+                string water5 = LangDict.Instance.GetText("Water5a") + "\r\n\r\n" +
                                 LangDict.Instance.GetText("Water5b");
-                string water6 = LangDict.Instance.GetText("Water6a") + "\n\n" +
+                string water6 = LangDict.Instance.GetText("Water6a") + "\r\n\r\n" +
                                 LangDict.Instance.GetText("Water6b");
-                string water7 = LangDict.Instance.GetText("Water7a") + "\n\n    " +
-                                LangDict.Instance.GetText("Water7b") + "\n\n    " +
+                string water7 = LangDict.Instance.GetText("Water7a") + "\r\n\r\n    " +
+                                LangDict.Instance.GetText("Water7b") + "\r\n\r\n    " +
                                 LangDict.Instance.GetText("Water7c");
 
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
@@ -164,18 +164,18 @@ public class TAEventManager
                 goto case 4;
 
             case 4:  //photosynthesis, food
-                string photo1 = LangDict.Instance.GetText("Photo1a") + "\n\n" +
+                string photo1 = LangDict.Instance.GetText("Photo1a") + "\r\n\r\n" +
                                 LangDict.Instance.GetText("Photo1b");
 
-                string photo2 = LangDict.Instance.GetText("Photo2a") + "\n\n" +
+                string photo2 = LangDict.Instance.GetText("Photo2a") + "\r\n\r\n" +
                                 LangDict.Instance.GetText("Photo2b");
                 string photo3 = LangDict.Instance.GetText("Photo3a");
                 string photo4 = LangDict.Instance.GetText("Photo4a");
 
-                string food1 = LangDict.Instance.GetText("Food1a") + "\n\n" +
-                               LangDict.Instance.GetText("Food1b") + "\n\n" +
+                string food1 = LangDict.Instance.GetText("Food1a") + "\r\n\r\n" +
+                               LangDict.Instance.GetText("Food1b") + "\r\n\r\n" +
                                LangDict.Instance.GetText("Food1c");
-                string food2 = LangDict.Instance.GetText("Food2a") + "\n\n" +
+                string food2 = LangDict.Instance.GetText("Food2a") + "\r\n\r\n" +
                                LangDict.Instance.GetText("Food2b");
 
                 taQueue.Enqueue(new TASetDNC(false, GV.defaultTutorialHour, 0));
@@ -211,20 +211,20 @@ public class TAEventManager
                 goto case 5;
 
             case 5:  //aphids, growth, pregame
-                string aphids1 = LangDict.Instance.GetText("Aphids1a") + "\n\n" +
-                                 LangDict.Instance.GetText("Aphids1b") + "\n\n" +
+                string aphids1 = LangDict.Instance.GetText("Aphids1a") + "\r\n\r\n" +
+                                 LangDict.Instance.GetText("Aphids1b") + "\r\n\r\n" +
                                  LangDict.Instance.GetText("Aphids1c");
-                string aphids2 = LangDict.Instance.GetText("Aphids2a") + "\n\n" +
+                string aphids2 = LangDict.Instance.GetText("Aphids2a") + "\r\n\r\n" +
                                  LangDict.Instance.GetText("Aphids2b") + " " +
                                  LangDict.Instance.GetText("Aphids2c");
 
-                string growth1 = LangDict.Instance.GetText("Growth1a") + "\n\n" +
-                                 LangDict.Instance.GetText("Growth1b") + "\n\n" +
+                string growth1 = LangDict.Instance.GetText("Growth1a") + "\r\n\r\n" +
+                                 LangDict.Instance.GetText("Growth1b") + "\r\n\r\n" +
                                  LangDict.Instance.GetText("Growth1c");
-                string growth2 = LangDict.Instance.GetText("Growth2a") + "\n\n" +
+                string growth2 = LangDict.Instance.GetText("Growth2a") + "\r\n\r\n" +
                                  LangDict.Instance.GetText("Growth2b");
                 string growth3 = LangDict.Instance.GetText("Growth3a");
-                string growth4 = LangDict.Instance.GetText("Growth4a") + "\n\n" +
+                string growth4 = LangDict.Instance.GetText("Growth4a") + "\r\n\r\n" +
                                  LangDict.Instance.GetText("Growth4b");
                 string growth5 = LangDict.Instance.GetText("Growth5a");
                 string growth6 = LangDict.Instance.GetText("Growth6a");
