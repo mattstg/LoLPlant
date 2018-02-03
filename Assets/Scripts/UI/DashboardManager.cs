@@ -57,6 +57,9 @@ public class DashboardManager : MonoBehaviour
     public Text hourText;
     public Text amPmText;
     public Text dayText;
+    public Text countdownText;
+    private bool countdownActive;
+    private int countdownOld = -1;
 
     public Slider sunControl;
     public Slider waterControl;
@@ -78,6 +81,12 @@ public class DashboardManager : MonoBehaviour
         heightBouncer.InitializeBouncer();
         foodScoreText.text = "0";
         heightText.text = "0";
+        countdownText.text = "10";
+        Color c = Color.white;
+        c.a = 1f;
+        countdownText.color = c;
+        SetCountdownActive(false, true);
+        
         //Application.targetFrameRate = 120;
     }
 
@@ -91,6 +100,7 @@ public class DashboardManager : MonoBehaviour
         UpdateSundial();
         UpdateDayText();
         UpdateHourText();
+        UpdateCountdown(dt);
         UpdateHeight(dt);
 
         if (fpsOverride)    //dev feature: psMeter shows fps instead
@@ -266,6 +276,31 @@ public class DashboardManager : MonoBehaviour
         amPmText.text = (GV.ws.dnc.isMorning) ? "AM" : "PM";
     }
 
+    public void UpdateCountdown(float dt)
+    {
+        DayNightCycle dnc = GV.ws.dnc;
+        if (dnc.clockActive && dnc.GetStateIsDaytime() && !dnc.GrowingOrJumpingOrZooming())
+        {
+            float time = DayNightCycle.time;
+            float sunset = dnc.GetNextSunset();
+            float preSunset = sunset - 11f;
+            if (time >= preSunset && time < sunset)
+            {
+                SetCountdownActive(true);
+                int countdownValue = (int)(Mathf.Ceil(sunset - time)) - 1;
+                float valueProgress = Mathf.Clamp01(time % 1f);
+                SetCountdownText(countdownValue);
+                Color c = Color.white;
+                c.a = 1f - valueProgress;
+                countdownText.color = c;
+            }
+            else
+                SetCountdownActive(false);
+        }
+        else
+            SetCountdownActive(false);
+    }
+
     public void UpdateHeight(float dt)
     {
         if (plant.height != plant.oldHeightInt)
@@ -388,5 +423,23 @@ public class DashboardManager : MonoBehaviour
     public void ToggleFpsOverride()
     {
         fpsOverride = !fpsOverride;
+    }
+
+    private void SetCountdownActive(bool _countdownActive, bool forceSet = false)
+    {
+        if (countdownActive != _countdownActive || forceSet)
+        {
+            countdownActive = _countdownActive;
+            countdownText.gameObject.SetActive(countdownActive);
+        }
+    }
+
+    private void SetCountdownText(int countdownNew, bool forceSet = false)
+    {
+        if (countdownOld != countdownNew || forceSet)
+        {
+            countdownText.text = countdownNew.ToString();
+            countdownOld = countdownNew;
+        }
     }
 }

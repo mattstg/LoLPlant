@@ -259,6 +259,11 @@ public class DayNightCycle : MonoBehaviour
         BeginJumping(GetTime(day + ((hourFloat <= sunsetHour) ? 0 : 1), sunsetHour));
     }
 
+    public void JumpToPreSunset()
+    {
+        BeginJumping(GetTime(day + ((hourFloat <= sunsetHour) ? 0 : 1), sunsetHour) - 16f);
+    }
+
     public void SetTime(int _day, float _hourFloat)
     {
         time = GetTime(_day, _hourFloat);
@@ -277,6 +282,12 @@ public class DayNightCycle : MonoBehaviour
         return _time;
     }
 
+    public float GetNextSunset()
+    {
+        int nextSunsetDay = day + ((hourFloat > sunsetHour) ? 1 : 0);
+        return GetTime(nextSunsetDay, sunsetHour);
+    }
+
     public void ToggleClockActive()
     {
         SetClockActive(!clockActive);
@@ -290,5 +301,15 @@ public class DayNightCycle : MonoBehaviour
     public float GetSunAngle()
     {
         return GV.GetAngle(sunPosition);
+    }
+
+    public bool GetStateIsDaytime()
+    {
+        return stateIsDaytime;
+    }
+
+    public bool GrowingOrJumpingOrZooming()
+    {
+        return isGrowing || isJumping || isZooming;
     }
 }
