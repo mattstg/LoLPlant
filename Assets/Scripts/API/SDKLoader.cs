@@ -31,8 +31,6 @@ public class SDKLoader {
         LOLSDK.Init (webGL, "com.Pansimula.LPlant");
         // Register event handlers
         LOLSDK.Instance.StartGameReceived += new StartGameReceivedHandler (HandleStartGame);
-		LOLSDK.Instance.GameStateChanged += new GameStateChangedHandler (HandleGameStateChange);   
-	    LOLSDK.Instance.QuestionsReceived += new QuestionListReceivedHandler (HandleQuestions);
 	    LOLSDK.Instance.LanguageDefsReceived += new LanguageDefsReceivedHandler (HandleLanguageDefs);
         // Mock the platform-to-game messages when in the Unity editor.
 #if UNITY_EDITOR
@@ -83,17 +81,6 @@ public class SDKLoader {
     {
         return languageLoaded && startgameLoaded;
     }
-
-    // Handle pause / resume
-    static void HandleGameStateChange (GameState gameState) {
-        // Either GameState.Paused or GameState.Resumed
-	}
-
-    // Store the questions and show them in order based on your game flow.
-    static void HandleQuestions (MultipleChoiceQuestionList questionList) {
-        //Debug.Log("QQ HandleQuestions");
-        //SharedState.QuestionList = questionList;
-	}
 
     // Use language to populate UI
     static void HandleLanguageDefs (string json)

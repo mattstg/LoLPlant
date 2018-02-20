@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour {
     
 	protected bool isGrounded;
     float moveForce = 6.7f;  //
-    float maxSpeed = 3.25f;
+    float maxSpeed = 2.25f;
     //All jump related
     float jumpForceInitial = 4f;
     float jumpForcePerSec = 7f;
