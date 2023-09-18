@@ -12,6 +12,7 @@ public class Shadow : MonoBehaviour {
     Vector3[] vertices = new Vector3[4];
     Mesh mesh;
     public CastsShadow parentObj;
+    public bool debug;
 
     public void Initialize(CastsShadow _parent, Vector2[] _staticEdges)
     {
@@ -50,7 +51,12 @@ public class Shadow : MonoBehaviour {
                 vertices[3] = this.transform.InverseTransformPoint((Vector3)(GetVertex(transform.TransformPoint(vertices[1]), m))) ;  
             }
         }
+        for (int i = 0; i < 4; i++)
+        {
+            vertices[i] = new Vector3(vertices[i].x, vertices[i].y, 0);
+        }
         mesh.vertices = vertices;
+        mesh.RecalculateBounds();
     }
 
     private Vector2 GetVertex(Vector2 vertexAbove, float m)
