@@ -1,142 +1,402 @@
 fileFormatVersion: 2
 guid: 638ea825f63ff2c4eb8bf92ec431bd27
-timeCreated: 1511471427
-licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: cloudsPNG_0
-    21300002: cloudsPNG_1
-    21300004: cloudsPNG_2
-    21300006: cloudsPNG_3
-    21300008: cloudsPNG_4
-    21300010: cloudsPNG_5
-    21300012: cloudsPNG_6
-    21300014: cloudsPNG_7
-    21300016: cloudsPNG_8
-    21300018: cloudsPNG_9
-    21300020: cloudsPNG_10
-    21300022: cloudsPNG_11
-    21300024: cloudsPNG_12
-    21300026: cloudsPNG_13
-    21300028: cloudsPNG_14
-    21300030: cloudsPNG_15
-    21300032: cloudsPNG_16
-    21300034: cloudsPNG_17
-    21300036: cloudsPNG_18
-    21300038: cloudsPNG_19
-    21300040: cloudsPNG_20
-    21300042: cloudsPNG_21
-    21300044: cloudsPNG_22
-    21300046: cloudsPNG_23
-    21300048: cloudsPNG_24
-    21300050: cloudsPNG_25
-    21300052: cloudsPNG_26
-    21300054: cloudsPNG_27
-    21300056: cloudsPNG_28
-    21300058: cloudsPNG_29
-    21300060: cloudsPNG_30
-    21300062: cloudsPNG_31
-    21300064: cloudsPNG_32
-    21300066: cloudsPNG_33
-    21300068: cloudsPNG_34
-    21300070: cloudsPNG_35
-    21300072: cloudsPNG_36
-    21300074: cloudsPNG_37
-    21300076: cloudsPNG_38
-    21300078: cloudsPNG_39
-    21300080: cloudsPNG_40
-    21300082: cloudsPNG_41
-    21300084: cloudsPNG_42
-    21300086: cloudsPNG_43
-    21300088: cloudsPNG_44
-    21300090: cloudsPNG_45
-    21300092: cloudsPNG_46
-    21300094: cloudsPNG_47
-    21300096: cloudsPNG_48
-    21300098: cloudsPNG_49
-    21300100: cloudsPNG_50
-    21300102: cloudsPNG_51
-    21300104: cloudsPNG_52
-    21300106: cloudsPNG_53
-    21300108: cloudsPNG_54
-    21300110: cloudsPNG_55
-    21300112: cloudsPNG_56
-    21300114: cloudsPNG_57
-    21300116: cloudsPNG_58
-    21300118: cloudsPNG_59
-    21300120: cloudsPNG_60
-    21300122: cloudsPNG_61
-    21300124: cloudsPNG_62
-    21300126: cloudsPNG_63
-    21300128: cloudsPNG_64
-    21300130: cloudsPNG_65
-    21300132: cloudsPNG_66
-    21300134: cloudsPNG_67
-    21300136: cloudsPNG_68
-    21300138: cloudsPNG_69
-    21300140: cloudsPNG_70
-    21300142: cloudsPNG_71
-    21300144: cloudsPNG_72
-    21300146: cloudsPNG_73
-    21300148: cloudsPNG_74
-    21300150: cloudsPNG_75
-    21300152: cloudsPNG_76
-    21300154: cloudsPNG_77
-    21300156: cloudsPNG_78
-    21300158: cloudsPNG_79
-    21300160: cloudsPNG_80
-    21300162: cloudsPNG_81
-    21300164: cloudsPNG_82
-    21300166: cloudsPNG_83
-    21300168: cloudsPNG_84
-    21300170: cloudsPNG_85
-    21300172: cloudsPNG_86
-    21300174: cloudsPNG_87
-    21300176: cloudsPNG_88
-    21300178: cloudsPNG_89
-    21300180: cloudsPNG_90
-    21300182: cloudsPNG_91
-    21300184: cloudsPNG_92
-    21300186: cloudsPNG_93
-    21300188: cloudsPNG_94
-    21300190: cloudsPNG_95
-    21300192: cloudsPNG_96
-    21300194: cloudsPNG_97
-    21300196: cloudsPNG_98
-    21300198: cloudsPNG_99
-    21300200: cloudsPNG_100
-    21300202: cloudsPNG_101
-    21300204: cloudsPNG_102
-    21300206: cloudsPNG_103
-    21300208: cloudsPNG_104
-    21300210: cloudsPNG_105
-    21300212: cloudsPNG_106
-    21300214: cloudsPNG_107
-    21300216: cloudsPNG_108
-    21300218: cloudsPNG_109
-    21300220: cloudsPNG_110
-    21300222: cloudsPNG_111
-    21300224: cloudsPNG_112
-    21300226: cloudsPNG_113
-    21300228: cloudsPNG_114
-    21300230: cloudsPNG_115
-    21300232: cloudsPNG_116
-    21300234: cloudsPNG_117
-    21300236: cloudsPNG_118
-    21300238: cloudsPNG_119
-    21300240: cloudsPNG_120
-    21300242: cloudsPNG_121
-    21300244: cloudsPNG_122
-    21300246: cloudsPNG_123
-    21300248: cloudsPNG_124
-    21300250: cloudsPNG_125
-    21300252: cloudsPNG_126
-    21300254: cloudsPNG_127
-    21300256: cloudsPNG_128
-    21300258: cloudsPNG_129
-    21300260: cloudsPNG_130
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: cloudsPNG_0
+  - first:
+      213: 21300002
+    second: cloudsPNG_1
+  - first:
+      213: 21300004
+    second: cloudsPNG_2
+  - first:
+      213: 21300006
+    second: cloudsPNG_3
+  - first:
+      213: 21300008
+    second: cloudsPNG_4
+  - first:
+      213: 21300010
+    second: cloudsPNG_5
+  - first:
+      213: 21300012
+    second: cloudsPNG_6
+  - first:
+      213: 21300014
+    second: cloudsPNG_7
+  - first:
+      213: 21300016
+    second: cloudsPNG_8
+  - first:
+      213: 21300018
+    second: cloudsPNG_9
+  - first:
+      213: 21300020
+    second: cloudsPNG_10
+  - first:
+      213: 21300022
+    second: cloudsPNG_11
+  - first:
+      213: 21300024
+    second: cloudsPNG_12
+  - first:
+      213: 21300026
+    second: cloudsPNG_13
+  - first:
+      213: 21300028
+    second: cloudsPNG_14
+  - first:
+      213: 21300030
+    second: cloudsPNG_15
+  - first:
+      213: 21300032
+    second: cloudsPNG_16
+  - first:
+      213: 21300034
+    second: cloudsPNG_17
+  - first:
+      213: 21300036
+    second: cloudsPNG_18
+  - first:
+      213: 21300038
+    second: cloudsPNG_19
+  - first:
+      213: 21300040
+    second: cloudsPNG_20
+  - first:
+      213: 21300042
+    second: cloudsPNG_21
+  - first:
+      213: 21300044
+    second: cloudsPNG_22
+  - first:
+      213: 21300046
+    second: cloudsPNG_23
+  - first:
+      213: 21300048
+    second: cloudsPNG_24
+  - first:
+      213: 21300050
+    second: cloudsPNG_25
+  - first:
+      213: 21300052
+    second: cloudsPNG_26
+  - first:
+      213: 21300054
+    second: cloudsPNG_27
+  - first:
+      213: 21300056
+    second: cloudsPNG_28
+  - first:
+      213: 21300058
+    second: cloudsPNG_29
+  - first:
+      213: 21300060
+    second: cloudsPNG_30
+  - first:
+      213: 21300062
+    second: cloudsPNG_31
+  - first:
+      213: 21300064
+    second: cloudsPNG_32
+  - first:
+      213: 21300066
+    second: cloudsPNG_33
+  - first:
+      213: 21300068
+    second: cloudsPNG_34
+  - first:
+      213: 21300070
+    second: cloudsPNG_35
+  - first:
+      213: 21300072
+    second: cloudsPNG_36
+  - first:
+      213: 21300074
+    second: cloudsPNG_37
+  - first:
+      213: 21300076
+    second: cloudsPNG_38
+  - first:
+      213: 21300078
+    second: cloudsPNG_39
+  - first:
+      213: 21300080
+    second: cloudsPNG_40
+  - first:
+      213: 21300082
+    second: cloudsPNG_41
+  - first:
+      213: 21300084
+    second: cloudsPNG_42
+  - first:
+      213: 21300086
+    second: cloudsPNG_43
+  - first:
+      213: 21300088
+    second: cloudsPNG_44
+  - first:
+      213: 21300090
+    second: cloudsPNG_45
+  - first:
+      213: 21300092
+    second: cloudsPNG_46
+  - first:
+      213: 21300094
+    second: cloudsPNG_47
+  - first:
+      213: 21300096
+    second: cloudsPNG_48
+  - first:
+      213: 21300098
+    second: cloudsPNG_49
+  - first:
+      213: 21300100
+    second: cloudsPNG_50
+  - first:
+      213: 21300102
+    second: cloudsPNG_51
+  - first:
+      213: 21300104
+    second: cloudsPNG_52
+  - first:
+      213: 21300106
+    second: cloudsPNG_53
+  - first:
+      213: 21300108
+    second: cloudsPNG_54
+  - first:
+      213: 21300110
+    second: cloudsPNG_55
+  - first:
+      213: 21300112
+    second: cloudsPNG_56
+  - first:
+      213: 21300114
+    second: cloudsPNG_57
+  - first:
+      213: 21300116
+    second: cloudsPNG_58
+  - first:
+      213: 21300118
+    second: cloudsPNG_59
+  - first:
+      213: 21300120
+    second: cloudsPNG_60
+  - first:
+      213: 21300122
+    second: cloudsPNG_61
+  - first:
+      213: 21300124
+    second: cloudsPNG_62
+  - first:
+      213: 21300126
+    second: cloudsPNG_63
+  - first:
+      213: 21300128
+    second: cloudsPNG_64
+  - first:
+      213: 21300130
+    second: cloudsPNG_65
+  - first:
+      213: 21300132
+    second: cloudsPNG_66
+  - first:
+      213: 21300134
+    second: cloudsPNG_67
+  - first:
+      213: 21300136
+    second: cloudsPNG_68
+  - first:
+      213: 21300138
+    second: cloudsPNG_69
+  - first:
+      213: 21300140
+    second: cloudsPNG_70
+  - first:
+      213: 21300142
+    second: cloudsPNG_71
+  - first:
+      213: 21300144
+    second: cloudsPNG_72
+  - first:
+      213: 21300146
+    second: cloudsPNG_73
+  - first:
+      213: 21300148
+    second: cloudsPNG_74
+  - first:
+      213: 21300150
+    second: cloudsPNG_75
+  - first:
+      213: 21300152
+    second: cloudsPNG_76
+  - first:
+      213: 21300154
+    second: cloudsPNG_77
+  - first:
+      213: 21300156
+    second: cloudsPNG_78
+  - first:
+      213: 21300158
+    second: cloudsPNG_79
+  - first:
+      213: 21300160
+    second: cloudsPNG_80
+  - first:
+      213: 21300162
+    second: cloudsPNG_81
+  - first:
+      213: 21300164
+    second: cloudsPNG_82
+  - first:
+      213: 21300166
+    second: cloudsPNG_83
+  - first:
+      213: 21300168
+    second: cloudsPNG_84
+  - first:
+      213: 21300170
+    second: cloudsPNG_85
+  - first:
+      213: 21300172
+    second: cloudsPNG_86
+  - first:
+      213: 21300174
+    second: cloudsPNG_87
+  - first:
+      213: 21300176
+    second: cloudsPNG_88
+  - first:
+      213: 21300178
+    second: cloudsPNG_89
+  - first:
+      213: 21300180
+    second: cloudsPNG_90
+  - first:
+      213: 21300182
+    second: cloudsPNG_91
+  - first:
+      213: 21300184
+    second: cloudsPNG_92
+  - first:
+      213: 21300186
+    second: cloudsPNG_93
+  - first:
+      213: 21300188
+    second: cloudsPNG_94
+  - first:
+      213: 21300190
+    second: cloudsPNG_95
+  - first:
+      213: 21300192
+    second: cloudsPNG_96
+  - first:
+      213: 21300194
+    second: cloudsPNG_97
+  - first:
+      213: 21300196
+    second: cloudsPNG_98
+  - first:
+      213: 21300198
+    second: cloudsPNG_99
+  - first:
+      213: 21300200
+    second: cloudsPNG_100
+  - first:
+      213: 21300202
+    second: cloudsPNG_101
+  - first:
+      213: 21300204
+    second: cloudsPNG_102
+  - first:
+      213: 21300206
+    second: cloudsPNG_103
+  - first:
+      213: 21300208
+    second: cloudsPNG_104
+  - first:
+      213: 21300210
+    second: cloudsPNG_105
+  - first:
+      213: 21300212
+    second: cloudsPNG_106
+  - first:
+      213: 21300214
+    second: cloudsPNG_107
+  - first:
+      213: 21300216
+    second: cloudsPNG_108
+  - first:
+      213: 21300218
+    second: cloudsPNG_109
+  - first:
+      213: 21300220
+    second: cloudsPNG_110
+  - first:
+      213: 21300222
+    second: cloudsPNG_111
+  - first:
+      213: 21300224
+    second: cloudsPNG_112
+  - first:
+      213: 21300226
+    second: cloudsPNG_113
+  - first:
+      213: 21300228
+    second: cloudsPNG_114
+  - first:
+      213: 21300230
+    second: cloudsPNG_115
+  - first:
+      213: 21300232
+    second: cloudsPNG_116
+  - first:
+      213: 21300234
+    second: cloudsPNG_117
+  - first:
+      213: 21300236
+    second: cloudsPNG_118
+  - first:
+      213: 21300238
+    second: cloudsPNG_119
+  - first:
+      213: 21300240
+    second: cloudsPNG_120
+  - first:
+      213: 21300242
+    second: cloudsPNG_121
+  - first:
+      213: 21300244
+    second: cloudsPNG_122
+  - first:
+      213: 21300246
+    second: cloudsPNG_123
+  - first:
+      213: 21300248
+    second: cloudsPNG_124
+  - first:
+      213: 21300250
+    second: cloudsPNG_125
+  - first:
+      213: 21300252
+    second: cloudsPNG_126
+  - first:
+      213: 21300254
+    second: cloudsPNG_127
+  - first:
+      213: 21300256
+    second: cloudsPNG_128
+  - first:
+      213: 21300258
+    second: cloudsPNG_129
+  - first:
+      213: 21300260
+    second: cloudsPNG_130
   externalObjects: {}
-  serializedVersion: 4
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -153,7 +413,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -162,9 +427,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -1
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -176,18 +441,27 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
-  - buildTarget: DefaultTexturePlatform
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -196,7 +470,11 @@ TextureImporter:
     crunchedCompression: 1
     allowsAlphaSplitting: 0
     overridden: 0
-  - buildTarget: Standalone
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -205,6 +483,48 @@ TextureImporter:
     crunchedCompression: 1
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -222,6 +542,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: cloudsPNG_4
       rect:
@@ -236,6 +563,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 82305410000000000800000000000000
+      internalID: 21300008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: cloudsPNG_5
       rect:
@@ -250,6 +584,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: a2305410000000000800000000000000
+      internalID: 21300010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: cloudsPNG_7
       rect:
@@ -264,6 +605,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: e2305410000000000800000000000000
+      internalID: 21300014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: cloudsPNG_24
       rect:
@@ -278,6 +626,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 05305410000000000800000000000000
+      internalID: 21300048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: cloudsPNG_26
       rect:
@@ -292,6 +647,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 45305410000000000800000000000000
+      internalID: 21300052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: cloudsPNG_38
       rect:
@@ -306,6 +668,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: c6305410000000000800000000000000
+      internalID: 21300076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: cloudsPNG_41
       rect:
@@ -320,6 +689,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 27305410000000000800000000000000
+      internalID: 21300082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: cloudsPNG_47
       rect:
@@ -334,6 +710,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: e7305410000000000800000000000000
+      internalID: 21300094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: cloudsPNG_50
       rect:
@@ -348,6 +731,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 48305410000000000800000000000000
+      internalID: 21300100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: cloudsPNG_84
       rect:
@@ -362,6 +752,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 8c305410000000000800000000000000
+      internalID: 21300168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: cloudsPNG_90
       rect:
@@ -376,6 +773,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 4d305410000000000800000000000000
+      internalID: 21300180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: cloudsPNG_91
       rect:
@@ -390,6 +794,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 6d305410000000000800000000000000
+      internalID: 21300182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: cloudsPNG_95
       rect:
@@ -404,9 +815,40 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: ed305410000000000800000000000000
+      internalID: 21300190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
-  spritePackingTag: 
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      cloudsPNG_0: 21300000
+      cloudsPNG_24: 21300048
+      cloudsPNG_26: 21300052
+      cloudsPNG_38: 21300076
+      cloudsPNG_4: 21300008
+      cloudsPNG_41: 21300082
+      cloudsPNG_47: 21300094
+      cloudsPNG_5: 21300010
+      cloudsPNG_50: 21300100
+      cloudsPNG_7: 21300014
+      cloudsPNG_84: 21300168
+      cloudsPNG_90: 21300180
+      cloudsPNG_91: 21300182
+      cloudsPNG_95: 21300190
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
